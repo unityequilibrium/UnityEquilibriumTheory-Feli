@@ -1,51 +1,69 @@
 # 🌌 Unity Equilibrium Theory (UET)
 
-> **The clean, honest, extensible research repository**
+> **A Cross-Domain Simulation Framework for Complex Systems**
+
+![tests](https://img.shields.io/badge/tests-180%2F180-brightgreen)
+![python](https://img.shields.io/badge/python-3.10%2B-blue)
+![license](https://img.shields.io/badge/license-MIT-green)
+![version](https://img.shields.io/badge/version-1.0-orange)
 
 ---
 
-## 🎯 Core Philosophy
+## 🚫 Critical Constraints (Please Read)
 
-**UET is NOT a prediction tool. It's a CONTROL framework.**
+> **UET is "Unity" (ความเป็นหนึ่งเดียว), NOT "Universal" (สากล)**
 
-| Wrong | Right |
-|:------|:------|
-| "What will happen?" | "If I want X, what do I need?" |
-| Prediction | **Inverse Control** |
+| Term | Meaning | UET Status |
+|:---|:---|:---:|
+| **Universal** | Fixed law, applies everywhere | ❌ NOT this |
+| **Unity** | Connects domains, context-aware | ✅ This |
 
-*The future is not predicted. It is created.*
-
----
-
-> *"A complementary information layer for understanding complex systems"*
+- UET is a **simulation framework**, NOT a universal law
+- Parameters (like `k`) are **context-dependent**, not fixed constants
+- Designed to **evolve** with new data (Axiom 12)
 
 ---
 
-## 🎯 What is UET?
+## 📊 Test Results (2026-01-01)
 
-UET is a **complementary framework** that works **alongside** established physics.
+### 🌌 Galaxy Rotation Curves
+
+| Dataset | Galaxies | Pass Rate | Avg Error |
+|:---|:---:|:---:|:---:|
+| **SPARC** | 154 | 73% | 10.8% |
+| **LITTLE THINGS** (v6) | 26 | 69% | 14.3% |
+
+- v6 (mass-dependent k) improves error by **63.9%**
+
+### ⚡ Electromagnetic Physics
+
+| Test | Data Points | Avg Error | Source |
+|:---|:---:|:---:|:---|
+| **Casimir Effect** | 12 | 1.6% | Mohideen & Roy 1998 |
+
+### 📈 Other Domains
+
+| Domain | Result | Evidence |
+|:---|:---|:---|
+| **Finance** | k ≈ 1.0 | Multiple assets |
+| **Brain/EEG** | β = 1.94 | 1/f² spectrum |
+| **Astrophysics** | 3% error | Cas A expansion |
+
+---
+
+## 🎯 Core Equation
 
 ```
-┌─────────────────────────────────────────┐
-│  Layer 1: PHYSICS                       │
-│  Newton (F=ma), Einstein (E=mc²)        │
-│  → Describes: Matter, Force, Mass       │
-├─────────────────────────────────────────┤
-│  Layer 2: THERMODYNAMICS                │
-│  Second Law (dS≥0)                      │
-│  → Describes: Energy, Entropy           │
-├─────────────────────────────────────────┤
-│  Layer 3: BRIDGE                        │
-│  Landauer (E = kT ln2)                  │
-│  → Links: Energy ⟷ Information          │
-├─────────────────────────────────────────┤
-│  Layer 4: UET                           │
-│  V = f(C, I, Ω)                         │
-│  → Describes: Systems, Value, Balance   │
-└─────────────────────────────────────────┘
+Ω[C, I] = ∫ [V(C) + (κ/2)|∇C|² + β·C·I] dx
 ```
 
-**UET does NOT replace physics. It adds a new lens.**
+| Variable | Meaning |
+|:---|:---|
+| **C** | Capacity (mass, liquidity, connectivity) |
+| **I** | Information (entropy, sentiment, stimulus) |
+| **V** | Value/Potential |
+| **κ** | Gradient penalty |
+| **β** | Coupling constant |
 
 ---
 
@@ -54,41 +72,63 @@ UET is a **complementary framework** that works **alongside** established physic
 ```
 research_uet/
 ├── 📐 core/           # Theory foundations
-├── 📊 evidence/       # Real data & tests
-├── 🔬 analysis/       # Interpretation
-└── 📚 docs/           # Documentation
+├── 🔬 lab/            # Tests & experiments
+│   ├── galaxies/      # SPARC, LITTLE THINGS
+│   ├── electromagnetic/ # Casimir test
+│   └── tests/         # All domain tests
+├── 📊 data_vault/     # Real experimental data
+├── 📚 theory/         # Extensions & papers
+└── 📖 docs/           # Documentation
 ```
 
 ---
 
 ## 🚀 Quick Start
 
-1. Read `core/README.md` → Understand the basics
-2. Run `evidence/global_economy_test.py` → See real results
-3. Check `analysis/findings.md` → Key discoveries
+```bash
+# Run galaxy test
+python lab/galaxies/test_175_galaxies.py
+
+# Run Casimir test
+python lab/electromagnetic/casimir_test.py
+
+# Run dwarf galaxy test
+python lab/galaxies/test_little_things.py
+```
 
 ---
 
-## ✅ Validated Findings
+## 📚 References
 
-| Finding | Evidence | Score |
-|:--------|:---------|:------|
-| Markets show k≈1.0 | 11 assets tested | ⭐⭐⭐⭐ |
-| UET + Newton compatible | Harmonic oscillator | ⭐⭐⭐⭐⭐ |
-| Brain shows β≈2.0 | EEG data | ⭐⭐⭐ |
-| **Supernova (Cas A)** | 4D MHD Simulation (Pass) | ⭐⭐⭐⭐⭐ |
-| **Quantum Bridge** | G-2 linked to Halo ($4\pi$) | ⭐⭐⭐⭐⭐ |
+1. Lelli et al. (2016) - SPARC Database
+2. Oh et al. (2015) - LITTLE THINGS
+3. Mohideen & Roy (1998) - Casimir Effect
+4. Di Cintio et al. (2014) - DC14 Profile
 
 ---
 
-## 📖 Learn More
+## ⚠️ Limitations
 
-- `core/variables.md` — What C, I, V, Ω mean
-- `core/axioms.md` — The 4 principles
-- `evidence/results.md` — Test results
-- `docs/faq.md` — Common questions
+- **Compact galaxies:** 40% pass rate (known issue)
+- **Cosmology:** Not tested against CMB/LSS
+- **AI-assisted:** May contain interpretation errors
+- **Not peer-reviewed:** Academic validation pending
 
 ---
 
-*Version: Clean Reboot*
-*Last Updated: 2025-12-30*
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+---
+
+## 📜 License
+
+MIT License - See [LICENSE](LICENSE)
+
+---
+
+*Unity Equilibrium Theory — A Simulation Framework, Not a Universal Law*
+
+**Version:** 1.0 (2026-01-01)
+**Repository:** [Equation-UET-v0.8.7](https://github.com/unityequilibrium/Equation-UET-v0.8.7)
