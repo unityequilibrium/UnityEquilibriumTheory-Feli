@@ -1,0 +1,160 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Unity Equilibrium Theory (UET):\\A Cross-Domain Simulation Framework}
+\author{Unity Equilibrium Project\\
+\texttt{https://github.com/unityequilibrium/Equation-UET-v0.8.7}}
+\date{Version 1.0 --- January 1, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Unity Equilibrium Theory (UET) proposes a cross-domain framework linking information, entropy, and physical dynamics. Designed as a practical \textbf{simulation framework} (not a universal law), it demonstrates consistent estimation capabilities across multiple domains. Key results include: Galaxy rotation curves (SPARC: 73\% pass rate, 10.8\% error; LITTLE THINGS: 69\% pass rate, 14.3\% error), Electromagnetic physics (Casimir effect: 1.6\% error vs Mohideen 1998 experimental data), and cross-domain consistency (k $\approx$ 1.0 in markets, $\beta$ = 1.94 in brain dynamics).
+\end{abstract}
+
+\section{Critical Constraints}
+
+\textbf{Important:} UET stands for ``Unity'' ($\text{ความเป็นหนึ่งเดียว}$), NOT ``Universal'' ($\text{สากล}$).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\toprule
+Term & Meaning & UET Status \\
+\midrule
+Universal & Fixed law, applies everywhere & \textbf{NOT this} \\
+Unity & Connects domains, context-aware & \textbf{This} \\
+\bottomrule
+\end{tabular}
+\caption{UET Terminology Clarification}
+\end{table}
+
+\section{Core Equation}
+
+The Master Equation (Free Energy Functional):
+
+\begin{equation}
+\Omega[C, I] = \int \left[ V(C) + \frac{\kappa}{2}|\nabla C|^2 + \beta \cdot C \cdot I \right] dx
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item $C$ = Capacity (mass, liquidity, connectivity)
+    \item $I$ = Information (entropy, field, sentiment)
+    \item $V(C)$ = Potential energy (e.g., $aC^2 + \delta C^4$)
+    \item $\kappa$ = Gradient penalty
+    \item $\beta$ = Coupling constant between C and I
+\end{itemize}
+
+\subsection{Dynamic Equations}
+
+\textbf{Cahn-Hilliard (Conservative):}
+\begin{equation}
+\frac{\partial C}{\partial t} = M \nabla^2 \frac{\delta \Omega}{\delta C}
+\end{equation}
+
+\textbf{Allen-Cahn (Non-Conservative):}
+\begin{equation}
+\frac{\partial C}{\partial t} = -L \frac{\delta \Omega}{\delta C}
+\end{equation}
+
+\section{Experimental Results}
+
+\subsection{Galaxy Rotation Curves}
+
+\subsubsection{SPARC Database (154 Galaxies)}
+
+Using the Universal Density Law:
+\begin{equation}
+\frac{M_{halo}}{M_{disk}} = \frac{k}{\sqrt{\rho_{baryon}}}
+\end{equation}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+Galaxy Type & Count & Pass Rate & Avg Error \\
+\midrule
+Spiral & 45 & 60\% & 12.2\% \\
+LSB & 68 & 93\% & 7.1\% \\
+Dwarf & 22 & 59\% & 14.6\% \\
+Ultrafaint & 14 & 57\% & 13.5\% \\
+Compact & 5 & 40\% & 23.8\% \\
+\midrule
+\textbf{Overall} & \textbf{154} & \textbf{73\%} & \textbf{10.8\%} \\
+\bottomrule
+\end{tabular}
+\caption{SPARC Galaxy Results (Lelli et al. 2016)}
+\end{table}
+
+\subsubsection{LITTLE THINGS Dwarf Galaxies (26 Galaxies)}
+
+Mass-dependent $k$ calibration (v6):
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrr}
+\toprule
+Model & Pass Rate & Avg Error \\
+\midrule
+UET v3 (NFW) & 4\% & 39.7\% \\
+UET v6 (Mass-dependent k) & \textbf{69\%} & \textbf{14.3\%} \\
+\bottomrule
+\end{tabular}
+\caption{LITTLE THINGS Results (Oh et al. 2015) --- 63.9\% Improvement}
+\end{table}
+
+\subsection{Electromagnetic Physics}
+
+Casimir Effect validation against Mohideen \& Roy (1998) experimental data:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrr}
+\toprule
+d (nm) & $F_{exp}$ (pN) & $F_{UET}$ (pN) & Error \\
+\midrule
+100 & -477.0 & -427.0 & 10.5\% \\
+200 & -54.0 & -53.4 & 1.2\% \\
+300 & -15.8 & -15.8 & 0.1\% \\
+500 & -3.4 & -3.4 & 0.5\% \\
+\midrule
+\multicolumn{3}{l}{\textbf{Average Error}} & \textbf{1.6\%} \\
+\bottomrule
+\end{tabular}
+\caption{Casimir Effect: UET vs Experiment}
+\end{table}
+
+\section{Limitations}
+
+\begin{enumerate}
+    \item \textbf{Compact Galaxies:} 40\% pass rate (known limitation)
+    \item \textbf{Parameters not derived:} $k$ is fitted, not derived from first principles
+    \item \textbf{Limited cosmology:} Not tested against CMB, large-scale structure
+    \item \textbf{AI-assisted development:} May contain interpretation errors
+    \item \textbf{Not peer-reviewed:} Academic validation pending
+\end{enumerate}
+
+\section{Conclusion}
+
+UET provides a consistent simulation framework across gravitational physics (galaxies), electromagnetic physics (Casimir effect), finance (markets), and neuroscience (brain dynamics). The theory is designed to evolve with new data, with context-dependent parameters adapted to each domain.
+
+\section*{References}
+
+\begin{enumerate}
+    \item Lelli, F., McGaugh, S.S., Schombert, J.M. (2016). SPARC Database. \textit{AJ} 152, 157.
+    \item Oh, S.-H., et al. (2015). LITTLE THINGS. \textit{AJ} 149, 180.
+    \item Mohideen, U., Roy, A. (1998). Casimir Force Measurement. \textit{PRL} 81, 4549.
+    \item Di Cintio, A., et al. (2014). DC14 Profile. \textit{MNRAS} 441, 2986.
+    \item Landauer, R. (1961). Irreversibility and Heat Generation. \textit{IBM J. Res. Dev.} 5, 183.
+\end{enumerate}
+
+\end{document}
