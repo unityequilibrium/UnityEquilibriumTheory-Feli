@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(echo:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(unzip:*)",
+      "Bash(if [ ! -d \"research_v3\" ])",
+      "Bash(then unzip -q research_v3.zip)",
+      "Bash(fi)",
+      "Bash(if [ ! -d \"research_uet\" ])",
+      "Bash(then unzip -q research_uet.zip)",
+      "Bash(python global_economy_test.py:*)",
+      "Bash(python:*)"
     ]
   }
 }
