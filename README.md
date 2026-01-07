@@ -1,7 +1,7 @@
 # Unified Equilibrium Theory (UET): The Thermodynamic Cost of Reality v0.8.7
 
-![tests](https://img.shields.io/badge/tests-45%2B_PASS-brightgreen)
-![coverage](https://img.shields.io/badge/coverage-20_DOMAINS-blue)
+![tests](https://img.shields.io/badge/tests-60_PASS-brightgreen)
+![coverage](https://img.shields.io/badge/coverage-18_DOMAINS-blue)
 ![version](https://img.shields.io/badge/version-v0.8.7-orange)
 
 > **"Ethics is not an opinion. It is a Thermodynamic Strategy for survival."**
