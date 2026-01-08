@@ -24,7 +24,7 @@ Physics is not abstract philosophy. It is the **System Administration of the Uni
 
 The entire universe is modeled as a maximization of equilibrium ($\Omega$) where **Existence has a Price**.
 
-### $$\Omega = c \cdot I$$
+$$\Omega = c \cdot I$$
 
 *   **c (Speed of Light)**: The **Processing Limit**. It acts as the "Exchange Rate" between Space and Time. It emerged naturally from our calculations as the constraint on causality.
 *   **I (Information Check)**: The **Latency** or "Lag" of existence. In physics, we call this Mass.
