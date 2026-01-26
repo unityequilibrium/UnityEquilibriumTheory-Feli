@@ -1,0 +1,41 @@
+{
+    "topic": "0.25 Strategy, Power, and Economics",
+    "updated": "2026-01-25",
+    "standard_version": "1.0",
+    "references": [
+        {
+            "id": "WORLD_BANK_2024",
+            "title": "World Development Indicators 2024",
+            "url": "https://databank.worldbank.org/source/world-development-indicators",
+            "note": "Baseline for Global Population, GDP PPP, and Gini Coefficients."
+        },
+        {
+            "id": "WID_2024",
+            "title": "World Inequality Database 2024",
+            "url": "https://wid.world/",
+            "note": "Source for Wealth Distribution Entropy (Top 1% vs Bottom 50%)."
+        },
+        {
+            "id": "KAPLAN_2020",
+            "title": "Scaling Laws for Neural Language Models",
+            "url": "https://arxiv.org/abs/2001.08361",
+            "note": "Mathematical basis for Power Law Decay in resource networks."
+        },
+        {
+            "id": "UET_MASTER_EQ",
+            "title": "The Unity Equilibrium Master Equation",
+            "url": "research_uet/core/UET_MASTER_EQUATION.md",
+            "note": "Defines Omega (Entropy) as the driver of Economic Friction."
+        }
+    ],
+    "HISTORICAL_STABILIZERS": {
+        "Stabilizer_1": {"name": "Roosevelt_type", "uet_boldness": 0.85},
+        "Stabilizer_2": {"name": "Gandhi_type", "uet_boldness": 0.15},
+        "Stabilizer_3": {"name": "Mandela_type", "uet_boldness": 0.70},
+        "Stabilizer_4": {"name": "Merkel_type", "uet_boldness": 0.40},
+        "Stabilizer_5": {"name": "LeeKuanYew_type", "uet_boldness": 0.90},
+        "Stabilizer_6": {"name": "KingBhumibol_type", "uet_boldness": 0.50},
+        "Stabilizer_7": {"name": "DengXiaoping_type", "uet_boldness": 0.80},
+        "Stabilizer_8": {"name": "Lincoln_type", "uet_boldness": 0.75}
+    }
+}

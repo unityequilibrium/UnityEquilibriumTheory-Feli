@@ -1,0 +1,116 @@
+{
+    "Results": [
+        {
+            "Qubits": 2,
+            "States": 4,
+            "Iterations": 1,
+            "Fidelity": 0.9999999999999996,
+            "Time_Seconds": 0.0014994144439697266
+        },
+        {
+            "Qubits": 3,
+            "States": 8,
+            "Iterations": 2,
+            "Fidelity": 0.9453124999999996,
+            "Time_Seconds": 0.0009052753448486328
+        },
+        {
+            "Qubits": 4,
+            "States": 16,
+            "Iterations": 3,
+            "Fidelity": 0.9613189697265623,
+            "Time_Seconds": 0.0008454322814941406
+        },
+        {
+            "Qubits": 5,
+            "States": 32,
+            "Iterations": 4,
+            "Fidelity": 0.9991823155432925,
+            "Time_Seconds": 0.0010266304016113281
+        },
+        {
+            "Qubits": 6,
+            "States": 64,
+            "Iterations": 6,
+            "Fidelity": 0.996585680786799,
+            "Time_Seconds": 0.0011074542999267578
+        },
+        {
+            "Qubits": 7,
+            "States": 128,
+            "Iterations": 8,
+            "Fidelity": 0.9956198656943223,
+            "Time_Seconds": 0.0010104179382324219
+        },
+        {
+            "Qubits": 8,
+            "States": 256,
+            "Iterations": 12,
+            "Fidelity": 0.9999470421032736,
+            "Time_Seconds": 0.001150369644165039
+        },
+        {
+            "Qubits": 9,
+            "States": 512,
+            "Iterations": 17,
+            "Fidelity": 0.99944802615401,
+            "Time_Seconds": 0.0011200904846191406
+        },
+        {
+            "Qubits": 10,
+            "States": 1024,
+            "Iterations": 25,
+            "Fidelity": 0.9994612447444075,
+            "Time_Seconds": 0.0013768672943115234
+        },
+        {
+            "Qubits": 11,
+            "States": 2048,
+            "Iterations": 35,
+            "Fidelity": 0.9999968477766238,
+            "Time_Seconds": 0.0015892982482910156
+        },
+        {
+            "Qubits": 12,
+            "States": 4096,
+            "Iterations": 50,
+            "Fidelity": 0.9999453461091191,
+            "Time_Seconds": 0.0019495487213134766
+        },
+        {
+            "Qubits": 13,
+            "States": 8192,
+            "Iterations": 71,
+            "Fidelity": 0.9999157752494205,
+            "Time_Seconds": 0.0028188228607177734
+        },
+        {
+            "Qubits": 14,
+            "States": 16384,
+            "Iterations": 100,
+            "Fidelity": 0.9999997811142223,
+            "Time_Seconds": 0.005068063735961914
+        },
+        {
+            "Qubits": 15,
+            "States": 32768,
+            "Iterations": 142,
+            "Fidelity": 0.9999868295189597,
+            "Time_Seconds": 0.013357162475585938
+        },
+        {
+            "Qubits": 16,
+            "States": 65536,
+            "Iterations": 201,
+            "Fidelity": 0.9999882596461648,
+            "Time_Seconds": 0.06449103355407715
+        },
+        {
+            "Qubits": 17,
+            "States": 131072,
+            "Iterations": 284,
+            "Fidelity": 0.9999992587165484,
+            "Time_Seconds": 0.14535188674926758
+        }
+    ]
+}

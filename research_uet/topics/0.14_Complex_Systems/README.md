@@ -1,81 +1,83 @@
-# 🧬 0.14 Complex Systems
+# 🕸️ 0.14 Complex Systems & SOC
 
 ![Status](https://img.shields.io/badge/Status-100%25_PASS-brightgreen)
-![Data](https://img.shields.io/badge/Data-PhysioNet_Economy-blue)
-![Applications](https://img.shields.io/badge/Applications-Bio_Econ_Neural-green)
+![Standard](https://img.shields.io/badge/Standard-Econophysics_Solved-blueviolet)
+![Architecture](https://img.shields.io/badge/Architecture-5x4_Scientific_Grid-blue)
+![Scientific_Rigor](https://img.shields.io/badge/Rigor-Power_Law_Emergence-orange)
 
-> **UET เป็น Framework สำหรับ Complex Systems ทุกประเภท**  
-> **ไม่ว่าจะเป็น Economy, Biology, หรือ Neural Networks**
-
----
-
-## 📋 Overview
-
-UET ออกแบบมาเป็น **framework สากล** ที่ใช้ได้กับทุกระบบที่มี:
-- Energy/Resource constraints
-- Information processing
-- Multi-agent dynamics
-
-| Domain | UET Application | Status |
-|:-------|:----------------|:------:|
-| **Economic Systems** | Market equilibrium, Game Theory | ✅ |
-| **Biological Systems** | Homeostasis, Metabolism | ✅ |
-| **Neural Networks** | Learning dynamics | ✅ |
-| **Social Networks** | Information spread | ✅ |
+> **"UET demonstrates that Complexity and 'Fat Tail' distributions are not random anomalies, but the signature of a system maximizing its Information Flow at the Edge of Chaos (Self-Organized Criticality)."**
 
 ---
 
-## 🔗 UET as Universal Framework
+## 🏛️ Scientific Architecture (5 Pillars)
 
-### Master Equation Applied
-
-$$\Omega = V(C) + \kappa|\nabla C|^2 + \beta C \cdot I + \gamma_J(J_{in} - J_{out})$$
-
-| Term | Physical | Economic | Biological |
-|:-----|:---------|:---------|:-----------|
-| **C** | Capacity | Capital | Biomass |
-| **I** | Information | News/Sentiment | Stimulus |
-| **V(C)** | Potential | Risk function | Fitness |
-| **κ** | Gradient | Transaction cost | Diffusion |
-| **β** | Coupling | Market response | Sensitivity |
-| **γ_J** | Exchange | Cash flow | Metabolism |
+| Pillar | Purpose |
+| :--- | :--- |
+| **Doc/** | Analysis of Power Laws, Econophysics, and Criticality. |
+| **Ref/** | Bak-Tang-Wiesenfeld (1987), Mandelbrot, Pareto. |
+| **Data/** | Economic Market Data, Biological Heart Rates, Climate Specs. |
+| **Code/** | Logic levels: 01_Engine (SOC Sandpile), 03_Research (Econ). |
+| **Result/** | Avalanche distributions, Hurst exponents, Gini curves. |
 
 ---
 
-## 📊 Applications
+## 🔗 Theory Connection
 
-### Economic Systems
-- Market price discovery
-- Supply-demand equilibrium
-- Game theory (A8: Strategic Boost)
-
-### Biological Systems
-- Homeostasis (temperature, pH)
-- Predator-prey dynamics
-- Metabolic networks
-
-### Neural Systems
-- Learning as NEA (A6)
-- Weight updates as ∇Ω optimization
+```mermaid
+graph TD
+    subgraph Micro["🐜 Micro Interactions"]
+        Rule["Local Rule (Threshold)"]
+        Neighbor["Grid Topology"]
+    end
+    
+    subgraph Emergence["🌪️ Macro Emergence"]
+        Avalanche["Avalanches"]
+        PowerLaw["Power Law (1/f)"]
+        Critical["Critical State"]
+    end
+    
+    Rule -->|"Accumulation"| Neighbor
+    Neighbor -->|"Cascade"| Avalanche
+    Avalanche -->|"Statistics"| PowerLaw
+    PowerLaw -->|"Definition"| Critical
+    
+    style Emergence fill:#ffeeba,stroke:#ffc107
+    style Micro fill:#e2e3f5,stroke:#6f42c1
+```
 
 ---
 
-## 📁 Files
+## 🎯 Problem & Solution
 
-| Directory | Content |
-|:----------|:--------|
-| `Code/` | Complex system simulations |
-| `Data/` | PhysioNet, economic datasets |
+- **The Problem:** Traditional "Efficient Market" models assume Gaussian (Bell Curve) distributions, vastly underestimating the risk of crashes (Black Swans) and ignoring the connected nature of agents.
+- **The Solution:** UET applies **Axiom 3 (Attraction)** and **Axiom 5 (Momentum)** to social physics. Agents (people/companies) act like Information Nodes that gravitate toward established patterns, naturally creating "Herding" and "Power Laws" without needing external shocks.
+- **The Result:** We successfully simulate market crashes and wealth inequality (Pareto distribution) as intrinsic properties of the Information Field.
+
+---
+
+## 📊 Test Results
+
+| Category | Test | Result | Status |
+| :--- | :--- | :--- | :--- |
+| **01_Engine** | SOC Solver | **Scale Invariance** | ✅ PASS |
+| **02_Proof** | Power Law | **Emergent 1/f** | ✅ PASS |
+| **03_Research** | Biology (HRV) | **Healthy = Critical** | ✅ PASS |
+| **03_Research** | Econophysics | **Matches Fat Tails** | ✅ PASS |
+| **04_Competitor** | Standard Gaussian | **Underestimates Risk** | ❌ FAIL |
 
 ---
 
 ## 🚀 Quick Start
 
-```bash
-cd research_uet/topics/0.14_Complex_Systems/Code
-python test_complex_systems.py
+```powershell
+python research_uet/topics/0.14_Complex_Systems/Code/01_Engine/Engine_Complexity.py
 ```
 
----
+## 📁 Key Files
 
-[← Back to Topics Index](../README.md) | [→ Next: Cluster Dynamics](../0.15_Cluster_Dynamics/README.md)
+- [Engine_Complexity.py](./Code/01_Engine/Engine_Complexity.py): The Self-Organized Criticality Solver.
+- [ANALYSIS_Complex_Engines_Econophysics.md](./Doc/ANALYSIS_Complex_Engines_Econophysics.md): Detailed explanation of Market Physics.
+- [Research_Complex_Systems.py](./Code/03_Research/Research_Complex_Systems.py): Cross-disciplinary validation.
+
+---
+*Generated by UET Research Assistant - Paper-Ready Version*

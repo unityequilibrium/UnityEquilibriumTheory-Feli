@@ -1,0 +1,61 @@
+{
+  "description": "3D Extreme Smoothness Benchmark - NS vs UET",
+  "tests": [
+    {
+      "name": "1. Low Re (\u03bd=0.1) - 16\u00b3",
+      "NS": {
+        "name": "1. Low Re (\u03bd=0.1) - 16\u00b3",
+        "solver": "NS",
+        "remained_smooth": true,
+        "max_gradient": 16.0,
+        "max_laplacian": 23.657956350330146,
+        "max_value": 1.0,
+        "min_value": -0.006869907429915531,
+        "runtime": 0.02199387550354004,
+        "steps_completed": 100,
+        "blow_up_step": null
+      },
+      "UET": {
+        "name": "1. Low Re (\u03bd=0.1) - 16\u00b3",
+        "solver": "UET",
+        "remained_smooth": true,
+        "max_gradient": 0.40004366235029015,
+        "max_laplacian": 2.5955535692746707,
+        "max_value": 1.3214322335288946,
+        "min_value": 0.7496693185497678,
+        "runtime": 0.021433591842651367,
+        "steps_completed": 100,
+        "blow_up_step": null
+      },
+      "winner": "TIE"
+    },
+    {
+      "name": "2. High Re (\u03bd=0.001) - 16\u00b3",
+      "NS": {
+        "name": "2. High Re (\u03bd=0.001) - 16\u00b3",
+        "solver": "NS",
+        "remained_smooth": true,
+        "max_gradient": 22.080127464774673,
+        "max_laplacian": 821.6958634989774,
+        "max_value": 1.0,
+        "min_value": -0.38000796654841706,
+        "runtime": 0.0435338020324707,
+        "steps_completed": 200,
+        "blow_up_step": null
+      },
+      "UET": {
+        "name": "2. High Re (\u03bd=0.001) - 16\u00b3",
+        "solver": "UET",
+        "remained_smooth": true,
+        "max_gradient": 0.5100227801383648,
+        "max_laplacian": 498.0385411143733,
+        "max_value": 1.3318196613307662,
+        "min_value": 0.6037321301679703,
+        "runtime": 0.04362773895263672,
+        "steps_completed": 200,
+        "blow_up_step": null
+      },
+      "winner": "TIE"
+    }
+  ]
+}

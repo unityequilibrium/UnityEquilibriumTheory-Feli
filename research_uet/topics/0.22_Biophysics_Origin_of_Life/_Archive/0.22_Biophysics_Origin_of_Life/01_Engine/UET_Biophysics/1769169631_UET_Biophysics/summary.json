@@ -1,0 +1,18 @@
+{
+  "run_id": "1769169631_UET_Biophysics",
+  "simulation": "UET_Biophysics",
+  "status": "FAILED",
+  "timestamp": "Fri Jan 23 19:00:31 2026",
+  "duration_seconds": 0.0032868385314941406,
+  "total_steps": 0,
+  "metadata": {
+    "nx": 64,
+    "ny": 1,
+    "dt": 0.001,
+    "kappa": 1.0,
+    "beta": 1.0,
+    "alpha": 1.0,
+    "C0": 0.0
+  },
+  "final_state": null
+}

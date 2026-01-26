@@ -1,0 +1,9 @@
+{
+  "nx": 60,
+  "ny": 1,
+  "dt": 0.001,
+  "kappa": NaN,
+  "beta": NaN,
+  "alpha": NaN,
+  "C0": NaN
+}

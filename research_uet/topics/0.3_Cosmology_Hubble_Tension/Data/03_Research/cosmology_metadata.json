@@ -1,0 +1,44 @@
+{
+  "_metadata": {
+    "description": "Cosmology and Hubble Tension Data Sources",
+    "sources": [
+      {
+        "name": "Planck 2018",
+        "doi": "10.1051/0004-6361/201833910",
+        "reference": "Planck Collaboration 2020, A&A 641, A6",
+        "data_type": "REAL"
+      },
+      {
+        "name": "SDSS-IV eBOSS BAO",
+        "doi": "10.1093/mnras/staa3882",
+        "reference": "eBOSS Collaboration 2021",
+        "data_type": "REAL"
+      },
+      {
+        "name": "Farrah et al. High-z Sample",
+        "doi": "10.3847/2041-8213/acb704",
+        "reference": "Farrah et al. 2023",
+        "data_type": "REAL"
+      },
+      {
+        "name": "Kormendy & Ho Ellipticals",
+        "doi": "10.1146/annurev-astro-081913-035722",
+        "reference": "Kormendy & Ho 2013",
+        "data_type": "REAL"
+      }
+    ],
+    "warnings": [
+      {
+        "file": "SN1987A_synthetic.json",
+        "issue": "SYNTHETIC DATA - Not for final validation",
+        "recommendation": "Replace with real SN data from Pantheon+ or CSP"
+      },
+      {
+        "file": "SN2011fe_synthetic.json",
+        "issue": "SYNTHETIC DATA - Not for final validation",
+        "recommendation": "Replace with real SN data from Pantheon+ DOI:10.3847/1538-4357/ac8e04"
+      }
+    ],
+    "last_updated": "2026-01-19"
+  }
+}

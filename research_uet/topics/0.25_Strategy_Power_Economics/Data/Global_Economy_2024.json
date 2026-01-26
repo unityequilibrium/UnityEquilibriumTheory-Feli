@@ -1,0 +1,46 @@
+{
+    "Source": "UET Economic Audit 2026 (World Bank/IMF Ref)",
+    "Metric_Definitions": {
+        "Population": "Total Human Nodes (N)",
+        "GDP_PPP": "Total Resource Throughput (Energy)",
+        "Gini": "Entropy of Distribution (0=Perfect Order, 100=Max Entropy)"
+    },
+    "Economies": {
+        "World_Total": {
+            "Population": 8100000000.0,
+            "GDP_PPP_USD": 185000000000000.0,
+            "Gini": 62.0,
+            "Note": "Earth System Limit"
+        },
+        "USA": {
+            "Population": 341000000.0,
+            "GDP_PPP_USD": 28700000000000.0,
+            "Gini": 41.5,
+            "Type": "Developed / High Inequality"
+        },
+        "China": {
+            "Population": 1410000000.0,
+            "GDP_PPP_USD": 35200000000000.0,
+            "Gini": 37.1,
+            "Type": "Developed / State Controlled"
+        },
+        "Thailand": {
+            "Population": 71800000.0,
+            "GDP_PPP_USD": 1580000000000.0,
+            "Gini": 35.0,
+            "Type": "Developing / UET Pilot Target"
+        },
+        "Norway": {
+            "Population": 5500000.0,
+            "GDP_PPP_USD": 450000000000.0,
+            "Gini": 27.7,
+            "Type": "Developed / Low Inequality (Ideal?)"
+        },
+        "South_Africa": {
+            "Population": 60400000.0,
+            "GDP_PPP_USD": 990000000000.0,
+            "Gini": 63.0,
+            "Type": "Developing / Extreme Inequality"
+        }
+    }
+}

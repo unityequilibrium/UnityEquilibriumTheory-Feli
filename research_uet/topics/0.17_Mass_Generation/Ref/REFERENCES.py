@@ -1,53 +1,57 @@
 """
-References: Mass Generation
-===========================
-
-DOIs for all data sources used in this topic.
+REFERENCES.py - 0.17 Mass Generation
+====================================
+Central registry for external citations and analysis.
 """
 
-REFERENCES = {
-    "lepton_masses": [
-        {
-            "title": "Review of Particle Physics",
-            "authors": "Particle Data Group",
-            "journal": "Prog. Theor. Exp. Phys. 2024, 083C01",
-            "year": 2024,
-            "doi": "10.1093/ptep/ptac097",
-            "data": "Electron, muon, tau masses",
-            "source": "PDG 2024",
-        },
-    ],
-    "higgs_mechanism": [
-        {
-            "title": "Observation of a new particle (Higgs)",
-            "authors": "CMS Collaboration",
-            "journal": "Phys. Lett. B 716, 30",
-            "year": 2012,
-            "doi": "10.1016/j.physletb.2012.08.021",
-            "data": "Higgs mass 125.09 GeV",
-        },
-    ],
-}
+from pathlib import Path
 
-DATA_FILES = {
-    "Code/lepton_mass/test_lepton_mass.py": {
-        "source": "PDG 2024",
-        "doi": "10.1093/ptep/ptac097",
-        "verified": True,
+REF_DIR = Path(__file__).parent
+
+REFERENCES = {
+    "ANALYSIS": REF_DIR / "BIBLIOGRAPHY_ANALYSIS.md",
+    "PDF_DIR": REF_DIR / "PDF_Downloads",
+    "DATA_DIR": REF_DIR / "Data_Source",
+    "KEY_PAPERS": {
+        "Higgs_1964": "Peter Higgs - Broken Symmetries and the Masses of Gauge Bosons",
+        "Englert_1964": "Englert & Brout - Broken Symmetry and the Mass of Gauge Vector Mesons",
+        "YangMills_Gap": "Jaffe & Witten - Quantum Yang-Mills Theory (Millennium Prize)",
     },
 }
+
+
+def get_ref_path(name: str):
+    """Returns path to a specific reference PDF if downloaded."""
+    # Common mappings
+    mapping = {
+        "Higgs_1964": "Broken Symmetries and the Masses of Gauge Bosons Higgs",
+        "Englert_1964": "Broken Symmetry and the Mass of Gauge Vector Mesons",
+        "YangMills_Gap": "Quantum Yang-Mills theory mass gap witten",
+    }
+
+    search_name = mapping.get(name, name)
+
+    # Try generic search in PDF folder
+    for pdf in REFERENCES["PDF_DIR"].glob("*.pdf"):
+        if search_name.lower() in pdf.name.lower():
+            return pdf
+
+    return None
 
 
 def list_references():
     """List all references."""
     print("=" * 60)
-    print("0.17 MASS GENERATION REFERENCES")
+    print("0.17 Mass Generation - References")
     print("=" * 60)
-    for category, refs in REFERENCES.items():
-        print(f"\n{category.upper()}:")
-        for ref in refs:
-            print(f"  [{ref['year']}] {ref['title']}")
-            print(f"         DOI: {ref['doi']}")
+    print(f"Analysis: {REFERENCES['ANALYSIS']}")
+    print(f"Pdf Dir: {REFERENCES['PDF_DIR']}\n")
+
+    print("Key Papers:")
+    for key, desc in REFERENCES["KEY_PAPERS"].items():
+        ref_path = get_ref_path(key)
+        status = "✅ FOUND" if ref_path else "❌ MISSING (Run Downloader)"
+        print(f"  * {key}: {desc} [{status}]")
 
 
 if __name__ == "__main__":

@@ -14,24 +14,111 @@ TOPICS = Path(__file__).parent
 
 
 def find_all_tests():
-    """Find all test files."""
+    """Find all test files.
+
+    Prioritizes 5x4 Grid structure for Topics 0.1-0.10:
+    - Code/01_Engine/
+    - Code/02_Proof/
+    - Code/03_Research/
+    - Code/04_Competitor/
+    """
     tests = []
-    for test_file in TOPICS.rglob("test_*.py"):
-        if test_file.name != "test_runner.py":
-            solution = test_file.relative_to(TOPICS).parts[0]
+    seen_paths = set()
+
+    # Priority 1: 5x4 Grid folders (Standard for ALL Topics 0.1-0.24)
+    grid_folders = ["01_Engine", "02_Proof", "03_Research", "04_Competitor"]
+
+    for topic_dir in TOPICS.iterdir():
+        if not topic_dir.is_dir() or not topic_dir.name.startswith("0."):
+            continue
+
+        code_dir = topic_dir / "Code"
+        if not code_dir.exists():
+            # Support for legacy layout if 'Code' folder is missing (fallback)
+            pass
+        else:
+            # Search in 5x4 Grid folders
+            for grid_folder in grid_folders:
+                folder = code_dir / grid_folder
+                if folder.exists():
+                    for py_file in folder.glob("*.py"):
+                        if py_file.name.startswith("__"):
+                            continue
+                        if py_file not in seen_paths:
+                            seen_paths.add(py_file)
+                            tests.append(
+                                {
+                                    "path": py_file,
+                                    "solution": topic_dir.name,
+                                    "name": py_file.stem,
+                                    "grid_folder": grid_folder,
+                                }
+                            )
+
+    # Priority 2: Legacy fallback (for any files NOT in standard Grid structure)
+    # Most should be picked up above now.
+
+    # Also include Engine_, Proof_, Research_, Competitor_ files from legacy locations
+    for extra_file in TOPICS.rglob("*.py"):
+        if extra_file in seen_paths or extra_file.name.startswith("__"):
+            continue
+        if extra_file.name == "test_runner.py":
+            continue
+
+        is_valid = (
+            extra_file.name.startswith("Engine_")
+            or extra_file.name.startswith("Proof_")
+            or extra_file.name.startswith("Research_")
+            or extra_file.name.startswith("Competitor_")
+            or "benchmark" in extra_file.name
+            or extra_file.name.startswith("experiment_")
+        )
+
+        if is_valid:
+            solution = extra_file.relative_to(TOPICS).parts[0]
+            seen_paths.add(extra_file)
             tests.append(
                 {
-                    "path": test_file,
+                    "path": extra_file,
                     "solution": solution,
-                    "name": test_file.stem,
+                    "name": extra_file.stem,
                 }
             )
+
     return tests
 
 
 def run_test(test_path):
     """Run a single test and return result."""
     try:
+        # robust environment setup
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "utf-8"
+
+        # Inject standard paths
+        project_root = TOPICS.parent.parent
+        lab_path = project_root / "lab"
+        research_uet = project_root / "research_uet"
+
+        extra_paths = [
+            str(project_root),
+            str(research_uet),
+            str(lab_path),
+            str(lab_path / "01_galaxy_dynamics"),
+            str(lab_path / "02_gravitational"),
+            str(lab_path / "03_electroweak"),
+            str(lab_path / "04_neutrino"),
+            str(lab_path / "05_qcd_hadrons"),
+            str(lab_path / "06_motion_dynamics"),
+            str(lab_path / "07_complex_systems"),
+            str(lab_path / "00_thermodynamic_bridge"),
+        ]
+
+        current_pythonpath = env.get("PYTHONPATH", "")
+        env["PYTHONPATH"] = (
+            os.pathsep.join(extra_paths) + os.pathsep + current_pythonpath
+        )
+
         result = subprocess.run(
             [sys.executable, "-X", "utf8", str(test_path)],
             capture_output=True,
@@ -40,6 +127,7 @@ def run_test(test_path):
             errors="replace",
             timeout=180,
             cwd=str(test_path.parent),
+            env=env,
         )
 
         output = result.stdout + result.stderr
@@ -153,7 +241,9 @@ def main():
     elif total_tests >= 50 and total_passed / total_tests >= 0.80:
         print("GRADE: GOOD (50+ tests, 80%+ pass)")
     else:
-        print(f"GRADE: IN PROGRESS ({total_tests} tests, {total_passed/total_tests*100:.0f}% pass)")
+        print(
+            f"GRADE: IN PROGRESS ({total_tests} tests, {total_passed/total_tests*100:.0f}% pass)"
+        )
 
     print("=" * 70)
 

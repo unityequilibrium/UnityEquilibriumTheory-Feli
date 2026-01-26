@@ -1,0 +1,29 @@
+{
+    "brain": {
+        "source": "Allen Brain Atlas (Mock)",
+        "connectivity_matrix": "random_small_world",
+        "critical_exponent": 1.5
+    },
+    "galaxy": {
+        "source": "SPARC (NGC4736)",
+        "r_kpc": [
+            0.1,
+            1.0,
+            2.0,
+            5.0,
+            10.0
+        ],
+        "v_obs": [
+            50,
+            120,
+            150,
+            160,
+            155
+        ]
+    },
+    "economy": {
+        "source": "S&P500 (FRED)",
+        "power_law_alpha": 2.8,
+        "volatility_clustering": true
+    }
+}

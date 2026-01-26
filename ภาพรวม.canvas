@@ -1,0 +1,35 @@
+{
+	"nodes": [
+		{"id":"fund_change","type":"text","text":"# 1. รากฐาน (Foundation)\n**การกลายเป็น (Becoming)**\n(การเปลี่ยนแปลง / Flow)\nไม่มีสิ่งใดหยุดนิ่ง\nทุกอย่างกำลังเปลี่ยนสภาพตลอดเวลา","x":-1400,"y":0,"width":350,"height":180,"color":"2"},
+		
+        {"id":"fund_energy","type":"text","text":"**พลังงาน (Energy)**\nคือ 'ต้นทุน' ของการกลายเป็น\n(Cost of Becoming)","x":-1000,"y":200,"width":250,"height":150,"color":"2"},
+		{"id":"fund_system","type":"text","text":"**ระบบ (System)**\nโครงสร้างที่พยายาม 'รอด'\nท่ามกลางกระแสการกลายเป็น","x":-1000,"y":-150,"width":250,"height":150,"color":"2"},
+
+		{"id":"hist_newton","type":"text","text":"# 2. ความพยายามหยุดเวลา (Newton)\n**มองเป็น 'วัตถุหยุดนิ่ง'**\nสมมติว่ามี มวลคงที่ (Static Mass)\nสมมติว่า เวลาเป็นสิ่งสัมบูรณ์","x":-500,"y":-300,"width":350,"height":180,"color":"3"},
+		{"id":"hist_thermo","type":"text","text":"# 3. การยอมรับความจริง (Thermo)\n**ยอมรับว่า 'หยุดไม่ได้'**\nEntropy ต้องเพิ่มขึ้นเสมอ\n(Time Arrow = Flow Direction)","x":-500,"y":0,"width":350,"height":180,"color":"3"},
+		{"id":"hist_modern","type":"text","text":"# 4. ขีดจำกัด (Modern Limits)\n**การกลายเป็นมี 'ขีดจำกัด'**\nมีความเร็วจำกัด (c)\nมีความละเอียดจำกัด (h)","x":-500,"y":300,"width":350,"height":180,"color":"3"},
+
+		{"id":"uet_core","type":"text","text":"# 5. บทสรุป: UET\n**สมดุลของการกลายเป็น**\n(Equilibrium of Becoming)","x":100,"y":0,"width":400,"height":150,"color":"1"},
+		{"id":"uet_mech","type":"text","text":"## กลไก (Mechanism)\n**Optimization of Flow**\nกฎฟิสิกส์เกิดขึ้นเพื่อให้\nการกลายเป็น A->B\nใช้ต้นทุนน้อยที่สุด","x":100,"y":200,"width":300,"height":150,"color":"4"},
+		{"id":"uet_result","type":"text","text":"## ผลลัพธ์ (Result)\n**เสถียรภาพ (Stability)**\nคือสภาวะที่การเปลี่ยนแปลง\nสูญเสียพลังงานน้อยที่สุด","x":500,"y":0,"width":300,"height":150,"color":"5"},
+
+        {"id":"connect_why","type":"text","text":"**ทำไมต้องมีกฎ?**\nเพื่อจัดการ Flow นี้\nให้มีประสิทธิภาพสูงสุด","x":-150,"y":-200,"width":200,"height":100,"color":"6"}
+
+	],
+	"edges": [
+		{"id":"e_chg_sys","fromNode":"fund_change","fromSide":"right","toNode":"fund_system","toSide":"left","label":"ทำให้เกิด"},
+		{"id":"e_sys_nrg","fromNode":"fund_system","fromSide":"bottom","toNode":"fund_energy","toSide":"top","label":"ต้องใช้"},
+		{"id":"e_chg_nrg","fromNode":"fund_change","fromSide":"bottom","toNode":"fund_energy","toSide":"left","label":"ขับเคลื่อนด้วย"},
+        
+        {"id":"e_sys_newt","fromNode":"fund_system","fromSide":"right","toNode":"hist_newton","toSide":"left","label":"มนุษย์อธิบายด้วย"},
+        {"id":"e_chg_ther","fromNode":"fund_change","fromSide":"right","toNode":"hist_thermo","toSide":"left","label":"มนุษย์อธิบายด้วย"},
+        {"id":"e_nrg_mod","fromNode":"fund_energy","fromSide":"right","toNode":"hist_modern","toSide":"left","label":"มนุษย์อธิบายด้วย"},
+
+        {"id":"e_n_uet","fromNode":"hist_newton","fromSide":"right","toNode":"uet_core","toSide":"left","label":"รวมกันที่"},
+        {"id":"e_t_uet","fromNode":"hist_thermo","fromSide":"right","toNode":"uet_core","toSide":"left","label":"รวมกันที่"},
+        {"id":"e_m_uet","fromNode":"hist_modern","fromSide":"right","toNode":"uet_core","toSide":"left","label":"รวมกันที่"},
+
+        {"id":"e_uet_mech","fromNode":"uet_core","fromSide":"bottom","toNode":"uet_mech","toSide":"top","label":"ทำงานโดย"},
+        {"id":"e_uet_res","fromNode":"uet_core","fromSide":"right","toNode":"uet_result","toSide":"left","label":"เป้าหมายคือ"}
+	]
+}

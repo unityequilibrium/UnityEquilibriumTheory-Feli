@@ -1,55 +1,58 @@
 """
 REFERENCES.py - 0.2 Black Hole Physics
-=======================================
-DOIs for all data sources used in this topic.
+========================================
+Central registry for external citations and analysis.
 """
 
+from pathlib import Path
+
+REF_DIR = Path(__file__).parent
+
 REFERENCES = {
-    "primary": {
-        "EHT_M87": {
-            "title": "First M87 Event Horizon Telescope Results. I. The Shadow of the Supermassive Black Hole",
-            "authors": ["Event Horizon Telescope Collaboration"],
-            "journal": "Astrophysical Journal Letters",
-            "volume": 875,
-            "pages": "L1",
-            "year": 2019,
-            "doi": "10.3847/2041-8213/ab0ec7",
-        },
-        "LIGO_GW150914": {
-            "title": "Observation of Gravitational Waves from a Binary Black Hole Merger",
-            "authors": ["Abbott, B.P.", "et al.", "LIGO Scientific Collaboration"],
-            "journal": "Physical Review Letters",
-            "volume": 116,
-            "pages": "061102",
-            "year": 2016,
-            "doi": "10.1103/PhysRevLett.116.061102",
-        },
+    "ANALYSIS": REF_DIR / "BIBLIOGRAPHY_ANALYSIS.md",
+    "PDF_DIR": REF_DIR / "PDF_Downloads",
+    "DATA_DIR": REF_DIR / "Data_Source",
+    "KEY_PAPERS": {
+        "Jacobson": "Thermodynamics of Spacetime (1995)",
+        "Farrah": "Cosmological Coupling of Black Holes (2023)",
+        "EHT": "M87 Event Horizon Shadow (2019)",
     },
-    "supplementary": [
-        {
-            "name": "Sgr A*",
-            "title": "First Sagittarius A* Event Horizon Telescope Results",
-            "doi": "10.3847/2041-8213/ac6674",
-            "year": 2022,
-        },
-        {
-            "name": "CCBH Farrah",
-            "title": "Observational Evidence for Cosmological Coupling of Black Holes",
-            "doi": "10.3847/2041-8213/acb704",
-            "year": 2023,
-        },
-    ],
 }
 
 
-def print_references():
+def get_ref_path(name: str):
+    """Returns path to a specific reference PDF if downloaded."""
+    # Common mappings
+    mapping = {
+        "Jacobson": "Thermodynamics of Spacetime The Einstein equation",
+        "Farrah": "Observational Evidence for Cosmological Coupling",
+        "EHT": "First M87 Event Horizon Telescope Results I The",
+    }
+
+    search_name = mapping.get(name, name)
+
+    # Try generic search in PDF folder
+    for pdf in REFERENCES["PDF_DIR"].glob("*.pdf"):
+        if search_name.lower() in pdf.name.lower():
+            return pdf
+
+    return None
+
+
+def list_references():
+    """List all references."""
     print("=" * 60)
     print("0.2 Black Hole Physics - References")
     print("=" * 60)
-    for name, ref in REFERENCES["primary"].items():
-        print(f"\n📚 {name}")
-        print(f"   DOI: {ref['doi']}")
+    print(f"Analysis: {REFERENCES['ANALYSIS']}")
+    print(f"Pdf Dir: {REFERENCES['PDF_DIR']}\n")
+
+    print("Key Papers:")
+    for key, desc in REFERENCES["KEY_PAPERS"].items():
+        ref_path = get_ref_path(key)
+        status = "✅ FOUND" if ref_path else "❌ MISSING (Run Downloader)"
+        print(f"  * {key}: {desc} [{status}]")
 
 
 if __name__ == "__main__":
-    print_references()
+    list_references()

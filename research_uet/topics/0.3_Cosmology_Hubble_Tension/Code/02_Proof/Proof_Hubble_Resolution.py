@@ -1,0 +1,61 @@
+"""
+UET Proof: Hubble Tension Resolution
+====================================
+Topic: 0.3 - Cosmology / Hubble Tension
+"""
+
+# --- ROBUST PATH FINDER ---
+from pathlib import Path
+import sys
+import os
+
+current_path = Path(__file__).resolve()
+root_path = None
+for parent in [current_path] + list(current_path.parents):
+    if (parent / "research_uet").exists():
+        root_path = parent
+        break
+
+if root_path and str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
+# Setup local imports for Topic 0.3
+topic_path = root_path / "research_uet" / "topics" / "0.3_Cosmology_Hubble_Tension"
+engine_path = topic_path / "Code" / "01_Engine"
+if str(engine_path) not in sys.path:
+    sys.path.insert(0, str(engine_path))
+
+try:
+    from Engine_Cosmology import UETCosmologyEngine
+except ImportError as e:
+    print(f"CRITICAL SETUP ERROR: {e}")
+    sys.exit(1)
+
+
+def prove_hubble_resolution():
+    print("=" * 60)
+    print("📜 UET PROOF: HUBBLE TENSION RESOLUTION")
+    print("=" * 60)
+
+    # 1. Instantiate Core Engine
+    engine = UETCosmologyEngine()
+
+    # 2. Execute Audit
+    engine.step()
+
+    # 3. Verify Metrics
+    metrics = engine.get_extra_metrics()
+    h0_pred = metrics.get("H0_predicted", 0.0)
+
+    print(f"  UET Hubble Parameter H0: {h0_pred:.2f}")
+
+    if 72 < h0_pred < 74:
+        print("  ✅ PASS: Hubble Tension resolved by Information Expansion.")
+        return True
+    else:
+        print(f"  ❌ FAIL: Predicted H0 ({h0_pred:.2f}) out of expected range (72-74).")
+        return False
+
+
+if __name__ == "__main__":
+    prove_hubble_resolution()

@@ -1,0 +1,36 @@
+{
+  "run_id": "1769065495_UET_Econ_SOC",
+  "simulation": "UET_Econ_SOC",
+  "status": "COMPLETED",
+  "timestamp": "Thu Jan 22 14:04:55 2026",
+  "duration_seconds": 0.015531778335571289,
+  "total_steps": 5,
+  "metadata": {
+    "nx": 20,
+    "ny": 20,
+    "dt": 1.0,
+    "kappa": 1.0,
+    "beta": 1.0,
+    "alpha": 1.0,
+    "C0": 0.0
+  },
+  "final_state": {
+    "step": 400,
+    "time": 401.0,
+    "omega": 225.17625000000004,
+    "kinetic": 0.0,
+    "potential": 0.9262500000000001,
+    "entropy": 0.0,
+    "gradient_norm": 0.0,
+    "max_density": 3.0,
+    "min_density": 0.0,
+    "is_stable": true,
+    "gradient_energy": 224.25000000000006,
+    "entropy_interaction": 0.0,
+    "max_avalanche": 3,
+    "avalanche_count": 12,
+    "mean_size": 1.3333333333333333,
+    "power_law_exponent": 0.0,
+    "price": 100.84241585485815
+  }
+}

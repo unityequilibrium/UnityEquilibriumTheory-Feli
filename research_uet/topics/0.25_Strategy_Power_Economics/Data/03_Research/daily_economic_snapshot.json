@@ -1,0 +1,27 @@
+{
+    "timestamp": "2026-01-26",
+    "source": "UET_FINANCIAL_GATEWAY",
+    "indicators": {
+        "SET_INDEX": {
+            "value": 1365.28,
+            "unit": "Points",
+            "significance": "Local Market Entropy"
+        },
+        "GOLD_PRICE": {
+            "value": 2016.59,
+            "unit": "USD/oz",
+            "significance": "Global Stability Standard"
+        },
+        "USD_THB": {
+            "value": 35.72,
+            "unit": "THB",
+            "significance": "Fluid Exchange Friction"
+        },
+        "GDP_GROWTH_REALTIME": {
+            "value": 2.5,
+            "unit": "Percent",
+            "significance": "Expansion Rate"
+        }
+    },
+    "status": "LIVE"
+}

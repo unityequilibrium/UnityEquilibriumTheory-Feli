@@ -10,7 +10,7 @@ This module implements the COMPLETE UET master equation covering all axioms:
       + β C·I                         # A2: Information-Energy Coupling
       + γ_J (J_in - J_out)·C          # A4: Semi-open Exchange (In-Ex)
       + W_N |∇Ω_local|               # A5: Natural Will
-      + β_U(Σ,R) · V_game(C)          # A8: Game Theory
+      + β_U(Σ,R) · V_game(C)          # A8: Dynamic Game (Energy Competition)
       + λ Σ_layers(C_i-C_j)²          # A10: Multi-layer Coherence
     ]
 
@@ -33,7 +33,7 @@ Sources:
     - Landauer Principle (1961), Bérut 2012
     - Bekenstein Bound (1981)
     - Jacobson's Thermodynamic Gravity (1995)
-    - Game Theory (Nash, Vanchurin, Friston)
+    - Dynamic Game (Nash Differential Games, Vanchurin 2020)
     - Core Axioms Document (Santa 2026)
 """
 
@@ -41,6 +41,7 @@ import numpy as np
 from dataclasses import dataclass, field
 from typing import Tuple, Optional, List
 from scipy.constants import k as k_B, c, G, hbar
+from research_uet.core.uet_parameters import INTEGRITY_KILL_SWITCH
 
 # =============================================================================
 # PHYSICAL CONSTANTS (CODATA 2024 / Real Experiments)
@@ -65,77 +66,7 @@ SIGMA_CRIT = 1.37e9  # M_sun/kpc² (Derived from Λ)
 # =============================================================================
 
 
-@dataclass
-class UETParameters:
-    """
-    Parameters for the UET master equation covering ALL 12 Core Axioms.
-
-    Axiom 1:  alpha, gamma → V(C) potential
-    Axiom 2:  beta → Information coupling (Landauer)
-    Axiom 3:  kappa → Gradient/memory term (Bekenstein)
-    Axiom 4:  gamma_J → Semi-open exchange rate
-    Axiom 5:  W_N → Natural Will strength
-    Axiom 6:  (implicit in dynamics as constrained optimization)
-    Axiom 7:  (scale-invariant form, no extra params)
-    Axiom 8:  (computed from density via strategic_boost())
-    Axiom 9:  eq_adaptive → Dynamic equilibrium flag
-    Axiom 10: lambda_coherence → Multi-layer coupling
-    Axiom 11: (verified via limit tests)
-    Axiom 12: version → Theory version tracking
-    """
-
-    # === A1: Potential parameters ===
-    alpha: float = None
-    gamma: float = None
-
-    # === A2: Information coupling (Landauer) ===
-    beta: float = None
-
-    # === A3: Gradient coefficient (Bekenstein) ===
-    kappa: float = None
-
-    # === A4: Semi-open exchange ===
-    gamma_J: float = 0.1  # Exchange rate coefficient
-
-    # === A5: Natural Will ===
-    W_N: float = 0.05  # Natural Will strength
-
-    # === A9: Dynamic equilibrium ===
-    eq_adaptive: bool = True  # Equilibrium center moves
-
-    # === A10: Multi-layer coherence ===
-    lambda_coherence: float = 0.01  # Layer coupling
-
-    # === A12: Version ===
-    version: str = "3.0"  # UET V3 with full axiom coverage
-
-    # === Physical ===
-    temperature: float = 300.0
-    use_planck_scale: bool = False
-
-    def __post_init__(self):
-        """Calculate parameters from temperature using real physics."""
-        T = self.temperature
-
-        # β: Landauer coupling (A2) - Bérut 2012
-        if self.beta is None:
-            self.beta = k_B * T * np.log(2)
-
-        # α: Equilibrium coefficient (A1)
-        if self.alpha is None:
-            self.alpha = 1.0
-
-        # γ: Nonlinear stability (A1)
-        if self.gamma is None:
-            self.gamma = 0.1 * self.alpha**2 / 4
-
-        # κ: Gradient coefficient (A3)
-        if self.kappa is None:
-            if self.use_planck_scale:
-                self.kappa = KAPPA_BEKENSTEIN
-            else:
-                self.kappa = 0.1
-
+from research_uet.core.uet_parameters import UETParameters
 
 # =============================================================================
 # AXIOM 1: ENERGY CONSERVATION - POTENTIAL V(C)
@@ -144,18 +75,20 @@ class UETParameters:
 
 def potential_V(C: np.ndarray, params: UETParameters) -> np.ndarray:
     """
-    ⚡ AXIOM 1: Energy Conservation & Transformative Dissipation
+    AXIOM 1: Energy Conservation & Transformative Dissipation
 
-    Local potential V(C) = (α/2)C² + (γ/4)C⁴
+    Local potential V(C) = (α/2)(C-C0)² + (γ/4)(C-C0)⁴
 
     "พลังงานไม่เคยหายไป แต่การใช้พลังงานทุกครั้งต้องแลกมาด้วยต้นทุนการสูญเสีย"
     """
-    return (params.alpha / 2) * C**2 + (params.gamma / 4) * C**4
+    diff = C - params.C0
+    return (params.alpha / 2) * diff**2 + (params.gamma / 4) * diff**4
 
 
 def potential_derivative(C: np.ndarray, params: UETParameters) -> np.ndarray:
-    """Derivative dV/dC = αC + γC³"""
-    return params.alpha * C + params.gamma * C**3
+    """Derivative dV/dC = α(C-C0) + γ(C-C0)³"""
+    diff = C - params.C0
+    return params.alpha * diff + params.gamma * diff**3
 
 
 # =============================================================================
@@ -195,14 +128,15 @@ def gradient_term(C: np.ndarray, dx: float, params: UETParameters) -> float:
     "ร่องรอยการเปลี่ยนพลังงานถูก encode บน geometry ของ space"
     """
     if C.ndim == 1:
+        if len(C) < 2:
+            return 0.0
         grad = np.gradient(C, dx)
         return (params.kappa / 2) * np.sum(grad**2) * dx
     elif C.ndim == 2:
-        grad_x = np.gradient(C, dx, axis=0)
-        grad_y = np.gradient(C, dx, axis=1)
+        # Handle singleton dimensions (1xN or Nx1)
+        grad_x = np.gradient(C, dx, axis=1) if C.shape[1] > 1 else np.zeros_like(C)
+        grad_y = np.gradient(C, dx, axis=0) if C.shape[0] > 1 else np.zeros_like(C)
         return (params.kappa / 2) * np.sum(grad_x**2 + grad_y**2) * dx**2
-    else:
-        raise ValueError("Only 1D and 2D fields supported")
 
 
 # =============================================================================
@@ -258,15 +192,15 @@ def natural_will_term(C: np.ndarray, dx: float, params: UETParameters) -> float:
     """
     # Compute local gradient of the field (proxy for |∇Ω|)
     if C.ndim == 1:
+        if len(C) < 2:
+            return 0.0
         grad = np.gradient(C, dx)
         return params.W_N * np.sum(np.abs(grad)) * dx
     elif C.ndim == 2:
-        grad_x = np.gradient(C, dx, axis=0)
-        grad_y = np.gradient(C, dx, axis=1)
+        grad_x = np.gradient(C, dx, axis=1) if C.shape[1] > 1 else np.zeros_like(C)
+        grad_y = np.gradient(C, dx, axis=0) if C.shape[0] > 1 else np.zeros_like(C)
         grad_mag = np.sqrt(grad_x**2 + grad_y**2)
         return params.W_N * np.sum(grad_mag) * dx**2
-    else:
-        raise ValueError("Only 1D and 2D fields supported")
 
 
 # =============================================================================
@@ -295,25 +229,31 @@ def nea_dynamics(C: np.ndarray, constraints: dict, params: UETParameters) -> np.
 
 
 # =============================================================================
-# AXIOM 8: GAME DYNAMICS - STRATEGIC BOOST
+# AXIOM 8: DYNAMIC GAME - ENERGY COMPETITION
 # =============================================================================
 
 
 def strategic_boost(density: float, scale: float = 1.0) -> float:
     """
-    🎮 AXIOM 8: Game Dynamics of Existence
+    🧬 AXIOM 8: Dynamic Game (Energy Competition)
 
-    Strategic boost β_U for high-conflict systems.
+    Strategic boost β_U for systems competing for limited energy resources.
 
-    From UET_GAME_THEORY.md §III.2:
-        β_U = 1.5 × (Σ_bar / Σ_crit) + payoff_gradient
+    Core Concept:
+        - Existence (Becoming) = Energy usage
+        - To survive longer = Conserve energy wisely
+        - Equilibrium = "Choose not to play" (Nash Equilibrium)
+        - Systems share/compete energy to maximize survival potential
 
-    "ทุกระบบอยู่ในเกมพลังงานหลายรอบ (multi-round energy game)"
-    "เป้าหมายของเกม = อยู่รอด + ลดค่าเสียหายในอนาคต"
+    Based on Nash Differential Games and Thermodynamic Selection:
+        β_U = 1.5 × (Σ_bar / Σ_crit) + ∇Π (Survival Gradient)
+
+    This describes how physical structures naturally optimize
+    for energy efficiency in competitive environments.
     """
     density_ratio = density / SIGMA_CRIT
 
-    # Base Game Theory formula
+    # Base Adaptation Pressure (Evolutionary Pressure)
     beta_base = 1.5 * density_ratio
 
     # Strategic Payoff Gradient (∇Π_game) for high-conflict
@@ -341,7 +281,7 @@ def game_theory_potential(
     C: np.ndarray, density: float, scale: float = 1.0
 ) -> np.ndarray:
     """
-    Game Theory correction to potential for high-conflict systems.
+    Dynamic Game correction to potential for energy-competitive systems.
 
     Adds: V_game = β_U × C²
     """
@@ -471,7 +411,7 @@ def omega_functional_complete(
       + β C·I                         # A2: Information-Energy Coupling
       + γ_J (J_in - J_out)·C          # A4: Semi-open Exchange (In-Ex)
       + W_N |∇Ω_local|               # A5: Natural Will
-      + β_U(Σ,R) · V_game(C)          # A8: Game Theory
+      + β_U(Σ,R) · V_game(C)          # A8: Dynamic Game
       + λ Σ_layers(C_i-C_j)²          # A10: Multi-layer Coherence
     ]
 
@@ -479,6 +419,10 @@ def omega_functional_complete(
     """
     if params is None:
         params = UETParameters()
+
+    # --- INTEGRITY KILL SWITCH ---
+    if INTEGRITY_KILL_SWITCH:
+        return 0.0  # Force zero energy / failure
 
     # === A1: Potential term ===
     V = potential_V(C, params)
@@ -505,7 +449,7 @@ def omega_functional_complete(
     # === A5: Natural Will ===
     will_integral = natural_will_term(C, dx, params)
 
-    # === A8: Game Theory ===
+    # === A8: Dynamic Game ===
     if density > 0:
         V_game = game_theory_potential(C, density, scale)
         if C.ndim == 1:
@@ -534,6 +478,131 @@ def omega_functional_complete(
 
 
 # =============================================================================
+# VALUE EQUATION: 𝒱 = -ΔΩ (THE CORE INSIGHT)
+# =============================================================================
+
+
+def calculate_value(omega_prev: float, omega_curr: float) -> float:
+    """
+    THE VALUE EQUATION: V = -dOmega/dt
+
+    Scientifically, 'Value' is the rate of Free Energy Minimization (Lyapunov stability).
+    It represents the "Useful Work" or "transformative dissipation" extracted from the system
+    as it moves towards equilibrium.
+
+    Equation:
+        V = -(Ω_t - Ω_{t-1}) = -ΔΩ
+
+    Thermodynamic Equivalence:
+    - Physics: Free Energy Drop (-ΔF) -> Work Available
+    - Biology: Fitness Gradient Ascent (+ΔFitness)
+    - ML: Gradient Descent on Loss Function (-ΔLoss)
+
+    This is not philosophy; it is the Second Law of Thermodynamics applied to complex systems.
+    Ω must decrease for any spontaneous process (dΩ/dt ≤ 0), thus V must be positive.
+    """
+    return -(omega_curr - omega_prev)
+
+
+def track_value_over_time(omega_series: List[float]) -> List[float]:
+    """
+    📈 Track Value at each timestep.
+
+    Args:
+        omega_series: List of Ω values at each timestep
+
+    Returns:
+        List of Value at each step (length = len(omega_series) - 1)
+    """
+    values = []
+    for i in range(1, len(omega_series)):
+        v = calculate_value(omega_series[i - 1], omega_series[i])
+        values.append(v)
+    return values
+
+
+def total_value(omega_series: List[float]) -> float:
+    """
+    💰 Calculate total Value created over entire simulation.
+
+    Total 𝒱 = -ΔΩ_total = -(Ω_final - Ω_initial)
+
+    This is the integral of instantaneous value.
+    """
+    if len(omega_series) < 2:
+        return 0.0
+    return -(omega_series[-1] - omega_series[0])
+
+
+# =============================================================================
+# AXIOM 6: DYNAMICS ENGINE CLASS (WRAPPER)
+# =============================================================================
+
+
+class UETMasterEquation:
+    """
+    Main Interface for UET Physics Engine.
+    Wraps the functional core into a unified object.
+    """
+
+    def __init__(self, params: UETParameters = None):
+        self.params = params if params else UETParameters()
+
+    def step(
+        self,
+        C: np.ndarray,
+        dt: float,
+        dx: float = 0.1,
+        I: Optional[np.ndarray] = None,
+        J_in: Optional[np.ndarray] = None,
+        J_out: Optional[np.ndarray] = None,
+        constraints: Optional[dict] = None,
+    ) -> np.ndarray:
+        """Execute one dynamics step."""
+        return dynamics_step_complete(
+            C=C,
+            I=I,
+            J_in=J_in,
+            J_out=J_out,
+            dx=dx,
+            dt=dt,
+            constraints=constraints,
+            params=self.params,
+        )
+
+    def compute_omega(
+        self,
+        C: np.ndarray,
+        dx: float = 0.1,
+        I: Optional[np.ndarray] = None,
+        J_in: Optional[np.ndarray] = None,
+        J_out: Optional[np.ndarray] = None,
+    ) -> float:
+        """Compute instantaneous Omega value."""
+        return omega_functional_complete(
+            C=C, I=I, J_in=J_in, J_out=J_out, dx=dx, params=self.params
+        )
+
+
+def is_system_improving(omega_series: List[float], window: int = 10) -> bool:
+    """
+    Check if system is consistently improving (creating value).
+
+    A system is "improving" if average Value over recent window is positive.
+    """
+    if len(omega_series) < 2:
+        return False
+
+    values = track_value_over_time(omega_series)
+
+    if len(values) < window:
+        window = len(values)
+
+    recent_values = values[-window:]
+    return sum(recent_values) > 0
+
+
+# =============================================================================
 # DYNAMICS - A6: CONSTRAINED OPTIMIZATION (LEARNING = NEA)
 # =============================================================================
 
@@ -549,15 +618,19 @@ def dynamics_step_complete(
     params: UETParameters = None,
 ) -> np.ndarray:
     """
-    📚 AXIOM 6: Dynamics as Constrained Optimization
+    AXIOM 6: Dynamics as Constrained Optimization
 
-    ∂C/∂t = -δΩ/δC = argmin_path(E_cost | constraints)
+    dC/dt = -dOmega/dC = argmin_path(E_cost | constraints)
 
-    "ระบบถูกบังคับให้ไปอยู่ใน path ที่ cost ต่ำที่สุดภายใต้ constraint"
-    "ไม่ใช่เพราะมันอยากไป แต่เพราะ path อื่นอยู่ไม่ได้"
+    The system is forced to follow the path of least cost under constraints.
+    Not because it wants to, but because other paths are energetically forbidden.
     """
     if params is None:
         params = UETParameters()
+
+    # --- INTEGRITY KILL SWITCH ---
+    if INTEGRITY_KILL_SWITCH:
+        return np.zeros_like(C) + np.nan  # Kill all dynamics
 
     # Reaction term: -V'(C)
     reaction = -potential_derivative(C, params)
@@ -565,14 +638,25 @@ def dynamics_step_complete(
     # Diffusion term: κ∇²C
     if C.ndim == 1:
         laplacian = np.zeros_like(C)
-        laplacian[1:-1] = (C[2:] - 2 * C[1:-1] + C[:-2]) / dx**2
-        laplacian[0] = laplacian[1]
-        laplacian[-1] = laplacian[-2]
+        if len(C) > 2:
+            laplacian[1:-1] = (C[2:] - 2 * C[1:-1] + C[:-2]) / dx**2
+            laplacian[0] = laplacian[1]
+            laplacian[-1] = laplacian[-2]
     else:
         laplacian = np.zeros_like(C)
-        laplacian[1:-1, 1:-1] = (
-            C[2:, 1:-1] - 2 * C[1:-1, 1:-1] + C[:-2, 1:-1]
-        ) / dx**2 + (C[1:-1, 2:] - 2 * C[1:-1, 1:-1] + C[1:-1, :-2]) / dx**2
+        # 2D Laplacian handling singleton dimensions
+        if C.shape[0] > 2 and C.shape[1] > 2:
+            laplacian[1:-1, 1:-1] = (
+                C[2:, 1:-1] - 2 * C[1:-1, 1:-1] + C[:-2, 1:-1]
+            ) / dx**2 + (C[1:-1, 2:] - 2 * C[1:-1, 1:-1] + C[1:-1, :-2]) / dx**2
+        elif C.shape[1] > 2:  # 1xN case
+            laplacian[0, 1:-1] = (C[0, 2:] - 2 * C[0, 1:-1] + C[0, :-2]) / dx**2
+            laplacian[0, 0] = laplacian[0, 1]
+            laplacian[0, -1] = laplacian[0, -2]
+        elif C.shape[0] > 2:  # Nx1 case
+            laplacian[1:-1, 0] = (C[2:, 0] - 2 * C[1:-1, 0] + C[:-2, 0]) / dx**2
+            laplacian[0, 0] = laplacian[1, 0]
+            laplacian[-1, 0] = laplacian[-2, 0]
 
     diffusion = params.kappa * laplacian
 
@@ -720,6 +804,18 @@ if __name__ == "__main__":
 
     N = 50
     dx = 0.1
+    C = np.exp(-((np.arange(N) * dx - 2.5) ** 2))
+    params = UETParameters()
+
+    # Run a few steps
+    print(f"Initial Omega: {omega_functional_complete(C, dx=dx, params=params):.4e}")
+
+    dt = 0.001
+    for i in range(10):
+        C = dynamics_step_complete(C, dx=dx, dt=dt, params=params)
+
+    print(f"Final Omega: {omega_functional_complete(C, dx=dx, params=params):.4e}")
+    print("✅ MASTER EQUATION TEST COMPLETE")
     C = np.sin(np.arange(N) * dx)
     I = np.ones(N) * 0.1
     J_in = np.ones(N) * 0.05
@@ -744,9 +840,9 @@ if __name__ == "__main__":
     print(f"  - Info coupling (A2): ✅")
     print(f"  - Exchange (A4): ✅")
     print(f"  - Natural Will (A5): ✅")
-    print(f"  - Game Theory (A8): ✅")
+    print(f"  - Dynamic Game (A8): ✅")
     print(f"  - Coherence (A10): ✅")
 
     print("\n" + "=" * 70)
-    print("🌌 UET V3.0 - ALL 12 AXIOMS IMPLEMENTED")
+    print("ALL 12 AXIOMS IMPLEMENTED")
     print("=" * 70)

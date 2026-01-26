@@ -1,0 +1,80 @@
+{
+  "description": "Master DOI Reference Database for UET Multi-Scale Framework",
+  "domains": {
+    "particle_physics": {
+      "name": "Particle Data Group 2024",
+      "doi": "10.1093/ptep/ptac097",
+      "url": "https://pdg.lbl.gov/",
+      "used_in": [
+        "0.17_Mass_Generation",
+        "0.18_Neutrino_Mixing"
+      ]
+    },
+    "nuclear_physics": {
+      "name": "Atomic Mass Evaluation 2020",
+      "doi": "10.1088/1674-1137/abddaf",
+      "url": "https://www-nds.iaea.org/amdc/",
+      "used_in": [
+        "0.5_Nuclear_Binding",
+        "0.16_Heavy_Nuclei"
+      ]
+    },
+    "atomic_physics": {
+      "name": "CODATA 2018 Fundamental Constants",
+      "doi": "10.1103/RevModPhys.93.025010",
+      "url": "https://physics.nist.gov/constants",
+      "used_in": [
+        "0.20_Atomic_Physics"
+      ]
+    },
+    "galactic_dynamics": {
+      "name": "SPARC Galaxy Database",
+      "doi": "10.3847/0004-6256/152/6/157",
+      "url": "http://astroweb.cwru.edu/SPARC/",
+      "used_in": [
+        "0.3_Cosmology",
+        "galactic rotation tests"
+      ]
+    },
+    "neutrino_physics": {
+      "name": "NuFIT 5.2 Global Analysis",
+      "doi": "10.1007/JHEP09(2020)178",
+      "url": "http://www.nu-fit.org/",
+      "used_in": [
+        "0.18_Neutrino_Mixing"
+      ]
+    },
+    "gravity": {
+      "name": "MICROSCOPE Mission",
+      "doi": "10.1103/PhysRevLett.129.121102",
+      "precision": "10^-15",
+      "used_in": [
+        "0.19_Gravity_GR"
+      ]
+    },
+    "neural_dynamics": {
+      "name": "CHB-MIT Scalp EEG Database",
+      "doi": "10.13026/C2K01R",
+      "url": "https://physionet.org/content/chbmit/1.0.0/",
+      "used_in": [
+        "0.22_Neural_Dynamics"
+      ]
+    },
+    "cosmology": {
+      "name": "Planck 2018 Results",
+      "doi": "10.1051/0004-6361/201833910",
+      "used_in": [
+        "0.3_Cosmology"
+      ]
+    },
+    "yang_mills": {
+      "name": "Lattice QCD Glueball Spectrum",
+      "doi": "10.1103/PhysRevD.60.034509",
+      "used_in": [
+        "0.21_Yang_Mills_Mass_Gap"
+      ]
+    }
+  },
+  "total_domains": 9,
+  "all_topics_pass": "See individual topic README.md for test results"
+}

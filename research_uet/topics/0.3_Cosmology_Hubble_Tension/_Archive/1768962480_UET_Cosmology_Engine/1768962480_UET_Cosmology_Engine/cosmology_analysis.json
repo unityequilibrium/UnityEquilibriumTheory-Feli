@@ -1,0 +1,42 @@
+[
+  {
+    "telescope": "Planck2018",
+    "H0": 67.4,
+    "Lambda_Obs": 1.0906825628747744e-46,
+    "Lambda_UET": 1.5922373180653635e-46,
+    "Ratio": 1.4598540145985397,
+    "Agreement": true
+  },
+  {
+    "telescope": "HST_Riess2022",
+    "H0": 73.0,
+    "Lambda_Obs": 1.2925275837234327e-46,
+    "Lambda_UET": 1.867814427346001e-46,
+    "Ratio": 1.4450867052023122,
+    "Agreement": true
+  },
+  {
+    "telescope": "JWST2024",
+    "H0": 72.5,
+    "Lambda_Obs": 1.2711977318031184e-46,
+    "Lambda_UET": 1.842315553337853e-46,
+    "Ratio": 1.4492753623188406,
+    "Agreement": true
+  },
+  {
+    "telescope": "SDSS_BAO",
+    "H0": 67.8,
+    "Lambda_Obs": 1.1020555724123877e-46,
+    "Lambda_UET": 1.6111923573280524e-46,
+    "Ratio": 1.4619883040935675,
+    "Agreement": true
+  },
+  {
+    "telescope": "DES2022",
+    "H0": 68.1,
+    "Lambda_Obs": 1.1150808178557331e-46,
+    "Lambda_UET": 1.6254822417722058e-46,
+    "Ratio": 1.4577259475218658,
+    "Agreement": true
+  }
+]

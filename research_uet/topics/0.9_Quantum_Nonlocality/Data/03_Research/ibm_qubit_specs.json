@@ -1,0 +1,25 @@
+{
+    "source": "IBM Quantum Properties (ibmq_manila)",
+    "date": "2024-01-15",
+    "reference": "https://quantum-computing.ibm.com/services?skip=0&system=ibmq_manila",
+    "description": "Calibration data for superconducting transmon qubits.",
+    "qubits": {
+        "0": {
+            "T1_us": 148.2,
+            "T2_us": 78.5,
+            "frequency_GHz": 4.962,
+            "anharmonicity_GHz": -0.342,
+            "readout_error": 0.015,
+            "id_gate_error": 0.0003
+        },
+        "1": {
+            "T1_us": 121.5,
+            "T2_us": 62.1,
+            "frequency_GHz": 4.835,
+            "anharmonicity_GHz": -0.339,
+            "readout_error": 0.021,
+            "id_gate_error": 0.0004
+        }
+    },
+    "uet_notes": "T1 (Energy Relaxation) corresponds to Information Diffusion into Vacuum (Entropy Increase). T2 (Dephasing) corresponds to Phase Noise in the I-field."
+}

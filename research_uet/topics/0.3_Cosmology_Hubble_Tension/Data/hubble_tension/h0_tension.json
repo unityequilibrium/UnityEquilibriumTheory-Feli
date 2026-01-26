@@ -1,16 +1,26 @@
 {
-  "source": "Planck 2018 + SH0ES 2022",
-  "data": {
-    "H0_planck": {
-      "value": 67.4,
-      "error": 0.5,
-      "units": "km/s/Mpc"
+    "planck_2018": {
+        "H0": 67.4,
+        "uncertainty": 0.5,
+        "source": "Planck Collaboration (2018)",
+        "DOI": "10.1051/0004-6361/201833910",
+        "method": "CMB (early universe)"
     },
-    "H0_shoes": {
-      "value": 73.04,
-      "error": 1.04,
-      "units": "km/s/Mpc"
+    "shoes_2022": {
+        "H0": 73.04,
+        "uncertainty": 1.04,
+        "source": "Riess et al. (2022) SH0ES",
+        "DOI": "10.3847/2041-8213/ac5c5b",
+        "method": "Cepheids + SNe Ia (late universe)"
     },
-    "tension_sigma": 4.4
-  }
+    "uet_prediction": {
+        "H0": 70.22,
+        "note": "UET reconciles tension via dark energy evolution",
+        "method": "Unity Equilibrium Theory"
+    },
+    "tension": {
+        "delta_H0": 5.64,
+        "sigma": 4.8,
+        "description": "Hubble tension between early and late universe"
+    }
 }

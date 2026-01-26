@@ -1,0 +1,111 @@
+{
+  "engine": "UET Superconductivity V3.2",
+  "avg_error_pct": 26.151640510995037,
+  "pass_rate_pct": 38.46153846153847,
+  "results": [
+    {
+      "name": "Aluminum (Al)",
+      "Tc_exp": 1.18,
+      "Tc_UET": 0.9046865104366623,
+      "error_pct": 23.331651657909973,
+      "uet_coherence": 0.5229860182213715,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Lead (Pb)",
+      "Tc_exp": 7.19,
+      "Tc_UET": 4.531685893723846,
+      "error_pct": 36.97237978130952,
+      "uet_coherence": 0.22787008297560163,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Tin (Sn)",
+      "Tc_exp": 3.72,
+      "Tc_UET": 3.102268417931478,
+      "error_pct": 16.60568769001404,
+      "uet_coherence": 0.22095348474164417,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Niobium (Nb)",
+      "Tc_exp": 9.25,
+      "Tc_UET": 6.831489941291528,
+      "error_pct": 26.14605468874024,
+      "uet_coherence": 0.343979179974517,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Vanadium (V)",
+      "Tc_exp": 5.36,
+      "Tc_UET": 5.2249818422399645,
+      "error_pct": 2.5189954805976824,
+      "uet_coherence": 0.43098035312413463,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Mercury (Hg)",
+      "Tc_exp": 4.15,
+      "Tc_UET": 2.1876009243462606,
+      "error_pct": 47.28672471454794,
+      "uet_coherence": 0.10764049309682296,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Indium (In)",
+      "Tc_exp": 3.41,
+      "Tc_UET": 2.1799004304022636,
+      "error_pct": 36.073301161223945,
+      "uet_coherence": 0.22440794242206039,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Tantalum (Ta)",
+      "Tc_exp": 4.47,
+      "Tc_UET": 4.325608330584645,
+      "error_pct": 3.2302386893815407,
+      "uet_coherence": 0.24748047085192726,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Nb3Sn",
+      "Tc_exp": 18.3,
+      "Tc_UET": 23.538159490434953,
+      "error_pct": 28.623822352103566,
+      "uet_coherence": 0.33426280572249834,
+      "anisotropy_factor": 1.15
+    },
+    {
+      "name": "Nb3Ge",
+      "Tc_exp": 23.2,
+      "Tc_UET": 28.540565084426014,
+      "error_pct": 23.019677088043167,
+      "uet_coherence": 0.3521025576313278,
+      "anisotropy_factor": 1.15
+    },
+    {
+      "name": "MgB2",
+      "Tc_exp": 39.0,
+      "Tc_UET": 43.49141205032898,
+      "error_pct": 11.516441154689698,
+      "uet_coherence": 0.4966025888597094,
+      "anisotropy_factor": 1.15
+    },
+    {
+      "name": "NbC",
+      "Tc_exp": 11.1,
+      "Tc_UET": 18.709196366145644,
+      "error_pct": 68.55131861392472,
+      "uet_coherence": 0.42672390458188836,
+      "anisotropy_factor": 1.15
+    },
+    {
+      "name": "NbN",
+      "Tc_exp": 16.0,
+      "Tc_UET": 13.42479462872809,
+      "error_pct": 16.095033570449434,
+      "uet_coherence": 0.42399034852649387,
+      "anisotropy_factor": 1.15
+    }
+  ]
+}

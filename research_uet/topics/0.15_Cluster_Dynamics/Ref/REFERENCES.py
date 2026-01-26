@@ -1,50 +1,57 @@
 """
-References: Cluster Dynamics
-============================
-
-DOIs for all data sources used in this topic.
+REFERENCES.py - 0.15 Cluster Dynamics
+=====================================
+Central registry for external citations and analysis.
 """
 
-REFERENCES = {
-    "galaxy_clusters": [
-        {
-            "title": "The Virial Masses of Galaxy Clusters",
-            "authors": "Girardi, M. et al.",
-            "journal": "ApJ 505, 74",
-            "year": 1998,
-            "doi": "10.1086/306157",
-            "data": "Cluster mass-velocity dispersion relation",
-        },
-        {
-            "title": "X-ray study of galaxy clusters",
-            "authors": "Vikhlinin, A. et al.",
-            "journal": "ApJ 640, 691",
-            "year": 2006,
-            "doi": "10.1086/500288",
-            "data": "Cluster mass profiles",
-        },
-    ],
-}
+from pathlib import Path
 
-DATA_FILES = {
-    "Code/cluster_virial/test_cluster_virial.py": {
-        "source": "Girardi 1998, Vikhlinin 2006",
-        "doi": "10.1086/306157",
-        "verified": True,
+REF_DIR = Path(__file__).parent
+
+REFERENCES = {
+    "ANALYSIS": REF_DIR / "BIBLIOGRAPHY_ANALYSIS.md",
+    "PDF_DIR": REF_DIR / "PDF_Downloads",
+    "DATA_DIR": REF_DIR / "Data_Source",
+    "KEY_PAPERS": {
+        "Zwicky_1933": "Fritz Zwicky - Die Rotverschiebung (Discovery of Dark Matter)",
+        "BulletCluster_2006": "Clowe et al. - Direct Empirical Proof of Dark Matter",
+        "Bahcall_1988": "Neta Bahcall - Large-Scale Structure Review",
     },
 }
+
+
+def get_ref_path(name: str):
+    """Returns path to a specific reference PDF if downloaded."""
+    # Common mappings
+    mapping = {
+        "Zwicky_1933": "Zwicky Die Rotverschiebung",
+        "BulletCluster_2006": "Direct Empirical Proof Existence Dark Matter",
+        "Bahcall_1988": "Large-Scale Structure Universe Galaxy Clusters",
+    }
+
+    search_name = mapping.get(name, name)
+
+    # Try generic search in PDF folder
+    for pdf in REFERENCES["PDF_DIR"].glob("*.pdf"):
+        if search_name.lower() in pdf.name.lower():
+            return pdf
+
+    return None
 
 
 def list_references():
     """List all references."""
     print("=" * 60)
-    print("0.15 CLUSTER DYNAMICS REFERENCES")
+    print("0.15 Cluster Dynamics - References")
     print("=" * 60)
-    for category, refs in REFERENCES.items():
-        print(f"\n{category.upper()}:")
-        for ref in refs:
-            print(f"  [{ref['year']}] {ref['title']}")
-            print(f"         DOI: {ref['doi']}")
+    print(f"Analysis: {REFERENCES['ANALYSIS']}")
+    print(f"Pdf Dir: {REFERENCES['PDF_DIR']}\n")
+
+    print("Key Papers:")
+    for key, desc in REFERENCES["KEY_PAPERS"].items():
+        ref_path = get_ref_path(key)
+        status = "✅ FOUND" if ref_path else "❌ MISSING (Run Downloader)"
+        print(f"  * {key}: {desc} [{status}]")
 
 
 if __name__ == "__main__":

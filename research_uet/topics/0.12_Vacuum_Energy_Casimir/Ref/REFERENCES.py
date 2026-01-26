@@ -1,38 +1,58 @@
 """
 REFERENCES.py - 0.12 Vacuum Energy & Casimir
-=============================================
-DOIs for all data sources used in this topic.
+============================================
+Central registry for external citations and analysis.
 """
 
+from pathlib import Path
+
+REF_DIR = Path(__file__).parent
+
 REFERENCES = {
-    "primary": {
-        "Casimir_Force": {
-            "title": "Precision Measurement of the Casimir Force from 0.1 to 0.9 μm",
-            "authors": ["Mohideen, U.", "Roy, A."],
-            "journal": "Physical Review Letters",
-            "volume": 81,
-            "pages": "4549",
-            "year": 1998,
-            "doi": "10.1103/PhysRevLett.81.4549",
-        },
-        "Planck_2018_DE": {
-            "title": "Planck 2018 Results. VI. Cosmological Parameters",
-            "authors": ["Planck Collaboration"],
-            "journal": "Astronomy & Astrophysics",
-            "volume": 641,
-            "pages": "A6",
-            "year": 2020,
-            "doi": "10.1051/0004-6361/201833910",
-        },
-    }
+    "ANALYSIS": REF_DIR / "BIBLIOGRAPHY_ANALYSIS.md",
+    "PDF_DIR": REF_DIR / "PDF_Downloads",
+    "DATA_DIR": REF_DIR / "Data_Source",
+    "KEY_PAPERS": {
+        "Casimir_1948": "H. Casimir - On the attraction between two conducting plates",
+        "Lamb_1947": "Lamb & Retherford - Discovery of the Lamb Shift",
+        "Milonni_1994": "P. Milonni - The Quantum Vacuum (Compendium)",
+    },
 }
 
 
-def print_references():
+def get_ref_path(name: str):
+    """Returns path to a specific reference PDF if downloaded."""
+    # Common mappings
+    mapping = {
+        "Casimir_1948": "Casimir attraction between two perfectly conducting",
+        "Lamb_1947": "Lamb shift fine structure hydrogen microwave",
+        "Milonni_1994": "Milonni Quantum Vacuum zero point energy",
+    }
+
+    search_name = mapping.get(name, name)
+
+    # Try generic search in PDF folder
+    for pdf in REFERENCES["PDF_DIR"].glob("*.pdf"):
+        if search_name.lower() in pdf.name.lower():
+            return pdf
+
+    return None
+
+
+def list_references():
+    """List all references."""
+    print("=" * 60)
     print("0.12 Vacuum Energy & Casimir - References")
-    for name, ref in REFERENCES["primary"].items():
-        print(f"📚 {name}: DOI {ref['doi']}")
+    print("=" * 60)
+    print(f"Analysis: {REFERENCES['ANALYSIS']}")
+    print(f"Pdf Dir: {REFERENCES['PDF_DIR']}\n")
+
+    print("Key Papers:")
+    for key, desc in REFERENCES["KEY_PAPERS"].items():
+        ref_path = get_ref_path(key)
+        status = "✅ FOUND" if ref_path else "❌ MISSING (Run Downloader)"
+        print(f"  * {key}: {desc} [{status}]")
 
 
 if __name__ == "__main__":
-    print_references()
+    list_references()

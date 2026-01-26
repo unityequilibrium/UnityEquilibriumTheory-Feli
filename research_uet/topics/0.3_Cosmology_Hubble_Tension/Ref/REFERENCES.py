@@ -1,55 +1,67 @@
 """
 REFERENCES.py - 0.3 Cosmology & Hubble Tension
 ===============================================
-DOIs for all data sources used in this topic.
+Central registry for external citations and analysis.
 """
 
+from pathlib import Path
+
+REF_DIR = Path(__file__).parent
+
 REFERENCES = {
-    "primary": {
-        "Planck_2018": {
-            "title": "Planck 2018 Results. VI. Cosmological Parameters",
-            "authors": ["Planck Collaboration"],
-            "journal": "Astronomy & Astrophysics",
-            "volume": 641,
-            "pages": "A6",
-            "year": 2020,
-            "doi": "10.1051/0004-6361/201833910",
-        },
-        "SH0ES_2022": {
-            "title": "A Comprehensive Measurement of the Local Value of the Hubble Constant",
-            "authors": ["Riess, A.G.", "et al."],
-            "journal": "Astrophysical Journal Letters",
-            "volume": 934,
-            "pages": "L7",
-            "year": 2022,
-            "doi": "10.3847/2041-8213/ac5c5b",
-        },
+    "ANALYSIS": REF_DIR / "BIBLIOGRAPHY_ANALYSIS.md",
+    "PDF_DIR": REF_DIR / "PDF_Downloads",
+    "DATA_DIR": REF_DIR / "Data_Source",
+    "KEY_PAPERS": {
+        "Planck_2018": "Planck 2018 Results (CMB)",
+        "SH0ES_2022": "Riess et al. (2022) - Hubble Constant",
+        "BOSS_BAO": "Alam et al. (2017) - BAO Data",
     },
-    "supplementary": [
-        {
-            "name": "BOSS BAO",
-            "title": "The clustering of galaxies in the completed SDSS-III",
-            "doi": "10.1093/mnras/stx721",
-            "year": 2017,
-        },
-        {
-            "name": "JWST Early",
-            "title": "JWST Early Release Science",
-            "doi": "10.3847/2041-8213/aca086",
-            "year": 2022,
-        },
-    ],
+    "Planck_Metadata": {
+        "title": "Planck 2018 Results. VI. Cosmological Parameters",
+        "authors": ["Planck Collaboration"],
+        "journal": "Astronomy & Astrophysics",
+        "volume": 641,
+        "pages": "A6",
+        "year": 2020,
+        "doi": "10.1051/0004-6361/201833910",
+    },
 }
 
 
-def print_references():
+def get_ref_path(name: str):
+    """Returns path to a specific reference PDF if downloaded."""
+    # Common mappings
+    mapping = {
+        "Planck_2018": "Planck 2018 results VI Cosmological parameters",
+        "SH0ES_2022": "A Comprehensive Measurement of the Local Value",
+        "BOSS_BAO": "The clustering of galaxies in the completed SDSS",
+    }
+
+    search_name = mapping.get(name, name)
+
+    # Try generic search in PDF folder
+    for pdf in REFERENCES["PDF_DIR"].glob("*.pdf"):
+        if search_name.lower() in pdf.name.lower():
+            return pdf
+
+    return None
+
+
+def list_references():
+    """List all references."""
     print("=" * 60)
     print("0.3 Cosmology & Hubble Tension - References")
     print("=" * 60)
-    for name, ref in REFERENCES["primary"].items():
-        print(f"\n📚 {name}")
-        print(f"   DOI: {ref['doi']}")
+    print(f"Analysis: {REFERENCES['ANALYSIS']}")
+    print(f"Pdf Dir: {REFERENCES['PDF_DIR']}\n")
+
+    print("Key Papers:")
+    for key, desc in REFERENCES["KEY_PAPERS"].items():
+        ref_path = get_ref_path(key)
+        status = "✅ FOUND" if ref_path else "❌ MISSING (Run Downloader)"
+        print(f"  * {key}: {desc} [{status}]")
 
 
 if __name__ == "__main__":
-    print_references()
+    list_references()

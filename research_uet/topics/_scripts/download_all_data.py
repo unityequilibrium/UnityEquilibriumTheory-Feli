@@ -9,7 +9,7 @@ import json
 import urllib.request
 from pathlib import Path
 
-TOPICS = Path(__file__).parent
+TOPICS = Path(__file__).parent.parent  # _scripts -> topics
 
 # ============================================================
 # PDG 2024 Data (Particle Physics)

@@ -1,44 +1,58 @@
 """
 REFERENCES.py - 0.11 Phase Transitions
-=======================================
-DOIs for all data sources used in this topic.
+========================================
+Central registry for external citations and analysis.
 """
 
+from pathlib import Path
+
+REF_DIR = Path(__file__).parent
+
 REFERENCES = {
-    "primary": {
-        "BEC_Cornell_Wieman": {
-            "title": "Observation of Bose-Einstein Condensation in a Dilute Atomic Vapor",
-            "authors": [
-                "Anderson, M.H.",
-                "Ensher, J.R.",
-                "Matthews, M.R.",
-                "Wieman, C.E.",
-                "Cornell, E.A.",
-            ],
-            "journal": "Science",
-            "volume": 269,
-            "pages": "198",
-            "year": 1995,
-            "doi": "10.1126/science.269.5221.198",
-        },
-        "Ising_Model": {
-            "title": "Crystal Statistics. I. A Two-Dimensional Model with an Order-Disorder Transition",
-            "authors": ["Onsager, L."],
-            "journal": "Physical Review",
-            "volume": 65,
-            "pages": "117",
-            "year": 1944,
-            "doi": "10.1103/PhysRev.65.117",
-        },
-    }
+    "ANALYSIS": REF_DIR / "BIBLIOGRAPHY_ANALYSIS.md",
+    "PDF_DIR": REF_DIR / "PDF_Downloads",
+    "DATA_DIR": REF_DIR / "Data_Source",
+    "KEY_PAPERS": {
+        "Onsager_1944": "Lars Onsager - Ising Model exact solution (2D)",
+        "Wilson_1971": "Kenneth Wilson - Renormalization Group (Nobel Prize)",
+        "Higgs_1964": "Peter Higgs - Spontaneous Symmetry Breaking",
+    },
 }
 
 
-def print_references():
+def get_ref_path(name: str):
+    """Returns path to a specific reference PDF if downloaded."""
+    # Common mappings
+    mapping = {
+        "Onsager_1944": "Onsager Ising model crystal statistics",
+        "Wilson_1971": "Kenneth Wilson renormalization group",
+        "Higgs_1964": "Higgs broken symmetries masses gauge",
+    }
+
+    search_name = mapping.get(name, name)
+
+    # Try generic search in PDF folder
+    for pdf in REFERENCES["PDF_DIR"].glob("*.pdf"):
+        if search_name.lower() in pdf.name.lower():
+            return pdf
+
+    return None
+
+
+def list_references():
+    """List all references."""
+    print("=" * 60)
     print("0.11 Phase Transitions - References")
-    for name, ref in REFERENCES["primary"].items():
-        print(f"📚 {name}: DOI {ref['doi']}")
+    print("=" * 60)
+    print(f"Analysis: {REFERENCES['ANALYSIS']}")
+    print(f"Pdf Dir: {REFERENCES['PDF_DIR']}\n")
+
+    print("Key Papers:")
+    for key, desc in REFERENCES["KEY_PAPERS"].items():
+        ref_path = get_ref_path(key)
+        status = "✅ FOUND" if ref_path else "❌ MISSING (Run Downloader)"
+        print(f"  * {key}: {desc} [{status}]")
 
 
 if __name__ == "__main__":
-    print_references()
+    list_references()

@@ -1,0 +1,27 @@
+{
+  "run_id": "1768998345_Quantum_Nonlocality",
+  "simulation": "Quantum_Nonlocality",
+  "status": "COMPLETED",
+  "timestamp": "Wed Jan 21 19:25:45 2026",
+  "duration_seconds": 0.0007119178771972656,
+  "total_steps": 1,
+  "metadata": {
+    "data_source": "Bell Tests + NIST CODATA",
+    "method": "UET Bell Violation",
+    "parameters": {
+      "beta": 1.0
+    }
+  },
+  "final_state": {
+    "step": 1,
+    "time": 1.0,
+    "omega": 1.0,
+    "kinetic": 0.0,
+    "potential": 0.0,
+    "entropy": 0.0,
+    "gradient_norm": 0.0,
+    "max_density": 0.0,
+    "min_density": 0.0,
+    "is_stable": true
+  }
+}

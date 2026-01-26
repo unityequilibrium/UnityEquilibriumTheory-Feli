@@ -1,0 +1,48 @@
+{
+  "description": "UET Variable Mapping Across Scales",
+  "core_equation": "Ω[C] = V(C) + κ|∇C|² + βCI",
+  "scales": {
+    "quantum_particle": {
+      "C": "Wavefunction amplitude",
+      "I": "Measurement/observer",
+      "∇C": "Momentum",
+      "Ω": "Action",
+      "physical_unit": "ℏ"
+    },
+    "nuclear": {
+      "C": "Nucleon density",
+      "I": "Nuclear force field",
+      "∇C": "Surface tension",
+      "Ω": "Binding energy",
+      "physical_unit": "MeV"
+    },
+    "atomic": {
+      "C": "Electron probability",
+      "I": "Nucleus potential",
+      "∇C": "Kinetic energy",
+      "Ω": "Energy level",
+      "physical_unit": "eV"
+    },
+    "galactic": {
+      "C": "Mass density",
+      "I": "Dark matter halo",
+      "∇C": "Rotation velocity",
+      "Ω": "Gravitational potential",
+      "physical_unit": "km/s, kpc"
+    },
+    "neural": {
+      "C": "Excitatory activity",
+      "I": "Inhibitory tone",
+      "∇C": "Temporal variation",
+      "Ω": "Brain state",
+      "physical_unit": "μV, Hz"
+    },
+    "economic": {
+      "C": "Price/transaction",
+      "I": "Market sentiment",
+      "∇C": "Volatility",
+      "Ω": "Market disequilibrium",
+      "physical_unit": "$, %"
+    }
+  }
+}

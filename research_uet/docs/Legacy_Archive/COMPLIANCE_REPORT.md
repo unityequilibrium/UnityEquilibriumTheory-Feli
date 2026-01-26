@@ -1,0 +1,135 @@
+# 5x4 Grid Compliance Report 📊
+
+| Topic | Script | Status | Reason |
+|---|---|---|---|
+| 0.10_Fluid_Dynamics_Chaos | Engine_UET_2D.py | ✅ PASS | Inherits/Uses BaseSolver |
+| 0.10_Fluid_Dynamics_Chaos | Engine_UET_3D.py | ✅ PASS | Inherits/Uses BaseSolver |
+| 0.10_Fluid_Dynamics_Chaos | debug_import.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_3D_Comparison.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_3D_Turbulence_Limits.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Brownian.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Calibration_Sweep.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Dashboard_Tool.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_FluidStatics_Buoyancy.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Inertial_Fluid.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Inertial_Runner.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Legacy_Accuracy.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Legacy_Comparison.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Legacy_Runner.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Legacy_Visualizer.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Poiseuille.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_Realtime_Fluid.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_ThreeBody_Chaos.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_TurbulenceStress_Test.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.10_Fluid_Dynamics_Chaos | Research_VortexWake_Test.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.11_Phase_Transitions | test_05_phase_demixing.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.11_Phase_Transitions | test_phase_transitions.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.12_Vacuum_Energy_Casimir | casimir_experimental_data.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.12_Vacuum_Energy_Casimir | casimir_test.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.12_Vacuum_Energy_Casimir | Research_Casimir.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.12_Vacuum_Energy_Casimir | Research_Cosmological_Constant.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.13_Thermodynamic_Bridge | download_data.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.13_Thermodynamic_Bridge | Research_Landauer.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.13_Thermodynamic_Bridge | Research_Real_Data_Validation.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.13_Thermodynamic_Bridge | Research_Thermodynamic_Bridge.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Biology_HRV.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Brain.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Climate.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Complex_Systems.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Economic_Health.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Economy.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Global_Economy.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Inequality.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Ledgers.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Social.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Thailand.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.14_Complex_Systems | Research_Validation.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.15_Cluster_Dynamics | cluster_solver.py | ✅ PASS | Inherits/Uses BaseSolver |
+| 0.15_Cluster_Dynamics | Research_Cluster_Formation.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.15_Cluster_Dynamics | run_cluster_experiment.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.15_Cluster_Dynamics | test_cluster_virial.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.16_Heavy_Nuclei | Engine_Fission_Solver.py | ✅ PASS | Inherits/Uses BaseSolver |
+| 0.16_Heavy_Nuclei | Research_Heavy_Binding.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.16_Heavy_Nuclei | Research_Heavy_Nuclei.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.17_Mass_Generation | Engine_Mass_Higgs.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.17_Mass_Generation | Research_Mass_Mechanism.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.18_Neutrino_Mixing | Engine_Mixing_Neutrino.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.18_Neutrino_Mixing | Research_Oscillation_4D.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.19_Gravity_GR | Engine_Gravity_GR.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.19_Gravity_GR | Research_G_Constant.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.1_Galaxy_Rotation_Problem | Engine_Galaxy_V3.py | ✅ PASS | Inherits/Uses BaseSolver |
+| 0.1_Galaxy_Rotation_Problem | Research_Alpha_Learning.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.1_Galaxy_Rotation_Problem | Research_Dwarf_Galaxies.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.1_Galaxy_Rotation_Problem | Research_Galaxy_Rotation.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.1_Galaxy_Rotation_Problem | Research_Residual_Analysis.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.20_Atomic_Physics | Engine_Atomic_Hydrogen.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.20_Atomic_Physics | Research_Multi_Electron.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.21_Yang_Mills_Mass_Gap | Engine_Mass_Gap.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.21_Yang_Mills_Mass_Gap | Research_Mass_Gap.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.21_Yang_Mills_Mass_Gap | Research_Mass_Gap_Sweep.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.22_Biophysics_Origin_of_Life | Engine_Neural_Seizure.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.22_Biophysics_Origin_of_Life | Research_DNA_Entropy.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.22_Biophysics_Origin_of_Life | Research_Seizure_Prediction.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.23_Unity_Scale_Link | Engine_Derivation.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.23_Unity_Scale_Link | Engine_Unified_Scale.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.23_Unity_Scale_Link | Research_Cross_Domain.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.24_Artificial_Intelligence | UET_AI_Core.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.24_Artificial_Intelligence | Research_AI_Detective.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.24_Artificial_Intelligence | Research_AI_Scaling.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.24_Artificial_Intelligence | Research_NanoGPT_UET.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.24_Artificial_Intelligence | Research_SimpleLM_UET.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.24_Artificial_Intelligence | Research_UET_Optimizer.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.2_Black_Hole_Physics | Engine_BlackHole.py | ✅ PASS | Inherits/Uses BaseSolver |
+| 0.2_Black_Hole_Physics | Research_CCBH_Analysis.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.2_Black_Hole_Physics | Research_EHT_Validation.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.2_Black_Hole_Physics | Research_GW_Validation.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.2_Black_Hole_Physics | Research_Singularity_Sweep.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.3_Cosmology_Hubble_Tension | Engine_Cosmology.py | ✅ PASS | Inherits/Uses BaseSolver |
+| 0.3_Cosmology_Hubble_Tension | download_cosmo_data.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.3_Cosmology_Hubble_Tension | Research_CMB_Analysis.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.3_Cosmology_Hubble_Tension | Research_Dark_Energy.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.3_Cosmology_Hubble_Tension | Research_highz_galaxies.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.3_Cosmology_Hubble_Tension | Research_Hubble_Comparison.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.3_Cosmology_Hubble_Tension | run_cosmo_experiment.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.4_Superconductivity_Superfluids | Engine_Superconductivity.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.4_Superconductivity_Superfluids | Experiment_Superconductor_Data.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.4_Superconductivity_Superfluids | Research_Plasma.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.4_Superconductivity_Superfluids | Research_Quantum_Phenomena.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.4_Superconductivity_Superfluids | Research_Superconductivity.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.4_Superconductivity_Superfluids | Research_Superfluids.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.5_Nuclear_Binding_Hadrons | Engine_Hadron_Model.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.5_Nuclear_Binding_Hadrons | Engine_Light_Nuclei.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.5_Nuclear_Binding_Hadrons | Engine_QCD_Bridge.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.5_Nuclear_Binding_Hadrons | Research_Nuclear_Binding.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.5_Nuclear_Binding_Hadrons | Research_Proton_Radius.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.5_Nuclear_Binding_Hadrons | Research_QCD_Running.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.5_Nuclear_Binding_Hadrons | Research_Quark_Masses.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.5_Nuclear_Binding_Hadrons | Research_Strong_Force.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.6_Electroweak_Physics | Engine_Electroweak.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.6_Electroweak_Physics | Research_Alpha_Decay.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.6_Electroweak_Physics | Research_Beta_Minus.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.6_Electroweak_Physics | Research_Beta_Plus.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.6_Electroweak_Physics | Research_Electroweak.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.6_Electroweak_Physics | Research_Higgs_Mechanism.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.6_Electroweak_Physics | Research_Neutron_Decay.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.6_Electroweak_Physics | Research_Sin2_Theta_W_Running.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.6_Electroweak_Physics | Research_W_Mass_Anomaly.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.6_Electroweak_Physics | Research_W_Mass_Anomaly_Exp.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.7_Neutrino_Physics | Engine_Neutrino.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.7_Neutrino_Physics | test_ft_values.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.7_Neutrino_Physics | test_muon_g2_uet.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.7_Neutrino_Physics | test_neutrino.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.7_Neutrino_Physics | test_neutrino_extended.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.7_Neutrino_Physics | test_neutrino_mass_viz.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.7_Neutrino_Physics | test_pmns_mixing.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.7_Neutrino_Physics | test_thermo_galaxy_law.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.8_Muon_g2_Anomaly | Engine_Muon_G2.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.8_Muon_g2_Anomaly | Research_Muon_Anomaly.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.8_Muon_g2_Anomaly | test_muon_g2.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.9_Quantum_Nonlocality | Engine_Quantum.py | ✅ PASS | Inherits/Uses BaseSolver |
+| 0.9_Quantum_Nonlocality | Research_Bell_Inequality.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.9_Quantum_Nonlocality | Research_Bell_Test.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.9_Quantum_Nonlocality | Research_Double_Slit.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.9_Quantum_Nonlocality | Research_Quantum_Mechanics.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.9_Quantum_Nonlocality | Research_Quantum_Tunneling.py | ⚠️ WARN | No Standard Pattern Found |
+| 0.9_Quantum_Nonlocality | Research_Qubit_Mechanics.py | ⚠️ WARN | No Standard Pattern Found |

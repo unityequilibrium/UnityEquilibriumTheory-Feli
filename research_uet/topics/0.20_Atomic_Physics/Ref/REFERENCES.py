@@ -5,7 +5,17 @@ References: Atomic Physics
 DOIs for all data sources used in this topic.
 """
 
+REF_DIR = Path(__file__).parent
+
 REFERENCES = {
+    "ANALYSIS": REF_DIR / "BIBLIOGRAPHY_ANALYSIS.md",
+    "PDF_DIR": REF_DIR / "PDF_Downloads",
+    "KEY_PAPERS": {
+        "Koide": "Fermion Mass Relations (1982)",
+        "Parker": "Fine Structure Constant (Science 2018)",
+        "Guellati-Khelifa": "Alpha Precision (Nature 2020)",
+        "CODATA": "Fundamental Constants (2022)",
+    },
     "hydrogen_spectrum": [
         {
             "title": "NIST Atomic Spectra Database (version 5.11)",
@@ -26,9 +36,19 @@ REFERENCES = {
             "doi": "10.1063/5.0064853",
             "data": "R∞ = 10973731.568160(21) m⁻¹",
             "source": "NIST/CODATA",
+            "new_version": "CODATA 2022 (NIST)",
         },
     ],
 }
+
+
+def get_ref_path(name: str):
+    """Returns path to a specific reference PDF if downloaded."""
+    pdf_path = REFERENCES["PDF_DIR"] / f"{name}.pdf"
+    if pdf_path.exists():
+        return pdf_path
+    return None
+
 
 DATA_FILES = {
     "Code/hydrogen_spectrum/test_hydrogen_spectrum.py": {

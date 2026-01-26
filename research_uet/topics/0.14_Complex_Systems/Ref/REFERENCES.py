@@ -1,51 +1,60 @@
 """
 REFERENCES.py - 0.14 Complex Systems
-======================================
-DOIs for all data sources used in this topic.
+=====================================
+Central registry for external citations and analysis.
 """
 
+from pathlib import Path
+
+REF_DIR = Path(__file__).parent
+
 REFERENCES = {
-    "primary": {
-        "HRV_Biology": {
-            "title": "Heart rate variability: Standards of measurement, physiological interpretation, and clinical use",
-            "authors": ["Task Force of ESC and NASPE"],
-            "journal": "Circulation",
-            "volume": 93,
-            "pages": "1043-1065",
-            "year": 1996,
-            "doi": "10.1161/01.CIR.93.5.1043",
-        },
-        "Stock_Market": {
-            "title": "Quantifying Stock-Price Response to Demand Fluctuations",
-            "authors": [
-                "Gabaix, X.",
-                "Gopikrishnan, P.",
-                "Plerou, V.",
-                "Stanley, H.E.",
-            ],
-            "journal": "Nature",
-            "volume": 423,
-            "pages": "267",
-            "year": 2003,
-            "doi": "10.1038/nature01624",
-        },
+    "ANALYSIS": REF_DIR / "BIBLIOGRAPHY_ANALYSIS.md",
+    "PDF_DIR": REF_DIR / "PDF_Downloads",
+    "DATA_DIR": REF_DIR / "Data_Source",
+    "KEY_PAPERS": {
+        "Anderson_1972": "P.W. Anderson - More is Different (Emergence)",
+        "Barabasi_1999": "Barabasi & Albert - Scaling in Random Networks",
+        "Prigogine_1977": "Nicolis & Prigogine - Self-Organization in Non-Equilibrium Systems",
+        "Granger_1969": "C.W.J. Granger - Investigating Causal Relations",
     },
-    "supplementary": [
-        {
-            "name": "Inequality",
-            "title": "Capital in the Twenty-First Century",
-            "doi": "10.4159/9780674369542",
-            "year": 2014,
-        }
-    ],
 }
 
 
-def print_references():
+def get_ref_path(name: str):
+    """Returns path to a specific reference PDF if downloaded."""
+    # Common mappings
+    mapping = {
+        "Anderson_1972": "More is different science 1972",
+        "Barabasi_1999": "Emergence of Scaling in Random Networks",
+        "Prigogine_1977": "Self-Organization in Non-Equilibrium Systems",
+        "Granger_1969": "Investigating Causal Relations by Econometric Models",
+    }
+
+    search_name = mapping.get(name, name)
+
+    # Try generic search in PDF folder
+    for pdf in REFERENCES["PDF_DIR"].glob("*.pdf"):
+        if search_name.lower() in pdf.name.lower():
+            return pdf
+
+    return None
+
+
+def list_references():
+    """List all references."""
+    print("=" * 60)
     print("0.14 Complex Systems - References")
-    for name, ref in REFERENCES["primary"].items():
-        print(f"📚 {name}: DOI {ref['doi']}")
+    print("=" * 60)
+    print(f"Analysis: {REFERENCES['ANALYSIS']}")
+    print(f"Pdf Dir: {REFERENCES['PDF_DIR']}\n")
+
+    print("Key Papers:")
+    for key, desc in REFERENCES["KEY_PAPERS"].items():
+        ref_path = get_ref_path(key)
+        status = "✅ FOUND" if ref_path else "❌ MISSING (Run Downloader)"
+        print(f"  * {key}: {desc} [{status}]")
 
 
 if __name__ == "__main__":
-    print_references()
+    list_references()

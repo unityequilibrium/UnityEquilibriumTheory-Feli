@@ -1,0 +1,111 @@
+{
+  "engine": "UET Superconductivity V3.2",
+  "avg_error_pct": NaN,
+  "pass_rate_pct": 0.0,
+  "results": [
+    {
+      "name": "Aluminum (Al)",
+      "Tc_exp": 1.18,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.5229860182213715,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Lead (Pb)",
+      "Tc_exp": 7.19,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.22787008297560163,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Tin (Sn)",
+      "Tc_exp": 3.72,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.22095348474164417,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Niobium (Nb)",
+      "Tc_exp": 9.25,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.343979179974517,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Vanadium (V)",
+      "Tc_exp": 5.36,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.43098035312413463,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Mercury (Hg)",
+      "Tc_exp": 4.15,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.10764049309682296,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Indium (In)",
+      "Tc_exp": 3.41,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.22440794242206039,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Tantalum (Ta)",
+      "Tc_exp": 4.47,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.24748047085192726,
+      "anisotropy_factor": 1.0
+    },
+    {
+      "name": "Nb3Sn",
+      "Tc_exp": 18.3,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.33426280572249834,
+      "anisotropy_factor": 1.15
+    },
+    {
+      "name": "Nb3Ge",
+      "Tc_exp": 23.2,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.3521025576313278,
+      "anisotropy_factor": 1.15
+    },
+    {
+      "name": "MgB2",
+      "Tc_exp": 39.0,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.4966025888597094,
+      "anisotropy_factor": 1.15
+    },
+    {
+      "name": "NbC",
+      "Tc_exp": 11.1,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.42672390458188836,
+      "anisotropy_factor": 1.15
+    },
+    {
+      "name": "NbN",
+      "Tc_exp": 16.0,
+      "Tc_UET": NaN,
+      "error_pct": NaN,
+      "uet_coherence": 0.42399034852649387,
+      "anisotropy_factor": 1.15
+    }
+  ]
+}

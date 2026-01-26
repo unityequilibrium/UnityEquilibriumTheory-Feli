@@ -1,0 +1,33 @@
+{
+  "run_id": "1769132115_Phase_LowT",
+  "simulation": "Phase_LowT",
+  "status": "COMPLETED",
+  "timestamp": "Fri Jan 23 08:35:15 2026",
+  "duration_seconds": 0.03821420669555664,
+  "total_steps": 2,
+  "metadata": {
+    "nx": 64,
+    "ny": 64,
+    "dt": 0.01,
+    "kappa": 1.0,
+    "beta": 1.0,
+    "alpha": 1.0,
+    "C0": 0.0
+  },
+  "final_state": {
+    "step": 0,
+    "time": 0.01,
+    "omega": 15962.599050890287,
+    "kinetic": 0.0,
+    "potential": 3.8377418661648264,
+    "entropy": 0.0,
+    "gradient_norm": 0.0,
+    "max_density": 3.0,
+    "min_density": -3.0,
+    "is_stable": true,
+    "gradient_energy": 15958.761309024125,
+    "entropy_interaction": 0.0,
+    "order_parameter": 2.6278978968810254,
+    "domains": 2513.0
+  }
+}

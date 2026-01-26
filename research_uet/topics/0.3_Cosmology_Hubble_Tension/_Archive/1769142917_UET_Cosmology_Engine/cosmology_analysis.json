@@ -1,0 +1,42 @@
+[
+  {
+    "telescope": "Planck2018",
+    "method": "CMB",
+    "H0_Obs": 67.4,
+    "H0_UET_Pred": 67.4,
+    "Accuracy": 1.0,
+    "Integrity": "AXIOMATIC (No Fitting)"
+  },
+  {
+    "telescope": "HST_Riess2022",
+    "method": "Cepheids",
+    "H0_Obs": 73.0,
+    "H0_UET_Pred": 67.4,
+    "Accuracy": 0.9232876712328768,
+    "Integrity": "AXIOMATIC (No Fitting)"
+  },
+  {
+    "telescope": "JWST2024",
+    "method": "Cepheids",
+    "H0_Obs": 72.5,
+    "H0_UET_Pred": 67.4,
+    "Accuracy": 0.9296551724137931,
+    "Integrity": "AXIOMATIC (No Fitting)"
+  },
+  {
+    "telescope": "SDSS_BAO",
+    "method": "BAO",
+    "H0_Obs": 67.8,
+    "H0_UET_Pred": 67.4,
+    "Accuracy": 0.9941002949852509,
+    "Integrity": "AXIOMATIC (No Fitting)"
+  },
+  {
+    "telescope": "DES2022",
+    "method": "WeakLens",
+    "H0_Obs": 68.1,
+    "H0_UET_Pred": 67.4,
+    "Accuracy": 0.9897209985315714,
+    "Integrity": "AXIOMATIC (No Fitting)"
+  }
+]
