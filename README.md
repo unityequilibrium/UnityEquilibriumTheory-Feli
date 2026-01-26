@@ -108,7 +108,7 @@ $$\boxed{\Omega = C \cdot I}$$
 
 This is how we actually calculate physics:
 
-$$\Omega[C,I] = \int \left[ \underbrace{V(C)}_{\text{Cost of Being}} + \underbrace{\frac{\kappa}{2}|\nabla C|^2}_{\text{Cost of Change}} + \underbrace{\beta C I}_{\text{The Ethics of Connection}} \right] dx$$
+$$\Omega[C,I] = \int \left[ \underbrace{V(C)}_{\text{Cost of Becoming}} + \underbrace{\frac{\kappa}{2}|\nabla C|^2}_{\text{Cost of Change}} + \underbrace{\beta C I}_{\text{The Ethics of Connection}} \right] dx$$
 
 **The Thermodynamics of Ethics:**
 
