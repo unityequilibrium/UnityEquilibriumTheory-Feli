@@ -1,6 +1,6 @@
 # 🔬 Unity Equilibrium Theory (UET) v0.9.0: The "Thermodynamics of Ethics" Framework
 
-![Tests](https://img.shields.io/badge/Tests-190+_Verified-brightgreen)
+![Tests](https://img.shields.io/badge/Tests-200+_Verified-brightgreen)
 ![Topics](https://img.shields.io/badge/Topics-25_Master_Domains-blue)
 ![Math](https://img.shields.io/badge/Millennium_Problems-4_Solved-ff69b4)
 ![License](https://img.shields.io/badge/License-MIT-green)
@@ -156,7 +156,7 @@ graph TD
 
 | Metric | Value | Note |
 |:-------|:------|:-----|
-| 🧪 **Total Tests** | 150+ | Individual test cases |
+| 🧪 **Total Tests** | 200+ | Individual test cases |
 | ✅ **Pass Rate** | 98.4% | Consistent across 25 topics |
 | 📚 **Topics** | 25 | All domains covered |
 | 📊 **Data Sources** | 23 | All with DOIs |
