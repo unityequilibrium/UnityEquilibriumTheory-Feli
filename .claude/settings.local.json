@@ -10,7 +10,9 @@
       "Bash(if [ ! -d \"research_uet\" ])",
       "Bash(then unzip -q research_uet.zip)",
       "Bash(python global_economy_test.py:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "mcp__research-theory__list_directory",
+      "mcp__research-theory__list_allowed_directories"
     ]
   }
 }
