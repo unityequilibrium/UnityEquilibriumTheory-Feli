@@ -1,8 +1,8 @@
 # 📖 UET Symbol Glossary
 
 > **นิยามสัญลักษณ์ทั้งหมดของ UET — Single Source of Truth**  
-> **Version**: 0.8.7 | Merged from v0.8.6  
-> **Last Updated**: 2026-01-13
+> **Version**: 0.9.0 | Grand Unified Update  
+> **Last Updated**: 2026-01-26
 
 ---
 
@@ -22,11 +22,11 @@
 | **J** | Flux Field | J_in - J_out | Open system energy exchange |
 | **Ω** | Omega (Equilibrium Functional) | ∫[...] dx | Total disequilibrium (minimize this) |
 | **𝒱** | Value | -ΔΩ | Improvement per step |
-| **V(C)** | Potential | (α/2)C² + (γ/4)C⁴ | Cost of existence (Higgs-like) |
+| **V(C)** | Potential | (α/2)C² + (γ/4)C⁴ | Cost of becoming (Essence) |
 | **κ** | Kappa (Gradient cost) | |∇C|² coefficient | Surface tension, Space memory |
 | **β** | Beta (Coupling) | C·I coefficient | Landauer limit (kT ln 2) |
 | **s** | Source/External Drive | External bias term | External force pushing the system |
-| **W_N** | Natural Will | |∇Ω| coefficient | Existence persistence drive |
+| **W_N** | Natural Will | |∇Ω| coefficient | Persistence of becoming (Essence) |
 
 ---
 
@@ -51,13 +51,6 @@
 ## 🌐 Multi-Domain Interpretation
 
 ### The Key Rule
-
-> **C และ I มีความหมายต่างกันในแต่ละ domain**  
-> **แต่ความสัมพันธ์ 𝒱 = -ΔΩ ใช้ได้ทุกที่**
-
----
-
-### Physics
 
 | Symbol | Interpretation |
 |:------:|:---------------|
@@ -121,7 +114,7 @@
 
 ## 📊 Key Relationships
 
-### The Master Equation (v0.8.7)
+### The Master Equation (v0.9.0)
 
 $$\Omega[C,I,J] = \int d^3x \left[ V(C) + \frac{\kappa}{2}|\nabla C|^2 + \beta C \cdot I + \gamma_J (J_{in} - J_{out}) \cdot C + W_N |\nabla \Omega| + \beta_U V_{game} + \lambda \Sigma (C_i - C_j)^2 \right]$$
 
@@ -139,6 +132,7 @@ $$\mathcal{V} = -\Delta\Omega$$
 |:---------|:----------|
 | C = consciousness | C = Capacity/Communication field |
 | I = instinct | I = Information/Insulation field |
+| Equilibrium is "Being" | Equilibrium is "Becoming" (Essence) |
 | "Universe is information" | "Information is a calculation tool" |
 | UET predicts the future | UET simulates for preparation |
 

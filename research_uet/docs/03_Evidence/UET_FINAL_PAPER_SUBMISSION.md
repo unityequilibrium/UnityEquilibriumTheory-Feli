@@ -14,7 +14,7 @@ We propose a Unity-based physical framework where the fundamental constants and 
 ## Part 1: The Narrative Foundation (The Cost of Existence)
 
 ### 1.1 The Economy of Reality
-Common sense suggests "being" is free. Thermodynamics proves it is not. To exist requires an ongoing expenditure of energy to maintain structure against entropy.
+Common sense suggests **"becoming"** is free. Thermodynamics proves it is not. To manifest (process) requires an ongoing expenditure of energy to maintain structure against entropy.
 *   **The Premise**: Distance is not just space; it is the **Cost** (Energy/Time) required to establish a connection.
 *   **The Constraint ($c$)**: $c$ is not merely the speed of light. It is the **Maximum Efficiency** of connection. It is the "Necessity Condition" that dictates the limit of causality.
 
@@ -102,4 +102,4 @@ Why does structure persist if proper thermodynamics dictates death?
 
 ## 5. Conclusion
 UET provides a single, unbroken chain of logic from the Big Bang to Biological Life.
-By recognizing **"c" as the Constraint** and **"I" as the Currency**, we see that the Universe is a self-optimizing system seeking Equilibrium. Our results, particularly the resolution of the Hubble Tension, meet the **$5\sigma$ threshold for New Physics**, confirming that UET is not just a model, but a description of the actual mechanism. We simply need to acknowledge the **Thermodynamic Cost of Reality**.
+By recognizing **"c" as the Constraint** and **"I" as the Currency**, we see that the Universe is a self-optimizing system seeking Equilibrium. Our results, particularly the resolution of the Hubble Tension, meet the **$5\sigma$ threshold for New Physics**, confirming that UET is not just a model, but a description of the actual mechanism. We simply need to acknowledge the **Thermodynamic Cost of Becoming**.

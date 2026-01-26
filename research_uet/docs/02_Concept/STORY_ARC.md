@@ -122,9 +122,9 @@ $$\Omega[C,I] = \int \left[ V(C) + \frac{\kappa}{2}|\nabla C|^2 + \beta C I \rig
 
 Let me translate that to human:
 
-**Ω** = The total "cost" of the system existing  
-**V(C)** = The price of being out of balance  
-**κ|∇C|²** = The price of being uneven  
+**Ω** = The total "cost" of the system's becoming  
+**V(C)** = The price of becoming out of balance  
+**κ|∇C|²** = The price of becoming uneven  
 **βCI** = The bridge between matter and information
 
 And here's the simple rule:

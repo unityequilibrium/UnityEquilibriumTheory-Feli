@@ -3,17 +3,17 @@
     "source": "UET_FINANCIAL_GATEWAY",
     "indicators": {
         "SET_INDEX": {
-            "value": 1365.28,
+            "value": 1333.0,
             "unit": "Points",
             "significance": "Local Market Entropy"
         },
         "GOLD_PRICE": {
-            "value": 2016.59,
+            "value": 2052.89,
             "unit": "USD/oz",
             "significance": "Global Stability Standard"
         },
         "USD_THB": {
-            "value": 35.72,
+            "value": 35.52,
             "unit": "THB",
             "significance": "Fluid Exchange Friction"
         },

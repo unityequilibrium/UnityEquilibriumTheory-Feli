@@ -18,7 +18,7 @@ $$ \Omega[C,I] = \int \left( \underbrace{V(C)}_{\text{Energy}} + \underbrace{\fr
 
 | Term | Component | Python Interpretation | Application |
 |:-----|:----------|:----------------------|:------------|
-| **$V(C)$** | **Potential Energy** | `potential_V(C)` | Defines the "Cost of Being". Use quartic potential for Phase Transitions. |
+| **$V(C)$** | **Potential Energy** | `potential_V(C)` | Defines the **"Cost of Becoming"**. Use quartic potential for Phase Transitions. |
 | **$\kappa (\nabla C)^2$** | **Geometric Tension** | `gradient_term(C)` | "Smoothness Cost". High $\kappa$ = Rigid space (General Relativity). Low $\kappa$ = Quantum foam. |
 | **$\beta C \cdot I$** | **Info Coupling** | `information_coupling()` | **THE KEY**. Mass ($C$) is drag caused by Information ($I$). $\beta$ is the coupling constant ($k_B T$). |
 | **$\nabla \cdot J$** | **Open Exchange** | `semi_open_exchange()` | Inflow/Outflow. Used for non-equilibrium thermodynamics (Life/Econ). |
