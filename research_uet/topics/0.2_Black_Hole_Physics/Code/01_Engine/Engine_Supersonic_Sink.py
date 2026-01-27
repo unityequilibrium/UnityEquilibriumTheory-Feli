@@ -26,12 +26,30 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from research_uet.core.uet_glass_box import UETPathManager
+from research_uet.core.uet_parameters import C_KM_S, G_GALACTIC
+
+# Base Solver Import
+try:
+    from research_uet.core.uet_base_solver import UETBaseSolver
+except ImportError:
+    import sys
+    from pathlib import Path
+
+    current = Path(__file__).resolve()
+    root = None
+    for parent in [current] + list(current.parents):
+        if (parent / "research_uet").exists():
+            root = parent
+            sys.path.insert(0, str(root))
+            break
+    from research_uet.core.uet_base_solver import UETBaseSolver
 
 
-class SupersonicSinkEngine:
+class SupersonicSinkEngine(UETBaseSolver):
     def __init__(self):
-        self.C = 299792.458  # km/s (Speed of Light/Sound)
-        self.G = 4.301e-6  # kpc km^2/s^2 M_sun^-1
+        super().__init__(name="BlackHole_Fluid_Sink")
+        self.C = C_KM_S  # km/s (Speed of Light/Sound)
+        self.G = G_GALACTIC  # kpc km^2/s^2 M_sun^-1
 
         # Convert G to compatible units for small scale?
         # Let's verify M87 scale (Solar Masses).

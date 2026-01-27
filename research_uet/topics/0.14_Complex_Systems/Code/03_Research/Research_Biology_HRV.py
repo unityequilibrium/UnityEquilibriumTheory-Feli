@@ -26,6 +26,7 @@ if root_path and str(root_path) not in sys.path:
 import numpy as np
 import os
 import glob
+import math
 from research_uet.core.uet_glass_box import UETPathManager
 
 # Import from UET V3.0 Master Equation
@@ -83,51 +84,33 @@ def load_hrv_data():
 def calculate_hrv_metrics(rr_intervals):
     """
     Calculate HRV metrics related to UET equilibrium.
-
-    UET Interpretation:
-    - High HRV = System flexibility (low Omega, stable)
-    - Low HRV = System stress (high Omega, seeking equilibrium)
+    Delegates to Engine_Complexity.
     """
-    if len(rr_intervals) < 10:
+    # Initialize Engine
+    # Note: We use the Complexity Engine which handles Stochastic systems
+    import importlib.util
+
+    eng_path = (
+        root_path
+        / "research_uet/topics/0.14_Complex_Systems/Code/01_Engine/Engine_Complexity.py"
+    )
+    if eng_path.exists():
+        spec = importlib.util.spec_from_file_location("Engine_Complexity", eng_path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        engine = mod.UETComplexityEngine(name="HRV_Analyzer")
+    else:
+        print("CRITICAL: Engine not found.")
         return None
 
-    # Clean data - convert to float and filter
-    rr = np.array(rr_intervals, dtype=float)
-    rr = rr[np.isfinite(rr)]
-    rr = rr[(rr > 0.3) & (rr < 2.0)]  # Physiological range (seconds)
+    metrics = engine.calculate_hrv_metrics(rr_intervals)
 
-    if len(rr) < 10:
+    # Check Kill Switch
+    if metrics and math.isnan(metrics.get("equilibrium_score", 0)):
+        print("KILL SWITCH DETECTED.")
         return None
 
-    # Time-domain metrics
-    mean_rr = np.mean(rr)
-    sdnn = np.std(rr)  # Standard deviation
-    rmssd = np.sqrt(np.mean(np.diff(rr) ** 2))  # Root mean square of differences
-
-    # Coefficient of variation (normalized variability)
-    cv = sdnn / mean_rr
-
-    # Poincaré plot metrics (short-term vs long-term variability)
-    sd1 = np.std(np.diff(rr)) / np.sqrt(2)
-    sd2 = np.sqrt(2 * sdnn**2 - sd1**2) if 2 * sdnn**2 > sd1**2 else sdnn
-
-    # UET Equilibrium Score
-    # Higher = closer to equilibrium
-    # Based on balance between short and long-term
-    balance = sd1 / (sd2 + 0.001)
-    equilibrium_score = 1 / (1 + abs(balance - 0.5))  # Optimal around 0.5
-
-    return {
-        "mean_rr": mean_rr,
-        "sdnn": sdnn,
-        "rmssd": rmssd,
-        "cv": cv,
-        "sd1": sd1,
-        "sd2": sd2,
-        "balance": balance,
-        "equilibrium_score": equilibrium_score,
-        "n_beats": len(rr),
-    }
+    return metrics
 
 
 def run_test():

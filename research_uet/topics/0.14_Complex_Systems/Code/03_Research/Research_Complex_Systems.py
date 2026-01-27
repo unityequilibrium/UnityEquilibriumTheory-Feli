@@ -26,6 +26,7 @@ except ImportError as e:
 
 import math
 import random
+import numpy as np
 
 # Topic Path
 TOPIC_DIR = root_path / "research_uet" / "topics" / "0.14_Complex_Systems"
@@ -151,6 +152,27 @@ def run_test():
         pillar="03_Research",
     )
     logger = None
+
+    # [INTEGRITY CHECK] Instantiate Engine to ensure Kill Switch compliance
+    import importlib.util
+
+    eng_path = (
+        root_path
+        / "research_uet/topics/0.14_Complex_Systems/Code/01_Engine/Engine_Complexity.py"
+    )
+    if eng_path.exists():
+        spec = importlib.util.spec_from_file_location("Engine_Complexity", eng_path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        engine = mod.UETComplexityEngine(name="Qualitative_Validator")
+        # Perform a dummy check
+        test = engine.calculate_stability_metrics(np.array([1, 2, 3]))
+        if math.isnan(test.get("equilibrium_score", 0)):
+            print("KILL SWITCH DETECTED: Engine disabled.")
+            return False
+    else:
+        pass  # Allow fallback for now
+
     try:
         logger = UETMetricLogger(
             "Complex_Systems_Qualitative", output_dir=result_dir_base

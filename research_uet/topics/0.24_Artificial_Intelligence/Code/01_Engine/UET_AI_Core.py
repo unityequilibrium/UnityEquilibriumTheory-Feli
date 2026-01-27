@@ -44,7 +44,14 @@ class UetcortexNeuralNet(UETBaseSolver):
     Measures the Information Entropy of production-grade architectures.
     """
 
-    def __init__(self, name="Cortex_V4_8", params: UETParameters = None):
+    def __init__(
+        self,
+        name="Cortex_V4_8",
+        params: UETParameters = None,
+        input_size=2,
+        hidden_size=4,
+        output_size=1,
+    ):
         if params is None:
             params = UETParameters(kappa=1.0, beta=0.01)
         super().__init__(
@@ -66,10 +73,15 @@ class UetcortexNeuralNet(UETBaseSolver):
             / "03_Research"
         )
         # Weight Initialization for legacy MLP support
-        self.W1 = np.random.randn(2, 4) * 0.1
-        self.b1 = np.zeros((1, 4))
-        self.W2 = np.random.randn(4, 1) * 0.1
-        self.b2 = np.zeros((1, 1))
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.output_size = output_size
+        self.loss_history = []
+
+        self.W1 = np.random.randn(self.input_size, self.hidden_size) * 1.0
+        self.b1 = np.zeros((1, self.hidden_size))
+        self.W2 = np.random.randn(self.hidden_size, self.output_size) * 1.0
+        self.b2 = np.zeros((1, self.output_size))
 
     def sigmoid(self, x):
         return 1.0 / (1.0 + np.exp(-x))
@@ -86,15 +98,20 @@ class UetcortexNeuralNet(UETBaseSolver):
         # Forward
         y_pred = self.forward(X)
         m = X.shape[0]
-        # Backprop (Simplest version)
-        delta2 = (y_pred - y) / m
+        # Backprop (MSE + Sigmoid derivative)
+        error = y_pred - y
+        delta2 = (error / m) * (y_pred * (1 - y_pred))
+
         dW2 = np.dot(self.a1.T, delta2)
         delta1 = np.dot(delta2, self.W2.T) * self.a1 * (1 - self.a1)
         dW1 = np.dot(X.T, delta1)
         # Update
         self.W1 -= learning_rate * dW1
         self.W2 -= learning_rate * dW2
-        return float(np.mean((y_pred - y) ** 2))
+
+        current_loss = float(np.mean((y_pred - y) ** 2))
+        self.loss_history.append(current_loss)
+        return current_loss
 
     def load_production_data(self):
         """Standardized Data Loader for AI Specs."""

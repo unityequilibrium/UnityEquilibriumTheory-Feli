@@ -27,13 +27,30 @@ if root_path and str(root_path) not in sys.path:
 
 from research_uet.core.uet_master_equation import omega_functional_complete
 
+# Base Solver Import
+try:
+    from research_uet.core.uet_base_solver import UETBaseSolver
+except ImportError:
+    import sys
+    from pathlib import Path
 
-class LifeEngine:
+    current = Path(__file__).resolve()
+    root = None
+    for parent in [current] + list(current.parents):
+        if (parent / "research_uet").exists():
+            root = parent
+            sys.path.insert(0, str(root))
+            break
+    from research_uet.core.uet_base_solver import UETBaseSolver
+
+
+class LifeEngine(UETBaseSolver):
     """
     Simulates a living system as an Information Processing Agent.
     """
 
     def __init__(self):
+        super().__init__(name="Origin_of_Life_Entropy")
         self.entropy_internal = 1.0  # Normalized Entropy
         self.information_intake = 0.1  # Rate of Negentropy intake (Food/Sunlight)
         self.decay_rate = 0.05  # Natural thermodynamic decay (2nd Law)

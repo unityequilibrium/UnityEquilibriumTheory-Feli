@@ -8,29 +8,25 @@ Tests UET prediction for superfluid properties.
 import sys
 from pathlib import Path
 
-# --- ROBUST PATH FINDER ---
+# --- ROBUST PATH FINDER (5x4 Grid Standard) ---
 current_path = Path(__file__).resolve()
-ROOT = None
+root_path = None
 for parent in [current_path] + list(current_path.parents):
     if (parent / "research_uet").exists():
-        ROOT = parent
+        root_path = parent
         break
 
-if ROOT:
-    if str(ROOT) not in sys.path:
-        sys.path.insert(0, str(ROOT))
-else:
-    print("CRITICAL: research_uet root not found!")
-    sys.exit(1)
+if root_path and str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
 
-repo_root = ROOT
-
-repo_root = ROOT
+print(f"DEBUG: Found root_path: {root_path}")
+print(f"DEBUG: sys.path[0]: {sys.path[0]}")
 
 try:
     from research_uet.core.uet_glass_box import UETPathManager
 except ImportError:
-    pass
+    print("CRITICAL: Failed to import UET Core")
+    sys.exit(1)
 
 # He-4 superfluid data (Donnelly 1998)
 HE4_DATA = {
@@ -46,7 +42,7 @@ try:
     import importlib.util
 
     engine_file = (
-        repo_root
+        root_path
         / "research_uet"
         / "topics"
         / "0.4_Superconductivity_Superfluids"

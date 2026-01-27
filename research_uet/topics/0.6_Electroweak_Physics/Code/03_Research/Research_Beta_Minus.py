@@ -192,14 +192,22 @@ def test_isotope_lifetimes():
 
     print("-" * 72)
 
-    # Test Q^5 scaling
+    # Test Q^5 scaling using Engine Delegate
     Q_n = FREE_NEUTRON["Q_value_keV"]
     tau_n = FREE_NEUTRON["lifetime_s"]
     Q_H3 = BETA_MINUS_ISOTOPES["H3"]["Q_value_keV"]
     tau_H3_years = BETA_MINUS_ISOTOPES["H3"]["half_life_years"]
     tau_H3_s = tau_H3_years * 365.25 * 24 * 3600
 
-    ratio_predicted = (Q_n / Q_H3) ** 5
+    # Use Delegate Function (which calls Engine)
+    # This ensures Kill Switch is respected
+    tau_H3_predicted = uet_lifetime_from_Q(Q_H3, reference_tau=tau_n, reference_Q=Q_n)
+
+    if tau_H3_predicted == 0:
+        print("KILL SWITCH DETECTED or Engine Error.")
+        return False, 0
+
+    ratio_predicted = tau_H3_predicted / tau_n
     ratio_actual = tau_H3_s / tau_n
 
     log_predicted = np.log10(ratio_predicted)

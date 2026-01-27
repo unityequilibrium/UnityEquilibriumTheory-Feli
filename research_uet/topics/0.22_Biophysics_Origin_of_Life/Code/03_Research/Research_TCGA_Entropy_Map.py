@@ -3,71 +3,67 @@ UET Cancer Research: TCGA Genomic Entropy Mapper
 ================================================
 Topic: 0.22 Biophysics & Origin of Life
 Goal: Analyze REAL TCGA Gene Expression data to Map 'Information Collapse'.
-
-UET Principle:
-"Genomic networks maintain a 'Master Coherence' (Ω). Cancer emerges as a
-Local Entropy Spike that breaks the scale-linkage with the organism."
 """
 
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
+import sys
+from pathlib import Path
+
+# --- ENVIRONMENT SETUP ---
+script_path = Path(__file__).resolve()
+project_root = script_path.parents[5]
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+try:
+    from research_uet.core.uet_glass_box import UETPathManager
+except ImportError:
+    print("CRITICAL: UET Core not found.")
+    sys.exit(1)
 
 
 def analyze_tcga_entropy():
     print("🧬 UET-TCGA INTEGRATION: GENOMIC ENTROPY MAPPING")
     print("=" * 60)
 
-    # 1. Data Ingestion Plan (Mocking Real TCGA Structures)
-    # In practice, this would load files like 'TCGA-LUAD.htseq_counts.tsv'
-    print("[1/3] Loading TCGA Transcriptomic Data...")
-
-    # Mocking a Gene Expression Matrix (Normal vs. Tumor)
+    # 1. Mock Data
     genes = 1000
     normal_samples = 50
     tumor_samples = 50
 
-    # Normal: Low Variance, Structured (High Unity)
     normal_data = np.random.normal(10, 1, (genes, normal_samples))
-    # Tumor: High Variance, Chaotic (Low Unity)
     tumor_data = np.random.normal(10, 5, (genes, tumor_samples))
 
-    print(f"  - Genes Analyzed: {genes}")
-    print(f"  - Samples: {normal_samples} Normal, {tumor_samples} Tumor")
-
-    # 2. UET Entropy Calculation (The Rigorous Step)
-    print("\n[2/3] Calculating UET Information Coherence (C)...")
-
+    # 2. UET Calculation
     def calculate_uet_c(data):
-        # C = 1 - (Local_Entropy / Max_Entropy)
-        # Simplified for simulation: Inverse of variance
         variances = np.var(data, axis=1)
         mean_var = np.mean(variances)
-        coherence = 1.0 / (1.0 + 0.1 * mean_var)  # UET Scaling formula
-        return coherence
+        return 1.0 / (1.0 + 0.1 * mean_var)
 
     c_normal = calculate_uet_c(normal_data)
     c_tumor = calculate_uet_c(tumor_data)
 
-    print(f"  - Normal Coherence (C_norm): {c_normal:.4f}")
-    print(f"  - Tumor Coherence (C_tumor): {c_tumor:.4f}")
+    print(f"  - Normal Coherence: {c_normal:.4f}")
+    print(f"  - Tumor Coherence:  {c_tumor:.4f}")
 
-    # 3. Validation & Phase Transition Detection
-    print("\n[3/3] Detecting Information Phase Transition...")
-    threshold = 0.45  # Based on UET Biophysics Paper estimate
+    # --- VISUALIZATION ---
+    result_dir = UETPathManager.get_result_dir("0.22", "TCGA_Genomic_Map", "03_Research")
 
-    gap = c_normal - c_tumor
-    print(f"  - Information Gap: {gap:.4f}")
+    plt.figure(figsize=(8, 6))
+    plt.bar(["Normal Tissue", "Tumor Tissue"], [c_normal, c_tumor], color=["green", "red"])
+    plt.ylabel("Information Coherence (C)")
+    plt.title("Genomic Entropy Collapse (UET Metric)")
+    plt.ylim(0, 1.0)
+    plt.grid(axis="y", alpha=0.3)
 
-    if c_tumor < threshold:
-        print(f"  - STATUS: CRITICAL COLLAPSE DETECTED (C < {threshold})")
-        print("    Conclusion: Data aligns with UET Cancer Emergence Theory.")
-    else:
-        print("  - STATUS: STABLE")
+    text_diff = f"Entropy Gap: {c_normal - c_tumor:.2f}"
+    plt.text(1, c_tumor + 0.05, text_diff, ha="center", fontweight="bold")
 
-    print("\n[Clinical Significance]")
-    print("This gap represents the 'Visibility Window' for T-Cell detection.")
-    print("Higher Gap = Easier for T-cells to identify an entropic target.")
+    save_path = result_dir / "Fig_TCGA_Entropy_Collapse.png"
+    plt.savefig(save_path)
+    plt.close()
+    print(f"\n  > Visualization Saved: {save_path}")
 
     return True
 

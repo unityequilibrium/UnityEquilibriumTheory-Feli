@@ -3,14 +3,24 @@ UET High-Fidelity Cancer Analysis: Multi-Cell Tissue Network
 ===========================================================
 Topic: 0.22 Biophysics & Origin of Life
 Goal: Model spatial tumor growth, heterogeneity, and T-cell infiltration.
-
-UET Principle:
-"Cancer is a spatial phase transition. The 'Information Island'
-expands as neighbors fail to suppress entropic noise."
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
+from pathlib import Path
+
+# --- ENVIRONMENT SETUP ---
+script_path = Path(__file__).resolve()
+project_root = script_path.parents[5]
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+try:
+    from research_uet.core.uet_glass_box import UETPathManager
+except ImportError:
+    print("CRITICAL: UET Core not found.")
+    sys.exit(1)
 
 
 def run_high_fidelity_simulation():
@@ -18,71 +28,52 @@ def run_high_fidelity_simulation():
     print("=" * 60)
 
     # 1. Spatial Environment Setup
-    grid_size = 20  # 20x20 grid (400 cellular compartments)
-    tissue = np.ones((grid_size, grid_size))  # Baseline High Unity (1.0)
+    grid_size = 20
+    tissue = np.ones((grid_size, grid_size))
 
-    # 2. Introduce Heterogeneity (Different Clones)
-    # Primary Tumor (Center)
+    # 2. Introduce Heterogeneity
     center = grid_size // 2
-    tissue[center - 2 : center + 2, center - 2 : center + 2] = np.random.uniform(
-        0.1, 0.3, (4, 4)
-    )
-
-    # Metastatic Seed (Top Right) - More Stable but growing
+    tissue[center - 2 : center + 2, center - 2 : center + 2] = np.random.uniform(0.1, 0.3, (4, 4))
     tissue[2:4, grid_size - 4 : grid_size - 2] = np.random.uniform(0.3, 0.45, (2, 2))
 
     print(f"Tissue Grid: {grid_size}x{grid_size} ({grid_size**2} units)")
-    print(f"Initial State: Identified 1 Primary Core and 1 Metastatic Seed.")
 
-    # 3. Time Evolution (Information Decay & Growth)
+    # 3. Time Evolution
     iterations = 5
-    print(f"\n[Time Evolution: {iterations} Generations]")
-
     for gen in range(iterations):
-        # Entropy Diffusion (Cancer 'infects' neighbors by increasing their entropy)
         new_tissue = tissue.copy()
         for x in range(1, grid_size - 1):
             for y in range(1, grid_size - 1):
-                if tissue[x, y] < 0.5:  # If cancerous/unstable
-                    # Average entropy of neighbors drops (Chaos spreads)
+                if tissue[x, y] < 0.5:
                     neighbor_noise = np.random.uniform(0.01, 0.05)
                     new_tissue[x - 1 : x + 2, y - 1 : y + 2] -= neighbor_noise
         tissue = np.clip(new_tissue, 0.0, 1.0)
 
-    global_coherence = np.mean(tissue)
-    print(f"Final Global Coherence (C_total): {global_coherence:.4f}")
+    print(f"Final Global Coherence: {np.mean(tissue):.4f}")
 
-    # 4. T-Cell Response (Spatial Search)
+    # 4. T-Cell Response
     print("\n[Immune Response: T-Cell Infiltration]")
     t_cells = 20
-    scanned_anomalies = 0
-    neutralized = 0
-
     for _ in range(t_cells):
         tx, ty = np.random.randint(0, grid_size, 2)
-        if tissue[tx, ty] < 0.5:  # Identified instability
-            scanned_anomalies += 1
-            if np.random.rand() < 0.7:  # Kill probability
-                neutralized += 1
-                tissue[tx, ty] = 1.0  # Restored equilibrium
+        if tissue[tx, ty] < 0.5:
+            if np.random.rand() < 0.7:
+                tissue[tx, ty] = 1.0
 
-    print(f"  - T-Cells Deployed: {t_cells}")
-    print(f"  - Anomalies Encountered: {scanned_anomalies}")
-    print(f"  - Nodes Stabilized: {neutralized}")
+    # --- VISUALIZATION ---
+    result_dir = UETPathManager.get_result_dir("0.22", "Tissue_Analysis", "03_Research")
 
-    # Visualize Result
     plt.figure(figsize=(8, 6))
-    plt.imshow(tissue, cmap="RdYlGn", origin="lower")
+    plt.imshow(tissue, cmap="RdYlGn", origin="lower", vmin=0, vmax=1)
     plt.colorbar(label="UET Coherence (C)")
     plt.title(f"Tissue State Post-Infiltration (Gen {iterations})")
     plt.xlabel("X (Cell Map)")
     plt.ylabel("Y (Cell Map)")
-    # Note: Saved visualization would go here in real research
-    print("\n[UET Research Insight]")
-    print("Multi-scale modeling reveals that 'Spatial Entropy' allows cancer pockets ")
-    print(
-        "to hide from immune surveillance even when the overall system seems healthy."
-    )
+
+    save_path = result_dir / "Fig_Tissue_Coherence_Map.png"
+    plt.savefig(save_path)
+    plt.close()
+    print(f"\n  > Visualization Saved: {save_path}")
 
     return True
 

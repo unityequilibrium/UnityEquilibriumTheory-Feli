@@ -36,11 +36,16 @@ G = 6.67430e-11  # Gravitational constant [m³/kg/s²]
 K_B = 1.380649e-23  # Boltzmann constant [J/K]
 ALPHA_EM = 1 / 137.035999  # Fine structure constant
 M_SUN = 1.98847e30  # Solar Mass (kg) [IAU 2015]
-G_GALACTIC = 4.302e-6  # kpc (km/s)² / M_sun (For Galaxy Rotation)
 H = 6.62607015e-34  # Planck constant [J·s]
 E_CHARGE = 1.602176634e-19  # Elementary charge [C]
 M_ELECTRON = 9.1093837015e-31  # Electron mass [kg]
 EPSILON_0 = 8.8541878128e-12  # Vacuum permittivity [F/m]
+
+# --- UET UNIT CONVERSIONS ---
+C_KM_S = C / 1000.0  # Speed of light [km/s]
+G_GALACTIC = 4.301e-6  # kpc (km/s)² / M_sun (Standardized UET Value)
+RHO_COSMIC = 2.9e-16  # kg/m^3 (UET Vacuum Density - Pioneer/Fluid Frame)
+H0 = 67.4  # km/s/Mpc (Planck 2018 - Global Baseline)
 
 # --- UET BRIDGE CONSTANTS ---
 FLUID_MOBILITY_BRIDGE = 1750.0  # Derived Informational-Physical Bridge for Topic 0.10
@@ -141,6 +146,15 @@ _SCALE_PARAMS = {
         beta=0.01,
         scale="fluid_high_re",
         origin="High Reynolds number regime",
+    ),
+    # =========================================================================
+    # GENERAL FALLBACK
+    # =========================================================================
+    "general": UETParameters(
+        kappa=0.1, beta=0.1, scale="general", origin="Fallback/Default"
+    ),
+    "General": UETParameters(
+        kappa=0.1, beta=0.1, scale="general", origin="Fallback/Default"
     ),
 }
 

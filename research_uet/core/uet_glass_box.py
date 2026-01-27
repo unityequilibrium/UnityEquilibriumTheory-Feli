@@ -63,6 +63,7 @@ class UETPathManager:
         "0.23": "0.23_Unity_Scale_Link",
         "0.24": "0.24_Artificial_Intelligence",
         "0.25": "0.25_Strategy_Power_Economics",
+        "0.26": "0.26_Cosmic_Dynamic_Frame",
     }
 
     @staticmethod

@@ -18,19 +18,20 @@ import sys
 from pathlib import Path
 
 
-# Path setup for UET Core (robust root finding)
-def _find_project_root():
-    """Find the project root by searching for research_uet folder."""
-    current = Path(__file__).resolve().parent
-    for _ in range(10):  # Max 10 levels up
-        if (current / "research_uet").exists():
-            return current
-        current = current.parent
-    return Path(__file__).parents[4]  # Fallback
+# --- ROBUST PATH FINDER ---
+current_path = Path(__file__).resolve()
+ROOT_DIR = None
+for parent in [current_path] + list(current_path.parents):
+    if (parent / "research_uet").exists():
+        ROOT_DIR = parent
+        break
 
-
-ROOT_DIR = _find_project_root()
-sys.path.insert(0, str(ROOT_DIR))
+if ROOT_DIR and str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+elif not ROOT_DIR:
+    # Fallback to manual standard if grid fails strictly
+    ROOT_DIR = Path(__file__).parents[4]
+    sys.path.append(str(ROOT_DIR))
 
 # --- ENGINE PATH SETUP (Topic 0.5 specific) ---
 ENGINE_PATH = (

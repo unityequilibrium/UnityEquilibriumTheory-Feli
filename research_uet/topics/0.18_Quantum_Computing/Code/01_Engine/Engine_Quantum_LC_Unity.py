@@ -13,9 +13,26 @@ UET Physics:
 
 import numpy as np
 
+# Base Solver Import
+try:
+    from research_uet.core.uet_base_solver import UETBaseSolver
+except ImportError:
+    import sys
+    from pathlib import Path
 
-class QuantumLCUnity:
+    current = Path(__file__).resolve()
+    root = None
+    for parent in [current] + list(current.parents):
+        if (parent / "research_uet").exists():
+            root = parent
+            sys.path.insert(0, str(root))
+            break
+    from research_uet.core.uet_base_solver import UETBaseSolver
+
+
+class QuantumLCUnity(UETBaseSolver):
     def __init__(self, L=1.0, C=1.0, hbar=1.0):
+        super().__init__(name="Quantum_LC_Reactor")
         self.L = L  # Inductance (Unity Inertia)
         self.C = C  # Capacitance (Unity Elasticity)
         self.hbar = hbar

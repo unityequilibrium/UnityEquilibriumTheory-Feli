@@ -69,10 +69,14 @@ class UETBaseSolver(ABC):
                 topic_key = topic.split("_")[0] if "_" in topic else topic
                 self.params = get_params(topic_key)
             except Exception as e:
+
                 print(
                     f"⚠️ [UETBaseSolver] Warning: Could not load params for topic {topic}: {e}"
                 )
-                self.params = UETParameters()
+                # Fallback to safe defaults
+                self.params = UETParameters(
+                    kappa=0.1, beta=0.1, scale="fallback", origin="Error_Recovery"
+                )
         else:
             self.params = params
 

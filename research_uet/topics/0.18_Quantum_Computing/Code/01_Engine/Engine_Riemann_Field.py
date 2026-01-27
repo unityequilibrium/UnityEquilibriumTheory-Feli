@@ -8,9 +8,26 @@ Maps the Riemann Zeta Function to UET Equilibrium Sinks.
 import numpy as np
 import math
 
+# Base Solver Import
+try:
+    from research_uet.core.uet_base_solver import UETBaseSolver
+except ImportError:
+    import sys
+    from pathlib import Path
 
-class RiemannFieldEngine:
+    current = Path(__file__).resolve()
+    root = None
+    for parent in [current] + list(current.parents):
+        if (parent / "research_uet").exists():
+            root = parent
+            sys.path.insert(0, str(root))
+            break
+    from research_uet.core.uet_base_solver import UETBaseSolver
+
+
+class RiemannFieldEngine(UETBaseSolver):
     def __init__(self, precision=1000):
+        super().__init__(name="Riemann_Zeta_Solver")
         self.precision = precision
 
     def zeta_approx(self, s: complex) -> complex:

@@ -15,18 +15,27 @@ from pathlib import Path
 current_path = Path(__file__).resolve()
 root_path = None
 for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
+    if (parent / "research_uet" / "core").exists():
         root_path = parent
         break
 
 if root_path and str(root_path) not in sys.path:
     sys.path.insert(0, str(root_path))
+    print(f"DEBUG: Added {root_path} to sys.path")
+
+print(f"DEBUG: sys.path[0] = {sys.path[0]}")
 
 try:
+    import research_uet
+
+    print(f"DEBUG: research_uet imported from {research_uet.__file__}")
     from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-    from research_uet.core.uet_master_equation import UETParameters
+    from research_uet.core.uet_parameters import UETParameters
 except ImportError as e:
     print(f"CRITICAL SETUP ERROR: {e}")
+    import traceback
+
+    traceback.print_exc()
     sys.exit(1)
 
 # Load real data (5x4 Grid)

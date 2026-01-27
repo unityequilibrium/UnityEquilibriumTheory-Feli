@@ -198,6 +198,48 @@ class UETComplexityEngine(UETBaseSolver):
             "frequencies": freqs,
         }
 
+    def calculate_hrv_metrics(self, rr_intervals: np.ndarray) -> Dict[str, Any]:
+        """
+        AXIOMATIC HRV ANALYSIS (Poincaré & Time Domain)
+        Specific implementation for Biophysics (Topic 0.22/0.14).
+        """
+        if INTEGRITY_KILL_SWITCH:
+            return {"status": "FAIL", "equilibrium_score": float("nan")}
+
+        # Clean data
+        rr = np.array(rr_intervals, dtype=float)
+        rr = rr[np.isfinite(rr)]
+        rr = rr[(rr > 0.3) & (rr < 2.0)]
+
+        if len(rr) < 10:
+            return None
+
+        # Time-domain metrics
+        mean_rr = np.mean(rr)
+        sdnn = np.std(rr)
+        rmssd = np.sqrt(np.mean(np.diff(rr) ** 2))
+        cv = sdnn / mean_rr
+
+        # Poincaré plot metrics
+        sd1 = np.std(np.diff(rr)) / np.sqrt(2)
+        sd2 = np.sqrt(2 * sdnn**2 - sd1**2) if 2 * sdnn**2 > sd1**2 else sdnn
+
+        # UET Equilibrium Score
+        balance = sd1 / (sd2 + 0.001)
+        equilibrium_score = 1 / (1 + abs(balance - 0.5))
+
+        return {
+            "mean_rr": mean_rr,
+            "sdnn": sdnn,
+            "rmssd": rmssd,
+            "cv": cv,
+            "sd1": sd1,
+            "sd2": sd2,
+            "balance": balance,
+            "equilibrium_score": equilibrium_score,
+            "n_beats": len(rr),
+        }
+
     def calculate_stability_metrics(self, data: np.ndarray) -> Dict[str, Any]:
         """
         AXIOMATIC STABILITY ANALYSIS (Variance-based Equilibrium)

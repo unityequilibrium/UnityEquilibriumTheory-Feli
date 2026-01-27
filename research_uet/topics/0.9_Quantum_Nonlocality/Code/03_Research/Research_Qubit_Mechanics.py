@@ -205,4 +205,5 @@ def run_qubit_experiment():
 
 
 if __name__ == "__main__":
-    run_qubit_experiment()
+    success = run_qubit_experiment()
+    sys.exit(0 if success else 1)

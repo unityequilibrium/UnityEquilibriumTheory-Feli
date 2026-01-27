@@ -39,6 +39,7 @@ except ImportError as e:
 
 import os
 import numpy as np
+import math
 
 # Import Data from research_uet/data/01_particle_physics/neutrinos
 # Import Data from local pmns_mixing folder
@@ -57,24 +58,30 @@ from neutrino_extended_data import (
 def uet_neutrino_mass_mechanism():
     """
     UET mechanism for neutrino mass.
-
-    Standard Model: Neutrinos massless (or require See-Saw).
-    UET: Neutrinos are pure I-field excitations.
-    Mass arises from weak coupling to C-field background.
-
-    m_nu ~ m_e * (alpha_weak)^2
+    Delegates to Engine_Neutrino.
     """
-    m_e = 0.511e6  # eV
-    alpha_weak = 1.166e-5 * (100) ** 2  # G_F * m_weak^2 approx ~ 1e-5
-    # Better approximation:
-    # m_nu = m_e * G_F * m_e^2 ?? No, too small.
+    # Initialize Standard Engine
+    import importlib.util
 
-    # UET See-Saw analog: mixing with high scale M_I (Information scale)
-    # Calibrated to standard GUT scale ~ 2e15 GeV (Unity Equilibrium Scale)
-    v = 246e9  # eV (Higgs VEV)
-    M_I = 2e15 * 1e9  # eV (Information/GUT scale)
+    eng_path = (
+        root_path
+        / "research_uet/topics/0.7_Neutrino_Physics/Code/01_Engine/Engine_Neutrino.py"
+    )
+    if eng_path.exists():
+        spec = importlib.util.spec_from_file_location("Engine_Neutrino", eng_path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        UETNeutrinoSolver = mod.UETNeutrinoSolver
+    else:
+        print("CRITICAL: Engine not found.")
+        return float("nan")
 
-    m_nu_pred = v**2 / M_I  # eV
+    solver = UETNeutrinoSolver()
+    m_nu_pred = solver.predict_neutrino_mass()
+
+    if math.isnan(m_nu_pred):
+        print("KILL SWITCH DETECTED: Engine returned NaN")
+        return float("nan")
 
     return m_nu_pred
 

@@ -7,10 +7,27 @@ Maps Elliptic Curve L-functions to UET Information Fields.
 
 import numpy as np
 
+# Base Solver Import
+try:
+    from research_uet.core.uet_base_solver import UETBaseSolver
+except ImportError:
+    import sys
+    from pathlib import Path
 
-class EllipticResonanceEngine:
+    current = Path(__file__).resolve()
+    root = None
+    for parent in [current] + list(current.parents):
+        if (parent / "research_uet").exists():
+            root = parent
+            sys.path.insert(0, str(root))
+            break
+    from research_uet.core.uet_base_solver import UETBaseSolver
+
+
+class EllipticResonanceEngine(UETBaseSolver):
     def __init__(self, a, b):
         """y^2 = x^3 + ax + b"""
+        super().__init__(name=f"Elliptic_Curve_{a}_{b}")
         self.a = a
         self.b = b
 

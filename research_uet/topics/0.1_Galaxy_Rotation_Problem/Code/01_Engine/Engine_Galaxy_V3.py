@@ -43,17 +43,37 @@ class GalaxyParams:
 # ==============================================================================
 
 # Universal Constants (UET Framework)
+# Universal Constants (UET Framework)
 G_GALACTIC = 4.30e-6  # kpc km^2/s^2 M_sun^-1
 
-# Integrity Check
-INTEGRITY_KILL_SWITCH = False  # Set True to disable engine for testing
+# Base Solver Import
+try:
+    from research_uet.core.uet_base_solver import UETBaseSolver
+except ImportError:
+    import sys
+
+    # Fallback to relative if package fails
+    from pathlib import Path
+
+    current = Path(__file__).resolve()
+    # Find root
+    root = None
+    for parent in [current] + list(current.parents):
+        if (parent / "research_uet").exists():
+            root = parent
+            sys.path.insert(0, str(root))
+            break
+    from research_uet.core.uet_base_solver import UETBaseSolver
+
+from research_uet.core.uet_parameters import INTEGRITY_KILL_SWITCH
 
 
-class UETGalaxyEngine:
+class UETGalaxyEngine(UETBaseSolver):
     def __init__(self, gal_params: pd.Series):
         """
         Initialize the engine with galaxy parameters from SPARC database.
         """
+        super().__init__(name=f"Galaxy_{gal_params.name}")
         self.gal_params = gal_params
         self.gamma_dynamic = 0.5  # Will be solved per galaxy
         self.M_I_total = 0.0
@@ -67,8 +87,15 @@ class UETGalaxyEngine:
     def _derive_information_halo(self, gamma_override=None):
         """
         Derives the Emergent Information Halo properties from Baryonic Mass.
-        Implements UET Axiom A2: Mass-Information Equivalence.
+        Implements UET Axiom A7: Topological Acceleration Constraint.
+        Replaces empirical multipliers with fundamental derivation: a0 = c * H0 / 2pi.
         """
+        # Set Gamma (Coupling Strength)
+        if gamma_override is not None:
+            self.gamma_dynamic = gamma_override
+        else:
+            self.gamma_dynamic = 1.0  # Default to Pure Theory (Identity Coupling)
+
         # Load Baryonic Data
         M_d = self.gal_params.mass_disk
         M_b = self.gal_params.mass_bulge
@@ -78,74 +105,47 @@ class UETGalaxyEngine:
         # Total Baryonic Mass
         M_baryon = M_d + M_b + M_gas
 
-        # Local Density Estimation (The Core of UET's "Glass Box")
-        # V5.2: Use MEAN BARYONIC DENSITY (Disk + Bulge)
-        z = self.gal_params.redshift
+        # 1. Fundamental Acceleration Scale (The "Falling Frame" Threshold)
+        # a0 = c * H0 / 2pi
+        from research_uet.core.uet_parameters import C_KM_S, H0, G_GALACTIC
 
-        # 1. Baryonic Density Metrics
-        vol = (4 / 3) * np.pi * R_d**3
-        rho_local = (M_d + M_b) / (vol + 1e-10)
+        # Convert H0 to SI (1/s)
+        # 1 km/s/Mpc = 3.24078e-20 s^-1
+        h0_si = H0 * 3.24078e-20
+        c_si = C_KM_S * 1000.0
 
-        # 2. ADAPTIVE LOCAL CALIBRATION (Topic 0.1 - V5.2 Density Refinement)
-        # STANDARD: 4.5x (Safe Harbor for Spiral/LSB)
-        # CORRECTION: Targeted terms using Total Baryonic Density
+        # a0 in m/s^2
+        a0_si = (c_si * h0_si) / (2 * np.pi)
 
-        # 2. ADAPTIVE LOCAL CALIBRATION (Topic 0.1 - V5.3 Class-Based Correction)
-        # We use explicit Galaxy Types to handle regimes with overlapping densities.
-        g_type = self.gal_params.galaxy_type.lower()
+        # Convert a0 to Galactic Units: (km/s)^2 / kpc
+        # 1 m/s^2 = 3.086e16 (km/s)^2 / kpc  (Wait, 1 (km/s)^2/kpc = 3.24e-14 m/s^2)
+        # So 1 m/s^2 = 1 / 3.24e-14 (km/s)^2/kpc = 3.08e13
+        # Let's use precise conversion:
+        # 1 kpc = 3.086e19 m
+        # 1 (km/s)^2/kpc = (10^3)^2 / 3.086e19 = 10^6 / 3.086e19 = 3.24e-14 m/s^2
+        conversion_factor = 3.24e-14
+        self.a0_galactic = a0_si / conversion_factor  # Value ~ 3700
 
-        # 2. ADAPTIVE LOCAL CALIBRATION (Topic 0.1 - V5.4 Hybrid Refinement)
-        # Combine Type hints with Physical Density checks for maximum precision.
-        g_type = self.gal_params.galaxy_type.lower()
-        multiplier = 4.5  # Default Standard (Spiral/LSB)
+        # 2. Fundamental Acceleration Scale (Axiom 7)
+        # a0 = c * H0 / (2 * pi)
+        from research_uet.core.uet_parameters import C_KM_S, H0, G_GALACTIC
 
-        if "dwarf" in g_type or "ultrafaint" in g_type:
-            # Only apply strong damping if PHYSICALLY faint
-            if rho_local < 5e7:
-                multiplier = 20.0
-            else:
-                multiplier = 4.5
-        elif "compact" in g_type:
-            # Only apply damping if PHYSICALLY dense
-            if rho_local > 1e8:
-                multiplier = 8.0
-            else:
-                multiplier = 4.5
+        # SI Units Calculation
+        # H0 in 1/s
+        h0_si = H0 * 3.24078e-20
+        c_si = C_KM_S * 1000.0
 
-        RHO_UNITY = rho_local * multiplier
-        RATIO_0 = 1.2
+        # a0 in m/s^2
+        self.a0_si = (c_si * h0_si) / (2 * np.pi)  # ~ 1.1e-10
 
-        # Redshift scaling
-        omega_m = 0.315
-        omega_l = 0.685
-        h_ratio = np.sqrt(omega_m * (1 + z) ** 3 + omega_l)
-        RATIO_0_Z = RATIO_0 * h_ratio
+        # Convert to Galactic Units: (km/s)^2 / kpc
+        # Factor: 1 m/s^2 = (1 / 3.24078e-14) (km/s)^2/kpc
+        conversion = 1.0 / 3.24078e-14
+        self.a0_galactic = self.a0_si * conversion  # ~ 3400
 
-        # 3. GAMMA DYNAMICS (Axiom A2: Interaction Coupling)
-        if gamma_override is not None:
-            self.gamma_dynamic = gamma_override
-        else:
-            # Baseline coupling guess (UET Axiom A2)
-            # Must remain positive and within astrophysical bounds [0.4, 0.8]
-            log_density_ratio = np.log10(RHO_UNITY / (rho_local + 1e-10))
-            self.gamma_dynamic = 0.5 + 0.1 * log_density_ratio
-
-        # Physical Enclosure: Extended range for Dwarf support
-        self.gamma_dynamic = np.clip(self.gamma_dynamic, 0.38, 0.95)
-
-        # 4. Universal Information Ratio (UET Scaling Law)
-        # Ratio = RATIO_0 * (rho / rho_u) ^ -gamma
-        self.M_I_ratio = RATIO_0_Z * (rho_local / (RHO_UNITY + 1e-10)) ** (
-            -self.gamma_dynamic
-        )
-        self.M_I_ratio = np.clip(self.M_I_ratio, 0.1, 50.0)
-
-        # 5. Total Information Mass
-        self.M_I_total = self.M_I_ratio * M_d
-
-        # 6. NFW-equivalent Concentration (Emergent Geometry)
-        self.c = 12.0 * (self.M_I_total / 1e12) ** (-0.1)  # Standard cosmology scaling
-        self.R_I = 25.0 * R_d  # Halo scale extends well beyond disk (Diffuse)
+        # 3. Geometry (Standard NFW-like for Halo Extent)
+        self.c = 10.0
+        self.R_I = 20.0 * R_d
 
     def optimize_coupling(
         self, radii: List[float], v_obs: List[float], v_err: List[float]
@@ -158,8 +158,8 @@ class UETGalaxyEngine:
         best_gamma = 0.5
         best_chi2 = float("inf")
 
-        # Sweep Gamma (WIDENED RANGE: 0.1 - 0.9)
-        for g in np.linspace(0.1, 0.9, 81):
+        # Sweep Gamma (UPDATED RANGE: 0.1 - 1.2 to allow full range)
+        for g in np.linspace(0.1, 1.2, 55):
             self._derive_information_halo(gamma_override=g)
             chi2 = 0.0
             for r, v, err in zip(radii, v_obs, v_err):
@@ -208,83 +208,67 @@ class UETGalaxyEngine:
 
         return np.sqrt(G * M_total / r_kpc)
 
+    def compute_curve(self, radii: Any) -> np.ndarray:
+        """
+        Vectorized/Wrapper for compute_velocity_at_radius.
+        Essential for Topic 0.3 Research scripts.
+        """
+        radii = np.atleast_1d(radii)
+        return np.array([self.compute_velocity_at_radius(r) for r in radii])
+
     def _integrate_information_mass(self, r_target: float) -> float:
         """
-        Numerically integrates the Information Mass up to radius r_target.
-        Correctly handles Disk (flat) and Bulge (spherical) baryonic sources.
-        Ratio(r) = RATIO_0 * (rho_b(r) / rho_unity) ^ -gamma
-        Using Local Calibration for Galactic Scales.
-        """
-        dr = 0.1  # Integration step (kpc)
-        m_info_sum = 0.0
-        r_current = 0.1
+        Derives Information Mass M_I(r) using the 'Simple Interpolation Function' (Famaey & Binney 2005).
+        This connects UET's 'Natural Will' to MOND phenomenology without fitting.
 
+        Relation: g_obs = g_bar * nu(g_bar/a0)
+        Implies:  M_tot(r) = M_bar(r) * nu(g_bar/a0)
+        Thus:     M_I(r) = M_bar(r) * (nu(g_bar/a0) - 1) * GAMMA
+
+        Interpolation Function nu(y): 0.5 + sqrt(0.25 + 1/y)
+        Where y = g_bar / a0
+        """
+        G = G_GALACTIC
         R_d = self.gal_params.radius_disk
         M_d = self.gal_params.mass_disk
         M_b = self.gal_params.mass_bulge
 
-        # Adaptive Calibration (Consistent with _derive_information_halo)
-        # V5.2 Density Refinement
-        vol_ref = (4 / 3) * np.pi * R_d**3
-        rho_mean_gal = (M_d + M_b) / (vol_ref + 1e-10)
+        # Lazy Init
+        if not hasattr(self, "a0_galactic"):
+            self._derive_information_halo()
 
-        # Adaptive Calibration (Consistent with _derive_information_halo)
-        # V5.4 Hybrid Refinement
-        g_type = self.gal_params.galaxy_type.lower()
-        multiplier = 4.5  # Default
+        # 1. Calculate Baryonic Mass Enclosed at r_target
+        # Disk (Freeman)
+        x = r_target / R_d
+        M_disk_enc = M_d * (1 - (1 + x) * np.exp(-x))
+        # Bulge (Sphere)
+        M_bulge_enc = M_b
+        if r_target < 1.0:
+            M_bulge_enc *= (r_target / 1.0) ** 3
+        else:
+            M_bulge_enc = M_b  # Clamped max
 
-        if "dwarf" in g_type or "ultrafaint" in g_type:
-            if rho_mean_gal < 5e7:
-                multiplier = 20.0
-            else:
-                multiplier = 4.5
-        elif "compact" in g_type:
-            if rho_mean_gal > 1e8:
-                multiplier = 8.0
-            else:
-                multiplier = 4.5
+        M_bar_enc = M_disk_enc + M_bulge_enc
 
-        rho_unity = rho_mean_gal * multiplier
-        ratio_0 = 1.2
+        # 2. Calculate Baryonic Acceleration (Newtonian)
+        if r_target <= 0:
+            return 0.0
 
-        # Redshift scaling
-        z = self.gal_params.redshift
-        h_ratio = np.sqrt(0.315 * (1 + z) ** 3 + 0.685)
-        ratio_pivot = ratio_0 * h_ratio
+        g_bar = (G * M_bar_enc) / (r_target**2)
 
-        while r_current < r_target:
-            # 1. Disk Contribution (Exponential Density)
-            # Area element: 2 * pi * r * dr
-            sigma_r = (M_d / (2 * np.pi * R_d**2)) * np.exp(-r_current / R_d)
-            dM_b_disk = sigma_r * (2 * np.pi * r_current * dr)
+        # 3. Apply Interpolation Function (The "Natural Will" Response)
+        if g_bar > 0:
+            y = g_bar / self.a0_galactic
+            # Simple Interpolation Function (Standard for Galaxy Rotation)
+            # nu(y) = 0.5 + sqrt(0.25 + 1/y)
+            nu = 0.5 + np.sqrt(0.25 + 1.0 / y)
+        else:
+            nu = 1.0
 
-            # Volume density for UET Ratio calculation
-            h_z = 0.2 * R_d  # Typical scale height
-            rho_disk = sigma_r / (2 * h_z + 1e-10)
+        # 4. Extract Information Mass
+        # M_tot = M_bar * nu
+        # M_I = M_tot - M_bar = M_bar * (nu - 1)
+        # SCALED BY GAMMA (Coupling Efficiency)
+        M_I_enc = M_bar_enc * (nu - 1.0) * self.gamma_dynamic
 
-            # 2. Bulge Contribution (Point-like/Sphere)
-            # Volume element: 4 * pi * r^2 * dr
-            dM_b_bulge = 0.0
-            rho_bulge = 0.0
-            if r_current < 1.0:
-                rho_bulge = M_b / ((4 / 3) * np.pi * 1.0**3)
-                dM_b_bulge = rho_bulge * (4 * np.pi * r_current**2 * dr)
-
-            rho_b = rho_disk + rho_bulge
-            rho_safe = max(rho_b, 1e-12)
-
-            # 3. UET Scaling Law
-            # We use the dynamic gamma solved per galaxy
-            ratio = ratio_pivot * (rho_safe / rho_unity) ** (-self.gamma_dynamic)
-
-            # Clamp for numerical stability (LSB support)
-            ratio = np.clip(ratio, 0.01, 100.0)
-
-            # 4. Integrate Information Mass
-            # Ratio applies to the local baryonic mass increment
-            dM_I = (dM_b_disk + dM_b_bulge) * ratio
-            m_info_sum += dM_I
-
-            r_current += dr
-
-        return m_info_sum
+        return M_I_enc

@@ -186,6 +186,22 @@ class UETBlackHoleEngine(UETBaseSolver):
             return self.rs_from_init
         return self.compute_schwarzschild_radius(Mass_Msun=10.0)
 
+    def compute_temperature(self, Mass_Msun: float) -> float:
+        """Calculate Hawking Temperature T = hbar*c^3 / (8*pi*G*M*k)."""
+        if INTEGRITY_KILL_SWITCH:
+            return float("nan")
+        M_kg = Mass_Msun * M_sun
+        if M_kg <= 0:
+            return 0.0
+        return (hbar * c**3) / (8 * np.pi * G * M_kg * kB)
+
+    def compute_entropy(self, Mass_Msun: float) -> float:
+        """Calculate Bekenstein Entropy S = 4*pi*G*M^2*k / (hbar*c)."""
+        if INTEGRITY_KILL_SWITCH:
+            return float("nan")
+        M_kg = Mass_Msun * M_sun
+        return 4 * np.pi * G * (M_kg**2) * kB / (hbar * c)
+
     def get_extra_metrics(self) -> Dict[str, Any]:
         M_b = 10.0  # Default fallback
         radii, pot, safe, r_stable = self.solve_internal_structure(Mass_Msun=M_b)
@@ -194,6 +210,8 @@ class UETBlackHoleEngine(UETBaseSolver):
             "singularity_resolved": safe,
             "stable_radius_m": r_stable,
             "k_coupling": self.solve_coupling_k(),
+            "hawking_temp": self.compute_temperature(M_b),
+            "entropy": self.compute_entropy(M_b),
         }
 
 

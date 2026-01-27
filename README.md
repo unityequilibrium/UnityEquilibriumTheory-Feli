@@ -28,7 +28,8 @@
     - [Run It Yourself](#run-it-yourself)
   - [🚀 8. Quick Start](#-8-quick-start)
     - [1. Clone \& Install](#1-clone--install)
-    - [2. Run All Tests](#2-run-all-tests)
+    - [2. Run the "Big 5" Physics Anomalies](#2-run-the-big-5-physics-anomalies)
+    - [3. Run All Tests](#3-run-all-tests)
   - [📚 9. Complete Topic Index (25 Domains)](#-9-complete-topic-index-25-domains)
   - [🔍 10. Methodology](#-10-methodology)
     - [Human + AI Collaboration](#human--ai-collaboration)
@@ -56,9 +57,9 @@ UET is not just a physics theory. It is a **"Civilization-Level Operating System
 ### 🌌 2. The "Impossible" Physics Anomalies
 *Standard Model said it was impossible. UET proved it necessary.*
 
-| Anomaly | The Crisis | UET Fix (No Dark Matter) | Topic |
-|:--------|:-----------|:-------------------------|:------|
-| **Dark Matter** | Galaxies spin too fast | Vacuum Pressure ($\beta C I$) mimics mass | [0.1 Galaxy Rotation](./research_uet/topics/0.1_Galaxy_Rotation_Problem/) |
+| Anomaly | The Crisis (Topic 0.1 Evidence) | UET Solution (Topic 0.26 Mechanism) | Status |
+|:--------|:--------------------------|:------------------------------------|:-------|
+| **Dark Matter** | Galaxies spin too fast ([Topic 0.1](./research_uet/topics/0.1_Galaxy_Rotation_Problem/)) | **Dynamic Viscosity**: Space acts as a fluid with drag $a_0$ ([Topic 0.26](./research_uet/topics/0.26_Cosmic_Dynamic_Frame/)) | ✅ Solved |
 | **Dark Energy** | Universe explodes | Info Field Cutoff (Finite $\Lambda$) | [0.12 Vacuum Energy](./research_uet/topics/0.12_Vacuum_Energy_Casimir/) |
 | **Hubble Tension** | $H_0$ mismatch (5$\sigma$) | Dynamic Entropy Scaling ($H(t)$) | [0.3 Cosmology](./research_uet/topics/0.3_Cosmology_Hubble_Tension/) |
 | **Muon g-2** | 4.2$\sigma$ deviation | Geometric Topology Correction | [0.8 Muon g-2](./research_uet/topics/0.8_Muon_g2_Anomaly/) |
@@ -194,7 +195,13 @@ cd Equation-UET-v0.8.7
 pip install -r requirements.txt
 ```
 
-### 2. Run All Tests
+### 2. Run the "Big 5" Physics Anomalies
+Solve Dark Matter, Singularity, and more in one go:
+```bash
+python research_uet/scripts/run_physics_anomalies.py
+```
+
+### 3. Run All Tests
 
 ```bash
 python research_uet/topics/run_all_tests.py

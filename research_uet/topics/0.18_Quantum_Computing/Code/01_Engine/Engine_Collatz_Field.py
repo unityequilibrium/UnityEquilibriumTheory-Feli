@@ -8,10 +8,29 @@ Treats numbers as Information Densities (Psi) flowing towards Unity.
 import numpy as np
 import math
 
+# Base Solver Import
+try:
+    from research_uet.core.uet_base_solver import UETBaseSolver
+except ImportError:
+    import sys
 
-class CollatzFieldEngine:
+    # Fallback to relative if package fails
+    from pathlib import Path
+
+    current = Path(__file__).resolve()
+    # Find root
+    root = None
+    for parent in [current] + list(current.parents):
+        if (parent / "research_uet").exists():
+            root = parent
+            sys.path.insert(0, str(root))
+            break
+    from research_uet.core.uet_base_solver import UETBaseSolver
+
+
+class CollatzFieldEngine(UETBaseSolver):
     def __init__(self, name="UET_Collatz_Field"):
-        self.name = name
+        super().__init__(name=name)
         self.history = []
 
     def get_binary_entropy(self, n: int) -> float:

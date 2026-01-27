@@ -179,7 +179,9 @@ def test_cmb_peaks():
 
     # --- VISUALIZATION ---
     try:
-        sys.path.append(str(Path(__file__).parents[4]))
+        # Use ROOT from robust finder
+        if str(ROOT) not in sys.path:
+            sys.path.insert(0, str(ROOT))
         import numpy as np
 
         # Try import viz if path valid

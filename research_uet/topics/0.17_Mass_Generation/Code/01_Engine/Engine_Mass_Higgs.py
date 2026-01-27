@@ -29,6 +29,7 @@ if root_path and str(root_path) not in sys.path:
 
 try:
     from research_uet.core.uet_master_equation import UETParameters
+    from research_uet.core.uet_base_solver import UETBaseSolver
 except ImportError as e:
     print(f"CRITICAL IMPORT ERROR: {e}")
     sys.exit(1)
@@ -58,7 +59,7 @@ def load_pdg_data():
         return {}
 
 
-class UETMassEngine:
+class UETMassEngine(UETBaseSolver):
     """
     V4.0 Mass Generation Engine (Predictive).
     Solves the Geometric Mass Equation to PREDICT heavy lepton masses.
@@ -67,6 +68,9 @@ class UETMassEngine:
     Lepton masses are roots of a geometric projection operator.
     Constraint: K = (Sum sqrt(m))^2 / Sum(m) = 1.50000 (Exact 3/2)
     """
+
+    def __init__(self):
+        super().__init__(name="UETMassEngine")
 
     def predict_tau_mass(self, m_e: float, m_mu: float) -> float:
         """

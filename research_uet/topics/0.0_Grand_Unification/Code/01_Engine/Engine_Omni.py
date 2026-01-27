@@ -164,8 +164,8 @@ class UETOmniEngine:
         # --- 1. COSMIC SCALE (Galaxy) ---
         print("  [1] Propagating Gravity...")
         gal_params = GalaxyParams(mass_disk=1e10, radius_disk=3.0, mass_bulge=0.0)
-        galaxy = UETGalaxyEngine(galaxy_params=gal_params, uet_params=params)
         # We simulate a "mock" check - normally we optimize gamma, here we check the Halo Ratio
+        galaxy = UETGalaxyEngine(gal_params=gal_params)
         # A beta change alters the 'Ratio_0' effectively.
         halo_ratio = galaxy.M_I_ratio
 

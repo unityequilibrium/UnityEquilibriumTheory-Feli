@@ -40,8 +40,25 @@ try:
     M_sun = M_SUN
     k_B = K_B
     h_bar = HBAR
+
+    # Helper: Dynamic Import of Engine
+    import importlib.util
+
+    eng_path = (
+        ROOT
+        / "research_uet/topics/0.2_Black_Hole_Physics/Code/01_Engine/Engine_BlackHole.py"
+    )
+    if eng_path.exists():
+        spec = importlib.util.spec_from_file_location("Engine_BlackHole", eng_path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        UETBlackHoleEngine = mod.UETBlackHoleEngine
+    else:
+        print("CRITICAL: Engine not found.")
+        sys.exit(1)
+
 except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
+    print(f"CRITICAL: Core UET imports failed: {e}")
     sys.exit(1)
 
 
@@ -73,19 +90,20 @@ def run_test():
         item for item in bh_data["gravitational_wave"] if item["event"] == "GW150914"
     )
 
-    M1 = gw_event["m1"] * M_sun
-    M2 = gw_event["m2"] * M_sun
-    M_final = gw_event["final_mass"] * M_sun
+    # Initialize Engine
+    engine = UETBlackHoleEngine()
 
-    # Radiated Energy
-    E_rad_obs = (
-        ((gw_event["m1"] + gw_event["m2"]) - gw_event["final_mass"]) * M_sun * c**2
-    )
+    M1 = gw_event["m1"]
+    M2 = gw_event["m2"]
+    M_final = gw_event["final_mass"]
 
-    # Calculate Entropies
-    S1 = bekenstein_entropy(M1)
-    S2 = bekenstein_entropy(M2)
-    S_final = bekenstein_entropy(M_final)
+    # Radiated Energy (Observed)
+    E_rad_obs = ((M1 + M2) - M_final) * M_sun * c**2
+
+    # Calculate Entropies using Engine
+    S1 = engine.compute_entropy(M1)
+    S2 = engine.compute_entropy(M2)
+    S_final = engine.compute_entropy(M_final)
 
     S_init = S1 + S2
     Delta_S = S_final - S_init
@@ -95,12 +113,17 @@ def run_test():
     print(f"Entropy Change:  {Delta_S:.2e} J/K (Increased)")
 
     # Temperature Scale (Hawking Temp of Final BH)
-    T_H_final = h_bar * c**3 / (8 * math.pi * G * M_final * k_B)
+    T_H_final = engine.compute_temperature(M_final)
     Thermodynamic_Available_Work = Delta_S * T_H_final
 
     print(f"T_Hawking (Final): {T_H_final:.2e} K")
     print(f"T * Delta_S:       {Thermodynamic_Available_Work:.2e} J")
     print(f"Observed E_rad:    {E_rad_obs:.2e} J")
+
+    # Guard against zero division if kill switch active (T=nan)
+    if math.isnan(T_H_final):
+        print("KILL SWITCH DETECTED: Engine returned NaN.")
+        return False
 
     Ratio = E_rad_obs / Thermodynamic_Available_Work
     print(f"Amplification Ratio: {Ratio:.4f}")

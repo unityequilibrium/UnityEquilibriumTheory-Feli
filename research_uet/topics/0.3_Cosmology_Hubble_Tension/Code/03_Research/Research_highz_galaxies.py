@@ -99,7 +99,17 @@ def simulate_highz_prediction(z_target=5.0):
     plt.legend()
     plt.grid(True, alpha=0.3)
 
-    output_png = "highz_evolution_prediction.png"
+    # Updated to use UETPathManager for output
+    try:
+        from research_uet.core.uet_glass_box import UETPathManager
+
+        output_dir = UETPathManager.get_result_dir("0.3", "HighZ_Prediction")
+    except ImportError:
+        # Fallback if running standalone without core
+        output_dir = Path("Result")
+        output_dir.mkdir(exist_ok=True)
+
+    output_png = output_dir / "highz_evolution_prediction.png"
     plt.savefig(output_png)
     print(f"\nPrediction figure saved to {output_png}")
     print("Finding: UET predicts that high-z galaxies will show significantly higher ")

@@ -29,11 +29,20 @@ for parent in [current_path] + list(current_path.parents):
 if root_path and str(root_path) not in sys.path:
     sys.path.insert(0, str(root_path))
 
+# Base Solver Import
+try:
+    from research_uet.core.uet_base_solver import UETBaseSolver
+except ImportError:
+    from research_uet.core.uet_base_solver import UETBaseSolver
 
-class AIEntropyEngine:
+
+class AIEntropyEngine(UETBaseSolver):
     """
     Simulates the entropy of token probability distributions.
     """
+
+    def __init__(self):
+        super().__init__(name="AI_Thought_Thermodynamics")
 
     def calculate_entropy(self, probabilities):
         """Shannon Entropy: H = -sum(p * log(p))"""

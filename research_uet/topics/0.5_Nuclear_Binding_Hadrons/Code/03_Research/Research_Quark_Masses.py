@@ -20,7 +20,19 @@ def run_test():
 
     # --- VISUALIZATION ---
     try:
-        sys.path.append(str(Path(__file__).parents[4]))
+    # --- VISUALIZATION ---
+    try:
+        # --- ROBUST PATH FINDER ---
+        from pathlib import Path
+        current_path = Path(__file__).resolve()
+        root_path = None
+        for parent in [current_path] + list(current_path.parents):
+            if (parent / "research_uet").exists():
+                root_path = parent
+                break
+        if root_path and str(root_path) not in sys.path:
+            sys.path.insert(0, str(root_path))
+            
         from core import uet_viz
 
         result_dir = UETPathManager.get_result_dir(topic="0.5_Nuclear_Binding_Hadrons", name="Research_Quark_Masses", pillar="03_Research")

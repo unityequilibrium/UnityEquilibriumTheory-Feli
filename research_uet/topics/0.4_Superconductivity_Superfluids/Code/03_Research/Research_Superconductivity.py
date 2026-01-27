@@ -14,7 +14,7 @@ from pathlib import Path
 current_path = Path(__file__).resolve()
 ROOT = None
 for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
+    if (parent / "research_uet" / "core").exists():
         ROOT = parent
         break
 

@@ -30,15 +30,36 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from research_uet.core.uet_glass_box import UETPathManager
+from research_uet.core.uet_parameters import G, G_GALACTIC, RHO_COSMIC
+
+# Base Solver Import
+try:
+    from research_uet.core.uet_base_solver import UETBaseSolver
+except ImportError:
+    import sys
+
+    # Fallback to relative if package fails
+    from pathlib import Path
+
+    current = Path(__file__).resolve()
+    # Find root
+    root = None
+    for parent in [current] + list(current.parents):
+        if (parent / "research_uet").exists():
+            root = parent
+            sys.path.insert(0, str(root))
+            break
+    from research_uet.core.uet_base_solver import UETBaseSolver
 
 
-class FluidGravityEngine:
+class FluidGravityEngine(UETBaseSolver):
     def __init__(self):
+        super().__init__(name="Fluid_Gravity_Derivation")
         # Cosmic Parameters (Topic 0.26)
-        self.G = 4.301e-6  # kpc km^2/s^2 M_sun^-1 (Galaxy Scale)
+        self.G = G_GALACTIC  # kpc km^2/s^2 M_sun^-1 (Galaxy Scale)
         # Or SI units for fundamental derivation? Let's use SI for physics proof.
-        self.G_SI = 6.674e-11
-        self.RHO_VACUUM = 10e-17  # kg/m^3 (Pioneer)
+        self.G_SI = G
+        self.RHO_VACUUM = RHO_COSMIC  # kg/m^3 (Pioneer)
 
     def calculate_force_field(self, mass_kg, r_meters):
         """

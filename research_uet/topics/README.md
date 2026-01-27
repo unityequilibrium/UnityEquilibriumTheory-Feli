@@ -64,31 +64,52 @@ We categorize our research into **3 Impact Zones**:
 
 ---
 
-## 🛠️ Topic Structure Standard
+---
 
-Every Topic follows the **Platinum Standard** layout:
+## 🏗️ The 5x4 Grid Architecture
 
-```text
-0.x_Topic_Name/
-├── README.md           # Quick summary, Pass/Fail status, Key Results
-├── Code/               # Verification Scripts (Python)
-├── Data/               # Real-world datasets (JSON/CSV)
-├── Doc/                # Theory explanation (Before/After UET)
-└── Result/             # Generated Plots and Logs
+Every topic is engineered for total transparency using the **5x4 Grid**:
+
+| Layer | Folder | Purpose |
+| :--- | :--- | :--- |
+| **1. Logic** | `Code/` | Python scripts for Engine, Proofs, and Research. |
+| **2. Evidence** | `Data/` | Real-world datasets (JSON/CSV) with DOI references. |
+| **3. Narrative** | `Doc/` | "Before vs After" analysis of the problem. |
+| **4. Citation** | `Ref/` | Papers, PDFs, and DOIs. |
+| **5. Proof** | `Result/` | Generated figures (PNG) proving the match. |
+
+---
+
+## 🛡️ The "Triple-Green" Standard
+
+To ensure scientific rigor, every topic must earn 3 badges:
+
+1.  **[Status: PASS]**: Code must run and yield <1% error vs Real Data.
+2.  **[Standard: Simple]**: No complex dependencies. Code must be readable.
+3.  **[Architecture: 5x4]**: Must follow the folder structure above strict.
+
+> **Zero Curve Fitting Law:** We do not tune parameters per galaxy. We use Universal Constants derived from the Master Equation.
+
+---
+
+## 🚀 Operations Guide (How to Verify)
+
+To verify any topic (e.g., Galaxy Rotation), use the **Runners**:
+
+### 1. Run a Single Topic
+```bash
+python research_uet/scripts/Runners/run_topic_tests.py 0.1
+```
+
+### 2. Run the "Big 5" Anomalies
+```bash
+python research_uet/scripts/run_physics_anomalies.py
+```
+
+### 3. Generate Paper Figures
+```bash
+python research_uet/scripts/Reporting/collect_paper_figures.py
 ```
 
 ---
-
-## 🔑 The Single Master Equation (Ethical Form)
-
-All 25 solutions derive from **One Equation**:
-
-$$ \Omega[C,I] = \int \left( V(C) + \frac{\kappa}{2}|\nabla C|^2 + \beta C \cdot I + \gamma_J \nabla \cdot J \right) d^3x $$
-
-*   **$\Omega$ (Balance):** The target state (Equilibrium/Peace).
-*   **$C$ (Connection):** Interaction Strength (Love/Trade/Forces).
-*   **$I$ (Isolation):** Separation Cost (Ego/Mass/Entropy).
-*   **Optimization:** The universe evolves to minimize the tension between Connection and Isolation ($\Omega \to 0$).
-
----
-*Last Updated: 2026-01-26 (v0.9.0 Grand Unified)*
+*Last Updated: 2026-01-27 (v0.9.0)*

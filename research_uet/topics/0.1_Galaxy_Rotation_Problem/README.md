@@ -9,6 +9,12 @@
 
 ---
 
+> [!IMPORTANT]
+> **Deep Dive Available:** This topic covers the *Observational Proof* (The "What").
+> To understand the *Underlying Mechanism* (The "Why" - Fluid Dynamics, Bullet Cluster, and Cosmic Drag), see **[Topic 0.26 Cosmic Dynamic Frame](../0.26_Cosmic_Dynamic_Frame/README.md)**.
+
+---
+
 ## 🏛️ Scientific Architecture (5 Pillars)
 
 | Pillar | Purpose |

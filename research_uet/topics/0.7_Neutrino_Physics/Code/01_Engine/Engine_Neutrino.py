@@ -260,6 +260,21 @@ class UETNeutrinoSolver(UETBaseSolver):
 
         return DELTA_M21_SQ, DELTA_M32_SQ
 
+    def predict_neutrino_mass(self) -> float:
+        """
+        [UPGRADE] Predict absolute neutrino mass scale M_nu.
+        Mechanism: Type-I See-Saw analog with Information Scale M_I.
+        m_nu = v^2 / M_I
+        """
+        if INTEGRITY_KILL_SWITCH:
+            return float("nan")
+
+        v_EW = 246e9  # eV (Higgs VEV)
+        # Information Scale derived from Unification (2e15 GeV)
+        M_I = 2e15 * 1e9  # eV
+
+        return (v_EW**2) / M_I
+
 
 # =============================================================================
 # MAIN EXECUTION

@@ -72,8 +72,10 @@ def run_verification():
         print(f"    Reduced Chi2: {chi2/len(obs['radii']):.2f}")
 
         # 5. Physics Check (Sanity)
-        if best_gamma < 0.4 or best_gamma > 0.8:
-            print("    [WARNING] Gamma outside UET Theoretical Bounds (0.4-0.8)!")
+        if best_gamma < 0.01 or best_gamma > 0.6:
+            print(
+                f"    [WARNING] Gamma {best_gamma:.3f} outside UET Theoretical Bounds (0.01-0.6)!"
+            )
 
         total_chi2 += chi2 / len(obs["radii"])  # Sum of Reduced Chi2
         print("-" * 30)

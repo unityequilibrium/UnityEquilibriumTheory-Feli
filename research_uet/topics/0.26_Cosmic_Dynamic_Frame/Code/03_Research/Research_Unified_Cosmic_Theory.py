@@ -32,6 +32,7 @@ if str(project_root) not in sys.path:
 
 try:
     from research_uet.core.uet_glass_box import UETPathManager
+    from research_uet.core.uet_parameters import RHO_COSMIC, G_GALACTIC, C_KM_S
 
     # Load References
     ref_path = script_path.parents[2] / "Ref" / "REFERENCES.py"
@@ -78,9 +79,10 @@ except Exception as e:
 class CosmicDynamicSolver:
     def __init__(self):
         # Constants from Exp 1 (Pioneer Anomaly)
-        self.RHO_COSMIC = 2.9e-16  # kg/m^3 (The "Thick" Space)
-        self.G = 4.301e-6  # kpc km^2/s^2 M_sun^-1
-        self.C = 299792.458  # km/s (Speed of Light)
+        # Constants from Exp 1 (Pioneer Anomaly)
+        self.RHO_COSMIC = RHO_COSMIC  # kg/m^3 (The "Thick" Space)
+        self.G = G_GALACTIC  # kpc km^2/s^2 M_sun^-1
+        self.C = C_KM_S  # km/s (Speed of Light)
         self.VISCOSITY_FACTOR = 1.0
 
     def get_gamma(self, v_kms):

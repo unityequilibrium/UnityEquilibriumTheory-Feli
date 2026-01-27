@@ -38,11 +38,26 @@ except ImportError as e:
 import os
 import numpy as np
 import importlib.util
+import math
 
 # Physic constants mapping
 kB = K_B
-hbar = HBAR
-c = C
+h_bar = HBAR
+
+# Initialize Standard Engine Globally (Dynamic Import)
+engine = None
+eng_path = (
+    root_path
+    / "research_uet/topics/0.13_Thermodynamic_Bridge/Code/01_Engine/Engine_Thermodynamics.py"
+)
+if eng_path.exists():
+    spec = importlib.util.spec_from_file_location("Engine_Thermodynamics", eng_path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    engine = mod.UETThermoEngine(N_A=1, N_B=1, E_total=1, name="Validator")
+else:
+    print("CRITICAL: Engine not found.")
+    sys.exit(1)
 
 # Import from UET V3.0 Master Equation
 try:
@@ -92,9 +107,21 @@ def test_landauer_real_data():
     print("Source:", BERUT_2012_DATA["paper"])
     print("=" * 70)
 
-    # Theoretical prediction
+    # Engine already initialized globally
+    if engine is None:
+        return False
+
+    # Use Engine Methods
     T = BERUT_2012_DATA["temperature_K"]
-    theoretical_kT = np.log(2)  # 0.693
+    # landauer_limit = k*T*ln(2)
+    # The engine has get_landauer_limit(T) which applies kill switch
+    theoretical_E = engine.get_landauer_limit(T)
+    # Convert E to kT units
+    theoretical_kT = theoretical_E / (K_B * T) if T > 0 else 0
+
+    if math.isnan(theoretical_E):
+        print("KILL SWITCH DETECTED: Engine returned NaN.")
+        return False
 
     print(f"\n[EXP] Experimental Setup:")
     print(f"   System: {BERUT_2012_DATA['system']}")
@@ -129,47 +156,75 @@ def test_landauer_real_data():
 
 
 def schwarzschild_area(M_solar):
-    """Calculate Schwarzschild horizon area in m^2."""
+    """Calculate Schwarzschild horizon area in m^2 using Engine."""
+    # We use engine.get_bekenstein_entropy to get S, then convert back to Area?
+    # Or calculate Area directly?
+    # Engine does not expose Area directly but calculates get_bekenstein_entropy = Area / 4lp^2.
+    # Let's add compute_schwarzschild_radius to Engine?
+    # No, let's use the local helper for now BUT verify with Engine entropy.
+    # Wait, the goal is to use Engine.
+    # Let's import the BlackHoleEngine for this test? No, stay in Thermo bridge.
+    # ThermoEngine has get_bekenstein_entropy.
+    # S = A / 4lp^2 => A = S * 4lp^2
     M_kg = M_solar * M_SUN
-    r_s = 2 * G * M_kg / (c**2)
-    return 4 * np.pi * r_s**2
+    S = engine.get_bekenstein_entropy(M_kg)
+    l_P = 1.616255e-35
+    l_P_sq = l_P**2  # Approximate
+    # Actually, let's use the exact l_p_sq from engine if possible.
+    # Engine calculates S = Area / (4 * l_P_sq).
+    # So Area = S * 4 * l_P_sq.
+    # Let's just define Area = 4 * pi * Rs^2 using calculated Rs.
+    # Engine doesn't expose Rs?
+    # Actually, let's just use the bekenstein method to check "Area Theorem" via Entropy Theorem.
+    # S_final >= S1 + S2 is equivalent to A_final >= A1 + A2.
+    return S  # Return Entropy instead of Area for checking?
+    # The original test checked Area.
+    # Let's modify the test to check ENTROPY.
+    pass
+    # Since I cannot easily change the calling code structure here without changing the test name/prints,
+    # I will modify the test_area_theorem_ligo function entirely.
+    return 0
 
 
 def test_area_theorem_ligo():
-    """Verify Hawking area theorem with LIGO merger data."""
+    """Verify Hawking area theorem (Entropy Theorem) with LIGO merger data."""
     print("\n" + "=" * 70)
     print("TEST 2: BLACK HOLE AREA THEOREM - LIGO Data")
     print("Verification:", LIGO_BLACK_HOLE_MERGERS["description"])
     print("=" * 70)
 
-    print(f"\n[DATA] Merger Events (Area in m^2):")
-    print(f"   {'Event':<12} {'A1 + A2':<18} {'A_final':<18} {'Ratio':<10}")
+    print(f"\n[DATA] Merger Events (Entropy in Planck units):")
+    print(f"   {'Event':<12} {'S1 + S2':<18} {'S_final':<18} {'Ratio':<10}")
     print("-" * 65)
 
     results = []
     for event in LIGO_BLACK_HOLE_MERGERS["events"]:
         if event.get("type") == "Binary Neutron Star":
-            continue  # Skip neutron star merger
+            continue
 
         M1 = event["M1_solar"]
         M2 = event["M2_solar"]
         M_final = event["M_final_solar"]
 
-        A1 = schwarzschild_area(M1)
-        A2 = schwarzschild_area(M2)
-        A_final = schwarzschild_area(M_final)
+        S1 = engine.get_bekenstein_entropy(M1 * M_SUN)
+        S2 = engine.get_bekenstein_entropy(M2 * M_SUN)
+        S_final = engine.get_bekenstein_entropy(M_final * M_SUN)
 
-        A_initial = A1 + A2
-        ratio = A_final / A_initial
+        if math.isnan(S1):
+            print("KILL SWITCH DETECTED.")
+            return False
 
-        # Area theorem: A_final >= A1 + A2
-        passed = A_final >= A_initial * 0.95  # Allow 5% uncertainty
+        S_initial = S1 + S2
+        ratio = S_final / S_initial
+
+        # Area theorem: S_final >= S1 + S2
+        passed = S_final >= S_initial * 0.95
 
         results.append(passed)
         status = "[OK]" if passed else "[FAIL]"
 
         print(
-            f"   {event['name']:<12} {A_initial:.3e}   {A_final:.3e}   {ratio:.2f}x {status}"
+            f"   {event['name']:<12} {S_initial:.3e}   {S_final:.3e}   {ratio:.2f}x {status}"
         )
 
     print("-" * 65)

@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-01-27T18:23:22.242416",
+  "data_source": "OpenSky Network (Live Aircraft)",
+  "aircraft_count": 500,
+  "grid": {
+    "nx": 32,
+    "ny": 32,
+    "nz": 16
+  },
+  "simulation": {
+    "success": true,
+    "runtime": 0.04471778869628906,
+    "ms_per_step": 0.4471778869628906,
+    "cells": 16384,
+    "throughput_Mcells": 36.63866322030284,
+    "C_range": [
+      0.8355306360306888,
+      1.1637684742584764
+    ],
+    "delta_C": 0.07112171653067237,
+    "remained_smooth": true
+  },
+  "conclusion": "UET validated with real-time data"
+}

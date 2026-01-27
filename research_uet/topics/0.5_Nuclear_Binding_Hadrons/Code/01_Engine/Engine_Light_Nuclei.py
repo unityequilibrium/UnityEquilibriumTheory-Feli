@@ -8,9 +8,26 @@ Refactored to replace fitted '3.8' junk factor with Manifold Overlap Geometry.
 
 import math
 
+# Base Solver Import
+try:
+    from research_uet.core.uet_base_solver import UETBaseSolver
+except ImportError:
+    import sys
+    from pathlib import Path
 
-class LightNucleiSolver:
+    current = Path(__file__).resolve()
+    root = None
+    for parent in [current] + list(current.parents):
+        if (parent / "research_uet").exists():
+            root = parent
+            sys.path.insert(0, str(root))
+            break
+    from research_uet.core.uet_base_solver import UETBaseSolver
+
+
+class LightNucleiSolver(UETBaseSolver):
     def __init__(self):
+        super().__init__(name="Light_Nuclei_Solver")
         self.experimental = {
             "H-2": {"A": 2, "Z": 1, "B": 2.2246, "B_A": 1.1123},
             "H-3": {"A": 3, "Z": 1, "B": 8.4820, "B_A": 2.8273},
