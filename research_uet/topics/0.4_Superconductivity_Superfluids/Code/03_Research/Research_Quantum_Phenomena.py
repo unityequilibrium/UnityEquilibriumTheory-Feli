@@ -12,7 +12,13 @@ try:
         calculate_uet_potential,
     )
 except ImportError:
-    pass  # V3.0 not available
+    try:
+        from core.uet_master_equation import (
+            UETParameters,
+            calculate_uet_potential,
+        )
+    except ImportError:
+        pass  # V3.0 not available
 
 try:
     from research_uet.topics._0_4_Superconductivity_Superfluids.Code._01_Engine.Engine_Superconductivity import (
@@ -131,9 +137,7 @@ def test_bec():
         import importlib.util
 
         engine_path = topic_dir / "Code" / "01_Engine" / "Engine_Superconductivity.py"
-        spec = importlib.util.spec_from_file_location(
-            "Engine_Superconductivity", str(engine_path)
-        )
+        spec = importlib.util.spec_from_file_location("Engine_Superconductivity", str(engine_path))
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         AllenDynesEngine = mod.AllenDynesEngine
@@ -276,9 +280,7 @@ def run_all_tests():
 
     print(f"\n{'Test':<35} {'Status':<15} {'Notes':<25}")
     print("-" * 75)
-    print(
-        f"{'Superconductivity':<35} {'DOCUMENTED':<15} {'250 K record (pressure)':<25}"
-    )
+    print(f"{'Superconductivity':<35} {'DOCUMENTED':<15} {'250 K record (pressure)':<25}")
     print(f"{'BEC':<35} {'DOCUMENTED':<15} {'170 nK first obs':<25}")
     print(f"{'Quantum Hall':<35} {'VERIFIED':<15} {'10⁻¹⁰ precision':<25}")
     print(f"{'Constants':<35} {'DOCUMENTED':<15} {'R_K, Φ₀, K_J':<25}")

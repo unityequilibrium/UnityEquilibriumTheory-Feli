@@ -1,7 +1,17 @@
 import sys
-from research_uet.core.uet_glass_box import UETPathManager
-
 from pathlib import Path
+
+# --- ROBUST PATH FINDER ---
+current_path = Path(__file__).resolve()
+root_path = None
+for parent in [current_path] + list(current_path.parents):
+    if (parent / "research_uet").exists():
+        root_path = parent
+        break
+if root_path and str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
+from research_uet.core.uet_glass_box import UETPathManager
 import json
 
 
@@ -20,22 +30,17 @@ def run_test():
 
     # --- VISUALIZATION ---
     try:
-    # --- VISUALIZATION ---
-    try:
-        # --- ROBUST PATH FINDER ---
-        from pathlib import Path
-        current_path = Path(__file__).resolve()
-        root_path = None
-        for parent in [current_path] + list(current_path.parents):
-            if (parent / "research_uet").exists():
-                root_path = parent
-                break
-        if root_path and str(root_path) not in sys.path:
-            sys.path.insert(0, str(root_path))
-            
-        from core import uet_viz
+        # Try importing uet_viz robustly
+        try:
+            from research_uet.core import uet_viz
+        except ImportError:
+            from core import uet_viz
 
-        result_dir = UETPathManager.get_result_dir(topic="0.5_Nuclear_Binding_Hadrons", name="Research_Quark_Masses", pillar="03_Research")
+        result_dir = UETPathManager.get_result_dir(
+            topic_id="0.5_Nuclear_Binding_Hadrons",
+            experiment_name="Research_Quark_Masses",
+            pillar="03_Research",
+        )
         import numpy as np
 
         fig = uet_viz.go.Figure()

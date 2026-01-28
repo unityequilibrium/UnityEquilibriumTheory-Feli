@@ -33,7 +33,10 @@ repo_root = ROOT
 repo_root = Path(repo_root)
 
 try:
-    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
+    try:
+        from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
+    except ImportError:
+        from core.uet_glass_box import UETPathManager, UETMetricLogger
 except ImportError as e:
     print(f"CRITICAL SETUP ERROR: {e}")
     sys.exit(1)
@@ -51,9 +54,7 @@ engine_path = (
     / "01_Engine"
     / "Engine_Superconductivity.py"
 )
-spec = importlib.util.spec_from_file_location(
-    "Engine_Superconductivity", str(engine_path)
-)
+spec = importlib.util.spec_from_file_location("Engine_Superconductivity", str(engine_path))
 engine_mod = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(engine_mod)
 AllenDynesEngine = engine_mod.AllenDynesEngine
@@ -146,9 +147,7 @@ def run_experiment():
     )
     logger = None
     try:
-        logger = UETMetricLogger(
-            "Superconductivity_Integrity", output_dir=result_dir_base
-        )
+        logger = UETMetricLogger("Superconductivity_Integrity", output_dir=result_dir_base)
         print(f"📂 Results: {logger.run_dir}")
     except Exception:
         pass

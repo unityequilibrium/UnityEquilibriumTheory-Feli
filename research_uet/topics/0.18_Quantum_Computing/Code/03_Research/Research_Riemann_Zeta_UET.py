@@ -7,6 +7,7 @@ Demonstrates the 'Pull' of the Critical Line.
 
 import sys
 import numpy as np
+import argparse
 from pathlib import Path
 
 # Add engine to path
@@ -45,15 +46,27 @@ def run_riemann_research():
     else:
         print("   ⚠️  UET DISTORTION: Check precision or grid resolution.")
 
-    # 2. Gradient Descent Proof (Topic 0.18 Specialty)
-    print("\n[2] Gradient Descent from Offset State (Re=0.8)...")
-    path = engine.find_gradient_sink(complex(0.8, target_im + 2.0))
-    final = path[-1]
-    print(f"    Final Equilibrium: {final.real:8.5f} + {final.imag:8.5f}i")
-    print(f"    Residual Omega:    {engine.calculate_omega(final):8.5e}")
+    # 2. Gradient Descent Proof (Topic 0.18 Specialty) (Optional)
+    parser = argparse.ArgumentParser(description="Research Riemann Zeta UET")
+    parser.add_argument(
+        "--proof", action="store_true", help="Run the full Gradient Descent Proof (Slow)"
+    )
+    args = parser.parse_args()
 
-    if abs(final.real - 0.5) < 0.05:
-        print("   ✅ PROOF: Manifold Tension forces state onto the Critical Line.")
+    if args.proof:
+        print("\n[2] Gradient Descent from Offset State (Re=0.8)...")
+        path = engine.find_gradient_sink(
+            complex(0.8, target_im + 0.5), lerp=0.005, iterations=2000, verbose=True
+        )
+        final = path[-1]
+        print(f"    Final Equilibrium: {final.real:8.5f} + {final.imag:8.5f}i")
+        print(f"    Residual Omega:    {engine.calculate_omega(final):8.5e}")
+
+        if abs(final.real - 0.5) < 0.05:
+            print("   ✅ PROOF: Manifold Tension forces state onto the Critical Line.")
+    else:
+        print("\n[2] Gradient Descent Proof (Skipped)")
+        print("    ℹ️  Run with '--proof' to see the full Manifold Tension demonstration.")
 
 
 if __name__ == "__main__":

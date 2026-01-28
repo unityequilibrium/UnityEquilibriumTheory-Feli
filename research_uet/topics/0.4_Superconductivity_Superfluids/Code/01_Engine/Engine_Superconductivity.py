@@ -120,9 +120,7 @@ class AllenDynesEngine(UETBaseSolver):
     def compute_Tc(self, omega_log_K, lam, mu_star, mat_data=None):
         if INTEGRITY_KILL_SWITCH:
             return float("nan")
-        uet_coherence, anisotropy = (
-            self.derive_uet_parameters(mat_data) if mat_data else (0.0, 1.0)
-        )
+        uet_coherence, anisotropy = self.derive_uet_parameters(mat_data) if mat_data else (0.0, 1.0)
         beta_val = getattr(self.params, "beta", 0.25)
         mu_star_eff = mu_star * (1.0 - beta_val * uet_coherence)
 
@@ -136,9 +134,7 @@ class AllenDynesEngine(UETBaseSolver):
         else:
             omega2_ratio = mat_data.get("omega2_ratio", 1.25) if mat_data else 1.25
             f1 = self.compute_f1(lam_eff, mu_star_eff)
-            f2 = self.compute_f2(
-                lam_eff, mu_star_eff, omega_log_K, omega2_ratio=omega2_ratio
-            )
+            f2 = self.compute_f2(lam_eff, mu_star_eff, omega_log_K, omega2_ratio=omega2_ratio)
             denom = lam_eff - mu_star_eff * (1 + 0.62 * lam_eff)
             if denom <= 0:
                 return 0.0
@@ -149,11 +145,7 @@ class AllenDynesEngine(UETBaseSolver):
         if INTEGRITY_KILL_SWITCH:
             return float("nan")
         n = rho / self.m_He4
-        T_c = (
-            (2 * math.pi * self.hbar**2 / self.m_He4)
-            * (n / 2.612) ** (2 / 3)
-            / self.k_B
-        )
+        T_c = (2 * math.pi * self.hbar**2 / self.m_He4) * (n / 2.612) ** (2 / 3) / self.k_B
         m_eff_ratio = 1.0 + (1.76 * getattr(self.params, "beta", 0.25))
         return float(T_c / m_eff_ratio)
 
@@ -176,13 +168,24 @@ class AllenDynesEngine(UETBaseSolver):
             * (n_20) ** 0.41
         )
 
+    def predict_uet_plasma_scaling(self, B_t):
+        """
+        Predict confinement time scaling with Magnetic Field (B)
+        keeping other parameters fixed at typical JET/ITER-like values.
+        """
+        # Nominal parameters for scaling comparison (JET-like)
+        P_mw = 10.0
+        R_m = 3.0
+        a_m = 1.0
+        n_20 = 3.0
+        M_eff = 2.0  # Deuterium
+        return self.compute_plasma_confinement(P_mw, B_t, R_m, a_m, n_20, M_eff)
+
 
 def run_engine():
     print("⚙️  ENGINE: UET Superconductivity V3.2")
     engine = AllenDynesEngine()
-    data_path = (
-        TOPIC_DIR / "Data" / "03_Research" / "comprehensive_superconductor_data.json"
-    )
+    data_path = TOPIC_DIR / "Data" / "03_Research" / "comprehensive_superconductor_data.json"
     if not data_path.exists():
         print(f"Error: {data_path} not found.")
         return False

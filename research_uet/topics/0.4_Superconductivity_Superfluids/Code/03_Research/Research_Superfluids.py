@@ -8,24 +8,33 @@ Tests UET prediction for superfluid properties.
 import sys
 from pathlib import Path
 
-# --- ROBUST PATH FINDER (5x4 Grid Standard) ---
+# --- ROBUST PATH FINDER ---
 current_path = Path(__file__).resolve()
-root_path = None
+research_uet_path = None
+
+# Climb up until we find 'research_uet' directory
 for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
+    if parent.name == "research_uet":
+        research_uet_path = parent
         break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-
-print(f"DEBUG: Found root_path: {root_path}")
-print(f"DEBUG: sys.path[0]: {sys.path[0]}")
+if research_uet_path:
+    # Add the PARENT of research_uet to sys.path so we can import research_uet.core
+    root_path = research_uet_path.parent
+    if str(root_path) not in sys.path:
+        sys.path.insert(0, str(root_path))
+    print(f"DEBUG: Found root_path: {root_path}")
+else:
+    print("CRITICAL: research_uet directory not found")
+    sys.exit(1)
 
 try:
-    from research_uet.core.uet_glass_box import UETPathManager
-except ImportError:
-    print("CRITICAL: Failed to import UET Core")
+    try:
+        from research_uet.core.uet_glass_box import UETPathManager
+    except ImportError:
+        from core.uet_glass_box import UETPathManager
+except ImportError as e:
+    print(f"CRITICAL: Failed to import UET Core: {e}")
     sys.exit(1)
 
 # He-4 superfluid data (Donnelly 1998)
@@ -50,9 +59,7 @@ try:
         / "01_Engine"
         / "Engine_Superconductivity.py"
     )
-    spec = importlib.util.spec_from_file_location(
-        "Engine_Superconductivity", str(engine_file)
-    )
+    spec = importlib.util.spec_from_file_location("Engine_Superconductivity", str(engine_file))
     engine_mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(engine_mod)
     AllenDynesEngine = engine_mod.AllenDynesEngine
@@ -122,6 +129,20 @@ def run_test():
     print("=" * 70)
     print(f"RESULT: {passed_count}/{total} PASSED")
     print("=" * 70)
+
+    # Save Report if UETPathManager is available
+    try:
+        result_dir = UETPathManager.get_result_dir(
+            topic_id="0.4_Superconductivity_Superfluids",
+            experiment_name="Research_Superfluids",
+            pillar="03_Research",
+        )
+        report_path = result_dir / "superfluids_report.txt"
+        with open(report_path, "w") as f:
+            f.write(f"UET Superfluids Test Results\nPassed: {passed_count}/{total}\n")
+        print(f"Report saved to {report_path}")
+    except Exception as e:
+        print(f"Could not save report: {e}")
 
     return passed_count >= 1
 

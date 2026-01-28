@@ -5,7 +5,7 @@
 ![Math](https://img.shields.io/badge/Millennium_Problems-4_Solved-ff69b4)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-> **"The universe is not just physics; it is a moral negotiation. Ω (Balance) is the goal. C (Connection) is the vehicle. I (Isolation) is the cost."**
+> **"The universe is not just physics; it is a moral negotiation. Ω (Balance) is the goal . C (Connection) is the vehicle. I (Isolation) is the cost."**
 
 ---
 
@@ -290,7 +290,7 @@ Physics students and researchers often search for these questions. UET provides 
 
 *Version 0.9.0 Grand Unified | MIT License | Last Updated: 2026-01-26*
 
-*[GitHub](https://github.com/unityequilibrium/Equation-UET-v0.9.0) | [📊 View All Experiments](https://github.com/unityequilibrium/Equation-UET-v0.9.0/tree/main/research_uet/topics)*
+*[GitHub](https://github.com/unityequilibrium/Equation_EQU_v0.9.0) | [📊 View All Experiments](./research_uet/topics/)*
 
 ---
 

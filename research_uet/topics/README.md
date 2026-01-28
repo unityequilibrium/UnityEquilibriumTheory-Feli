@@ -35,6 +35,7 @@ We categorize our research into **3 Impact Zones**:
 | ID | Topic Name | The Anomaly | UET Fix | Status |
 |:---|:-----------|:------------|:--------|:-------|
 | [0.1](0.1_Galaxy_Rotation_Problem/) | **Galaxy Rotation** | Dark Matter | Vacuum Pressure ($\beta C I$) | ✅ |
+| [0.26](0.26_Cosmic_Dynamic_Frame/) | **Cosmic Dynamic Frame** | Dark Matter Mechanism | Dynamic Viscosity ($a_0$) | ✅ |
 | [0.2](0.2_Black_Hole_Physics/) | **Black Holes** | Singularity | $\kappa |\nabla C|^2$ (Horizon) | ✅ |
 | [0.3](0.3_Cosmology_Hubble_Tension/) | **Cosmology** | Hubble Tension | $\lambda$-coherence (Time) | ✅ |
 | [0.12](0.12_Vacuum_Energy_Casimir/) | **Vacuum Energy** | Cosmological Const | Boundary Information Term | ✅ |

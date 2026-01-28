@@ -2,8 +2,8 @@
   "run_id": "Turbulence_Stress_Test",
   "simulation": "Turbulence_Stress_Test",
   "status": "FAILED",
-  "timestamp": "Tue Jan 27 19:02:26 2026",
-  "duration_seconds": 9.433746814727783,
+  "timestamp": "Wed Jan 28 19:58:48 2026",
+  "duration_seconds": 12.048799991607666,
   "total_steps": 0,
   "metadata": {
     "fluid": "Air",

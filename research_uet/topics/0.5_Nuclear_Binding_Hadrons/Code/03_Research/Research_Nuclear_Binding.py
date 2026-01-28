@@ -35,12 +35,7 @@ elif not ROOT_DIR:
 
 # --- ENGINE PATH SETUP (Topic 0.5 specific) ---
 ENGINE_PATH = (
-    ROOT_DIR
-    / "research_uet"
-    / "topics"
-    / "0.5_Nuclear_Binding_Hadrons"
-    / "Code"
-    / "01_Engine"
+    ROOT_DIR / "research_uet" / "topics" / "0.5_Nuclear_Binding_Hadrons" / "Code" / "01_Engine"
 )
 sys.path.insert(0, str(ENGINE_PATH))
 
@@ -176,6 +171,23 @@ def uet_binding_energy(A, Z):
     # --- ENGINE INTEGRATION ---
     from Engine_Nuclear_Binding import UETNuclearBindingEngine
 
+    # Try using Light Nuclei Solver for small systems if available
+    try:
+        from Engine_Light_Nuclei import LightNucleiSolver
+
+        light_solver = LightNucleiSolver()
+
+        # Map (A, Z) to Solver Key
+        key_map = {(2, 1): "H-2", (3, 1): "H-3", (3, 2): "He-3", (4, 2): "He-4"}
+
+        if (A, Z) in key_map:
+            key = key_map[(A, Z)]
+            total_be = light_solver.binding_energy_hulthen(key)
+            return total_be / A
+
+    except ImportError:
+        pass
+
     engine = UETNuclearBindingEngine()
 
     # UET Information Correction Parameter
@@ -199,14 +211,12 @@ def run_test():
     logger = None
     try:
         result_dir_base = UETPathManager.get_result_dir(
-            topic="0.5_Nuclear_Binding_Hadrons",
-            name="Research_Nuclear_Binding",
+            topic_id="0.5_Nuclear_Binding_Hadrons",
+            experiment_name="Research_Nuclear_Binding",
             pillar="03_Research",
             stable=True,
         )
-        logger = UETMetricLogger(
-            "Nuclear_Binding", output_dir=result_dir_base, flat_mode=True
-        )
+        logger = UETMetricLogger("Nuclear_Binding", output_dir=result_dir_base, flat_mode=True)
         logger.set_metadata(
             {
                 "data_source": "AME2020",
@@ -281,8 +291,8 @@ def run_test():
             result_dir = logger.run_dir
         else:
             result_dir = UETPathManager.get_result_dir(
-                topic="0.5_Nuclear_Binding_Hadrons",
-                name="Research_Nuclear_Binding",
+                topic_id="0.5_Nuclear_Binding_Hadrons",
+                experiment_name="Research_Nuclear_Binding",
                 pillar="03_Research",
             )
 

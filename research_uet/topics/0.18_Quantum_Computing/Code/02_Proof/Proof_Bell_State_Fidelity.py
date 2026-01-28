@@ -31,17 +31,21 @@ from Engine_Quantum_Logic import QuantumUnityEngine
 def verify_bell_state(samples=1000):
     print(f"🔬 Verifying Bell State Fidelity ({samples} samples)...")
 
-    engine = QuantumUnityEngine(num_qubits=2)
-
-    # 1. Apply Hadamard to Qubit 0
-    engine.apply_hadamard(0)
-
-    # 2. Apply CNOT (Control: 0, Target: 1)
-    engine.apply_cnot(0, 1)
-
-    # 3. Measure
+    # 3. Measure (Correct Physics: Re-prepare state for each shot)
     results = []
+
+    print("   [Running 1000 Independent Trials...]")
     for _ in range(samples):
+        # A. Initialize Fresh Engine (Reset Unity Field)
+        engine = QuantumUnityEngine(num_qubits=2)
+
+        # B. Apply Hadamard to Qubit 0
+        engine.apply_hadamard(0)
+
+        # C. Apply CNOT (Control: 0, Target: 1)
+        engine.apply_cnot(0, 1)
+
+        # D. Measure & Collapse
         results.append(tuple(map(int, list(engine.measure_collapse()))))
 
     # Analyze

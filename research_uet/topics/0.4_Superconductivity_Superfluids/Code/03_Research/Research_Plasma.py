@@ -9,31 +9,30 @@ Confinement time scales with I-field coherence (kappa).
 Updated for UET V3.0
 """
 
-# Robust Root Finding
+# --- ROBUST PATH FINDER ---
 import sys
 from pathlib import Path
 
-current_file = Path(__file__).resolve()
-root_found = None
-for parent in [current_file] + list(current_file.parents):
-    if (parent / "research_uet").exists():
-        root_found = parent
+current_path = Path(__file__).resolve()
+research_uet_path = None
+
+# Climb up until we find 'research_uet' directory
+for parent in [current_path] + list(current_path.parents):
+    if parent.name == "research_uet":
+        research_uet_path = parent
         break
 
-if root_found:
-    if str(root_found) not in sys.path:
-        sys.path.insert(0, str(root_found))
+if research_uet_path:
+    # Add the PARENT of research_uet to sys.path so we can import research_uet.core
+    root_path = research_uet_path.parent
+    if str(root_path) not in sys.path:
+        sys.path.insert(0, str(root_path))
+    print(f"DEBUG: Found root_path: {root_path}")
 else:
-    print("CRITICAL: Root not found. Imports may fail.")
+    print("CRITICAL: research_uet directory not found")
+    sys.exit(1)
 
 try:
-    from research_uet.core.uet_master_equation import (
-        UETParameters,
-        SIGMA_CRIT,
-        strategic_boost,
-        potential_V,
-        KAPPA_BEKENSTEIN,
-    )
     from research_uet.core.uet_master_equation import (
         UETParameters,
         SIGMA_CRIT,
@@ -44,14 +43,8 @@ try:
     from research_uet.core.uet_glass_box import UETPathManager
 except ImportError as e:
     print(f"Import Error: {e}")
-
-    # Fallback for UETPathManager if import fails
-    class UETPathManager:
-        @staticmethod
-        def get_result_dir(topic, name, pillar):
-            p = Path(__file__).resolve().parent.parent.parent / "Result" / pillar / name
-            p.mkdir(parents=True, exist_ok=True)
-            return p
+    # Fallback only if absolutely necessary, but with robust path it shouldn't happen
+    sys.exit(1)
 
 
 # Use local data (5x4 Grid - Updated after migration)
@@ -81,9 +74,7 @@ def uet_confinement_scaling_h(P_mw, B_t, R_m, a_m, n_20, M_eff):
         # Assuming we are in research_uet/topics/.../Code/03_Research
         # topic_dir is defined above (lines 48-49)
         topic_dir_path = Path(__file__).resolve().parent.parent.parent
-        engine_path = (
-            topic_dir_path / "Code" / "01_Engine" / "Engine_Superconductivity.py"
-        )
+        engine_path = topic_dir_path / "Code" / "01_Engine" / "Engine_Superconductivity.py"
         if engine_path.exists():
             spec = importlib.util.spec_from_file_location(
                 "Engine_Superconductivity", str(engine_path)
@@ -164,11 +155,15 @@ def run_all_tests():
     try:
         sys.path.append(str(Path(__file__).parents[4]))
         import numpy as np
-        from core import uet_viz
+
+        try:
+            from research_uet.core import uet_viz
+        except ImportError:
+            from core import uet_viz
 
         result_dir = UETPathManager.get_result_dir(
-            topic="0.4_Superconductivity_Superfluids",
-            name="Research_Plasma",
+            topic_id="0.4_Superconductivity_Superfluids",
+            experiment_name="Research_Plasma",
             pillar="03_Research",
         )
 
@@ -177,9 +172,7 @@ def run_all_tests():
             import importlib.util
 
             topic_dir_path = Path(__file__).resolve().parent.parent.parent
-            engine_path = (
-                topic_dir_path / "Code" / "01_Engine" / "Engine_Superconductivity.py"
-            )
+            engine_path = topic_dir_path / "Code" / "01_Engine" / "Engine_Superconductivity.py"
             spec = importlib.util.spec_from_file_location(
                 "Engine_Superconductivity", str(engine_path)
             )

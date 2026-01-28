@@ -150,12 +150,8 @@ _SCALE_PARAMS = {
     # =========================================================================
     # GENERAL FALLBACK
     # =========================================================================
-    "general": UETParameters(
-        kappa=0.1, beta=0.1, scale="general", origin="Fallback/Default"
-    ),
-    "General": UETParameters(
-        kappa=0.1, beta=0.1, scale="general", origin="Fallback/Default"
-    ),
+    "general": UETParameters(kappa=0.1, beta=0.1, scale="general", origin="Fallback/Default"),
+    "General": UETParameters(kappa=0.1, beta=0.1, scale="general", origin="Fallback/Default"),
 }
 
 # Alias mapping for topic numbers
@@ -182,6 +178,7 @@ _TOPIC_SCALE_MAP = {
     "0.20": "electroweak",
     "0.21": "macroscopic",
     "0.22": "macroscopic",
+    "0.24": "macroscopic",
 }
 
 

@@ -70,9 +70,7 @@ class UETBaseSolver(ABC):
                 self.params = get_params(topic_key)
             except Exception as e:
 
-                print(
-                    f"⚠️ [UETBaseSolver] Warning: Could not load params for topic {topic}: {e}"
-                )
+                print(f"⚠️ [UETBaseSolver] Warning: Could not load params for topic {topic}: {e}")
                 # Fallback to safe defaults
                 self.params = UETParameters(
                     kappa=0.1, beta=0.1, scale="fallback", origin="Error_Recovery"
@@ -248,7 +246,7 @@ class UETBaseSolver(ABC):
         """
         if verbose:
             print(
-                f"🚀 Simulation '{self.logger.run_name if self.logger else 'UET'}' Started. Steps: {steps}"
+                f"🚀 Simulation '{self.logger.simulation_name if self.logger else 'UET'}' Started. Steps: {steps}"
             )
 
         for i in range(steps):

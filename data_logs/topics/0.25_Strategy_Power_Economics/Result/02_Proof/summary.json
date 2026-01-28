@@ -1,0 +1,26 @@
+{
+  "run_id": "World_Stabilizer",
+  "simulation": "World_Stabilizer",
+  "status": "COMPLETED",
+  "timestamp": "Wed Jan 28 22:06:31 2026",
+  "duration_seconds": 0.022619247436523438,
+  "total_steps": 50,
+  "metadata": {},
+  "final_state": {
+    "step": 1,
+    "time": 0.001,
+    "omega": 4.9900050001261606e-11,
+    "kinetic": 0.0,
+    "potential": 4.9900050001261606e-11,
+    "entropy": 0.0,
+    "gradient_norm": 0.0,
+    "max_density": 1.0000099900000001,
+    "min_density": 1.0000099900000001,
+    "is_stable": true,
+    "gradient_energy": 0.0,
+    "entropy_interaction": 0.0,
+    "nature_health": 1.0,
+    "gini_estimate": 0.0,
+    "capital_concentration": 0.0099999999999
+  }
+}

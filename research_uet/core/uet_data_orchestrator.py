@@ -45,7 +45,13 @@ class UETDataOrchestrator:
         # Find the full topic directory (e.g., '0.25_Strategy_Power_Economics')
         topic_dir = None
         for d in data_path.iterdir():
-            if d.is_dir() and d.name.lower().startswith(topic.lower()):
+            if not d.is_dir():
+                continue
+            # Strict filtering: "0.1" must match "0.1_Galaxy..." not "0.10_Fluid..."
+            # Check if name is exactly "0.1" (rare) or starts with "0.1_"
+            name = d.name.lower()
+            key = topic.lower()
+            if name == key or name.startswith(key + "_"):
                 topic_dir = d
                 break
 
