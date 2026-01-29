@@ -55,7 +55,7 @@ class UETPathManager:
         "0.15": "0.15_Cluster_Dynamics",
         "0.16": "0.16_Heavy_Nuclei",
         "0.17": "0.17_Mass_Generation",
-        "0.18": "0.18_Quantum_Computing",
+        "0.18": "0.18_Mathnicry",
         "0.19": "0.19_Gravity_GR",
         "0.20": "0.20_Atomic_Physics",
         "0.21": "0.21_Yang_Mills_Mass_Gap",
@@ -129,9 +129,7 @@ class UETValidator:
         max_c = np.max(np.abs(C))
         metrics["max_abs_C"] = float(max_c)
         if max_c > UETValidator.C_MAX_FAIL:
-            return ValidationResult(
-                False, "FAIL", f"field_blowup(max_C={max_c:.2f})", metrics
-            )
+            return ValidationResult(False, "FAIL", f"field_blowup(max_C={max_c:.2f})", metrics)
         if step_info:
             dOmega = step_info.get("dOmega", float("-inf"))
             Omega = step_info.get("Omega", 1.0)
@@ -176,18 +174,19 @@ class UETMetricLogger:
     ):
         self.simulation_name, self.flat_mode = simulation_name, flat_mode
         root = UETPathManager.get_root()
-        central_log_root = root.parent / "data_logs"
+
+        # Standard UET behavior: Anchor all relative paths to research_uet root
         if output_dir:
             base_path = Path(output_dir)
             if not base_path.is_absolute():
-                base_path = central_log_root / output_dir
+                base_path = root / output_dir
         else:
-            base_path = central_log_root
+            # Fallback for generic logs
+            base_path = root.parent / "data_logs"
+
         self.timestamp_str = f"{int(time.time())}"
         self.run_id = (
-            simulation_name
-            if self.flat_mode
-            else f"{self.timestamp_str}_{simulation_name}"
+            simulation_name if self.flat_mode else f"{self.timestamp_str}_{simulation_name}"
         )
         self.run_dir = base_path if self.flat_mode else base_path / self.run_id
         self.run_dir.mkdir(parents=True, exist_ok=True)
@@ -214,9 +213,7 @@ class UETMetricLogger:
         **kwargs,
     ):
         clean_kwargs = {
-            k: v
-            for k, v in kwargs.items()
-            if not isinstance(v, (np.ndarray, list, dict))
+            k: v for k, v in kwargs.items() if not isinstance(v, (np.ndarray, list, dict))
         }
         max_c = float(np.max(field_c)) if field_c is not None else 0.0
         min_c = float(np.min(field_c)) if field_c is not None else 0.0
@@ -240,18 +237,12 @@ class UETMetricLogger:
             if len(self.history) > 500:
                 self.history.pop(0)
         self.step_count += 1
-        dOmega = (
-            (self.history[-1].omega - self.history[-2].omega)
-            if len(self.history) > 1
-            else 0.0
-        )
+        dOmega = (self.history[-1].omega - self.history[-2].omega) if len(self.history) > 1 else 0.0
         scale = max(1.0, abs(omega))
         # SOC MODELS require much higher tolerance for valid discrete jumps (Topic 0.14)
         is_discrete = "0.14" in str(self.run_dir)
         tol_multiplier = 1e12 if is_discrete else 1.0
-        tol = (
-            UETValidator.DOMEGA_TOL_REL * scale + UETValidator.DOMEGA_TOL_ABS
-        ) * tol_multiplier
+        tol = (UETValidator.DOMEGA_TOL_REL * scale + UETValidator.DOMEGA_TOL_ABS) * tol_multiplier
         if dOmega > tol:
             print(f"⚠️ [UET Safety] Energy Violation: dOmega={dOmega:.2e}")
         if not stable:
@@ -288,9 +279,7 @@ class UETMetricLogger:
         report = {
             "run_id": self.run_id,
             "simulation": self.simulation_name,
-            "status": (
-                "COMPLETED" if (step_final and step_final.is_stable) else "FAILED"
-            ),
+            "status": ("COMPLETED" if (step_final and step_final.is_stable) else "FAILED"),
             "timestamp": time.ctime(self.start_time),
             "duration_seconds": time.time() - self.start_time,
             "total_steps": self.step_count,
