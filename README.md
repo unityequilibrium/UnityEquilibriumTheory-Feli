@@ -180,7 +180,7 @@ graph TD
 ### Run It Yourself
 
 ```bash
-python research_uet/topics/run_all_tests.py
+python research_uet/topics/run_full_verification.py
 ```
 
 ---
