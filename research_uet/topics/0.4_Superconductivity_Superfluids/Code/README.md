@@ -23,11 +23,11 @@ Code/
     super_solver.py                    # Gap equation solver utility
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Logic (Upgraded V3.3)
 python research_uet/topics/0.4_Superconductivity_Superfluids/Code/01_Engine/Engine_Superconductivity.py
@@ -47,7 +47,7 @@ python research_uet/topics/0.4_Superconductivity_Superfluids/Code/03_Research/Re
 python research_uet/topics/0.4_Superconductivity_Superfluids/Code/04_Competitor/Competitor_Standard_Model_Super.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -69,7 +69,7 @@ Successfully predicts Isotope Effect and Heavy Fermion coupling boost.
 - **Engine needed?** Yes. Now robust across periodic table (s/p blocks).
 - **Proof needed?** Yes. Derivation of phase locking is solid.
 
-## Key Physics
+## 🧬 Key Physics
 
 ```
 Tc ~ <theta_D> * exp(-1/lambda_eff)

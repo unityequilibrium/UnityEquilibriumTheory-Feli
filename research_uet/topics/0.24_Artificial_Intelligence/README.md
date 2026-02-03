@@ -1,15 +1,16 @@
 # 🤖 0.24 AI Alignment & Ethics
 
-## 📋 Table of Contents
+## 1. 📂 5x4 Grid Structure
 
-1. [Overview](#-overview)
-2. [📄 Analysis: Thought Entropy](Doc/ANALYSIS_AI_ENTROPY.md)
-3. [📄 Analysis: Physics of Ethics](Doc/ANALYSIS_ALIGNMENT.md)
-4. [The Problem](#-the-problem)
-5. [UET Solution](#-uet-solution)
-6. [Results](#-test-results)
-7. [Quick Start](#-quick-start)
-8. [Files](#-files-in-this-module)
+| Pillar | Purpose |
+| :--- | :--- |
+| **Doc/** | Analysis of AI Entropy, Ethics, and Alignment. |
+| **Ref/** | Hopfield (1982), Bengio (2000), Vaswani (2017). |
+| **Data/** | GLUE/SuperGLUE Benchmarks and Logic Logs. |
+| **Code/** | Logic levels: 01_Engine (AI Logic), 03_Research (Alignment). |
+| **Result/** | Fidelity and stability plots. |
+
+---
 
 ---
 
@@ -59,10 +60,10 @@ $$ \nabla \Omega = 0 $$
 
 ---
 
-## 🚀 Quick Start
+## 2. ⚡ Quick Start
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Thought Entropy (Measuring Intelligence)
 python research_uet/topics/0.24_Artificial_Intelligence/Code/01_Engine/Engine_AI_Entropy.py

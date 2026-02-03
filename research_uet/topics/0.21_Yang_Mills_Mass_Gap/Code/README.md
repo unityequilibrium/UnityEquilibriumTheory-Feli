@@ -15,10 +15,10 @@ Code/
     Research_Mass_Gap_Sweep.py # Coupling Sweep
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Mass Gap Engine (Simulation)
 python research_uet/topics/0.21_Yang_Mills_Mass_Gap/Code/01_Engine/Engine_Mass_Gap.py
@@ -30,7 +30,7 @@ python research_uet/topics/0.21_Yang_Mills_Mass_Gap/Code/02_Proof/Proof_Mass_Gap
 python research_uet/topics/0.21_Yang_Mills_Mass_Gap/Code/03_Research/Research_Mass_Gap.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Tests | Status |
 |--------|-------|--------|
@@ -40,7 +40,7 @@ python research_uet/topics/0.21_Yang_Mills_Mass_Gap/Code/03_Research/Research_Ma
 
 **Total: All Systems PASS**
 
-## Key Concepts
+## 🧬 Key Physics
 
 1.  **Mass Generation:** Emerges from $\beta I^3$ self-interaction term.
 2.  **Confinement:** Information "clumps" because spreading costs infinite energy.

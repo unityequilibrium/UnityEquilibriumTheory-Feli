@@ -9,7 +9,7 @@
 
 ---
 
-## 🏛️ Scientific Architecture (5 Pillars)
+## 1. 📂 5x4 Grid Structure
 
 | Pillar | Purpose |
 | :--- | :--- |
@@ -71,7 +71,7 @@ graph TB
 
 ---
 
-## 🚀 Quick Start
+## 2. ⚡ Quick Start
 
 ```powershell
 python research_uet/topics/0.15_Cluster_Dynamics/Code/01_Engine/cluster_solver.py

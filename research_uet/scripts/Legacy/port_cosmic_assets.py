@@ -3,10 +3,10 @@ import os
 from pathlib import Path
 
 # Source with non-ASCII characters
-SOURCE_DIR = r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\(search Only) ทองข้อมูลดี\Fali\Re(fail003)\03_universal_physics\data"
+SOURCE_DIR = r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\(search Only) ทองข้อมูลดี\Fali\Re(fail003)\03_universal_physics\data"
 
 # Destination in active lab
-DEST_DIR = r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\research_uet\data\03_universal"
+DEST_DIR = r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\research_uet\data\03_universal"
 
 
 def port_data():

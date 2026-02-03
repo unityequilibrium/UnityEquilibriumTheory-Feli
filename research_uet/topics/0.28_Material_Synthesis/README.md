@@ -6,11 +6,18 @@
 ![Architecture](https://img.shields.io/badge/Architecture-5x4_Scientific_Grid-blue)
 ![Scientific_Rigor](https://img.shields.io/badge/Rigor-Zero_Curve_Fitting-orange)
 
-> **"Atoms are lazy; they follow the path of least resistance. We simply use sound to shape that path into a perfect hexagon."**
+> **"Surfaces that Think and Power themselves."**
+> **Concept:** Self-Powered Perovskite-Graphene Sheets for Smart Home & Infrastructure.
 
 ---
 
-## 📋 Scientific Architecture (5 Pillars)
+| Pillar | Purpose |
+| :--- | :--- |
+| **Doc/** | Synthesis methods (LARP), Stability reports, Degradation logs. |
+| **Ref/** | Mahidol University (Thailand) Perovskite Research synergy. |
+| **Data/** | Conversion efficiency and Material lifetime datasets. |
+| **Code/** | Engine (CVD/LARP), Proof (Efficiency), Research (Durability). |
+| **Result/** | Verified 15-year stability simulation results. |
 
 | Pillar | Purpose |
 | :--- | :--- |
@@ -47,9 +54,12 @@ graph TB
 
 ## 🎯 Problem & Solution
 
-- **The Problem:** Mass-producing Graphene for holograms (Topic 0.27) is impossible with current CVD because random thermal atoms create defects (grain boundaries). It's too slow and yields "dirty" carbon.
-- **The Solution:** UET proposes **"Resonant Manufacturing"**. By applying a standing wave field matching the Carbon lattice frequency, atoms are "surfed" into their correct positions.
-- **Zero Curve Fitting Law:** The force required is derived from the Boltzmann energy barrier ($k_B T$), ensuring the guidance signal is just strong enough to overcome noise.
+- **The Problem:** Modern surfaces (windows, fridge doors) are passive. Turning them into active displays requires toxic materials, external power, and rare-earth mining.
+- **Goal 1: Zero-Mining Materials.** Replacing Rare Earth Elements (REEs) and Copper with Graphene (from agricultural waste) and Perovskite (from recycled sources).
+- **Goal 2: Zero-Waste Manufacturing.** Implementing "Urban Mining" and closed-loop systems to prevent toxic runoff into rivers.
+- **Goal 3: Geometric Doping.** Using UET's Axiom 3 (Information Trap) to create "virtual doping" in chips, eliminating the need for heavy metal dopants.
+ and projection capabilities.
+- **Zero-Mining Law:** High-purity Perovskite is "grown" from simple chemical precursors (Mahidol Style), not mined, using Acoustic Resonance to align the lattice.
 
 ---
 
@@ -64,7 +74,7 @@ graph TB
 
 ---
 
-## 🚀 Quick Start
+## 2. ⚡ Quick Start (Run Commands)
 
 ```powershell
 # Run the core manufacturing simulation

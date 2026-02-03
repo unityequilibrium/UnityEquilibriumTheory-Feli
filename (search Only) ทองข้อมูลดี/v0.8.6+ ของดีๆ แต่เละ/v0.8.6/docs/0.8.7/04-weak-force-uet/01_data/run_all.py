@@ -8,7 +8,7 @@ from pathlib import Path
 
 def main():
     print("=" * 70)
-    print("   WEAK FORCE VALIDATION - UET HARNESS v0.8.7")
+    print("   WEAK FORCE VALIDATION - UET HARNESS v0.9.0")
     print("=" * 70)
 
     from test_weak import WeakForceUET

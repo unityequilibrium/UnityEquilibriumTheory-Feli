@@ -14,10 +14,10 @@ Code/
     Research_Mass_Mechanism.py # Validate Koide Relation for Leptons
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Engine (Mass from Coupling)
 python research_uet/topics/0.17_Mass_Generation/Code/01_Engine/Engine_Mass_Higgs.py
@@ -29,7 +29,7 @@ python research_uet/topics/0.17_Mass_Generation/Code/02_Proof/Proof_Lepton_Mass.
 python research_uet/topics/0.17_Mass_Generation/Code/03_Research/Research_Mass_Mechanism.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Tests | Status |
 |--------|-------|--------|
@@ -48,7 +48,7 @@ Uses logic: $m_{eff} \propto \beta C I$ and $S = \ln(M_P/m)$.
 - **Engine Verified**: Consistent coupling behavior.
 - **Research Verified**: Koide relation holds to high precision (0.0006% error).
 
-## Key Physics
+## 🧬 Key Physics
 
 ```
 m_eff = beta * < C * I >

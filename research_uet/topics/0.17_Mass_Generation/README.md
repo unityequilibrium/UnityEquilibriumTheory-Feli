@@ -9,7 +9,7 @@
 
 ---
 
-## 🏛️ Scientific Architecture (5 Pillars)
+## 1. 📂 5x4 Grid Structure
 
 | Pillar | Purpose |
 | :--- | :--- |
@@ -67,7 +67,7 @@ graph LR
 
 ---
 
-## 🚀 Quick Start
+## 2. ⚡ Quick Start
 
 ```powershell
 python research_uet/topics/0.17_Mass_Generation/Code/01_Engine/Engine_Mass_Higgs.py

@@ -9,7 +9,7 @@
 
 | File | Description | Status |
 |:-----|:------------|:------:|
-| `UET_PAPER_v0.8.7.md` | v0.8.7 snapshot | Archived |
+| `UET_PAPER_v0.9.0.md` | v0.9.0 snapshot | Archived |
 | `UET_PAPER_2_EXISTENCE.md` | Philosophical extension | Archived |
 | `UET_NARRATIVE_PAPER.md` | Layperson narrative | Archived |
 

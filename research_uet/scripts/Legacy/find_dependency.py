@@ -2,7 +2,7 @@ import zipfile
 import os
 
 zip_dir = (
-    r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\(search Only) ทองข้อมูลดี\v0.8.7+"
+    r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\(search Only) ทองข้อมูลดี\v0.9.0+"
 )
 target_file = "w_mass_anomaly_data.py"
 files = ["lab 02.01.2026.zip", "03.01.2026.zip", "04.01.2026.zip"]

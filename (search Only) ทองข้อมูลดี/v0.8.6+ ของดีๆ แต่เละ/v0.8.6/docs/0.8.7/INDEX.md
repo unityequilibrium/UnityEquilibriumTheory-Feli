@@ -1,4 +1,4 @@
-# UET Research Index - Version 0.8.7
+# UET Research Index - Version 0.9.0
 
 ## COMPLETE: 52/52 TESTS PASSED
 

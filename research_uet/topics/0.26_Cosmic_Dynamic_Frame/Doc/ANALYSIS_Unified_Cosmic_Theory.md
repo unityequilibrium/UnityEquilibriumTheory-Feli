@@ -1,7 +1,7 @@
 # 🔬 ANALYSIS: 0.26 The Dynamic Universe (Unified Theory)
 
 > **File/Script:** `Code/03_Research/Research_Unified_Cosmic_Theory.py`
-> **Role:** Grand Unified Theory (GUT)
+> **Role:** Unity Equilibrium Theory (UET)
 > **Status:** 🟢 FINAL
 > **Paper Potential:** ⭐️⭐️⭐️ High (Paradigm Shift)
 
@@ -19,7 +19,7 @@
 
 ---
 
-## 2. 🧱 Theoretical Framework
+## 2. 🧱 Theoretical Framework (กรอบแนวคิดทฤษฎี)
 
 ### 2.1 The Core Logic
 Inertia is not an intrinsic property; it is **Drag** against the cosmic fluid.
@@ -43,7 +43,7 @@ graph LR
 
 ---
 
-## 3. 🔬 Implementation & Code
+## 3. 🔬 Implementation & Code (การทำงานของโค้ด)
 
 ### 3.1 Algorithm Flow
 1.  **Engine 1 (Micro):** `Research_Pioneer_Drag.py` simulates a spacecraft. We tune fluid density $\rho$ until drag acceleration matches $a_P$.
@@ -69,7 +69,7 @@ graph LR
 
 ---
 
-## 5. 🧠 Discussion & Analysis
+## 5. 🧠 Discussion & Analysis (วิเคราะห์ผลเชิงลึก)
 
 ### 5.1 Why it works?
 The "Inverse Square Decay" ($1/r^2$) is the magic key.
@@ -84,7 +84,11 @@ It means the **"Viscosity Field"** behaves exactly like **Gravity** or **Light**
 
 ---
 
-## 7. 📝 Conclusion
+## 6. 📚 References & Data (อ้างอิง)
+*   **Data Source:** Nature (2006) - *The Bullet Cluster* - DOI: 10.1086/508162
+*   **SPARC Database:** *Galaxy Rotation Curves* - DOI: 10.3847/1538-3881/152/6/157
+
+## 7. 📝 Conclusion & Future Work (สรุปและก้าวต่อไป)
 
 *   **Key Finding:** **Space is a Fluid.** The Pioneer Anomaly and Dark Matter are the same phenomenon (Fluid Drag) seen at different scales.
 *   **Next Step:** Use this Fluid Model to derive **Gravity itself** (Topic 0.19) and **Mass** (Topic 0.21).

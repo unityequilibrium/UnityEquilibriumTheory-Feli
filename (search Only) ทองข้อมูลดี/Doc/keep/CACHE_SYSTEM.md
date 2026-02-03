@@ -13,7 +13,7 @@
 
 ```powershell
 # Set in PowerShell profile or .env
-$env:PYTHONPYCACHEPREFIX = "C:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\.cache\pycache"
+$env:PYTHONPYCACHEPREFIX = "C:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\.cache\pycache"
 ```
 
 ### Option 2: ใช้ pyproject.toml (Python 3.8+)
@@ -29,7 +29,7 @@ $env:PYTHONPYCACHEPREFIX = "C:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\.c
 ## 📁 โครงสร้างใหม่
 
 ```
-Lab_uet_harness_v0.8.7/
+Lab_uet_harness_v0.9.0/
 ├── .cache/                    ← รวม cache ทั้งหมดที่นี่
 │   ├── pycache/               ← __pycache__ ทั้งหมด
 │   └── pytest/                ← pytest cache

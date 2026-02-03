@@ -19,11 +19,11 @@ Code/
     (Empty)                       # Standard Dark Matter models are implicit competitors
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Demo (Virial Mass)
 python research_uet/topics/0.15_Cluster_Dynamics/Code/01_Engine/cluster_solver.py
@@ -38,7 +38,7 @@ python research_uet/topics/0.15_Cluster_Dynamics/Code/03_Research/Research_Clust
 python research_uet/topics/0.15_Cluster_Dynamics/Code/03_Research/Research_Stability_Experiment.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -56,6 +56,12 @@ At the scale of galaxy clusters, the acceleration drops below the critical thres
 
 ### 2. The Bullet Cluster
 Standard Dark Matter claims the separation of Mass (Lensing) and Gas (X-ray) proves particles. UET explains this as **Differential Viscosity**: The Information Field is a superfluidmetric deformation that passes through the collision largely unaffected, while the baryonic gas interacts via hydrodynamics and slows down.
+
+## 🧬 Key Physics
+
+```
+2K + U + I = 0 (Modified Virial Theorem)
+```
 
 ## ASCII Note
 

@@ -17,7 +17,7 @@ uet-harness/
 │   ├── uet_core/           # PDE solvers, physical kernels
 │   ├── uet_analytics/      # Statistical analysis and plotting
 │   └── uet_utils/          # General helpers
-├── tests/                  # Automated validation suite (from v0.8.7)
+├── tests/                  # Automated validation suite (from v0.9.0)
 │   ├── unit/               # Code unit tests
 │   └── physics/            # Physical validation tests (16 topic folders)
 ├── .gitignore

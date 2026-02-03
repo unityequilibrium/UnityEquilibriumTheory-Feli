@@ -30,11 +30,11 @@ Code/
 > [!NOTE]
 > Some research scripts (`Research_Econophysics.py`, `Research_Stocks.py`, etc.) are integrated into `Research_Complex_Systems.py` or other modules. Ensure you run the scripts listed below.
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Demo (Avalanche Dynamics)
 python research_uet/topics/0.14_Complex_Systems/Code/01_Engine/Engine_Complexity.py
@@ -56,7 +56,7 @@ python research_uet/topics/0.14_Complex_Systems/Code/03_Research/Research_Global
 python research_uet/topics/0.14_Complex_Systems/Code/03_Research/Research_Validation.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -77,6 +77,12 @@ A healthy complex system (like a heart or market) maintains itself at **Critical
 
 ### 2. Information Networks
 UET models complexity as the flow of information through a networked topology. Avalanches are not failures; they are the system's way of distributing excess information stress to maximize total capacity.
+
+## 🧬 Key Physics
+
+```
+P(s) ~ s^(-tau) (Power Law Avalanche Distribution)
+```
 
 ## ASCII Note
 

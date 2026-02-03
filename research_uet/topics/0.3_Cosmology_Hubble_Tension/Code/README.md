@@ -24,11 +24,11 @@ Code/
     Competitor_Comparison_BAO.py  # Standard Model BAO deviations
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Logic (The Fix)
 python research_uet/topics/0.3_Cosmology_Hubble_Tension/Code/01_Engine/Engine_Cosmology.py
@@ -52,7 +52,7 @@ python research_uet/topics/0.3_Cosmology_Hubble_Tension/Code/03_Research/Researc
 python research_uet/topics/0.3_Cosmology_Hubble_Tension/Code/04_Competitor/Competitor_Comparison_BAO.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -82,7 +82,7 @@ This implies the Hubble Constant $H_0$ scales with information density, creating
 - **Engine needed?** Yes. Standard $\Lambda$CDM has no mechanism to vary $H_0$ by scale.
 - **Proof needed?** Yes. Derivation of the $\beta$ factor is critical.
 
-## Key Physics
+## 🧬 Key Physics
 
 ```
 H0_local = H0_cmb * (1 + beta)

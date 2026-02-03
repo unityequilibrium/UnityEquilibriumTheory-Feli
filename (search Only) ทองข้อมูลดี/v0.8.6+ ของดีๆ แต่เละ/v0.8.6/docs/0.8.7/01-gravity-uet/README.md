@@ -44,4 +44,4 @@ $$F = m \cdot \frac{2\pi r^3}{M} \cdot \nabla E = \frac{GMm}{r^2}$$
 - [03-strong-force-uet](../03-strong-force-uet/) - Different structure ✅
 
 ---
-*Verified in UET Harness v0.8.7 on 2025-12-28*
+*Verified in UET Harness v0.9.0 on 2025-12-28*

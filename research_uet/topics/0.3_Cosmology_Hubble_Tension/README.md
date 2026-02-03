@@ -9,7 +9,7 @@
 
 ---
 
-## 🏛️ Scientific Architecture (5 Pillars)
+## 1. 📂 5x4 Grid Structure
 
 | Pillar | Purpose |
 | :--- | :--- |
@@ -68,7 +68,7 @@ graph TB
 
 ---
 
-## 🚀 Quick Start
+## 2. ⚡ Quick Start
 
 ```powershell
 python research_uet/topics/0.3_Cosmology_Hubble_Tension/Code/03_Research/Research_Hubble_Comparison.py

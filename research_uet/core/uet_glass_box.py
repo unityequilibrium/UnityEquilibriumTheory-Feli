@@ -64,6 +64,11 @@ class UETPathManager:
         "0.24": "0.24_Artificial_Intelligence",
         "0.25": "0.25_Strategy_Power_Economics",
         "0.26": "0.26_Cosmic_Dynamic_Frame",
+        "0.27": "0.27_Cold_Light_Hologram",
+        "0.28": "0.28_Material_Synthesis",
+        "0.29": "0.29_Ocean_Recovery",
+        "0.30": "0.30_Mega_Flora_Biotech",
+        "0.31": "0.31_SpaceTime_Propulsion",
     }
 
     @staticmethod

@@ -4,7 +4,7 @@ from pathlib import Path
 import importlib.util
 
 # Path setup
-repo_root = Path("c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7")
+repo_root = Path("c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.9.0")
 sys.path.insert(0, str(repo_root))
 
 from research_uet.core.uet_bug_hunter import UETBugHunter

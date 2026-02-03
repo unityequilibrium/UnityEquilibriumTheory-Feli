@@ -31,11 +31,11 @@ Code/
 - **`Research_Real_Data_Validation.py`**: **Critical Validation**: Checks UET predictions against Berut (2012), LIGO, and EHT data.
 - **`Research_Thermodynamic_Bridge.py`**: Integration script connecting all components.
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Demo (Entropic Force)
 python research_uet/topics/0.13_Thermodynamic_Bridge/Code/01_Engine/Engine_Thermodynamics.py
@@ -53,7 +53,7 @@ python research_uet/topics/0.13_Thermodynamic_Bridge/Code/03_Research/Research_R
 python research_uet/topics/0.13_Thermodynamic_Bridge/Code/03_Research/Research_Thermodynamic_Bridge.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -80,6 +80,12 @@ By extending this logic to the Information Field itself, Jacobson (1995) and UET
 | **Berut 2012** | Nature 483, 187 | Experimental verification of Landauer Limit |
 | **LIGO** | PRL 116, 061102 | Gravitational Wave Area Theorem |
 | **EHT** | ApJL 875, L1 | Black Hole Entropy |
+
+## 🧬 Key Physics
+
+```
+E >= k_B * T * ln(2) (Landauer Limit)
+```
 
 ## ASCII Note
 

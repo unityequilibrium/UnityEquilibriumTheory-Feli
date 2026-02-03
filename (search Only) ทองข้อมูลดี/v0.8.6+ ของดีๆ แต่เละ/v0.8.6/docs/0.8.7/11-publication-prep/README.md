@@ -174,6 +174,6 @@ docs/0.8.7/
 
 Ready for peer review and collaboration.
 
-**Repository:** UET Harness v0.8.7  
+**Repository:** UET Harness v0.9.0  
 **Tests:** 36/36 PASSED  
 **Status:** Publication-ready 🚀

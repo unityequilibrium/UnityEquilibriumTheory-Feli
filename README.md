@@ -26,10 +26,10 @@
     - [Summary](#summary)
     - [What We Validated](#what-we-validated)
     - [Run It Yourself](#run-it-yourself)
-  - [🚀 8. Quick Start](#-8-quick-start)
-    - [1. Clone \& Install](#1-clone--install)
-    - [2. Run the "Big 5" Physics Anomalies](#2-run-the-big-5-physics-anomalies)
-    - [3. Run All Tests](#3-run-all-tests)
+  - [🚀 8. Quick Start (Python Library)](#-8-quick-start-python-library)
+    - [1. Installation](#1-installation)
+    - [2. Usage Examples](#2-usage-examples)
+    - [3. Run Verify Test](#3-run-verify-test)
   - [📚 9. Complete Topic Index (27 Domains)](#-9-complete-topic-index-27-domains)
   - [🔍 10. Methodology](#-10-methodology)
     - [Human + AI Collaboration](#human--ai-collaboration)
@@ -86,6 +86,10 @@ UET is not just a physics theory. It is a **"Civilization-Level Operating System
 | **Energy** | Infinite Power | Room-Temp Superconductivity | [0.4 Superconduct](./research_uet/topics/0.4_Superconductivity_Superfluids/) |
 | **Computing** | Quantum Leap | 99.99% Fidelity Gates | [0.18 Mathnicry](./research_uet/topics/0.18_Mathnicry/) |
 | **Medicine** | Cold Light | Trapping Light for Holograms/Imaging | [0.27 Cold Light](./research_uet/topics/0.27_Cold_Light_Hologram/) |
+| **Material** | Zero Mining | Graphene from Carbon Waste | [0.28 Material](./research_uet/topics/0.28_Material_Synthesis/) |
+| **Environment** | Ocean Shield | Reverse Ocean Acidification | [0.29 Ocean](./research_uet/topics/0.29_Ocean_Recovery/) |
+| **Agriculture** | Mega Flora | Acoustic Nutrient Injection | [0.30 Mega Flora](./research_uet/topics/0.30_Mega_Flora_Biotech/) |
+| **Space** | Warp Drive | Reach 0.1c via Singularities | [0.31 Propulsion](./research_uet/topics/0.31_SpaceTime_Propulsion/) |
 
 ---
 
@@ -186,24 +190,54 @@ python research_uet/topics/run_full_verification.py
 
 ---
 
-## 🚀 8. Quick Start
+## 🚀 8. Quick Start (Python Library)
 
-### 1. Clone & Install
+UET is now available as a standard Python 3.9+ library.
+
+### 1. Installation
 
 ```bash
-git clone https://github.com/unityequilibrium/Equation-UET-v0.8.7.git
-cd Equation-UET-v0.8.7
-pip install -r requirements.txt
+git clone https://github.com/unityequilibrium/Equation-UET-v0.9.0.git
+cd Equation-UET-v0.9.0
+pip install .
 ```
 
-### 2. Run the "Big 5" Physics Anomalies
-Solve Dark Matter, Singularity, and more in one go:
-```bash
-python research_uet/scripts/run_physics_anomalies.py
+### 2. Usage Examples
+
+**A. Fluid Dynamics (800x Faster)**
+```python
+import research_uet as uet
+
+# Initialize 2D Fluid Engine
+fluid = uet.fluid.Engine2D(nx=128, ny=128, dt=0.01)
+
+# Run Simulation (Terminal Demo)
+fluid.solve_2d() 
 ```
 
-### 3. Run All Tests
+**B. Mathnicry (Riemann Zeta)**
+```python
+import research_uet as uet
 
+# Calculate Omega Potential for a complex number
+zeta = uet.math.RiemannEngine()
+potential = zeta.calculate_omega(0.5 + 14.1347j) # First Zero
+print(f"Omega: {potential}") # Should be near 0.0
+```
+
+**C. Complexity (Entropy Analysis)**
+```python
+import numpy as np
+import research_uet as uet
+
+# Analyze Time Series Data
+data = np.random.normal(0, 1, 1000)
+complexity = uet.complexity.ComplexityEngine()
+metrics = complexity.compute_complexity_metrics(data)
+print(f"Entropy: {metrics['entropy']}")
+```
+
+### 3. Run Verify Test
 ```bash
 python research_uet/topics/run_all_tests.py
 ```
@@ -242,6 +276,9 @@ python research_uet/topics/run_all_tests.py
 | 0.26 | [Cosmic Viscosity](./research_uet/topics/0.26_Cosmic_Dynamic_Frame/) | Drag Term Explained | ✅ |
 | 0.27 | [Cold Light](./research_uet/topics/0.27_Cold_Light_Hologram/) | Stopping Light (No Heat) | ✅ |
 | 0.28 | [Material Synthesis](./research_uet/topics/0.28_Material_Synthesis/) | Resonant Manufacturing | ✅ |
+| 0.29 | [Ocean Recovery](./research_uet/topics/0.29_Ocean_Recovery/) | Graphene Ocean Shield | ✅ |
+| 0.30 | [Mega Flora](./research_uet/topics/0.30_Mega_Flora_Biotech/) | Acoustic Nutrient Delivery | ✅ |
+| 0.31 | [SpaceTime Prop](./research_uet/topics/0.31_SpaceTime_Propulsion/) | Relativistic Slingshot (.1c) | ✅ |
 
 ---
 

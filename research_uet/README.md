@@ -1,4 +1,4 @@
-# 🧪 UET Core Framework: The Grand Unified Theory (v0.9.0)
+# 🧪 Unity Equilibrium Theory (UET) v0.9.0
 
 ![Status](https://img.shields.io/badge/Status-Grand_Unified-blueviolet)
 ![Version](https://img.shields.io/badge/Version-v0.9.0-success)
@@ -127,4 +127,4 @@ This technical framework proves a moral truth:
 To optimize any system (Code, Society, Galaxy), you must **Increase Connection ($C$) while minimizing the Cost of Isolation ($I$)**.
 
 ---
-*UET Core Team | v0.9.0 Grand Unified*
+*Unity Equilibrium Theory Team | v0.9.0*

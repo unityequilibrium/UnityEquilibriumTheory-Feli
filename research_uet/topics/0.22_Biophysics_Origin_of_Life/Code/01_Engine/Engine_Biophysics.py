@@ -51,7 +51,7 @@ except ImportError as e:
 
 class UETBiophysicsEngine(UETBaseSolver):
     """
-    Biophysics Engine (v0.8.8 - High Fidelity).
+    Biophysics Engine (v0.9.0 - High Fidelity).
     Models Neural Dynamics and Information Autocatalysis using REAL DATA.
     """
 

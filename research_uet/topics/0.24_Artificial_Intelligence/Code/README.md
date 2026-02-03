@@ -13,10 +13,10 @@ Code/
     Research_SimpleLM_UET.py   # Proof of Concept: Language Model
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. AI Entropy Engine
 python research_uet/topics/0.24_Artificial_Intelligence/Code/01_Engine/Engine_AI_Entropy.py
@@ -28,14 +28,14 @@ python research_uet/topics/0.24_Artificial_Intelligence/Code/03_Research/Researc
 python research_uet/topics/0.24_Artificial_Intelligence/Code/03_Research/Research_SimpleLM_UET.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test | Result | Status |
 |--------|------|--------|--------|
 | Engine_AI_Entropy.py | Hallucination Detection | Detected (High H) | PASS |
 | Research_Alignment_Equilibrium.py | Nash Equilibrium | Good = Stable | PASS |
 
-## Key Concepts
+## 🧬 Key Physics
 
 1.  **Thinking Entropy:** Coherent thought lies between Order (0) and Chaos (Max).
 2.  **Physical Ethics:** Cooperation lowers global entropy; Defection spikes it.

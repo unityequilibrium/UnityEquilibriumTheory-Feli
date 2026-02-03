@@ -7,7 +7,7 @@ def download_research_assets():
     print("=" * 60)
 
     # Target directory
-    target_dir = r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\research_uet\topics\0.22_Biophysics_Origin_of_Life\Ref\03_Research"
+    target_dir = r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\research_uet\topics\0.22_Biophysics_Origin_of_Life\Ref\03_Research"
 
     # Assets to download (Using known open access or summary links where available)
     # Note: Direct PDF download depends on server permissions.

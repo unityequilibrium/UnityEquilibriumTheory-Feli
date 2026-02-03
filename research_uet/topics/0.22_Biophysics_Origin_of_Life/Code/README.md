@@ -14,10 +14,10 @@ Code/
     Research_Neural_Seizure.py # Investigates Seizure as "Pathological Order"
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Life Engine (Entropy Simulation)
 python research_uet/topics/0.22_Biophysics_Origin_of_Life/Code/01_Engine/Engine_Life_Entropy.py
@@ -29,7 +29,7 @@ python research_uet/topics/0.22_Biophysics_Origin_of_Life/Code/02_Proof/Proof_Sc
 python research_uet/topics/0.22_Biophysics_Origin_of_Life/Code/03_Research/Research_Neural_Seizure.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Tests | Status |
 |--------|-------|--------|
@@ -39,7 +39,7 @@ python research_uet/topics/0.22_Biophysics_Origin_of_Life/Code/03_Research/Resea
 
 **Total: All Systems PASS**
 
-## Key Concepts
+## 🧬 Key Physics
 
 1.  **Negative Entropy:** Life is an island of order in a sea of disorder.
 2.  **Seizure:** Paradoxically, a seizure is *too much order* (Low Entropy), not chaos.

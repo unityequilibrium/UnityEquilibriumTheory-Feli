@@ -19,19 +19,25 @@ Code/
     Competitor_Standard_Slow_Light.py # Comparison vs BEC
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
-# Stability Test
+# Engine
+python research_uet/topics/0.27_Cold_Light_Hologram/Code/01_Engine/Engine_Cold_Light.py
+
+# Proof
+python research_uet/topics/0.27_Cold_Light_Hologram/Code/02_Proof/Proof_Resonance_Lock.py
+
+# Research
 python research_uet/topics/0.27_Cold_Light_Hologram/Code/03_Research/Research_Hologram_Stability.py
 
-# Proof of Resonance
-python research_uet/topics/0.27_Cold_Light_Hologram/Code/02_Proof/Proof_Resonance_Lock.py
+# Competitor
+python research_uet/topics/0.27_Cold_Light_Hologram/Code/04_Competitor/Competitor_Standard_Slow_Light.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Tests | Status |
 |--------|-------|--------|
@@ -56,7 +62,7 @@ Uses `Engine_Cold_Light.py` which implements a Lorentzian Resonance model.
 - **No new Engine needed** - The current `ColdLightEngine` correctly models the $Q$-factor and trap probability.
 - **Proof Valid** - `Proof_Resonance_Lock.py` confirms the mathematical basis.
 
-## Key Physics
+## 🧬 Key Physics
 
 ```
 Trap_Prob = 1 / (1 + (Q * Mismatch)^2)

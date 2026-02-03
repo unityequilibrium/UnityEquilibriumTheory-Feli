@@ -2,7 +2,7 @@ import sys
 import os
 from pathlib import Path
 
-TOPICS = Path(r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\research_uet\topics")
+TOPICS = Path(r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\research_uet\topics")
 
 
 def find_all_tests():

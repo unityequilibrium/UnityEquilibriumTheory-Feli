@@ -272,7 +272,7 @@ if __name__ == "__main__":
     ║  Testing: Can bag model energy density reproduce              ║
     ║          linear confinement in QCD?                           ║
     ║                                                               ║
-    ║  Running in: UET Harness v0.8.7                               ║
+    ║  Running in: UET Harness v0.9.0                               ║
     ║                                                               ║
     ╚═══════════════════════════════════════════════════════════════╝
     """

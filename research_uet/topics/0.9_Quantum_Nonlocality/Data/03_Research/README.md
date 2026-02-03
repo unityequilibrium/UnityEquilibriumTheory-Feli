@@ -18,4 +18,4 @@
 - **Lab tests**: `../../lab/04_quantum/`
 - **Theory**: `../../theory/04_quantum/`
 
-*Quantum Data v0.8.7*
+*Quantum Data v0.9.0*

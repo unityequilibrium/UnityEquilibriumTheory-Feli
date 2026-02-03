@@ -26,11 +26,11 @@ Code/
     electroweak_solver.py              # Utility
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Logic (Upgraded)
 python research_uet/topics/0.6_Electroweak_Physics/Code/01_Engine/Engine_Electroweak.py
@@ -53,7 +53,7 @@ python research_uet/topics/0.6_Electroweak_Physics/Code/03_Research/Research_Sin
 python research_uet/topics/0.6_Electroweak_Physics/Code/03_Research/Research_W_Mass_Anomaly_Exp.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -80,6 +80,12 @@ Uses `Engine_Electroweak.py` with `predict_neutron_lifetime()` derived from $G_F
 ### Recommendation
 - **No new Engine needed** - Current logic accurately models weak unification.
 - **Proof complete** - W/Z ratio derivation verified.
+
+## 🧬 Key Physics
+
+```
+G_F = 1 / (sqrt(2) * v^2)
+```
 
 ## ASCII Note
 

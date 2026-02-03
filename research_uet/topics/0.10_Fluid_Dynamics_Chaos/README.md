@@ -9,7 +9,7 @@
 
 ---
 
-## 🏛️ Scientific Architecture (5 Pillars)
+## 1. 📂 5x4 Grid Structure
 
 | Pillar | Purpose |
 | :--- | :--- |
@@ -71,17 +71,20 @@ graph TB
 
 ---
 
-## 🚀 Quick Start
+## 2. ⚡ Quick Start
 
-```powershell
-# [1] Proof of 800x Speedup
-python research_uet/topics/0.10_Fluid_Dynamics_Chaos/Code/03_Research/Research_Benchmark_Suite.py
+```python
+import research_uet as uet
 
-# [2] Run the 3D Engine
-python research_uet/topics/0.10_Fluid_Dynamics_Chaos/Code/01_Engine/Engine_UET_3D.py
+# [1] Initialize the 800x Faster Engine
+fluid = uet.fluid.Engine2D(nx=128, ny=128, dt=0.01)
 
-# [3] Verify Stability (Turbulence)
-python research_uet/topics/0.10_Fluid_Dynamics_Chaos/Code/03_Research/Research_TurbulenceStress_Test.py
+# [2] Run Simulation (See the result in /Result folder)
+fluid.solve_2d()
+
+# [3] Advanced: Get Critical Reynolds Number
+re_c, note = fluid.predict_critical_reynolds()
+print(f"Turbulence Barrier: {re_c}")
 ```
 
 ## 📁 Key Files

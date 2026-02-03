@@ -1,15 +1,15 @@
-# Unity Equilibrium Theory (UET): Version 0.8.7
+# Unity Equilibrium Theory (UET): Version 0.9.0
 ## A Scale-Invariant Framework for Gravity, Dark Energy, and Information Flux
 
 **Date:** 2026-01-03
 **Authors:** UET Research Team
-**Status:** ✅ **Validated Version 0.8.7**
+**Status:** ✅ **Validated Version 0.9.0**
 **Validation:** 113 Tests (96.5% PASS) with REAL DATA (Complete Validation)
 
 ---
 
 ## 1. Abstract
-We present the **Unity Equilibrium Framework (Version 0.8.7)**, validated against **113 experimental tests (96.5% PASS)** using real data from:
+We present the **Unity Equilibrium Framework (Version 0.9.0)**, validated against **113 experimental tests (96.5% PASS)** using real data from:
 *   Galaxy Rotation Curves (**SPARC**, 81% Pass Rate)
 *   Black Holes (**EHT + LIGO**, 3/3 Pass)
 *   Superconductivity (**McMillan 1968**, 0.01% Error)

@@ -2,10 +2,26 @@ import numpy as np
 import time
 import sys
 import random
+from pathlib import Path
+
+# --- ROBUST PATH FINDER ---
+current_path = Path(__file__).resolve()
+root_path = None
+for parent in [current_path] + list(current_path.parents):
+    if (parent / "research_uet").exists():
+        root_path = parent
+        break
+
+if root_path and str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
+from research_uet.core.uet_parameters import get_params
+from research_uet.core.uet_glass_box import UETPathManager
 
 
 class ResonantCVDEngine:
-    def __init__(self, size=50):
+    def __init__(self, size=50, params=None):
+        self.params = params if params else get_params("0.28")
         self.size = size
         self.grid = np.zeros((size, size))
         self.target_atoms = int((size * size / 2) * 0.95)
@@ -124,12 +140,9 @@ if __name__ == "__main__":
     # SAVE PLOT (Method 1: Matplotlib Bar Chart)
     # Get current script directory and Result dir
     import matplotlib.pyplot as plt
-    import os
 
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    topic_root = os.path.dirname(os.path.dirname(script_dir))
-    result_dir = os.path.join(topic_root, "Result", "01_Engine")
-    os.makedirs(result_dir, exist_ok=True)
+    # Use UETPathManager for consistent result storage
+    result_dir = UETPathManager.get_result_dir("0.28", "Resonant_CVD")
 
     labels = ["Standard CVD", "UET Resonant CVD"]
     efficiencies = [e1, e2]
@@ -164,7 +177,7 @@ if __name__ == "__main__":
     autolabel(rects1)
     autolabel(rects2)
 
-    output_path = os.path.join(result_dir, "Res_CVD_Comparison.png")
+    output_path = result_dir / "Res_CVD_Comparison.png"
     plt.savefig(output_path)
     print(f"📊 Comparison Plot saved to: {output_path}")
     plt.close()

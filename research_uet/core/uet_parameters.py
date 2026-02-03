@@ -10,7 +10,7 @@ Usage:
     print(params.kappa, params.beta)
 
 Author: UET Research Team
-Version: 0.8.7
+Version: 0.9.0
 Last Updated: 2026-01-13
 """
 
@@ -179,6 +179,13 @@ _TOPIC_SCALE_MAP = {
     "0.21": "macroscopic",
     "0.22": "macroscopic",
     "0.24": "macroscopic",
+    "0.25": "macroscopic",
+    "0.26": "astrophysical",
+    "0.27": "macroscopic",
+    "0.28": "macroscopic",
+    "0.29": "macroscopic",
+    "0.30": "macroscopic",
+    "0.31": "astrophysical",
 }
 
 

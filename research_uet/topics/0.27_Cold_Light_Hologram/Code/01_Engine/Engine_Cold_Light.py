@@ -3,27 +3,29 @@ import os
 import sys
 from pathlib import Path
 
-# --- UET CORE SETUP ---
+# --- ROBUST PATH FINDER ---
 current_path = Path(__file__).resolve()
-# Go up 3 levels to pkg_root (Code -> 0.27 -> topics -> research_uet)
-# Actually, path is topics/0.27/Code/01_Engine/file
-# So parents[0] = 01_Engine
-# parents[1] = Code
-# parents[2] = 0.27...
-# parents[3] = topics
-# parents[4] = research_uet
-# We generally want 'research_uet' or the root containing it to be in path.
-# Let's try adding the project root.
+root_path = None
+for parent in [current_path] + list(current_path.parents):
+    if (parent / "research_uet").exists():
+        root_path = parent
+        break
 
-project_root = current_path.parents[5]  # Adjust based on actual depth
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
+if root_path and str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
+from research_uet.core.uet_parameters import get_params, C, HBAR
+from research_uet.core.uet_glass_box import UETPathManager
+
+# --- UET CORE SETUP ---
+# Path logic is now handled by UETPathManager where possible.
 
 
 class ColdLightEngine:
-    def __init__(self):
-        self.c = 3e8  # Speed of light
-        self.h_bar = 1.054e-34
+    def __init__(self, params=None):
+        self.params = params if params else get_params("0.27")
+        self.c = C
+        self.h_bar = HBAR  # Use CODATA hbar
         self.lattice_constant = 0.142e-9  # Graphene C-C bond length (nm)
 
         # UET Resonance Factor (Geometry)
@@ -109,4 +111,13 @@ class ColdLightEngine:
 
 if __name__ == "__main__":
     engine = ColdLightEngine()
-    engine.run_sweep()
+    results = engine.run_sweep()
+
+    # Save JSON results using UETPathManager
+    import json
+
+    res_dir = UETPathManager.get_result_dir("0.27", "Cold_Light_Sweep")
+    out_file = res_dir / "Cold_Light_Resonance.json"
+    with open(out_file, "w") as f:
+        json.dump(results, f, indent=2)
+    print(f"\n✅ RESULTS SAVED: {out_file}")

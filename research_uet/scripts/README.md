@@ -60,9 +60,9 @@ python research_uet/scripts/Audit/audit_figure_coverage.py
 ## 🛡️ **Integrity Standard**
 
 All scripts in this directory MUST:
-1.  Run from the **Project Root** (`c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7`).
+1.  Run from the **Project Root** (`c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0`).
 2.  Use **Relative Paths** starting with `research_uet/...`.
 3.  Be strictly categorized (No loose files except major Runners).
 
 ---
-*Maintained by UET DevOps - v0.8.7*
+*Maintained by UET DevOps - v0.9.0*

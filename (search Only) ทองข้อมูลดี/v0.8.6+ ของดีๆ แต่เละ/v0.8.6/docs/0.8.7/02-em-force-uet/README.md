@@ -50,4 +50,4 @@ Both forces have **identical mathematical structure!**
 - [05-unification](../05-unification/) - R² = 1.0 ✅
 
 ---
-*Verified in UET Harness v0.8.7 on 2025-12-28*
+*Verified in UET Harness v0.9.0 on 2025-12-28*

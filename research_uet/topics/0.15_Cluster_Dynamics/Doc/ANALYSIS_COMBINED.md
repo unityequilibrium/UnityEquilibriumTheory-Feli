@@ -14,7 +14,7 @@
 
 ## 2. 🧱 Continuity across Scales (การเชื่อมโยงระหว่างหัวข้อ)
 
-การวิเคราะห์นี้เป็น "หมัดฮุค" ที่มาเสริม [Topic 0.1: Galaxy Rotation](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/topics/0.1_Galaxy_Rotation_Problem/Doc/ANALYSIS_COMBINED.md) เพื่อแสดงความต่อเนื่องของทฤษฎี:
+การวิเคราะห์นี้เป็น "หมัดฮุค" ที่มาเสริม [Topic 0.1: Galaxy Rotation](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.9.0/research_uet/topics/0.1_Galaxy_Rotation_Problem/Doc/ANALYSIS_COMBINED.md) เพื่อแสดงความต่อเนื่องของทฤษฎี:
 
 | Scale | Key Axiom | Mechanism | Dark Matter Killer |
 | :--- | :--- | :--- | :--- |

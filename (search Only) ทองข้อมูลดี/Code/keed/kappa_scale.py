@@ -23,7 +23,7 @@ Usage:
     kappa = get_kappa(1e-15)      # Returns 0.57 (by scale)
 
 Author: UET Research Team
-Version: 0.8.7
+Version: 0.9.0
 """
 
 import numpy as np

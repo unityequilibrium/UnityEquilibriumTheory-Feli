@@ -26,11 +26,11 @@ Code/
     Competitor_Nuclear_Baseline.py # Standard SEMF Baseline
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Logic (Upgraded with Yukawa)
 python research_uet/topics/0.5_Nuclear_Binding_Hadrons/Code/01_Engine/Engine_Nuclear_Binding.py
@@ -44,7 +44,7 @@ python research_uet/topics/0.5_Nuclear_Binding_Hadrons/Code/03_Research/Research
 python research_uet/topics/0.5_Nuclear_Binding_Hadrons/Code/03_Research/Research_Nuclear_Binding.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -55,6 +55,12 @@ python research_uet/topics/0.5_Nuclear_Binding_Hadrons/Code/03_Research/Research
 | Engine_QCD_Bridge.py | Alpha_s (Mz) | 0.2% Deviation | ✅ PASS |
 
 **Total: 4/5 PASS (Deuteron needs Schrodinger Solver)**
+
+## 🧬 Key Physics
+
+```
+E_binding = V_volume + V_surface + V_coulomb + V_asymmetry + V_yukawa
+```
 
 ## Engine Upgrade Note
 

@@ -9,7 +9,7 @@
 
 ---
 
-## 🏛️ Scientific Architecture (5 Pillars)
+## 1. 📂 5x4 Grid Structure
 
 | Pillar | Purpose |
 | :--- | :--- |
@@ -67,10 +67,19 @@ graph TD
 
 ---
 
-## 🚀 Quick Start
+## 2. ⚡ Quick Start
 
-```powershell
-python research_uet/topics/0.14_Complex_Systems/Code/01_Engine/Engine_Complexity.py
+```python
+import research_uet as uet
+import numpy as np
+
+# [1] Analyze Time Series Entropy
+data = np.random.normal(0, 1, 1000)
+complexity = uet.complexity.ComplexityEngine()
+metrics = complexity.compute_complexity_metrics(data)
+
+print(f"System Entropy: {metrics['entropy']}")
+print(f"Equilibrium Score: {metrics['equilibrium_score']}")
 ```
 
 ## 📁 Key Files

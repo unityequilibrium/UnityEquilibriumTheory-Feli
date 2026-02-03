@@ -74,4 +74,4 @@ $$ \Omega[C,I] = \int \left( V(C) + \frac{\kappa}{2}|\nabla C|^2 + \beta C \cdot
 *   **Optimization:** The universe evolves to minimize $\Omega$ (Action/Free Energy).
 
 ---
-*Last Updated: 2026-01-12 (v0.8.7 Production)*
+*Last Updated: 2026-01-12 (v0.9.0 Production)*

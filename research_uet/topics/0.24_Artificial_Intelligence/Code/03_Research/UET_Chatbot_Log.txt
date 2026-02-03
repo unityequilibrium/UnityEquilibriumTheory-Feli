@@ -2,20 +2,20 @@ UET-NanoGPT Conversation Log (Full Knowledge)
 =============================================
 
 User: UET is
-UET: UET is พลังงานไม่สูญหาย
+UET: UET is ≈
 --------------------
 User: The standard model
 UET: The standard model
 --------------------
 User: Equation
-UET: Equation → 32693
+UET: Equation จาก 8746
 --------------------
 User: Consciousness is
-UET: Consciousness is based
+UET: Consciousness is 10174
 --------------------
 User: Future of humanity
 UET: Future of humanity
 --------------------
 User: Economic system
-UET: Economic system 3099
+UET: Economic system |
 --------------------

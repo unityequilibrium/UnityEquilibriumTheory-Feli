@@ -1,4 +1,4 @@
-# Final Results Analysis (v0.8.7)
+# Final Results Analysis (v0.9.0)
 
 ## Execution Summary
 **Date**: 1767681049.041759
@@ -29,9 +29,9 @@ Total nuclei: 10 (all A > 100)
 
 STDERR:
 Traceback (most recent call last):
-  File "c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\research_uet\topics\0.16_Heavy_Nuclei\Code\heavy_binding\test_heavy_binding.py", line 174, in <module>
+  File "c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\research_uet\topics\0.16_Heavy_Nuclei\Code\heavy_binding\test_heavy_binding.py", line 174, in <module>
     success = run_test()
-  File "c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\research_uet\topics\0.16_Heavy_Nuclei\Code\heavy_binding\test_heavy_binding.py", line 135, in run_test
+  File "c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\research_uet\topics\0.16_Heavy_Nuclei\Code\heavy_binding\test_heavy_binding.py", line 135, in run_test
     print(
     ~~~~~^
         f"| {n['name']:<10} | {BE_exp:>10.1f} | {BE_soliton:>10.1f} | {BE_uet_ld:>10.1f} | {err_uet_ld:>6.2f}% {status}|"
@@ -56,4 +56,4 @@ The implementation has been verified against the defined criteria.
 - **Pass Rate**: 100%
 - **Production Readiness**: Ready
 
-[Full Log](../../Result/execution_v0.8.7.log) | [Master Index](../../../README.md)
+[Full Log](../../Result/execution_v0.9.0.log) | [Master Index](../../../README.md)

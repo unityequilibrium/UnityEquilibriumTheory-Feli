@@ -18,11 +18,11 @@ Code/
     run_muon_experiment.py        # Standard Model Baseline vs Experiment
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Logic
 python research_uet/topics/0.8_Muon_g2_Anomaly/Code/01_Engine/Engine_Muon_G2.py
@@ -37,7 +37,7 @@ python research_uet/topics/0.8_Muon_g2_Anomaly/Code/03_Research/Research_Muon_An
 python research_uet/topics/0.8_Muon_g2_Anomaly/Code/04_Competitor/run_muon_experiment.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -63,6 +63,12 @@ The `Proof_Muon_Anomaly.py` script demonstrates that this effect scales with mas
 | :--- | :--- | :--- |
 | **Fermilab g-2** | [arXiv:2308.06230](https://arxiv.org/abs/2308.06230) | Measurement of the Positive Muon Anomalous Magnetic Moment to 0.20 ppm |
 | **Theory Initiative** | [arXiv:2006.04822](https://arxiv.org/abs/2006.04822) | The anomalous magnetic moment of the muon in the Standard Model |
+
+## 🧬 Key Physics
+
+```
+Delta_a_mu = (alpha / 4*pi^3) * (m_mu / M_EW)^2
+```
 
 ## ASCII Note
 

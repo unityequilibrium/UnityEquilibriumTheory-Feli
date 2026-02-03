@@ -26,7 +26,7 @@ Code/
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Run Bell State Entanglement Proof (2 Qubits)
 python research_uet/topics/0.18_Quantum_Computing/Code/02_Proof/Proof_Bell_State_Fidelity.py

@@ -9,7 +9,7 @@
 
 ---
 
-## 📋 Scientific Architecture (5 Pillars)
+## 1. 📂 5x4 Grid Structure (Scientific Architecture)
 
 | Pillar | Purpose |
 | :--- | :--- |
@@ -80,7 +80,7 @@ We use the **Pioneer Acceleration** ($a_0 \approx 8.74 \times 10^{-10} m/s^2$) a
 
 ---
 
-## 🚀 Quick Start & Files
+## 2. ⚡ Quick Start (Run Commands)
 
 ### Quick Start
 Verify the Unified Theory against SPARC Benchmarks:

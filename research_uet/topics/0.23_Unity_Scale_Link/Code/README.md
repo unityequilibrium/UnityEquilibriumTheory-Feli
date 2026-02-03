@@ -16,10 +16,10 @@ Code/
     Research_Cross_Domain.py  # TRANSFER: Galaxy parameters -> Brain Seizures
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Derivation (The Math)
 python research_uet/topics/0.23_Unity_Scale_Link/Code/01_Engine/Engine_Derivation.py
@@ -31,7 +31,7 @@ python research_uet/topics/0.23_Unity_Scale_Link/Code/03_Research/Falsification_
 python research_uet/topics/0.23_Unity_Scale_Link/Code/03_Research/Research_Cross_Domain.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test | Result | Status |
 |--------|------|--------|--------|
@@ -41,7 +41,7 @@ python research_uet/topics/0.23_Unity_Scale_Link/Code/03_Research/Research_Cross
 
 **Total: Scientific Integrity Verified**
 
-## Key Concepts
+## 🧬 Key Physics
 
 1.  **Unity of Form:** The equation structure ($\Omega$) is universal.
 2.  **Discontinuity of Scale:** Parameters ($\kappa, \beta$) must "run" (change) with energy scale.

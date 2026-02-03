@@ -41,11 +41,11 @@ Code/
 ### 04_Competitor
 - **`Competitor_QM_Baseline.py`**: Standard Quantum Mechanics solver (Matrix Mechanics) for benchmarking.
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Logic (Upgraded)
 python research_uet/topics/0.9_Quantum_Nonlocality/Code/01_Engine/Engine_Quantum.py
@@ -63,7 +63,7 @@ python research_uet/topics/0.9_Quantum_Nonlocality/Code/03_Research/Research_Qub
 python research_uet/topics/0.9_Quantum_Nonlocality/Code/03_Research/Research_DNA_Tunneling_Decay.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -93,6 +93,12 @@ Tunneling is modeled as the diffusion of Information $(\Sigma)$ through a barrie
 | :--- | :--- | :--- |
 | **Bell Test 2015** | [Nature 526, 682](https://doi.org/10.1038/nature15759) | Loophole-free Bell inequality violation using electron spins |
 | **IBMQ Manila** | IBM Quantum | T1 Coherence Times and Frequency Specs |
+
+## 🧬 Key Physics
+
+```
+S = 2 * sqrt(2) (Tsirelson Bound)
+```
 
 ## ASCII Note
 

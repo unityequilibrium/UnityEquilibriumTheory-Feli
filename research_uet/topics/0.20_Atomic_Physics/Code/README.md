@@ -14,10 +14,10 @@ Code/
     Research_Multi_Electron.py # Simulates Helium Three-Body Chaos
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Hydrogen Engine (Precision Check)
 python research_uet/topics/0.20_Atomic_Physics/Code/01_Engine/Engine_Atomic_Hydrogen.py
@@ -29,7 +29,7 @@ python research_uet/topics/0.20_Atomic_Physics/Code/02_Proof/Proof_Hydrogen_Spec
 python research_uet/topics/0.20_Atomic_Physics/Code/03_Research/Research_Multi_Electron.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Tests | Status |
 |--------|-------|--------|

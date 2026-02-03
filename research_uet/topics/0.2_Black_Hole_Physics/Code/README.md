@@ -22,11 +22,11 @@ Code/
     Competitor_GR_Benchmark.py    # Standard Schwarzschild/Hawking GR baseline
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Logic
 python research_uet/topics/0.2_Black_Hole_Physics/Code/01_Engine/Engine_BlackHole.py
@@ -50,7 +50,7 @@ python research_uet/topics/0.2_Black_Hole_Physics/Code/03_Research/Research_Sing
 python research_uet/topics/0.2_Black_Hole_Physics/Code/04_Competitor/Competitor_GR_Benchmark.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Tests | Result | Status |
 |--------|-------|--------|--------|
@@ -81,7 +81,7 @@ Supports "Information Repulsion" at r < 1.0e-4 Rs.
 - **Engine needed?** Yes. Without the beta-term, the model collapses to a 1/r singularity.
 - **Proof needed?** Yes. Specifically `Proof_Singularity_Resolution` to verify the potential minimum exists.
 
-## Key Physics
+## 🧬 Key Physics
 
 ```
 Potential: V(r) = -GM/r (Gravity) + (beta*GM*R_core)/r^2 (Info)

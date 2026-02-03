@@ -255,7 +255,7 @@ def main() -> int:
         notes.append("Structural precheck cases may PASS at runtime; they must be validated with coercivity_check (COERCIVITY_*).")
 
     report_md = out_dir / "UET_v0_8_5_master_evidence.md"
-    write_markdown(report_md, "UET v0.8.5 — Master Evidence (Fail Pack)", table, plot_items, notes)
+    write_markdown(report_md, "UET v0.9.0 — Master Evidence (Fail Pack)", table, plot_items, notes)
 
     # Optional PDF
     report_pdf = out_dir / "UET_v0_8_5_master_evidence.pdf"

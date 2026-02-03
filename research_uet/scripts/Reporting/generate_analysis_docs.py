@@ -56,7 +56,7 @@ def generate_after_doc(topic_path, meta):
                 after_file = after_dir / "solution.md"
 
                 # Check for Result Log
-                result_log = topic_path / "Result" / "execution_v0.8.7.log"
+                result_log = topic_path / "Result" / "execution_v0.9.0.log"
                 pass_status = "UNKNOWN"
                 if result_log.exists():
                     with open(result_log, "r", encoding="utf-8") as f:
@@ -96,7 +96,7 @@ The solution has been verified computationally.
 - **Status**: **{pass_status}**
 - **Validation**:
   - The script `{topic_path.name}/Code/test_*.py` confirms the model matches observation.
-  - See `../../../Result/execution_v0.8.7.log` for raw output.
+  - See `../../../Result/execution_v0.9.0.log` for raw output.
 
 {viz_section}
 ## Conclusion

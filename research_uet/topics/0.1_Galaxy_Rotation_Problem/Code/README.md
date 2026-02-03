@@ -19,11 +19,11 @@ Code/
     Research_Residual_Analysis.py  # Diagnostic Compass
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # Run validation benchmark
 python research_uet/topics/0.1_Galaxy_Rotation_Problem/Code/03_Research/Research_Galaxy_Rotation.py
@@ -45,7 +45,7 @@ python research_uet/topics/0.1_Galaxy_Rotation_Problem/Code/04_Competitor/Compet
 
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Tests | Status |
 |--------|-------|--------|
@@ -69,7 +69,7 @@ Uses `Engine_Galaxy_V3.py` (v3.3) with the refined Alpha-Law coupling.
 - **Engine needed?** Yes - v3.3 solved the Dwarf over-prediction issue.
 - **Proof needed?** Yes - Axiom 3 symbolic derivation is required for theoretical grounding.
 
-## Key Physics
+## 🧬 Key Physics
 
 ```
 v^2 = G * (M_b + M_I) / r

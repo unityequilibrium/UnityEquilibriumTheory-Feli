@@ -5,7 +5,7 @@
 | Section | Description | Status |
 |---------|-------------|--------|
 | [Core Concepts](#core-concepts) | พื้นฐาน UET | ✅ Complete |
-| [v0.8.7 Research](#v087-research) | งานวิจัยล่าสุด | 🔄 Active |
+| [v0.9.0 Research](#v087-research) | งานวิจัยล่าสุด | 🔄 Active |
 | [Theory Development](#theory-development) | พัฒนาทฤษฎี | 🔄 Active |
 | [Black Hole + UET](#black-hole--uet-research) | วิจัย Black Hole | 🆕 New |
 
@@ -52,7 +52,7 @@
 
 ---
 
-## v0.8.7 Research
+## v0.9.0 Research
 
 > งานวิจัยเวอร์ชัน 0.8.7
 

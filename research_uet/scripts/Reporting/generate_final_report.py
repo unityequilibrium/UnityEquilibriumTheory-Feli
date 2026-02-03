@@ -8,7 +8,7 @@ TOPICS_DIR = current_file.parents[2] / "topics"
 
 
 def generate_report(topic_path):
-    result_log = topic_path / "Result" / "execution_v0.8.7.log"
+    result_log = topic_path / "Result" / "execution_v0.9.0.log"
     doc_after_dir = topic_path / "Doc" / "after"
     doc_after_dir.mkdir(parents=True, exist_ok=True)
     report_path = doc_after_dir / "result_summary.md"
@@ -41,7 +41,7 @@ def generate_report(topic_path):
             status = "FAILURE"
 
     # Generate Report Content
-    report = f"""# Final Results Analysis (v0.8.7)
+    report = f"""# Final Results Analysis (v0.9.0)
 
 ## Execution Summary
 **Date**: {time.ctime(os.path.getmtime(result_log))}
@@ -60,7 +60,7 @@ The implementation has been verified against the defined criteria.
 - **Pass Rate**: {"100%" if status == "SUCCESS" else "Mixed"}
 - **Production Readiness**: {"Ready" if status == "SUCCESS" else "Requires Research"}
 
-[Full Log](../../Result/execution_v0.8.7.log) | [Master Index](../../../README.md)
+[Full Log](../../Result/execution_v0.9.0.log) | [Master Index](../../../README.md)
 """
 
     with open(report_path, "w", encoding="utf-8") as f:

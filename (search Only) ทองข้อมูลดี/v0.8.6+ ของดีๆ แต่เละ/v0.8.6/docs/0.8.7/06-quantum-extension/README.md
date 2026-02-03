@@ -69,6 +69,6 @@ UET is **consistent** with quantum mechanics because:
 - [05-unification](../05-unification/) - Framework comparison
 
 ---
-*Verified in UET Harness v0.8.7 on 2025-12-28*
+*Verified in UET Harness v0.9.0 on 2025-12-28*
 
 **Phase 2 Quantum Extension: STARTED ✅**

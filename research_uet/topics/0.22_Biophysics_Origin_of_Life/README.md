@@ -1,16 +1,16 @@
 # 🧬 0.22 Biophysics & Origin of Life
 
-## 📋 Table of Contents
+## 1. 📂 5x4 Grid Structure
 
-1. [Overview](#-overview)
-2. [📄 Analysis: Life Engine (Entropy)](Doc/ANALYSIS_LIFE_ENGINE.md)
-3. [📄 Analysis: Life Proof (Thermodynamics)](Doc/ANALYSIS_LIFE_PROOF.md)
-4. [📄 Analysis: Neural Check (Seizures)](Doc/ANALYSIS_NEURAL_RESEARCH.md)
-5. [The Problem](#-the-problem)
-6. [UET Solution](#-uet-solution)
-7. [Results](#-test-results)
-8. [Quick Start](#-quick-start)
-9. [Files](#-files-in-this-module)
+| Pillar | Purpose |
+| :--- | :--- |
+| **Doc/** | Analysis of Homeostasis and Entropy Resistance. |
+| **Ref/** | Schrödinger (What is Life?), Prigogine (Dissipative Systems). |
+| **Data/** | Neural signal logs and metabolic rates. |
+| **Code/** | Logic levels: 01_Engine (Life Entropy), 02_Proof (Homeostasis). |
+| **Result/** | Phase plots and entropy reduction curves. |
+
+---
 
 ---
 
@@ -57,10 +57,10 @@ Life creates local order ($S \downarrow$) by exporting massive amounts of disord
 
 ---
 
-## 🚀 Quick Start
+## 2. ⚡ Quick Start
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Life Engine (Entropy Simulation)
 python research_uet/topics/0.22_Biophysics_Origin_of_Life/Code/01_Engine/Engine_Life_Entropy.py

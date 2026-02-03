@@ -5,17 +5,18 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="research-uet",
-    version="0.8.7",
+    version="0.9.0",
     author="Unity Equilibrium Theory Team",
     author_email="contact@unityequilibrium.io",
     description="A Unified Physics Simulation Framework (UET)",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/unityequilibrium/Equation-UET-v0.8.7",
+    url="https://github.com/unityequilibrium/Equation-UET-v0.9.0",
     packages=find_packages(),
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Science/Research",
+        "Intended Audience :: Developers",
         "Topic :: Scientific/Engineering :: Physics",
         "Topic :: Scientific/Engineering :: Mathematics",
         "License :: OSI Approved :: MIT License",

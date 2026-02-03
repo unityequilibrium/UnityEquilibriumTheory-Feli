@@ -1,0 +1,20 @@
+[
+    {
+        "method": "Standard LARP",
+        "material": "MAPbBr3",
+        "temperature_K": 300,
+        "base_defect_rate_pct": 3.9929669821742046e-07,
+        "final_defect_rate_pct": 3.9929669821742046e-07,
+        "purity_pct": 99.9999996007033,
+        "conclusion": "Standard process, higher defects."
+    },
+    {
+        "method": "Resonant LARP (UET)",
+        "material": "MAPbBr3",
+        "temperature_K": 300,
+        "base_defect_rate_pct": 3.9929669821742046e-07,
+        "final_defect_rate_pct": 6.3663008356562354e-24,
+        "purity_pct": 100.0,
+        "conclusion": "Resonance Guidance reduces defects significantly."
+    }
+]

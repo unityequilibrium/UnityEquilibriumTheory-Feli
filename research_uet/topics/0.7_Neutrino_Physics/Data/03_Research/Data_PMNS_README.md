@@ -28,4 +28,4 @@
 - **Lab tests**: `../../lab/01_particle_physics/`
 - **Theory**: `../../theory/01_particle/`
 
-*Particle Physics Data v0.8.7*
+*Particle Physics Data v0.9.0*

@@ -1,5 +1,5 @@
 # 🚨 NO PARAMETER FIXING POLICY
-## UET Validation Standard v0.8.7
+## UET Validation Standard v0.9.0
 
 ---
 
@@ -72,4 +72,4 @@ But UET's OWN parameters (κ, β, γ) must remain FREE.
 All tests in `research_uet/lab/` must comply with this policy.
 
 Date: 2026-01-03
-Version: 0.8.7
+Version: 0.9.0

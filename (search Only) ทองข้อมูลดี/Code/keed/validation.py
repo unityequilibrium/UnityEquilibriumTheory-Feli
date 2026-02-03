@@ -15,7 +15,7 @@ class ValidationResult:
 class UETValidator:
     """
     Implements the 'Anti-Crash' logic extracted from legacy grade_runs.py.
-    Safety limits are based on stability thresholds observed in v0.8.6.
+    Safety limits are based on stability thresholds observed in v0.9.0.
     """
 
     # Thresholds from grade_runs.py

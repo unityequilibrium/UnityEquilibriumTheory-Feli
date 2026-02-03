@@ -50,7 +50,7 @@ Code/
 
 \```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # Run individual scripts
 python research_uet/topics/X.XX_Topic_Name/Code/03_Research/Research_Script1.py
@@ -161,7 +161,7 @@ Code/
 ## Run Commands
 
 \```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 python research_uet/topics/X.XX_Topic_Name/Code/03_Research/Research_Script1.py
 \```
 

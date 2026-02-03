@@ -1,7 +1,7 @@
 """
 UET Research Parameter Sweep (The "Brutal Tester" Restoration)
 ==============================================================
-Replicates the rigorous "Cross-Sweep" methodology from v0.8.6.
+Replicates the rigorous "Cross-Sweep" methodology from v0.9.0.
 
 Objective:
     Map the Stability Phase Space of the UET Master Equation (V3.0).

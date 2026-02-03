@@ -2,7 +2,7 @@
 UET Tensor Parity Validator
 ===========================
 Purpose: Ensure that the new Matrix Engine (v0.9) produces physically consistent results
-compared to the legacy Functional Engine (v0.8.7).
+compared to the legacy Functional Engine (v0.9.0).
 
 We cannot expect bit-exact matches (Function vs Discrete Grid), but we expect
 PHYSICAL PARITY (Trends, Energy Conservation, Information Generation).

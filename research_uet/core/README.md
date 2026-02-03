@@ -1,7 +1,7 @@
 # ⚙️ Core — UET Mathematical Engine
 
 > **The Physics Engine solving the Unity Equilibrium Master Equation**  
-> **Version 0.8.7** | Last Updated: 2026-01-13
+> **Version 0.9.0** | Last Updated: 2026-01-13
 
 ![Engine](https://img.shields.io/badge/Engine-UET_Master_Eq-blue)
 ![Coverage](https://img.shields.io/badge/Axioms-12%2F12-brightgreen)
@@ -111,5 +111,5 @@ These scripts ensure the engine adheres to fundamental physics limits (Axiom 11)
 
 ---
 
-*Unity Equilibrium Theory — Core Engine v0.8.7*
+*Unity Equilibrium Theory — Core Engine v0.9.0*
 *"𝒱 = -ΔΩ — ระบบที่ลดความไม่สมดุล = ระบบที่สร้าง Value"*

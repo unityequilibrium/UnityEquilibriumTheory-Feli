@@ -9,7 +9,7 @@ This document summarizes the comprehensive synthesis of **Topic 0.18: Quantum Co
 
 ### 2.1 P vs NP Resolution (Short-Path Discovery)
 By treating the discrete search space as a continuous geometric manifold, UET achieves a **$\sqrt{N}$ speedup** with near-perfect fidelity. This confirms that many "hard" problems in NP are actually "easy" in the UET Information Field.
-- **Evidence:** [ANALYSIS_RESEARCH.md](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/topics/0.18_Quantum_Computing/Doc/03_Research/ANALYSIS_RESEARCH.md)
+- **Evidence:** [ANALYSIS_RESEARCH.md](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.9.0/research_uet/topics/0.18_Quantum_Computing/Doc/03_Research/ANALYSIS_RESEARCH.md)
 
 ### 2.2 Collatz Conjecture: The Universal Drain
 We proved that the 3n+1 problem is a **Stability Manifold**. By calculating a consistent **Negative Lyapunov Gradient (-0.43)**, we have shown that every positive integer must naturally dissipate toward the Unity Sink ($N=1$).
@@ -17,7 +17,7 @@ We proved that the 3n+1 problem is a **Stability Manifold**. By calculating a co
 
 ### 2.3 Noise-Resistant Entanglement
 Unlike discrete bit-flipping simulators, UET Unity circuits use **Resonant Coupling**. This makes our simulated Bell States 100% stable, proving that "Entropy" is merely "Field Noise" that can be regulated by the $\Omega$ functional.
-- **Evidence:** [ANALYSIS_ENGINE.md](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/topics/0.18_Quantum_Computing/Doc/01_Engine/ANALYSIS_ENGINE.md)
+- **Evidence:** [ANALYSIS_ENGINE.md](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.9.0/research_uet/topics/0.18_Quantum_Computing/Doc/01_Engine/ANALYSIS_ENGINE.md)
 
 ---
 

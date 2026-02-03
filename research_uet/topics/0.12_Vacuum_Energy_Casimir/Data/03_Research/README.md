@@ -19,4 +19,4 @@
 - **Lab tests**: `../../lab/03_condensed_matter/`
 - **Theory**: `../../theory/03_condensed/`
 
-*Condensed Matter Data v0.8.7*
+*Condensed Matter Data v0.9.0*

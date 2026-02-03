@@ -1,16 +1,16 @@
 # 🌌 0.23 Unity Scale Link (Grand Unification)
 
-## 📋 Table of Contents
+## 1. 📂 5x4 Grid Structure
 
-1. [Overview](#-overview)
-2. [📄 Analysis: Derivation (The Math)](Doc/ANALYSIS_UNITY_DERIVATION.md)
-3. [📄 Analysis: Falsification (The Limits)](Doc/ANALYSIS_FALSIFICATION.md)
-4. [📄 Analysis: Cross-Domain (The Magic)](Doc/ANALYSIS_CROSS_DOMAIN.md)
-5. [The Problem](#-the-problem)
-6. [UET Solution](#-uet-solution)
-7. [Results](#-test-results)
-8. [Quick Start](#-quick-start)
-9. [Files](#-files-in-this-module)
+| Pillar | Purpose |
+| :--- | :--- |
+| **Doc/** | Analysis of Cross-Scale Unity and Planck Link. |
+| **Ref/** | Suskind (Holographic Principle), Maldacena (AdS/CFT). |
+| **Data/** | Comparison of Galactic vs Atomic parameters. |
+| **Code/** | Logic levels: 01_Engine (Unity Solver), 03_Research (Falsification). |
+| **Result/** | Scale Invariance charts and Unity ratio logs. |
+
+---
 
 ---
 
@@ -60,10 +60,10 @@ $$ \Omega = V(C) + \kappa |\nabla C|^2 + \beta C \cdot I $$
 
 ---
 
-## 🚀 Quick Start
+## 2. ⚡ Quick Start
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. The Math Verification
 python research_uet/topics/0.23_Unity_Scale_Link/Code/01_Engine/Engine_Derivation.py

@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 TARGET_DIR = (
-    r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\(search Only) ทองข้อมูลดี\v0.8.7+"
+    r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\(search Only) ทองข้อมูลดี\v0.9.0+"
 )
 ZIPS = ["02.01.2026.zip", "03.01.2026.zip", "lab 02.01.2026.zip"]
 

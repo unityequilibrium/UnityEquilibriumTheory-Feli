@@ -30,7 +30,7 @@ from pathlib import Path
 # 1. ROBUST ENVIRONMENT SETUP
 # =============================================================================
 script_path = Path(__file__).resolve()
-project_root = script_path.parents[5]  # .../Lab_uet_harness_v0.8.7
+project_root = script_path.parents[5]  # .../Lab_uet_harness_v0.9.0
 
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))

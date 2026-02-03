@@ -1,5 +1,5 @@
 """
-Engine_Power_Dynamics.py - UET Topic 0.25 (v0.8.7)
+Engine_Power_Dynamics.py - UET Topic 0.25 (v0.9.0)
 =================================================
 Refined Strategic Power Engine.
 Unified with UET Master Equation while maintaining research script compatibility.
@@ -65,7 +65,7 @@ class StrategicAgent:
 
 class PowerDynamicsEngine(UETBaseSolver):
     """
-    Standardized UET Engine for Strategic Power Simulations (v0.8.7).
+    Standardized UET Engine for Strategic Power Simulations (v0.9.0).
     Unified with Field Theory via UETBaseSolver.
     """
 
@@ -262,7 +262,7 @@ class PowerDynamicsEngine(UETBaseSolver):
         return productivity
 
     def step(self, step_idx: int = 0, **kwargs):
-        """Axiomatic Step with Strategic Agent Behavior (v0.8.7)."""
+        """Axiomatic Step with Strategic Agent Behavior (v0.9.0)."""
         if INTEGRITY_KILL_SWITCH:
             return
 
@@ -335,7 +335,7 @@ class PowerDynamicsEngine(UETBaseSolver):
 
 
 if __name__ == "__main__":
-    print("🚀 Verifying Strategy Engine (0.25) - Standardized v0.8.7...")
+    print("🚀 Verifying Strategy Engine (0.25) - Standardized v0.9.0...")
     engine = PowerDynamicsEngine(nx=100)
     engine.seed_from_country("World_Total")
     for i in range(100):

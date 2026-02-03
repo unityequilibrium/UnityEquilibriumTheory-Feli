@@ -14,7 +14,7 @@ Usage:
     params = get_params("0.1")  # Galaxy rotation
 
 Author: UET Research Team
-Version: 0.8.7
+Version: 0.9.0
 """
 
 from .uet_parameters import (

@@ -13,7 +13,7 @@ from pathlib import Path
 
 def main():
     print("=" * 70)
-    print("   STRONG FORCE VALIDATION - UET HARNESS v0.8.7")
+    print("   STRONG FORCE VALIDATION - UET HARNESS v0.9.0")
     print("=" * 70)
     print()
 

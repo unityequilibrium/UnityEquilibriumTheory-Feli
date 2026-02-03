@@ -14,7 +14,7 @@
 | Pillar | Purpose |
 | :--- | :--- |
 | **Doc/** | Theoretical expansion of Social Manifolds and Strategic Leverage. |
-| **Ref/** | Legacy v0.8.6 `power_dynamics` logs and Game Theory pivots. |
+| **Ref/** | Legacy v0.9.0 `power_dynamics` logs and Game Theory pivots. |
 | **Data/** | Historical inequality simulations and 'Whale' resource logs. |
 | **Code/** | Agent-Based Unity Engine and Leverage Research scripts. |
 | **Result/** | Verified stability reports (Omega reduction logs). |
@@ -76,6 +76,6 @@ python research_uet/topics/0.25_Strategy_Power_Economics/Code/02_Proof/Proof_Soc
 ---
 
 ## 📁 Key Files
-- [Engine_Power_Dynamics.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/topics/0.25_Strategy_Power_Economics/Code/01_Engine/Engine_Power_Dynamics.py) - Social Field Engine.
-- [Research_Leverage_Wave.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/topics/0.25_Strategy_Power_Economics/Code/03_Research/Research_Leverage_Wave.py) - Power shift tactical.
-- [Proof_Social_Stability.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/topics/0.25_Strategy_Power_Economics/Code/02_Proof/Proof_Social_Stability.py) - Inequality verification.
+- [Engine_Power_Dynamics.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.9.0/research_uet/topics/0.25_Strategy_Power_Economics/Code/01_Engine/Engine_Power_Dynamics.py) - Social Field Engine.
+- [Research_Leverage_Wave.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.9.0/research_uet/topics/0.25_Strategy_Power_Economics/Code/03_Research/Research_Leverage_Wave.py) - Power shift tactical.
+- [Proof_Social_Stability.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.9.0/research_uet/topics/0.25_Strategy_Power_Economics/Code/02_Proof/Proof_Social_Stability.py) - Inequality verification.

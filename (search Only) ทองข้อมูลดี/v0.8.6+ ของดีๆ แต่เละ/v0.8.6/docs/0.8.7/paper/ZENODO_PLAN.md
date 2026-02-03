@@ -1,10 +1,10 @@
 # UET Data Archiving Plan (Zenodo)
 
 ## Goal
-To provide a immutable, citable record of the UET v0.8.7 validation data and code.
+To provide a immutable, citable record of the UET v0.9.0 validation data and code.
 
 ## Zenodo Metadata
-- **Title:** Unified Energy Theory (UET) Validation Suite v0.8.7
+- **Title:** Unified Energy Theory (UET) Validation Suite v0.9.0
 - **Creators:** UET Research Team
 - **Description:** This dataset contains the full 52-test validation suite for UET, including the stability tester, raw results JSON, and topic-specific literature reviews.
 - **License:** Creative Commons Attribution 4.0 International

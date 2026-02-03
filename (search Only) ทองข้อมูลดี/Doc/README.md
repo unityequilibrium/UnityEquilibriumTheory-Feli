@@ -1,9 +1,9 @@
-# 🔬 Unity Equilibrium Theory (UET) v0.8.7: The Unified Physics Framework
+# 🔬 Unity Equilibrium Theory (UET) v0.9.0: The Unified Physics Framework
 
 ![Tests](https://img.shields.io/badge/Tests-127_Scripts-brightgreen)
 ![Topics](https://img.shields.io/badge/Topics-21_Domains-blue)
 ![Fluid](https://img.shields.io/badge/Fluid_Dynamics-816x_Faster-ff69b4)
-![Version](https://img.shields.io/badge/Version-v0.8.7-orange)
+![Version](https://img.shields.io/badge/Version-v0.9.0-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 > **"Physics is the System Administration of the Universe — managing resources to prevent the system from crashing."**
@@ -36,7 +36,7 @@ Information has "Latency" → Information Latency = Mass
 
 ---
 
-## 🆕 New in v0.8.7 (Platinum Release)
+## 🆕 New in v0.9.0 (Platinum Release)
 
 *   **Standardized 5x4 Grid**: All 21 topics now follow a strict structure (Engine / Proof / Research / Competitor).
 *   **Restored Legacy Engines**:
@@ -106,7 +106,7 @@ graph TD
 
 ---
 
-## 📊 Test Results (v0.8.7)
+## 📊 Test Results (v0.9.0)
 
 ### Summary
 
@@ -145,8 +145,8 @@ python research_uet/topics/run_all_tests.py
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/unityequilibrium/Equation-UET-v0.8.7.git
-cd Equation-UET-v0.8.7
+git clone https://github.com/unityequilibrium/Equation-UET-v0.9.0.git
+cd Equation-UET-v0.9.0
 pip install -r requirements.txt
 ```
 
@@ -257,9 +257,9 @@ GRADE: EXCELLENT (100+ tests, 90%+ pass)
 
 ---
 
-*Version 0.8.7 | MIT License | Last Updated: 2026-01-14*
+*Version 0.9.0 | MIT License | Last Updated: 2026-01-14*
 
-*[GitHub](https://github.com/unityequilibrium/Equation-UET-v0.8.7) | [📊 View All Experiments](https://github.com/unityequilibrium/Equation-UET-v0.8.7/tree/main/research_uet/topics)*
+*[GitHub](https://github.com/unityequilibrium/Equation-UET-v0.9.0) | [📊 View All Experiments](https://github.com/unityequilibrium/Equation-UET-v0.9.0/tree/main/research_uet/topics)*
 
 ---
 

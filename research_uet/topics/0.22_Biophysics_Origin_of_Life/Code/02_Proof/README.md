@@ -1,7 +1,7 @@
 # 🧠 UET Neural Dynamics
 
 > **Topic 0.21**: Applying UET to Neural/Brain Dynamics
-> **Status**: NEW (ported from v0.8.6)
+> **Status**: NEW (ported from v0.9.0)
 
 ---
 

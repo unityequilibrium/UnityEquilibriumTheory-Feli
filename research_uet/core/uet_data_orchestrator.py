@@ -1,5 +1,5 @@
 """
-uet_data_orchestrator.py - UET Core (v0.8.7)
+uet_data_orchestrator.py - UET Core (v0.9.0)
 ===========================================
 Standardized Data Orchestrator for Total Connectivity.
 Prevents "Shadow Data" by providing a unified interface for all topics.

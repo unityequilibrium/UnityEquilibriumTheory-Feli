@@ -20,11 +20,11 @@ Code/
     casimir_solver.py             # Lifshitz Theory
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine (4D Full Option)
 python research_uet/topics/0.12_Vacuum_Energy_Casimir/Code/01_Engine/Engine_Vacuum.py
@@ -39,7 +39,7 @@ python research_uet/topics/0.12_Vacuum_Energy_Casimir/Code/03_Research/casimir_t
 python research_uet/topics/0.12_Vacuum_Energy_Casimir/Code/03_Research/Research_Casimir.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -56,6 +56,12 @@ python research_uet/topics/0.12_Vacuum_Energy_Casimir/Code/03_Research/Research_
 
 ### 4D Hyper-Lattice
 We demonstrated that simply calculating in 3D leads to infinite energy. By simulating a **4D Lattice** (Hypercube modes), the energy naturally converges to the observed Dark Energy value without arbitrary fine-tuning.
+
+## 🧬 Key Physics
+
+```
+E_vacuum = (hbar * pi) / (480 * d^4) (Casimir Limit)
+```
 
 ## ASCII Note
 

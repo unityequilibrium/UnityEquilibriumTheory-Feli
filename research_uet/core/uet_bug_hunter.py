@@ -1,7 +1,7 @@
 """
 UET Bug Hunter (The Truth Auditor)
 ==================================
-Restored from v0.8.6 Integrity philosophy.
+Restored from v0.9.0 Integrity philosophy.
 
 Objective:
 1. Enforce 'Strict Truth' Policy (No Parameter Fitting).

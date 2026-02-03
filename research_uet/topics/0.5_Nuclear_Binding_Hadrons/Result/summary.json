@@ -2,8 +2,8 @@
   "run_id": "Nuclear_Binding",
   "simulation": "Nuclear_Binding",
   "status": "COMPLETED",
-  "timestamp": "Fri Jan 30 10:03:18 2026",
-  "duration_seconds": 1.9686610698699951,
+  "timestamp": "Mon Feb  2 19:00:13 2026",
+  "duration_seconds": 2.1009931564331055,
   "total_steps": 1,
   "metadata": {
     "data_source": "AME2020",

@@ -1,0 +1,29 @@
+{
+  "run_id": "1770089614_Research_Riemann_Siege",
+  "simulation": "Research_Riemann_Siege",
+  "status": "COMPLETED",
+  "timestamp": "Tue Feb  3 10:33:34 2026",
+  "duration_seconds": 2.6099109649658203,
+  "total_steps": 50,
+  "metadata": {
+    "topic": "0.18_Mathnicry",
+    "experiment": "Riemann_Hypothesis_Verification",
+    "zeros_checked": 50,
+    "precision": 15
+  },
+  "final_state": {
+    "step": 1,
+    "time": 0.023214101791381836,
+    "omega": 6.668186342283778e-16,
+    "kinetic": 14.134725141734695,
+    "potential": 0.0,
+    "entropy": 0.0,
+    "gradient_norm": 0.0,
+    "max_density": 0.0,
+    "min_density": 0.0,
+    "is_stable": true,
+    "Zero_ID": 1,
+    "Imaginary_t": 14.134725141734695,
+    "Status": "PASS"
+  }
+}

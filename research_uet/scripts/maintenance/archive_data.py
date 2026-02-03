@@ -11,7 +11,7 @@ from pathlib import Path
 current_file = Path(__file__).resolve()
 PROJECT_ROOT = current_file.parents[3]
 # (search Only) ทองข้อมูลดี is at root
-ARCHIVE = PROJECT_ROOT / "(search Only) ทองข้อมูลดี" / "v0.8.7+" / "data"
+ARCHIVE = PROJECT_ROOT / "(search Only) ทองข้อมูลดี" / "v0.9.0+" / "data"
 
 # Destination
 # research_uet/topics

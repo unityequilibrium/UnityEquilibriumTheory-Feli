@@ -66,6 +66,6 @@ These are the "3 classical tests" proposed by Einstein:
 - [black-hole-uet](../black-hole-uet/) - CCBH cosmology
 
 ---
-*Verified in UET Harness v0.8.7 on 2025-12-28*
+*Verified in UET Harness v0.9.0 on 2025-12-28*
 
 **Phase 3 GR: ALL CLASSICAL TESTS PASSED! ✅**

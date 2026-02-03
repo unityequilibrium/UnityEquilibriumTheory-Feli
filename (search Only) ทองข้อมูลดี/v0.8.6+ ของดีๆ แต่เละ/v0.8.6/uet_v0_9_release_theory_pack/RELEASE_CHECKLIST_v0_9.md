@@ -36,7 +36,7 @@ Release v0.9 ถือว่า “ผ่าน” เมื่อ:
 - [ ] Glossary ครบคำที่คนงง (phase, bias, seed, sweep, Strength)
 
 ### D. Stability & Regression
-- [ ] รัน baseline sweep (เล็ก) แล้ว “รูปเฟส” ไม่เปลี่ยนผิดปกติเมื่อเทียบกับ v0.8.5+
+- [ ] รัน baseline sweep (เล็ก) แล้ว “รูปเฟส” ไม่เปลี่ยนผิดปกติเมื่อเทียบกับ v0.9.0+
 - [ ] Validator thresholds ไม่เปลี่ยนโดยไม่ bump version
 - [ ] Aggregator ไม่ทำให้คอลัมน์สำคัญเป็น NaN (delta/s extraction ต้องผ่าน)
 

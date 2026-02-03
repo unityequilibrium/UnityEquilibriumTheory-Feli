@@ -34,11 +34,11 @@ Code/
 - **`phase_solver.py`**: Older Phase Solver implementation (Legacy).
 - **`run_phase_experiment.py`**: Main experiment runner for order parameter growth.
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Demo
 python research_uet/topics/0.11_Phase_Transitions/Code/01_Engine/Engine_Phase.py
@@ -50,7 +50,7 @@ python research_uet/topics/0.11_Phase_Transitions/Code/04_Competitor/run_phase_e
 python research_uet/topics/0.11_Phase_Transitions/Code/03_Research/test_05_phase_demixing.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -75,6 +75,12 @@ The potential $V(C) = \frac{\alpha}{2}C^2 + \frac{\gamma}{4}C^4$ with $\alpha < 
 | Dataset | DOI / Source | Description |
 | :--- | :--- | :--- |
 | **Al-Zn SAXS** | Rundman & Hilliard (1967) | Small Angle X-ray Scattering data of spinodal decomposition in Al-22 at.% Zn. |
+
+## 🧬 Key Physics
+
+```
+dC/dt = M * grad^2(df/dC - kappa * grad^2(C))
+```
 
 ## ASCII Note
 

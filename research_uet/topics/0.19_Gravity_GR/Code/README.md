@@ -14,10 +14,10 @@ Code/
     Research_G_Constant.py     # Validates G against CODATA 2018
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Gravity Engine (Thermodynamic Calculation)
 python research_uet/topics/0.19_Gravity_GR/Code/01_Engine/Engine_Gravity_GR.py
@@ -29,7 +29,7 @@ python research_uet/topics/0.19_Gravity_GR/Code/02_Proof/Proof_Equivalence_Princ
 python research_uet/topics/0.19_Gravity_GR/Code/03_Research/Research_G_Constant.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Tests | Status |
 |--------|-------|--------|
@@ -39,10 +39,11 @@ python research_uet/topics/0.19_Gravity_GR/Code/03_Research/Research_G_Constant.
 
 **Total: All Systems PASS**
 
-## key Concepts
+## 🧬 Key Physics
 
-1.  **Entropic Gravity:** $\mathbf{g} = -c^2 \nabla (\ln \Omega)$
-2.  **Equivalence:** Inertia and Gravity act on the same Information Field -> Identity is Tautology.
+```
+g = -c^2 * grad(ln(Omega)) (Entropic Gravity)
+```
 
 ## ASCII Note
 All Unicode replaced with ASCII for Windows compatibility.

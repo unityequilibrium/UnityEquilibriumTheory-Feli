@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Great Barrier Reef (North)",
+        "lat": -10.5,
+        "lon": 145.0,
+        "max_temp": 32.5,
+        "bleaching_risk": "Severe"
+    },
+    {
+        "name": "Great Barrier Reef (South)",
+        "lat": -23.5,
+        "lon": 151.0,
+        "max_temp": 29.8,
+        "bleaching_risk": "Low"
+    },
+    {
+        "name": "Andaman Sea (Thailand)",
+        "lat": 7.5,
+        "lon": 98.3,
+        "max_temp": 32.2,
+        "bleaching_risk": "Severe"
+    },
+    {
+        "name": "Maldives (Indian Ocean)",
+        "lat": 3.2,
+        "lon": 73.2,
+        "max_temp": 31.8,
+        "bleaching_risk": "High"
+    },
+    {
+        "name": "Red Sea (Egypt)",
+        "lat": 27.0,
+        "lon": 34.0,
+        "max_temp": 30.5,
+        "bleaching_risk": "Moderate"
+    },
+    {
+        "name": "Hawaii (Kona)",
+        "lat": 19.6,
+        "lon": -156.0,
+        "max_temp": 29.5,
+        "bleaching_risk": "Low"
+    },
+    {
+        "name": "Caribbean (Bahamas)",
+        "lat": 24.0,
+        "lon": -77.5,
+        "max_temp": 30.8,
+        "bleaching_risk": "Moderate"
+    },
+    {
+        "name": "Florida Keys (USA)",
+        "lat": 24.6,
+        "lon": -81.5,
+        "max_temp": 32.0,
+        "bleaching_risk": "Severe"
+    },
+    {
+        "name": "Persian Gulf (Qatar)",
+        "lat": 25.3,
+        "lon": 51.5,
+        "max_temp": 35.0,
+        "bleaching_risk": "Extreme"
+    },
+    {
+        "name": "Coral Triangle (Indonesia)",
+        "lat": -2.5,
+        "lon": 125.0,
+        "max_temp": 31.5,
+        "bleaching_risk": "High"
+    }
+]

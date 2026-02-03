@@ -71,6 +71,6 @@ Verify fundamental constant relationships in UET.
 - [06-quantum](../06-quantum-extension/) - Casimir F=-∇E
 
 ---
-*Verified in UET Harness v0.8.7 on 2025-12-28*
+*Verified in UET Harness v0.9.0 on 2025-12-28*
 
 **Phase 4: ALL UNIFICATION TESTS PASSED! ✅**

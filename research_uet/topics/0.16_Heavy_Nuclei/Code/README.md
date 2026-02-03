@@ -16,10 +16,10 @@ Code/
     Research_Heavy_Binding.py  # Validation against AME2020 Real Data
 ```
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Engines
 python research_uet/topics/0.16_Heavy_Nuclei/Code/01_Engine/Engine_Fission_Solver.py
@@ -33,7 +33,7 @@ python research_uet/topics/0.16_Heavy_Nuclei/Code/03_Research/Research_Heavy_Bin
 python research_uet/topics/0.16_Heavy_Nuclei/Code/03_Research/Research_Heavy_Nuclei.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Tests | Status |
 |--------|-------|--------|
@@ -58,7 +58,7 @@ Uses `Engine_Heavy_Nuclei.py` which extends the core solver with a specific "Sur
 - **Engine Verified**: The fission solver correctly predicts topological rupture without needing cut-off hacks.
 - **Proof Verified**: The binding energy curve naturally emerges from the competition between Volume Term ($\alpha$) and Surface Term ($\kappa$).
 
-## Key Physics
+## 🧬 Key Physics
 
 ```
 Omega = V(C) + kappa|grad(C)|^2 + gamma*C^3 + sigma*A^(2/3)*f(C)

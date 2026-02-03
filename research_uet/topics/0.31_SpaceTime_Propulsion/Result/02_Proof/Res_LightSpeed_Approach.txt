@@ -1,0 +1,117 @@
+
+🚀 UET PROOF 05: THE LIGHT-SPEED APPROACH
+=========================================
+Scenario: Exiting Solar System & Activating Interstellar SGS
+Current Position: 1.0 AU (Earth Orbit)
+🛑 SAFETY BREACH: Too close to Solar System ( < 100 AU). Use Planetary Slingshot instead.
+... Moving to Interstellar Vacuum (Heliopause) ...
+✅ CLEAR: Interstellar Space. SGS Authorized.
+
+Target Velocity: 29,979,246 m/s (0.1c)
+Initial Velocity: 11,000 m/s
+------------------------------------------------------------
+Stage 01: V = 311,677 m/s (+300,677 m/s) | 0.10% c
+Stage 02: V = 612,354 m/s (+300,677 m/s) | 0.20% c
+Stage 03: V = 913,032 m/s (+300,677 m/s) | 0.30% c
+Stage 04: V = 1,213,709 m/s (+300,677 m/s) | 0.40% c
+Stage 05: V = 1,514,386 m/s (+300,677 m/s) | 0.51% c
+Stage 06: V = 1,815,063 m/s (+300,677 m/s) | 0.61% c
+Stage 07: V = 2,115,741 m/s (+300,677 m/s) | 0.71% c
+Stage 08: V = 2,416,418 m/s (+300,677 m/s) | 0.81% c
+Stage 09: V = 2,717,095 m/s (+300,677 m/s) | 0.91% c
+Stage 10: V = 3,017,772 m/s (+300,677 m/s) | 1.01% c
+Stage 11: V = 3,318,449 m/s (+300,677 m/s) | 1.11% c
+Stage 12: V = 3,619,127 m/s (+300,677 m/s) | 1.21% c
+Stage 13: V = 3,919,804 m/s (+300,677 m/s) | 1.31% c
+Stage 14: V = 4,220,481 m/s (+300,677 m/s) | 1.41% c
+Stage 15: V = 4,521,158 m/s (+300,677 m/s) | 1.51% c
+Stage 16: V = 4,821,835 m/s (+300,677 m/s) | 1.61% c
+Stage 17: V = 5,122,513 m/s (+300,677 m/s) | 1.71% c
+Stage 18: V = 5,423,190 m/s (+300,677 m/s) | 1.81% c
+Stage 19: V = 5,723,867 m/s (+300,677 m/s) | 1.91% c
+Stage 20: V = 6,024,544 m/s (+300,677 m/s) | 2.01% c
+Stage 21: V = 6,325,222 m/s (+300,677 m/s) | 2.11% c
+Stage 22: V = 6,625,899 m/s (+300,677 m/s) | 2.21% c
+Stage 23: V = 6,926,576 m/s (+300,677 m/s) | 2.31% c
+Stage 24: V = 7,227,253 m/s (+300,677 m/s) | 2.41% c
+Stage 25: V = 7,527,930 m/s (+300,677 m/s) | 2.51% c
+Stage 26: V = 7,828,608 m/s (+300,677 m/s) | 2.61% c
+Stage 27: V = 8,129,285 m/s (+300,677 m/s) | 2.71% c
+Stage 28: V = 8,429,962 m/s (+300,677 m/s) | 2.81% c
+Stage 29: V = 8,730,639 m/s (+300,677 m/s) | 2.91% c
+Stage 30: V = 9,031,316 m/s (+300,677 m/s) | 3.01% c
+Stage 31: V = 9,331,994 m/s (+300,677 m/s) | 3.11% c
+Stage 32: V = 9,632,671 m/s (+300,677 m/s) | 3.21% c
+Stage 33: V = 9,933,348 m/s (+300,677 m/s) | 3.31% c
+Stage 34: V = 10,234,025 m/s (+300,677 m/s) | 3.41% c
+Stage 35: V = 10,534,703 m/s (+300,677 m/s) | 3.51% c
+Stage 36: V = 10,835,380 m/s (+300,677 m/s) | 3.61% c
+Stage 37: V = 11,136,057 m/s (+300,677 m/s) | 3.71% c
+Stage 38: V = 11,436,734 m/s (+300,677 m/s) | 3.81% c
+Stage 39: V = 11,737,411 m/s (+300,677 m/s) | 3.92% c
+Stage 40: V = 12,038,089 m/s (+300,677 m/s) | 4.02% c
+Stage 41: V = 12,338,766 m/s (+300,677 m/s) | 4.12% c
+Stage 42: V = 12,639,443 m/s (+300,677 m/s) | 4.22% c
+Stage 43: V = 12,940,120 m/s (+300,677 m/s) | 4.32% c
+Stage 44: V = 13,240,797 m/s (+300,677 m/s) | 4.42% c
+Stage 45: V = 13,541,475 m/s (+300,677 m/s) | 4.52% c
+Stage 46: V = 13,842,152 m/s (+300,677 m/s) | 4.62% c
+Stage 47: V = 14,142,829 m/s (+300,677 m/s) | 4.72% c
+Stage 48: V = 14,443,506 m/s (+300,677 m/s) | 4.82% c
+Stage 49: V = 14,744,184 m/s (+300,677 m/s) | 4.92% c
+Stage 50: V = 15,044,861 m/s (+300,677 m/s) | 5.02% c
+Stage 51: V = 15,345,538 m/s (+300,677 m/s) | 5.12% c
+Stage 52: V = 15,646,215 m/s (+300,677 m/s) | 5.22% c
+Stage 53: V = 15,946,892 m/s (+300,677 m/s) | 5.32% c
+Stage 54: V = 16,247,570 m/s (+300,677 m/s) | 5.42% c
+Stage 55: V = 16,548,247 m/s (+300,677 m/s) | 5.52% c
+Stage 56: V = 16,848,924 m/s (+300,677 m/s) | 5.62% c
+Stage 57: V = 17,149,601 m/s (+300,677 m/s) | 5.72% c
+Stage 58: V = 17,450,278 m/s (+300,677 m/s) | 5.82% c
+Stage 59: V = 17,750,956 m/s (+300,677 m/s) | 5.92% c
+Stage 60: V = 18,051,633 m/s (+300,677 m/s) | 6.02% c
+Stage 61: V = 18,352,310 m/s (+300,677 m/s) | 6.12% c
+Stage 62: V = 18,652,987 m/s (+300,677 m/s) | 6.22% c
+Stage 63: V = 18,953,665 m/s (+300,677 m/s) | 6.32% c
+Stage 64: V = 19,254,342 m/s (+300,677 m/s) | 6.42% c
+Stage 65: V = 19,555,019 m/s (+300,677 m/s) | 6.52% c
+Stage 66: V = 19,855,696 m/s (+300,677 m/s) | 6.62% c
+Stage 67: V = 20,156,373 m/s (+300,677 m/s) | 6.72% c
+Stage 68: V = 20,457,051 m/s (+300,677 m/s) | 6.82% c
+Stage 69: V = 20,757,728 m/s (+300,677 m/s) | 6.92% c
+Stage 70: V = 21,058,405 m/s (+300,677 m/s) | 7.02% c
+Stage 71: V = 21,359,082 m/s (+300,677 m/s) | 7.12% c
+Stage 72: V = 21,659,759 m/s (+300,677 m/s) | 7.22% c
+Stage 73: V = 21,960,437 m/s (+300,677 m/s) | 7.33% c
+Stage 74: V = 22,261,114 m/s (+300,677 m/s) | 7.43% c
+Stage 75: V = 22,561,791 m/s (+300,677 m/s) | 7.53% c
+Stage 76: V = 22,862,468 m/s (+300,677 m/s) | 7.63% c
+Stage 77: V = 23,163,146 m/s (+300,677 m/s) | 7.73% c
+Stage 78: V = 23,463,823 m/s (+300,677 m/s) | 7.83% c
+Stage 79: V = 23,764,500 m/s (+300,677 m/s) | 7.93% c
+Stage 80: V = 24,065,177 m/s (+300,677 m/s) | 8.03% c
+Stage 81: V = 24,365,854 m/s (+300,677 m/s) | 8.13% c
+Stage 82: V = 24,666,532 m/s (+300,677 m/s) | 8.23% c
+Stage 83: V = 24,967,209 m/s (+300,677 m/s) | 8.33% c
+Stage 84: V = 25,267,886 m/s (+300,677 m/s) | 8.43% c
+Stage 85: V = 25,568,563 m/s (+300,677 m/s) | 8.53% c
+Stage 86: V = 25,869,240 m/s (+300,677 m/s) | 8.63% c
+Stage 87: V = 26,169,918 m/s (+300,677 m/s) | 8.73% c
+Stage 88: V = 26,470,595 m/s (+300,677 m/s) | 8.83% c
+Stage 89: V = 26,771,272 m/s (+300,677 m/s) | 8.93% c
+Stage 90: V = 27,071,949 m/s (+300,677 m/s) | 9.03% c
+Stage 91: V = 27,372,627 m/s (+300,677 m/s) | 9.13% c
+Stage 92: V = 27,673,304 m/s (+300,677 m/s) | 9.23% c
+Stage 93: V = 27,973,981 m/s (+300,677 m/s) | 9.33% c
+Stage 94: V = 28,274,658 m/s (+300,677 m/s) | 9.43% c
+Stage 95: V = 28,575,335 m/s (+300,677 m/s) | 9.53% c
+Stage 96: V = 28,876,013 m/s (+300,677 m/s) | 9.63% c
+Stage 97: V = 29,176,690 m/s (+300,677 m/s) | 9.73% c
+Stage 98: V = 29,477,367 m/s (+300,677 m/s) | 9.83% c
+Stage 99: V = 29,778,044 m/s (+300,677 m/s) | 9.93% c
+Stage 100: V = 30,078,721 m/s (+300,677 m/s) | 10.03% c
+
+✅ Plot saved to: C:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\research_uet\topics\0.31_SpaceTime_Propulsion\Result\02_Proof\relativistic_acceleration.png
+------------------------------------------------------------
+✅ SUCCESS: Reached 0.1c in 100 slingshots!
+Status: Space-Time Synchronized with Galactic Flow.

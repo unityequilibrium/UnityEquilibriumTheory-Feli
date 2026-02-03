@@ -52,4 +52,4 @@ Qubits are physically implemented as LC circuits. UET interprets the "electrical
 *   **UET View**: The LC circuit is a **Standing Wave in the Unity Lattice**.
 *   **Result**: UET predicts the **Zero-Point Fluctuations** (ZPF) as the minimum vibration limit of the manifold before it hits the discrete lattice resolution.
 
-[Engine_Quantum_LC_Unity.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/topics/0.18_Quantum_Computing/Code/01_Engine/Engine_Quantum_LC_Unity.py)
+[Engine_Quantum_LC_Unity.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.9.0/research_uet/topics/0.18_Quantum_Computing/Code/01_Engine/Engine_Quantum_LC_Unity.py)

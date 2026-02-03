@@ -12,17 +12,17 @@
 
 ---
 
-## 📋 Table of Contents
+## 1. 📂 5x4 Grid Structure
 
-1. [Overview](#-overview)
-2. [📄 Analysis: Mass Gap Engine (Simulation)](Doc/ANALYSIS_MASS_GAP_ENGINE.md)
-3. [📄 Analysis: Confinement Proof (Theory)](Doc/ANALYSIS_MASS_GAP_PROOF.md)
-4. [📄 Analysis: Glueball Research (Sweep)](Doc/ANALYSIS_GLUEBALL_RESEARCH.md)
-5. [The Problem](#-the-problem)
-6. [UET Solution](#-uet-solution)
-7. [Results](#-test-results)
-8. [Quick Start](#-quick-start)
-9. [Files](#-files-in-this-module)
+| Pillar | Purpose |
+| :--- | :--- |
+| **Doc/** | Analysis of Mass Gap and Confinement Proof. |
+| **Ref/** | Lattice QCD Benchmarks. |
+| **Data/** | Gauge field configuration logs. |
+| **Code/** | Logic levels: 01_Engine (Mass Gap), 02_Proof (Confinement). |
+| **Result/** | Energy spectrum and glueball mass plots. |
+
+---
 
 ---
 
@@ -76,10 +76,10 @@ This function has a minimum at $R > 0$, meaning the wave packet cannot disperse.
 
 ---
 
-## 🚀 Quick Start
+## 2. ⚡ Quick Start
 
 ```powershell
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # 1. Mass Gap Engine
 python research_uet/topics/0.21_Yang_Mills_Mass_Gap/Code/01_Engine/Engine_Mass_Gap.py

@@ -118,14 +118,14 @@ def load_shen_catalog():
     from astropy.table import Table
 
     # Path to Data (Found in Backup Folder)
-    # c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\(search Only) ทองข้อมูลดี\v0.8.7+\data\02_astrophysics\black_holes\shen2011_recovered.fits
+    # c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\(search Only) ทองข้อมูลดี\v0.9.0+\data\02_astrophysics\black_holes\shen2011_recovered.fits
 
     # We construct path relative to Repo Root for portability on this machine
     repo = REPO_ROOT
     path = (
         repo
         / "(search Only) ทองข้อมูลดี"
-        / "v0.8.7+"
+        / "v0.9.0+"
         / "data"
         / "02_astrophysics"
         / "black_holes"
@@ -162,7 +162,7 @@ def load_kormendy_ho():
     path = (
         repo
         / "(search Only) ทองข้อมูลดี"
-        / "v0.8.7+"
+        / "v0.9.0+"
         / "data"
         / "02_astrophysics"
         / "black_holes"
@@ -896,7 +896,7 @@ def analyze_entropy_recycling(k_fit, log_M0_avg=8.5, volume_radius_mpc=1000):
 
 
 # ============================================================================
-# SELECTION BIAS DIAGNOSIS (Integrated from v0.8.6 prototype)
+# SELECTION BIAS DIAGNOSIS (Integrated from v0.9.0 prototype)
 # ============================================================================
 
 

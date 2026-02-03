@@ -114,7 +114,7 @@ UET sets E₀ directly from cosmological measurements, avoiding the 10¹²⁰ hi
 
 ## 6. Numerical Validation
 
-### Final Pass Rates (v0.8.7)
+### Final Pass Rates (v0.9.0)
 | Category | Tests | Pass Rate | Status |
 |----------|-------|-----------|--------|
 | Fundamental Forces | 15/15 | 100% | ✅ |

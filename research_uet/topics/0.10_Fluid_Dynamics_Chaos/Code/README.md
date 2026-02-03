@@ -60,11 +60,11 @@ Code/
 - **`Competitor_NS_2D_Improved.py`**: Optimized (Vectorized) NS Solver (Unstable at high Re).
 - **`Competitor_NS_3D.py`**: 3D Navier-Stokes Implementation.
 
-## Run Commands
+## 🚀 Run Commands
 
 ```powershell
 # Navigate to project root
-cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7
+cd c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0
 
 # [1] Core Engine Logic
 python research_uet/topics/0.10_Fluid_Dynamics_Chaos/Code/01_Engine/Engine_UET_2D.py
@@ -79,7 +79,7 @@ python research_uet/topics/0.10_Fluid_Dynamics_Chaos/Code/03_Research/Research_L
 python research_uet/topics/0.10_Fluid_Dynamics_Chaos/Code/03_Research/Research_TurbulenceStress_Test.py
 ```
 
-## Test Results
+## 📊 Test Results
 
 | Script | Test Focus | Result | Status |
 |--------|------------|--------|--------|
@@ -104,6 +104,12 @@ The diffusion term $\kappa \nabla^2 C$ in the Master Equation acts as a natural 
 | :--- | :--- | :--- |
 | **NIST WebBook** | NIST | Fluid Properties (Density, Viscosity) for Water, Glycerin, Honey |
 | **Kolmogorov** | Legacy | Turbulent Energy Decay rates ($E \sim k^{-5/3}$) |
+
+## 🧬 Key Physics
+
+```
+dC/dt = kappa * grad^2(C) - grad(V) (Master Equation)
+```
 
 ## ASCII Note
 

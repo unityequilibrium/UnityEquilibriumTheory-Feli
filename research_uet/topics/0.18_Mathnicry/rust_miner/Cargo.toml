@@ -1,0 +1,38 @@
+[package]
+name = "uet_miner"
+version = "0.1.0"
+edition = "2021"
+authors = ["UET Research Team"]
+description = "UET GPU Bitcoin Miner with Stratum V1 support"
+
+[dependencies]
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Crypto
+sha2 = "0.10"
+hex = "0.4"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Utils
+anyhow = "1"
+thiserror = "1"
+futures = "0.3"
+rayon = "1.10"
+
+# GPU (Phase 2 - AMD RX 6600 XT via Vulkan)
+wgpu = "24"
+bytemuck = { version = "1", features = ["derive"] }
+pollster = "0.4"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

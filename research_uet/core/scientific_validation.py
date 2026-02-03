@@ -1,5 +1,5 @@
 """
-scientific_validation.py - UET Core (v0.8.8)
+scientific_validation.py - UET Core (v0.9.0)
 ===========================================
 Rigorous scientific validation framework.
 Measures the 'Sincerity' of research by comparing UET predictions

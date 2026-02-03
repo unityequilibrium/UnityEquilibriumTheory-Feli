@@ -22,7 +22,7 @@ import math
 
 # --- PROLOGUE: UET ENGINE SETUP ---
 current_path = Path(__file__).resolve()
-# Need to go up 6 levels to get to Lab_uet_harness_v0.8.7
+# Need to go up 6 levels to get to Lab_uet_harness_v0.9.0
 # Script -> 03_Research -> Code -> 0.24_AI -> topics -> research_uet -> Root
 root_dir = current_path.parents[5]
 data_dir = root_dir / "(search Only) ทองข้อมูลดี"

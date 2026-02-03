@@ -38,14 +38,14 @@ def list_zip_contents(zip_path, keywords=None):
 
 
 base_path_1 = (
-    r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\(search Only) ทองข้อมูลดี\v0.8.7+"
+    r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\(search Only) ทองข้อมูลดี\v0.9.0+"
 )
-zip_1 = os.path.join(base_path_1, "(03.01.2026)uet_foundation_v0.8.7.zip")
+zip_1 = os.path.join(base_path_1, "(03.01.2026)uet_foundation_v0.9.0.zip")
 
-base_path_2 = r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\(search Only) ทองข้อมูลดี\v0.8.7 Fali"
-zip_2 = os.path.join(base_path_2, "v0.8.7 Re(fail001).zip")
-zip_3 = os.path.join(base_path_2, "v0.8.7 Re(fail002).zip")
-zip_4 = os.path.join(base_path_2, "v0.8.7 Re(fail003).zip")
+base_path_2 = r"c:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\(search Only) ทองข้อมูลดี\v0.9.0 Fali"
+zip_2 = os.path.join(base_path_2, "v0.9.0 Re(fail001).zip")
+zip_3 = os.path.join(base_path_2, "v0.9.0 Re(fail002).zip")
+zip_4 = os.path.join(base_path_2, "v0.9.0 Re(fail003).zip")
 
 keywords = [
     "planck",
