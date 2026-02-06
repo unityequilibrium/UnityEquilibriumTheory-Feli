@@ -90,9 +90,7 @@ def test_pmns_angles():
         status = "✓" if err_pct < 15 else "~"
         results.append(err_pct < 15)
 
-        print(
-            f"{name:<15} {uet_val:<15.1f}° {exp_val:<12.2f}° {err_pct:>6.1f}% {status}"
-        )
+        print(f"{name:<15} {uet_val:<15.1f}° {exp_val:<12.2f}° {err_pct:>6.1f}% {status}")
 
     print("-" * 57)
 
@@ -297,48 +295,9 @@ def run_all_tests():
     print("SUMMARY: PMNS Validation")
 
     # --- VISUALIZATION ---
-    try:
-        from research_uet.core import uet_viz
-
-        result_dir = (
-            UETPathManager.get_result_dir(
-                topic_id="0.7",
-                experiment_name="Research_PMNS_Mixing",
-                pillar="03_Research",
-            )
-            / "pmns_mixing"
-        )
-        if not result_dir.exists():
-            result_dir.mkdir(parents=True, exist_ok=True)
-
-        # Heatmap of PMNS magnitudes
-        matrix = PMNS_MAGNITUDES
-        labels = ["ν_e", "ν_μ", "ν_τ"]
-        cols = ["ν_1", "ν_2", "ν_3"]
-
-        fig = uet_viz.go.Figure(
-            data=uet_viz.go.Heatmap(
-                z=matrix,
-                x=cols,
-                y=labels,
-                colorscale="Viridis",
-                text=[[f"{val:.3f}" for val in row] for row in matrix],
-                texttemplate="%{text}",
-                showscale=True,
-            )
-        )
-
-        fig.update_layout(
-            title="PMNS Mixing Matrix (Magnitudes |U_αi|)",
-            xaxis_title="Mass Eigenstates",
-            yaxis_title="Flavor Eigenstates",
-        )
-
-        uet_viz.save_plot(fig, "pmns_matrix_viz.png", result_dir)
-        print("  [Viz] Generated 'pmns_matrix_viz.png'")
-
-    except Exception as e:
-        print(f"Viz Error: {e}")
+    # --- VISUALIZATION ---
+    # Delegated to Code/05_Visualization/Vis_Neutrino_Physics.py
+    print("  [Note] Run Vis_Neutrino_Physics.py for PMNS heatmaps.")
 
     print("=" * 70)
 

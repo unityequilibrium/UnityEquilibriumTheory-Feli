@@ -5,7 +5,7 @@ To ensure publication-ready research, every Topic (e.g., `0.10_Fluid_Chaos`) MUS
 | Pillar | Purpose | Internal Sub-structure |
 | :--- | :--- | :--- |
 | **`Doc/`** | Research Documentation | `01_Engine` to `04_Competitor` |
-| **`Ref/`** | Scientific References | `01_Engine` to `04_Competitor` |
+| **`Ref/`** | Scientific References | **Flat Structure:** `PDF_Downloads/`, `BIBLIOGRAPHY.md` |
 | **`Data/`** | Real World Data | `01_Engine` to `04_Competitor` |
 | **`Code/`** | Implementation | `01_Engine` to `04_Competitor` |
 | **`Result/`** | Automated Outputs | `01_Engine` to `04_Competitor` |
@@ -23,8 +23,8 @@ graph TD
     D1 --> D_LN["ANALYSIS_[NAME].md"]
 
     Topic --> Ref["Ref/ (Sources)"]
-    Ref --> R1["01-04 Categories"]
-    R1 --> R_PDF["[Reference].pdf"]
+    Ref --> R_PDF["PDF_Downloads/"]
+    Ref --> R_Bib["REFERENCES.py"]
 
     Topic --> Data["Data/ (Raw Data)"]
     Data --> DA1["01-04 Categories"]
@@ -36,15 +36,15 @@ graph TD
     Code --> C3["03_Research/"]
     Code --> C4["04_Competitor/"]
 
-    Topic --> Result["Result/ (Plots)"]
-    Result --> Res1["01_Engine/"]
-    Result --> Res2["02_Proof/"]
-    Result --> Res3["03_Research/"]
-    Result --> Res4["04_Competitor/"]
+    Topic --> Result["Result/ (Outputs)"]
+    Result --> Res1["01_Showcase/ 🔥"]
+    Result --> Res2["02_Figures/ 📊"]
+    Result --> Res3["_Logs/ 🗑️"]
+    Result --> Res4["03_show_Result/ 📊"]
 ```
 
 ### 📏 The Laws of Consistency (The 5x4 Grid)
-1.  **Universal Sub-folders:** Every root pillar (Doc, Ref, Data, Code, Result) MUST use the same `01_Engine`, `02_Proof`, `03_Research`, `04_Competitor` sub-structure where content exists.
+1.  **Universal Sub-folders:** Root pillars `Doc`, `Data`, `Code`, `Result` MUST use the same `01_Engine` to `04_Competitor` structure. **Exception:** `Ref/` uses a **Flat Standard** (see `how to Reference Standard.md`).
 2.  **Prefix-Correspondence:** If a script is `Code/03_Research/Research_Poiseuille.py`, its data MUST be in `Data/03_Research/Data_Poiseuille.json` and its result in `Result/03_Research/Res_Poiseuille.png`.
 3.  **Doc Hierarchy:** `Doc/` folders like `Doc/03_Research/` contain the `before/`, `after/`, and `paper/` sub-folders for that specific application.
 4.  **No Exceptions:** If a file is at the root of a pillar, it must be a global index (like `README.md`) or a general tool. Science files MUST be categorized.

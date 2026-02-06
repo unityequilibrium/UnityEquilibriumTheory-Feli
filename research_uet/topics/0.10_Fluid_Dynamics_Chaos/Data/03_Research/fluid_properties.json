@@ -1,22 +1,23 @@
 {
-    "water_20c": {
-        "density": 998.2,
-        "viscosity": 0.001002,
-        "source": "NIST Chemistry WebBook"
+    "source": "NIST Chemistry WebBook",
+    "water_25C": {
+        "density": 997.047,
+        "viscosity": 0.00089
     },
-    "air_20c": {
-        "density": 1.204,
-        "viscosity": 1.81e-05,
-        "source": "NIST / Engineering Toolbox"
+    "air_25C": {
+        "density": 1.184,
+        "viscosity": 1.849e-05
     },
-    "glycerin_20c": {
-        "density": 1261.0,
-        "viscosity": 1.412,
-        "source": "CRC Handbook of Chemistry and Physics"
+    "honey": {
+        "density": 1420,
+        "viscosity": 10.0
     },
-    "mercury_20c": {
-        "density": 13546.0,
-        "viscosity": 0.001526,
-        "source": "NIST"
+    "blood": {
+        "density": 1060,
+        "viscosity": 0.0035
+    },
+    "mercury": {
+        "density": 13534,
+        "viscosity": 0.001526
     }
 }

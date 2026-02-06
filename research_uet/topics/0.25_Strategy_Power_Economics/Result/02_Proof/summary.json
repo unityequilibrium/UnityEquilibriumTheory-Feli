@@ -1,9 +1,9 @@
 {
-  "run_id": "World_Stabilizer",
+  "run_id": "02_Proof",
   "simulation": "World_Stabilizer",
   "status": "COMPLETED",
-  "timestamp": "Mon Feb  2 18:58:42 2026",
-  "duration_seconds": 0.019264698028564453,
+  "timestamp": "Thu Feb  5 20:24:00 2026",
+  "duration_seconds": 0.020101070404052734,
   "total_steps": 50,
   "metadata": {},
   "final_state": {

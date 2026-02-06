@@ -85,15 +85,34 @@ class UETPathManager:
         pillar: str = "01_Engine",
         stable: bool = True,
         use_archive: bool = False,
+        category: str = "log",  # [NEW] Options: 'log', 'showcase', 'figures'
     ) -> Path:
         root = UETPathManager.get_root()
         topic_full = UETPathManager.get_canonical_topic(topic_id)
         topic_dir = root / "topics" / topic_full
-        target_path = topic_dir / "Result"
-        if use_archive:
+
+        # Base Result Path
+        result_base = topic_dir / "Result"
+
+        if category == "showcase":
+            # 01_Showcase: Flat directory for high-quality assets
+            target_path = result_base / "01_Showcase"
+        elif category == "figures":
+            # 02_Figures: Flat directory for scientific plots
+            target_path = result_base / "02_Figures"
+        else:
+            # Default "log": Timestamped run folders in _Logs
+            # Note: We move logs to _Logs subfolder to reduce clutter
             timestamp = f"{int(time.time())}"
             run_id = f"{timestamp}_{experiment_name}"
-            target_path = topic_dir / "_Archive" / run_id
+
+            # If use_archive is explicitly requested (old logic), honor it, but mapped to _Archive
+            if use_archive:
+                target_path = topic_dir / "_Archive" / run_id
+            else:
+                # Standard Logs go to Result/_Logs/RunID
+                target_path = result_base / "_Logs" / run_id
+
         target_path.mkdir(parents=True, exist_ok=True)
         return target_path
 
@@ -176,24 +195,42 @@ class UETMetricLogger:
         simulation_name: str,
         output_dir: Optional[str] = None,
         flat_mode: bool = False,
+        category: str = "log",  # [NEW]
+        topic_id: str = "General",  # [NEW] Optional topic binding
     ):
         self.simulation_name, self.flat_mode = simulation_name, flat_mode
+        self.category = category
         root = UETPathManager.get_root()
 
-        # Standard UET behavior: Anchor all relative paths to research_uet root
+        # Resolution Strategy:
+        # 1. If output_dir is Explicit -> Use it.
+        # 2. If topic_id provided -> Use UETPathManager logic (Best Practice).
+        # 3. Fallback -> data_logs
+
         if output_dir:
             base_path = Path(output_dir)
             if not base_path.is_absolute():
                 base_path = root / output_dir
-        else:
-            # Fallback for generic logs
-            base_path = root.parent / "data_logs"
+            self.run_dir = base_path
+            # Explicit output_dir given, defaulting run_id to dir name
+            self.run_id = self.run_dir.name
 
-        self.timestamp_str = f"{int(time.time())}"
-        self.run_id = (
-            simulation_name if self.flat_mode else f"{self.timestamp_str}_{simulation_name}"
-        )
-        self.run_dir = base_path if self.flat_mode else base_path / self.run_id
+        elif topic_id != "General":
+            # Use the new standard
+            self.run_dir = UETPathManager.get_result_dir(
+                topic_id=topic_id, experiment_name=simulation_name, category=category
+            )
+            # Standard output dir, using directory name for run_id
+            self.run_id = self.run_dir.name
+        else:
+            # Legacy Fallback
+            base_path = root.parent / "data_logs"
+            self.timestamp_str = f"{int(time.time())}"
+            self.run_id = (
+                simulation_name if self.flat_mode else f"{self.timestamp_str}_{simulation_name}"
+            )
+            self.run_dir = base_path if self.flat_mode else base_path / self.run_id
+
         self.run_dir.mkdir(parents=True, exist_ok=True)
         self._init_state()
 

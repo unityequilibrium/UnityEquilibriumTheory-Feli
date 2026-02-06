@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "source": "Synthetic Benchmark for Hyperbolic Heat Conduction (Cattaneo-Vernotte Model)",
+    "description": "Heat flux response to a rapid thermal pulse, demonstrating non-instantaneous propagation (Second Sound).",
+    "units": {
+      "time_ps": "Picoseconds",
+      "heat_flux_W_m2": "Heat Flux (Watt/m^2)",
+      "temperature_gradient_K_m": "Temperature Gradient (K/m)"
+    }
+  },
+  "relaxation_time_tau": 10.0,
+  "experiments": [
+    {
+      "time_ps": 0,
+      "heat_flux": 0.0,
+      "gradient": 0.0,
+      "notes": "Initial State"
+    },
+    {
+      "time_ps": 5,
+      "heat_flux": 100.0,
+      "gradient": -500.0,
+      "notes": "Fourier prediction: Flux should be proportional to Gradient. Observation: Flux lags."
+    },
+    {
+      "time_ps": 10,
+      "heat_flux": 450.0,
+      "gradient": -1000.0,
+      "notes": "Peak Gradient. Flux still rising (Inertia)."
+    },
+    {
+      "time_ps": 20,
+      "heat_flux": 850.0,
+      "gradient": -800.0,
+      "notes": "Gradient reducing, but Flux peaks (Overshoot)."
+    },
+    {
+      "time_ps": 30,
+      "heat_flux": 600.0,
+      "gradient": -400.0,
+      "notes": "Relaxation phase."
+    },
+    {
+      "time_ps": 50,
+      "heat_flux": 200.0,
+      "gradient": -100.0,
+      "notes": "Returning to equilibrium."
+    }
+  ]
+}

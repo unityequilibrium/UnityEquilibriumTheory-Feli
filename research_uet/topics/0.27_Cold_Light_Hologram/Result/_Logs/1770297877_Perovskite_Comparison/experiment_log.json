@@ -1,0 +1,17 @@
+[
+    {
+        "medium": "Vacuum (No Scaffolding)",
+        "velocity": 299792458,
+        "is_floating": "Yes (Propagating)",
+        "stability": "Low (Entropy Spreads)",
+        "conclusion": "Light escapes at c. No stable hologram possible."
+    },
+    {
+        "medium": "Perovskite Lattice (3D Scaffold)",
+        "velocity": 0.0,
+        "is_floating": "Yes (Information-Trapped)",
+        "stability": "High (Geometric Lock)",
+        "trap_efficiency": 100.0,
+        "conclusion": "Light is 'frozen' in the lattice. Tangible hologram achieved."
+    }
+]

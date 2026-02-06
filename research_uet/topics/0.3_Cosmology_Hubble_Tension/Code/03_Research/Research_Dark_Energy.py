@@ -81,8 +81,7 @@ def test_hubble_tension():
     print(f"  Engine Beta: {beta:.4f} (Cosmic Stiffness)")
 
     observed_delta = (
-        HUBBLE_MEASUREMENTS["SH0ES_2022"]["H0"]
-        - HUBBLE_MEASUREMENTS["Planck_2018"]["H0"]
+        HUBBLE_MEASUREMENTS["SH0ES_2022"]["H0"] - HUBBLE_MEASUREMENTS["Planck_2018"]["H0"]
     )
     error = abs(Delta_H0_uet - observed_delta) / observed_delta * 100
 
@@ -132,8 +131,8 @@ def test_dark_energy_eqn():
         from core import uet_viz
 
         result_dir = UETPathManager.get_result_dir(
-            topic="0.3_Cosmology_Hubble_Tension",
-            name="Research_Dark_Energy",
+            topic_id="0.3_Cosmology_Hubble_Tension",
+            experiment_name="Research_Dark_Energy",
             pillar="03_Research",
         )
 
@@ -235,9 +234,7 @@ def test_pantheon_data():
     print(f"  w = {pp['w']['value']} ± {pp['w']['error']}")
 
     print(f"\nCombined with SH0ES:")
-    print(
-        f"  H₀ = {pp['H0_combined']['value']} ± {pp['H0_combined']['error']} km/s/Mpc"
-    )
+    print(f"  H₀ = {pp['H0_combined']['value']} ± {pp['H0_combined']['error']} km/s/Mpc")
 
     print(f"\n  Status: REAL DATA DOCUMENTED")
 
@@ -308,9 +305,7 @@ def run_all_tests():
     print(f"{'Pantheon+ Data':<35} {'DOCUMENTED':<15} {'1701 SNe':<25}")
     print(f"{'UET Interpretation':<35} {'GAP':<15} {'Needs theory work':<25}")
 
-    passed_count = sum(
-        [pass1, pass2, pass4, pass5]
-    )  # pass3 is intended fail (unsolved)
+    passed_count = sum([pass1, pass2, pass4, pass5])  # pass3 is intended fail (unsolved)
 
     print("-" * 75)
     print(f"Overall: {passed_count}/5 tests")

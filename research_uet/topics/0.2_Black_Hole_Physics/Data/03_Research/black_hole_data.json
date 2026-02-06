@@ -1,79 +1,40 @@
 {
+  "_meta": {
+    "source": "Event Horizon Telescope Collaboration (2019, 2022)",
+    "description": "Black Hole Shadow parameters for M87* and Sgr A*.",
+    "references": [
+      "EHT Collaboration et al. 2019, ApJ, 875, L1 (M87*)",
+      "EHT Collaboration et al. 2022, ApJ, 930, L12 (Sgr A*)"
+    ]
+  },
   "supermassive": [
     {
       "name": "M87*",
       "mass_solar": 6.5e9,
-      "mass_error": 0.7e9,
       "distance_Mpc": 16.8,
+      "distance_kpc": 16800.0,
       "shadow_uas": 42.0,
       "shadow_error_uas": 3.0,
-      "source": "EHT Collaboration 2019, ApJL 875, L1"
+      "notes": "First image of a black hole (2019)."
     },
     {
       "name": "Sgr A*",
-      "mass_solar": 4.0e6,
-      "mass_error": 0.4e6,
-      "distance_kpc": 8.1,
+      "mass_solar": 4.154e6,
+      "distance_Mpc": 0.008178,
+      "distance_kpc": 8.178,
       "shadow_uas": 51.8,
-      "shadow_error_uas": 2.0,
-      "source": "EHT Collaboration 2022, ApJL 930, L12"
-    }
-  ],
-  "stellar": [
-    {
-      "name": "Cygnus X-1",
-      "mass_solar": 21.2,
-      "error": 2.2,
-      "distance_kpc": 2.22,
-      "source": "Miller-Jones 2021, Science 371, 1046"
-    },
-    {
-      "name": "LMC X-1",
-      "mass_solar": 10.9,
-      "error": 1.4,
-      "distance_kpc": 48.0,
-      "source": "Orosz 2009, ApJ 697, 573"
-    },
-    {
-      "name": "GRO J1655-40",
-      "mass_solar": 6.3,
-      "error": 0.5,
-      "distance_kpc": 3.2,
-      "source": "Beer & Podsiadlowski 2002"
-    },
-    {
-      "name": "V404 Cygni",
-      "mass_solar": 9.0,
-      "error": 0.6,
-      "distance_kpc": 2.39,
-      "source": "Miller-Jones 2009"
+      "shadow_error_uas": 2.3,
+      "notes": "Milky Way center, EHT 2022 + GRAVITY 2019 mass/dist constraint."
     }
   ],
   "gravitational_wave": [
     {
       "event": "GW150914",
-      "m1": 35.6,
-      "m2": 30.6,
-      "final_mass": 63.1,
-      "distance_Mpc": 410,
-      "source": "LIGO 2016, PRL 116, 061102"
-    },
-    {
-      "event": "GW190521",
-      "m1": 85.3,
-      "m2": 65.4,
-      "final_mass": 142.0,
-      "distance_Mpc": 5300,
-      "source": "LIGO-Virgo 2020, PRL 125, 101102"
-    },
-    {
-      "event": "GW170817",
-      "m1": 1.46,
-      "m2": 1.27,
-      "final_mass": 2.7,
-      "distance_Mpc": 40,
-      "source": "LIGO-Virgo 2017, PRL 119, 161101",
-      "note": "Neutron star merger"
+      "m1": 36.0,
+      "m2": 29.0,
+      "final_mass": 62.0,
+      "energy_radiated": 3.0,
+      "unit": "M_sun"
     }
   ]
 }

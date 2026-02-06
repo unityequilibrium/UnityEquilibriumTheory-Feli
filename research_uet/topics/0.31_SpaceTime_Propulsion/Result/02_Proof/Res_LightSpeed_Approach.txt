@@ -111,7 +111,7 @@ Stage 98: V = 29,477,367 m/s (+300,677 m/s) | 9.83% c
 Stage 99: V = 29,778,044 m/s (+300,677 m/s) | 9.93% c
 Stage 100: V = 30,078,721 m/s (+300,677 m/s) | 10.03% c
 
-✅ Plot saved to: C:\Users\santa\Desktop\lad\Lab_uet_harness_v0.9.0\research_uet\topics\0.31_SpaceTime_Propulsion\Result\02_Proof\relativistic_acceleration.png
+✅ Plot saved to: C:\Users\santa\Desktop\lad\Lab_uet_harness_v0.8.7\research_uet\topics\0.31_SpaceTime_Propulsion\Result\02_Proof\relativistic_acceleration.png
 ------------------------------------------------------------
 ✅ SUCCESS: Reached 0.1c in 100 slingshots!
 Status: Space-Time Synchronized with Galactic Flow.

@@ -56,7 +56,11 @@ def find_test_scripts(root_dir):
             continue
 
         # Walk through the topic directory to find ALL relevant scripts
-        for root, _, files in os.walk(topic_path):
+        for root, dirs, files in os.walk(topic_path):
+            # Skip visualization directories to avoid 'visual debt' during bulk runs
+            if "05_Visualization" in root:
+                continue
+
             for file in files:
                 if not file.endswith(".py"):
                     continue
@@ -112,9 +116,7 @@ def run_script(path):
 
         # Merge with existing PYTHONPATH if it exists
         current_pythonpath = env.get("PYTHONPATH", "")
-        env["PYTHONPATH"] = (
-            os.pathsep.join(extra_paths) + os.pathsep + current_pythonpath
-        )
+        env["PYTHONPATH"] = os.pathsep.join(extra_paths) + os.pathsep + current_pythonpath
 
         result = subprocess.run(
             [sys.executable, path],

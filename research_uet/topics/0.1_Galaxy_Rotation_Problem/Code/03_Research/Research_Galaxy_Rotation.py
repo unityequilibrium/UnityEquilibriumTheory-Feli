@@ -162,12 +162,10 @@ def run_experiment():
 
     print("\n--- BY TYPE ---")
     for t, errors in by_type.items():
-        print(
-            f"{t.upper():<12}: Avg Error {np.mean(errors):.1f}% | Count {len(errors)}"
-        )
+        print(f"{t.upper():<12}: Avg Error {np.mean(errors):.1f}% | Count {len(errors)}")
 
-    # Visualization
-    visualize_parity(results, logger)
+    # Visualization delegated to Code/05_Visualization/Vis_Galaxy_Curve.py
+    # visualize_parity(results, logger)
 
     # Save Final Report
     logger.log_step(
@@ -188,45 +186,6 @@ def run_experiment():
     else:
         print("\n❌ RESULT: FAIL (Accuracy below standard)")
         return False
-
-
-def visualize_parity(results, logger_inst):
-    """Generate Parity Plot."""
-    v_obs = [r["v_obs"] for r in results]
-    v_uet = [r["v_uet"] for r in results]
-    types = [r["type"] for r in results]
-
-    plt.figure(figsize=(10, 6))
-
-    # Color map
-    colors = {
-        "spiral": "blue",
-        "dwarf": "green",
-        "lsb": "cyan",
-        "compact": "red",
-        "ultrafaint": "purple",
-    }
-
-    for t in set(types):
-        x = [r["v_obs"] for r in results if r["type"] == t]
-        y = [r["v_uet"] for r in results if r["type"] == t]
-        plt.scatter(x, y, label=t, color=colors.get(t, "gray"), alpha=0.7)
-
-    max_v = max(max(v_obs), max(v_uet))
-    plt.plot([0, max_v], [0, max_v], "k--", label="Ideal 1:1")
-
-    plt.xlabel("Observed Velocity (km/s)")
-    plt.ylabel("UET Predicted (km/s)")
-    plt.title("UET Galaxy Rotation Validated (SPARC)")
-    plt.legend()
-    plt.grid(True, alpha=0.3)
-
-    # Standardized Output Path
-    out_path = logger_inst.run_dir / "galaxy_rotation_parity.png"
-    plt.savefig(out_path, dpi=300)
-    print(f"  [Viz] Saved parity plot to: {out_path}")
-
-    plt.close()
 
 
 if __name__ == "__main__":

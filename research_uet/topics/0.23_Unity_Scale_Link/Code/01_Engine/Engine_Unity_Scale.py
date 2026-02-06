@@ -40,7 +40,10 @@ class UETUnityScaleEngine(UETBaseSolver):
     """
 
     def __init__(self, name="UET_Unity_Scale_Engine"):
-        # Unitary Params: Kappa=1, Beta=1 aligns with Quantum-Cosmo bridge
+        # Unitary Params:
+        # - Kappa=0.1 (Galactic - Low Density)
+        # - Kappa=1.40 (Qubit - High Density/Noise)
+        # - Kappa=1.0 (Default/Bridge)
         params = UETParameters(kappa=1.0, beta=1.0, alpha=1.0, gamma=0.025, C0=1.0)
         super().__init__(
             nx=100,
@@ -53,9 +56,7 @@ class UETUnityScaleEngine(UETBaseSolver):
             stable_path=True,
         )
 
-    def generate_field(
-        self, domain: str, state_regime: str = "normal", n: int = 100
-    ) -> np.ndarray:
+    def generate_field(self, domain: str, state_regime: str = "normal", n: int = 100) -> np.ndarray:
         """Centralized field generator for all domains."""
         if domain == "quantum":
             r = np.linspace(0.1, 10, n)

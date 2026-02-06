@@ -21,34 +21,23 @@ Ref/
 ├── BIBLIOGRAPHY_ANALYSIS.md   # Why these papers matter to UET
 ├── REFERENCES.py              # Python registry for code integration
 ├── Download_Ref_Script.py     # Automation script (optional)
-├── PDF_Downloads/             # ALL PDF files go here
-└── Data_Source/               # JSON/BIB/TXT data files go here
+└── PDF_Downloads/             # ALL PDF files go here
 ```
 
 ---
 
 ## 2. 💾 The Output Standard (`Result/`)
-**Goal:** strict containment. No leaks.
+**Goal:** Strict containment. No leaks.
 
-### ❌ Banned Behaviors
-*   Writing to `research_uet/outputs` (Global Dump).
-*   Writing to `research_uet/Result`.
-*   Creating timestamped folders *every single run* (e.g., `17691122_Test`, `17691123_Test`).
+See the dedicated guide for full details:
+👉 [`how to Result Standard.md`](./how%20to%20Result%20Standard.md)
 
-### ✅ New Standard
-*   **Target:** `topics/[TopicID]/Result/[ExperimentName]/`
-*   **Mode:** Use `stable=True` in `UETPathManager`.
-*   **Logger:** Use `flat_mode=True` in `UETMetricLogger`.
-
-**Example Code:**
-```python
-output_dir = UETPathManager.get_result_dir(
-    topic="0.1_Galaxy",
-    name="Rotation_Test",
-    stable=True  # <--- CRITICAL: Prevents timestamp flood
-)
-logger = UETMetricLogger("Rotation_Test", output_dir, flat_mode=True)
-```
+**A Quick Summary:**
+*   **Target:** `topics/[TopicID]/Result/`
+*   **Showcase:** `01_Showcase/` (Social Media, Final Papers)
+*   **Figures:** `02_Figures/` (Validation Plots)
+*   **Logs:** `_Logs/` (Raw Data)
+*   **Code:** Use `category="showcase"` in `UETMetricLogger`.
 
 ---
 

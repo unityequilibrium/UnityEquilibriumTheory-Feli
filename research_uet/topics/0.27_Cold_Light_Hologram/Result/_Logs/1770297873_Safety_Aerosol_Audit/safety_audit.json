@@ -1,0 +1,23 @@
+[
+    {
+        "material": "Lead_Perovskite",
+        "toxicity_score": 0.95,
+        "degradation_per_min": 0.01,
+        "exposure_risk_index": 95.0,
+        "status": "HAZARD: Persistent heavy metal accumulation"
+    },
+    {
+        "material": "Tin_Perovskite",
+        "toxicity_score": 0.05,
+        "degradation_per_min": 0.5,
+        "exposure_risk_index": 0.1,
+        "status": "BIO-SAFE: Degrades quickly into harmless oxides"
+    },
+    {
+        "material": "Bismuth_Perovskite",
+        "toxicity_score": 0.02,
+        "degradation_per_min": 0.5,
+        "exposure_risk_index": 0.04,
+        "status": "BIO-SAFE: Degrades quickly into harmless oxides"
+    }
+]

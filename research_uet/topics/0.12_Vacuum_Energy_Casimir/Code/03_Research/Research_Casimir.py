@@ -109,6 +109,43 @@ def run_test():
     passed = avg_error < 70
     status = "PASS" if passed else "FAIL"
     print(f"\n{status} - UET Casimir Validation")
+
+    # --- PLOTTING FOR SHOWCASE ---
+    try:
+        import matplotlib.pyplot as plt
+
+        # Get Standard Showcase Path
+        from research_uet.core.uet_glass_box import UETPathManager
+
+        output_dir = UETPathManager.get_result_dir(
+            topic_id="0.12", experiment_name="Casimir_Validation", category="showcase"
+        )
+
+        plt.figure(figsize=(10, 6))
+        plt.loglog(separations, forces_exp, "ro", label="Exp: Mohideen (1998)")
+        plt.loglog(
+            separations,
+            [
+                abs(f)
+                for f in [engine.calculate_physical_casimir_force(d, 200.0) for d in separations]
+            ],
+            "b-",
+            label="UET Prediction",
+        )
+
+        plt.xlabel("Separation d (nm)")
+        plt.ylabel("Casimir Force F (nN)")
+        plt.title(f"Vacuum Energy Validation: UET vs Experiment (Err: {avg_error:.1f}%)")
+        plt.grid(True, which="both", ls="-", alpha=0.5)
+        plt.legend()
+
+        output_path = output_dir / "Casimir_Validation_Plot.png"
+        plt.savefig(output_path, dpi=300)
+        print(f"📸 Showcase Image Saved: {output_path}")
+
+    except Exception as e:
+        print(f"⚠️ Could not generate plot: {e}")
+
     return passed
 
 

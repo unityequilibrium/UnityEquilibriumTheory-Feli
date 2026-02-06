@@ -133,9 +133,7 @@ def test_planck_parameters():
 
     print(f"\nEnergy Budget:")
     print(f"  Ω_m (matter):   {p['Omega_m']['value']} ± {p['Omega_m']['error']}")
-    print(
-        f"  Ω_Λ (dark E):   {p['Omega_Lambda']['value']} ± {p['Omega_Lambda']['error']}"
-    )
+    print(f"  Ω_Λ (dark E):   {p['Omega_Lambda']['value']} ± {p['Omega_Lambda']['error']}")
     print(f"  Ω_k (curvature): {p['Omega_k']['value']} ± {p['Omega_k']['error']}")
 
     print(f"\nPerturbations:")
@@ -218,88 +216,15 @@ def test_cmb_peaks():
                     l_real.append(float(parts[0]))
                     dl_real.append(float(parts[1]))
                     # Use average of +error and -error
-                    err = (
-                        (float(parts[2]) + float(parts[3])) / 2 if len(parts) > 3 else 0
-                    )
+                    err = (float(parts[2]) + float(parts[3])) / 2 if len(parts) > 3 else 0
                     dl_err.append(err)
         else:
-            print(
-                "  [Warn] Real data file not found. Run download_cosmo_data.py first."
-            )
+            print("  [Warn] Real data file not found. Run download_cosmo_data.py first.")
             return False, 0
 
         # Plot if viz available
-        if "uet_viz" in locals():
-            fig = uet_viz.go.Figure()
-
-            # 1. Real Data Points
-            fig.add_trace(
-                uet_viz.go.Scatter(
-                    x=l_real,
-                    y=dl_real,
-                    error_y=dict(type="data", array=dl_err, visible=True),
-                    mode="markers",
-                    name="Planck 2018 (Observed)",
-                    marker=dict(size=4, color="black", opacity=0.7),
-                )
-            )
-
-            # 2. UET Prediction Curve
-            # Generate high-res theoretical curve for comparison
-            l_theory = np.linspace(2, 2500, 1000)
-
-            def uet_spectrum(l):
-                # Simplified phenomenological model of acoustic peaks for visualization
-                # This represents the "ideal" flat LCDM/UET prediction
-                decay = np.exp(-((l / 1400) ** 1.2))  # Silk damping
-                osc = np.cos((l - 220) / 302 * np.pi) ** 2  # Acoustic oscillation
-                # Sachs-Wolfe plateau + Peaks
-                sw = 1000 * l ** (-2) if l > 10 else 0
-                power = 4000 * (1 / l**0.8) * (1 + 0.5 * osc) * decay
-                return power + sw
-
-            # Scale theory to match first peak (approx 5800 uK^2)
-            dl_theory = uet_spectrum(l_theory)
-            # Normalize peak
-            scale = max(dl_real) / max(dl_theory)
-            dl_theory *= scale
-
-            fig.add_trace(
-                uet_viz.go.Scatter(
-                    x=l_theory,
-                    y=dl_theory,
-                    mode="lines",
-                    name="UET Prediction (Theoretical)",
-                    line=dict(color="blue", width=2),
-                )
-            )
-
-            fig.update_layout(
-                title="CMB Power Spectrum: Planck 2018 vs UET Prediction",
-                xaxis_title="Multipole Moment (l)",
-                yaxis_title="D_l [uK^2]",
-                yaxis_type="log",
-                width=1000,
-                height=600,
-            )
-
-            # Note: xaxis_type was xaxis_getType in original file (typo). Fixed to log.
-            # But usually linear for L. Keeping linear default or log?
-            # Original code said xaxis_getType="log". Probably meant type="log".
-            # Planck usually X log. I'll use log.
-            fig.update_xaxes(type="log")
-
-            if logger:
-                uet_viz.save_plot(fig, "cmb_power_spectrum.png", logger.run_dir)
-                print(f"  [Viz] Generated 'cmb_power_spectrum.png' in {logger.run_dir}")
-            else:
-                # Fallback (Safety)
-                fallback_dir = UETPathManager.get_result_dir(
-                    topic="0.3_Cosmology_Hubble_Tension",
-                    name="Research_CMB_Analysis",
-                    pillar="03_Research",
-                )
-                uet_viz.save_plot(fig, "cmb_power_spectrum.png", fallback_dir)
+        # Delegated to Code/05_Visualization/Vis_Cosmology_Expansion.py
+        print("  [Viz] Run Vis_Cosmology_Expansion.py for CMB plots.")
 
         return True, 0.0
 
@@ -321,9 +246,7 @@ def test_bao():
     bao = BAO_DATA
 
     print(f"\nSound Horizon (Standard Ruler):")
-    print(
-        f"  r_d = {bao['sound_horizon']['r_d']} ± {bao['sound_horizon']['error']} Mpc"
-    )
+    print(f"  r_d = {bao['sound_horizon']['r_d']} ± {bao['sound_horizon']['error']} Mpc")
 
     print(f"\nBAO Measurements at Different z:")
     for name, data in bao["measurements"].items():

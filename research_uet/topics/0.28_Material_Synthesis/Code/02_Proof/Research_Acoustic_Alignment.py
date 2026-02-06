@@ -1,25 +1,48 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
+from pathlib import Path
+
+# --- ROBUST PATH FINDER ---
+current_path = Path(__file__).resolve()
+root_path = None
+for parent in [current_path] + list(current_path.parents):
+    if (parent / "research_uet").exists():
+        root_path = parent
+        break
+
+if root_path and str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
+# Engine Import (Crystallized Specialized Engine)
+try:
+    import importlib.util
+
+    engine_file = (
+        root_path
+        / "research_uet"
+        / "topics"
+        / "0.28_Material_Synthesis"
+        / "Code"
+        / "01_Engine"
+        / "Engine_Acoustic_Alignment.py"
+    )
+    spec = importlib.util.spec_from_file_location("Engine_Acoustic_Alignment", engine_file)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    AcousticAlignmentEngine = mod.AcousticAlignmentEngine
+except Exception as e:
+    print(f"Error loading Acoustic Engine: {e}")
+    sys.exit(1)
 
 
 def simulate_acoustic_locking(frequency_mhz):
     """
-    Simulates how a specific frequency affects the 'Twist Error'.
-    Resonant Frequency for 1.1 degrees is assumed to be 432 MHz
-    (A UET favored 'healing' frequency).
+    Simulates alignment quality using the official Specialized Engine.
+    Natural Resonance (432 MHz) is formalized in Pillar 01.
     """
-    resonant_freq = 432.0
-    # Q-Factor of the acoustic cavity
-    q_factor = 50.0
-
-    # Calculate how close we are to the resonance
-    tuning_factor = np.exp(-((frequency_mhz - resonant_freq) ** 2) / (q_factor))
-
-    # Twist Error (Degrees): 0.0 is perfect 1.1 alignment
-    base_error = 0.5  # Human hand error
-    final_error = base_error * (1.0 - 0.99 * tuning_factor)
-
-    return final_error
+    engine = AcousticAlignmentEngine()
+    return engine.calculate_twist_error(frequency_mhz)
 
 
 def run_alignment_demo():
@@ -46,11 +69,21 @@ def run_alignment_demo():
     plt.ylabel("Twist Error (Degrees)")
     plt.legend()
     plt.grid(True, alpha=0.3)
-    plt.savefig("research_uet/topics/0.28_Material_Synthesis/Figures/acoustic_alignment_plot.png")
+    # Save to Standardized Results via PathManager
+    try:
+        from research_uet.core.uet_glass_box import UETPathManager
 
-    print(
-        "\n✅ Simulation Complete. Plot saved as 'research_uet/topics/0.28_Material_Synthesis/Figures/acoustic_alignment_plot.png'"
-    )
+        output_dir = UETPathManager.get_result_dir(
+            topic_id="0.28", experiment_name="Acoustic_Alignment", category="Research"
+        )
+    except ImportError:
+        output_dir = Path("research_uet/topics/0.28_Material_Synthesis/Figures")
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+    output_path = output_dir / "acoustic_alignment_plot.png"
+    plt.savefig(output_path)
+
+    print(f"\n✅ Simulation Complete. Plot saved as {output_path}")
     print(
         "💡 CONCLUSION: At 432 MHz resonance, graphene sheets self-align to the 1.1 degree Magic Angle."
     )

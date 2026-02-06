@@ -65,6 +65,10 @@ def find_all_tests():
         if extra_file.name == "test_runner.py":
             continue
 
+        # Skip visualization directories to avoid 'visual debt' during bulk runs
+        if "05_Visualization" in str(extra_file):
+            continue
+
         is_valid = (
             extra_file.name.startswith("Engine_")
             or extra_file.name.startswith("Proof_")
@@ -115,9 +119,7 @@ def run_test(test_path):
         ]
 
         current_pythonpath = env.get("PYTHONPATH", "")
-        env["PYTHONPATH"] = (
-            os.pathsep.join(extra_paths) + os.pathsep + current_pythonpath
-        )
+        env["PYTHONPATH"] = os.pathsep.join(extra_paths) + os.pathsep + current_pythonpath
 
         result = subprocess.run(
             [sys.executable, "-X", "utf8", str(test_path)],
@@ -241,9 +243,7 @@ def main():
     elif total_tests >= 50 and total_passed / total_tests >= 0.80:
         print("GRADE: GOOD (50+ tests, 80%+ pass)")
     else:
-        print(
-            f"GRADE: IN PROGRESS ({total_tests} tests, {total_passed/total_tests*100:.0f}% pass)"
-        )
+        print(f"GRADE: IN PROGRESS ({total_tests} tests, {total_passed/total_tests*100:.0f}% pass)")
 
     print("=" * 70)
 

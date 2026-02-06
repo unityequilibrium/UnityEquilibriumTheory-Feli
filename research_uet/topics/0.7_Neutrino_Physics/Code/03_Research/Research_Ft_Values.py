@@ -91,9 +91,7 @@ def run_test():
         print(f"| {nucleus:7} | {ft:.1f} | {err:.1f} | {dev:.1f} {status} |")
 
     print(f"\n  Average ft: {ft_avg:.1f} s")
-    print(
-        f"  Std dev:    {(sum((ft-ft_avg)**2 for ft in ft_values)/len(ft_values))**0.5:.1f} s"
-    )
+    print(f"  Std dev:    {(sum((ft-ft_avg)**2 for ft in ft_values)/len(ft_values))**0.5:.1f} s")
 
     ft_uet = uet_ft_value()
     error = abs(ft_uet - ft_avg) / ft_avg * 100
@@ -145,71 +143,8 @@ def run_test():
     print(f"RESULT: {passed_count}/{total} PASSED (constancy check)")
 
     # --- VISUALIZATION ---
-    try:
-        from research_uet.core import uet_viz
-
-        result_dir = (
-            UETPathManager.get_result_dir(
-                topic_id="0.7",
-                experiment_name="Research_Ft_Values",
-                pillar="03_Research",
-            )
-            / "beta_decay"
-        )
-        if not result_dir.exists():
-            result_dir.mkdir(parents=True, exist_ok=True)
-
-        nuc_names = [n for n, _, _ in FT_VALUES]
-        fts = [f for _, f, _ in FT_VALUES]
-        errs = [e for _, _, e in FT_VALUES]
-
-        fig = uet_viz.go.Figure()
-
-        # Data points
-        fig.add_trace(
-            uet_viz.go.Scatter(
-                x=nuc_names,
-                y=fts,
-                error_y=dict(type="data", array=errs, visible=True),
-                mode="markers",
-                name="Experimental ft",
-                marker=dict(color="red", size=10),
-            )
-        )
-
-        # Average/Theory Line
-        fig.add_shape(
-            type="line",
-            x0=-0.5,
-            y0=ft_avg,
-            x1=len(nuc_names) - 0.5,
-            y1=ft_avg,
-            line=dict(color="green", width=3, dash="dash"),
-            name="Average ft",
-        )
-        # Hack to add legend for shape
-        fig.add_trace(
-            uet_viz.go.Scatter(
-                x=[None],
-                y=[None],
-                mode="lines",
-                line=dict(color="green", width=3, dash="dash"),
-                name=f"Average ft ({ft_avg:.1f} s)",
-            )
-        )
-
-        fig.update_layout(
-            title="Superallowed Beta Decay: Constancy of ft Values",
-            xaxis_title="Nucleus",
-            yaxis_title="ft Value (s)",
-            showlegend=True,
-        )
-
-        uet_viz.save_plot(fig, "ft_value_comparison.png", result_dir)
-        print("  [Viz] Generated 'ft_value_comparison.png'")
-
-    except Exception as e:
-        print(f"Viz Error: {e}")
+    # Delegated to Code/05_Visualization/Vis_Neutrino_Physics.py
+    print("  [Note] Run Vis_Neutrino_Physics.py for ft Value plots.")
 
     print("=" * 70)
 

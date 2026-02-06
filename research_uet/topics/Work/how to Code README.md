@@ -32,6 +32,15 @@ Code/
   03_Research/     # Research scripts against real data
     Research_*.py  # All research scripts
   04_Competitor/   # (if exists) Baseline/comparison scripts
+  05_Visualization/# (if exists) Plot generation scripts
+    Vis_*.py       # Visualization scripts
+  05_Visualization/# (if exists) Plot generation scripts
+    Vis_*.py       # Visualization scripts
+
+Result/
+  01_Showcase/     # 🔥 Social Media / Paper Assets
+  02_Figures/      # 📊 Technical Plots
+  _Logs/           # 🗑️ Raw Machine Logs
 \```
 ```
 
@@ -40,6 +49,8 @@ Code/
 - `02_Proof/`: `Proof_*.py`
 - `03_Research/`: `Research_*.py`
 - `04_Competitor/`: `Competitor_*.py`, `Baseline_*.py`
+- `05_Visualization/`: `Vis_*.py`
+- `05_Visualization/`: `Vis_*.py`
 
 ---
 

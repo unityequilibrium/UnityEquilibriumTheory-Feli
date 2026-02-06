@@ -100,6 +100,66 @@ def run_test():
     print("RESULT: HUBBLE TENSION EXPLAINED BY UET")
     print("=" * 70)
 
+    # --- VISUALIZATION ---
+    try:
+        sys.path.append(str(Path(__file__).parents[4]))
+        import matplotlib.pyplot as plt
+        import numpy as np
+        from core.uet_glass_box import UETPathManager
+
+        result_dir = UETPathManager.get_result_dir(
+            topic_id="0.3_Cosmology_Hubble_Tension",
+            experiment_name="Research_Hubble_Comparison",
+            pillar="03_Research",
+        )
+
+        # Create Comparison Plot
+        labels = [
+            "Planck 2018\n(Early Universe)",
+            "SH0ES 2022\n(Late Universe)",
+            "UET Prediction\n(Unified)",
+        ]
+        values = [H0_PLANCK, H0_SHOES, H0_late_uet]
+        errors = [0.5, 1.0, 0.5]  # Approx errors for visual
+        colors = ["#1f77b4", "#d62728", "#2ca02c"]
+
+        plt.figure(figsize=(10, 6))
+        bars = plt.bar(labels, values, yerr=errors, capsize=10, color=colors, alpha=0.8)
+
+        # Add value labels
+        for bar in bars:
+            height = bar.get_height()
+            plt.text(
+                bar.get_x() + bar.get_width() / 2.0,
+                height + 1.5,
+                f"{height:.1f}",
+                ha="center",
+                va="bottom",
+                fontsize=12,
+                fontweight="bold",
+            )
+
+        plt.ylabel("Hubble Constant (km/s/Mpc)", fontsize=12)
+        plt.title("UET Resolution of Hubble Tension", fontsize=14, fontweight="bold")
+        plt.ylim(60, 80)
+        plt.grid(axis="y", linestyle="--", alpha=0.5)
+
+        # Add annotation explaining the bridge
+        plt.annotate(
+            "UET bridges the gap\nvia Beta Scaling",
+            xy=(2, H0_late_uet),
+            xytext=(1.5, 76),
+            arrowprops=dict(facecolor="black", shrink=0.05),
+        )
+
+        output_path = result_dir / "hubble_tension_resolution.png"
+        plt.savefig(output_path, dpi=300, bbox_inches="tight")
+        plt.close()
+        print(f"  [Viz] Generated 'hubble_tension_resolution.png' at {output_path}")
+
+    except Exception as e:
+        print(f"Viz Error: {e}")
+
     return passed
 
 

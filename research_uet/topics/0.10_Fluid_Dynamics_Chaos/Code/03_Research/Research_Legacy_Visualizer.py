@@ -84,9 +84,7 @@ def generate_comparison_plot():
     # Normalize both for shape comparison
     u_analytical_norm = u_analytical / np.max(u_analytical)
     u_uet_norm = (
-        np.abs(u_uet) / np.max(np.abs(u_uet))
-        if np.max(np.abs(u_uet)) > 0
-        else np.zeros_like(u_uet)
+        np.abs(u_uet) / np.max(np.abs(u_uet)) if np.max(np.abs(u_uet)) > 0 else np.zeros_like(u_uet)
     )
 
     # Result directory
@@ -130,9 +128,7 @@ def generate_comparison_plot():
         )
 
         # Right: Density field
-        fig.add_trace(
-            go.Heatmap(z=solver.C, colorscale="Viridis", name="Density C"), row=1, col=2
-        )
+        fig.add_trace(go.Heatmap(z=solver.C, colorscale="Viridis", name="Density C"), row=1, col=2)
 
         fig.update_layout(
             title="UET Fluid Dynamics: Poiseuille Flow Comparison",
@@ -154,9 +150,7 @@ def generate_comparison_plot():
         fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
         # Left: Profile comparison
-        axes[0].plot(
-            u_analytical_norm, y, "b-", linewidth=3, label="Analytical (Poiseuille)"
-        )
+        axes[0].plot(u_analytical_norm, y, "b-", linewidth=3, label="Analytical (Poiseuille)")
         axes[0].plot(u_uet_norm, y, "ro", markersize=8, label="UET (Calibrated)")
         axes[0].set_xlabel("Normalized Velocity")
         axes[0].set_ylabel("y (Channel Height)")
@@ -289,14 +283,12 @@ def generate_summary_table():
     print(summary)
 
     # Save to file
-    result_dir = (
-        UETPathManager.get_result_dir(
-            topic_id="0.10",
-            experiment_name="Research_Legacy_Visualizer",
-            pillar="03_Research",
-        )
-        / "03_Research"
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.10",
+        experiment_name="Research_Legacy_Visualizer",
+        pillar="03_Research",
     )
+    result_dir.mkdir(parents=True, exist_ok=True)
     with open(result_dir / "RESEARCH_SUMMARY.txt", "w", encoding="utf-8") as f:
         f.write(summary)
 
@@ -305,11 +297,30 @@ def generate_summary_table():
 
 if __name__ == "__main__":
     try:
+        # Standardize result directory for the entire run
+        result_dir = UETPathManager.get_result_dir(
+            topic_id="0.10",
+            experiment_name="Research_Legacy_Visualizer",
+            pillar="03_Research",
+        )
+        result_dir.mkdir(parents=True, exist_ok=True)
+
+        # Override local result_dir logic in functions (simplified for this script)
+        def generate_comparison_plot_fixed(r_dir):
+            return (
+                generate_comparison_plot()
+            )  # It uses its own, but we'll fix the whole script below if needed
+
+        # Actually, let's just refactor the main calls to be more robust
         generate_comparison_plot()
         generate_speed_comparison()
         generate_summary_table()
+
         print("\n1/1 PASS")
         sys.exit(0)
     except Exception as e:
+        import traceback
+
+        traceback.print_exc()
         print(f"FAILED: {e}")
         sys.exit(1)

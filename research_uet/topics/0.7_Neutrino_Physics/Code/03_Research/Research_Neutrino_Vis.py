@@ -50,9 +50,7 @@ def visualize_hierarchy():
         topic_dir_path = Path(__file__).resolve().parent.parent.parent
         engine_path = topic_dir_path / "Code" / "01_Engine" / "Engine_Neutrino.py"
         if engine_path.exists():
-            spec = importlib.util.spec_from_file_location(
-                "Engine_Neutrino", str(engine_path)
-            )
+            spec = importlib.util.spec_from_file_location("Engine_Neutrino", str(engine_path))
             mod = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(mod)
             UETNeutrinoSolver = mod.UETNeutrinoSolver
@@ -76,30 +74,8 @@ def visualize_hierarchy():
     # Flavor composition (Simplified for Viz)
     # nu1 is mostly electron (blue), nu2 mixed, nu3 mostly mu/tau
     # For simplicity, just showing mass levels
-
-    fig = uet_viz.go.Figure()
-
-    # Draw bars for mass levels
-    for i, m in enumerate(masses):
-        fig.add_trace(
-            uet_viz.go.Bar(
-                x=[names[i]],
-                y=[m],
-                name=names[i],
-                marker_color=colors[i],
-                text=f"{m:.1f} meV",
-                textposition="auto",
-            )
-        )
-
-    fig.update_layout(
-        title="Neutrino Mass Hierarchy (Normal Ordering)",
-        yaxis_title="Mass (meV)",
-        showlegend=False,
-    )
-
-    uet_viz.save_plot(fig, "neutrino_mass_hierarchy.png", result_dir)
-    print("  [Viz] Generated 'neutrino_mass_hierarchy.png'")
+    # Visualization delegated to Code/05_Visualization/Vis_Neutrino_Physics.py
+    print("  [Note] Run Vis_Neutrino_Physics.py for visualizations.")
 
     # Calculate Sum
     total_mass = sum(masses)

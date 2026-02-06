@@ -1,0 +1,30 @@
+{
+  "run_id": "03_Research",
+  "simulation": "Research_P_vs_NP_Scaling",
+  "status": "COMPLETED",
+  "timestamp": "Tue Feb  3 21:00:18 2026",
+  "duration_seconds": 0.2616569995880127,
+  "total_steps": 16,
+  "metadata": {
+    "topic": "0.18_Mathnicry",
+    "description": "Proof of Polynomial scaling for NP-Hard search using Quantum Manifold Resonance",
+    "max_qubits": 17,
+    "mode": "Research_Proof"
+  },
+  "final_state": {
+    "step": 2,
+    "time": 0.0010950565338134766,
+    "omega": 4.440892098500626e-16,
+    "kinetic": 1.0,
+    "potential": 0.0,
+    "entropy": 2.0,
+    "gradient_norm": 0.0,
+    "max_density": 0.0,
+    "min_density": 0.0,
+    "is_stable": true,
+    "Qubits": 2,
+    "States": 4,
+    "Iterations": 1,
+    "Fidelity": 0.9999999999999996
+  }
+}

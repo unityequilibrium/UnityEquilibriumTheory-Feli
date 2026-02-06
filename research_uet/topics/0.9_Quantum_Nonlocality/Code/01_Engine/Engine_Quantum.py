@@ -64,9 +64,7 @@ class EntanglementLogic:
         self.beta = beta
         self.CLASSICAL_LIMIT = 2.0
 
-    def correlation(
-        self, theta_A: float, theta_B: float, params: UETParameters = None
-    ) -> float:
+    def correlation(self, theta_A: float, theta_B: float, params: UETParameters = None) -> float:
         """Compute quantum correlation between two angles."""
         # Use provided params or default to 1.0/1.0 if not sabotaged
         beta = getattr(params, "beta", self.beta)
@@ -138,15 +136,22 @@ class UETQuantumEngine(UETBaseSolver):
     Inherits UETBaseSolver to ensure standardized logging and pathing.
     """
 
-    def __init__(self, mode: str = "entanglement", uet_params: UETParameters = None):
+    def __init__(self, mode: str = "entanglement", uet_params: UETParameters = None, **kwargs):
         # 1. Initialize Base Solver (Sets up Logger & PathManager)
+        # Defaults for Quantum (1D strip represented by 60 cells)
+        nx = kwargs.pop("nx", 60)
+        ny = kwargs.pop("ny", 1)
+        dt = kwargs.pop("dt", 0.001)
+
         super().__init__(
-            nx=60,
-            ny=1,
+            nx=nx,
+            ny=ny,
+            dt=dt,
             params=uet_params,
             name=f"Quantum_{mode.capitalize()}",
             topic="0.9_Quantum_Nonlocality",
             pillar="01_Engine",
+            **kwargs,
         )
 
         self.mode = mode.lower()
@@ -161,9 +166,7 @@ class UETQuantumEngine(UETBaseSolver):
             # Using Matrix Engine (Composition)
             if MatrixEvolution:
                 # Direct Scalar Initialization
-                self.matrix_engine = MatrixEvolution(
-                    beta=self.params.beta, kappa=self.params.kappa
-                )
+                self.matrix_engine = MatrixEvolution(beta=self.params.beta, kappa=self.params.kappa)
                 self.state_tensor = UniverseState(self.nx)
             else:
                 print("⚠️ MatrixEvolution module missing.")
@@ -222,9 +225,7 @@ class UETQuantumEngine(UETBaseSolver):
         return {
             "mode": self.mode,
             "metric_val": float(self.last_metric),
-            "violation": (
-                bool(self.last_metric > 2.0) if self.mode == "entanglement" else False
-            ),
+            "violation": (bool(self.last_metric > 2.0) if self.mode == "entanglement" else False),
         }
 
     # Public API for Experiment

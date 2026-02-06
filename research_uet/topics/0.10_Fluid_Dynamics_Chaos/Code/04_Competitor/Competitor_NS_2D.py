@@ -136,86 +136,54 @@ class NavierStokesSolver:
             self.v[:, -1] = 0.0
 
     def compute_advection(self):
-        """Compute advection term (u·∇)u using upwind scheme."""
-        # Simplified central difference for now
-        # TODO: Implement upwind for stability at high Re
-
+        """Compute advection term (u·∇)u using vectorized slicing."""
         u_adv = np.zeros_like(self.u)
         v_adv = np.zeros_like(self.v)
 
-        # Interior points only
-        for j in range(1, self.ny - 1):
-            for i in range(1, self.nx):
-                # ∂(u²)/∂x + ∂(uv)/∂y
-                dudx = (
-                    (self.u[j, i + 1] - self.u[j, i - 1]) / (2 * self.dx)
-                    if i < self.nx
-                    else 0
-                )
-                dudy = (self.u[j + 1, i] - self.u[j - 1, i]) / (2 * self.dy)
-                u_adv[j, i] = (
-                    self.u[j, i] * dudx
-                    + 0.5
-                    * (
-                        self.v[j, min(i, self.nx - 1)]
-                        + self.v[j + 1, min(i, self.nx - 1)]
-                    )
-                    * dudy
-                )
+        # Vectorized u-advection: u*du/dx + v*du/dy
+        # Interior of u is [j=1:-1, i=1:-1] (shape: ny-2, nx-1)
+        dudx = (self.u[1:-1, 2:] - self.u[1:-1, 0:-2]) / (2 * self.dx)
+        dudy = (self.u[2:, 1:-1] - self.u[0:-2, 1:-1]) / (2 * self.dy)
 
-        for j in range(1, self.ny):
-            for i in range(1, self.nx - 1):
-                dvdx = (self.v[j, i + 1] - self.v[j, i - 1]) / (2 * self.dx)
-                dvdy = (
-                    (self.v[j + 1, i] - self.v[j - 1, i]) / (2 * self.dy)
-                    if j < self.ny
-                    else 0
-                )
-                v_adv[j, i] = (
-                    0.5
-                    * (
-                        self.u[min(j, self.ny - 1), i]
-                        + self.u[min(j, self.ny - 1), i + 1]
-                    )
-                    * dvdx
-                    + self.v[j, i] * dvdy
-                )
+        # v interpolated to u-field locations (j, i)
+        # u[j,i] is at (j, i-0.5) in u-grid, which is (j, i-0.5) in cell indices
+        # v points around it are v[j,i-1], v[j+1,i-1], v[j,i], v[j+1,i]
+        # For u[1:-1, 1:-1], we need v[1:-1, 0:-1] and v[2:, 0:-1] etc?
+        # Wait, if ny=32, u[1:-1] has 30 rows. v has 33 rows.
+        # v[1:31] and v[2:32] have 30 rows.
+        v_interp = 0.25 * (
+            self.v[1:-2, 0:-1] + self.v[2:-1, 0:-1] + self.v[1:-2, 1:] + self.v[2:-1, 1:]
+        )
+        u_adv[1:-1, 1:-1] = self.u[1:-1, 1:-1] * dudx + v_interp * dudy
+
+        # Vectorized v-advection
+        dvdx = (self.v[1:-1, 2:] - self.v[1:-1, 0:-2]) / (2 * self.dx)
+        dvdy = (self.v[2:, 1:-1] - self.v[0:-2, 1:-1]) / (2 * self.dy)
+
+        # u interpolated to v-field locations (j, i)
+        u_interp = 0.25 * (
+            self.u[0:-1, 1:-2] + self.u[0:-1, 2:-1] + self.u[1:, 1:-2] + self.u[1:, 2:-1]
+        )
+        v_adv[1:-1, 1:-1] = u_interp * dvdx + self.v[1:-1, 1:-1] * dvdy
 
         return u_adv, v_adv
 
     def compute_diffusion(self):
-        """Compute diffusion term ν∇²u."""
+        """Compute diffusion term ν∇²u using vectorized slicing."""
         u_diff = np.zeros_like(self.u)
         v_diff = np.zeros_like(self.v)
 
-        # Laplacian using 5-point stencil
-        for j in range(1, self.ny - 1):
-            for i in range(1, self.nx):
-                u_diff[j, i] = (
-                    self.nu
-                    * (
-                        (self.u[j, i + 1] - 2 * self.u[j, i] + self.u[j, i - 1])
-                        / self.dx**2
-                        + (self.u[j + 1, i] - 2 * self.u[j, i] + self.u[j - 1, i])
-                        / self.dy**2
-                    )
-                    if i < self.nx
-                    else 0
-                )
+        # Vectorized u-diffusion (Interior i=1:-1, j=1:-1)
+        u_diff[1:-1, 1:-1] = self.nu * (
+            (self.u[1:-1, 2:] - 2 * self.u[1:-1, 1:-1] + self.u[1:-1, 0:-2]) / self.dx**2
+            + (self.u[2:, 1:-1] - 2 * self.u[1:-1, 1:-1] + self.u[0:-2, 1:-1]) / self.dy**2
+        )
 
-        for j in range(1, self.ny):
-            for i in range(1, self.nx - 1):
-                v_diff[j, i] = (
-                    self.nu
-                    * (
-                        (self.v[j, i + 1] - 2 * self.v[j, i] + self.v[j, i - 1])
-                        / self.dx**2
-                        + (self.v[j + 1, i] - 2 * self.v[j, i] + self.v[j - 1, i])
-                        / self.dy**2
-                    )
-                    if j < self.ny
-                    else 0
-                )
+        # Vectorized v-diffusion (Interior i=1:-1, j=1:-1)
+        v_diff[1:-1, 1:-1] = self.nu * (
+            (self.v[1:-1, 2:] - 2 * self.v[1:-1, 1:-1] + self.v[1:-1, 0:-2]) / self.dx**2
+            + (self.v[2:, 1:-1] - 2 * self.v[1:-1, 1:-1] + self.v[0:-2, 1:-1]) / self.dy**2
+        )
 
         return u_diff, v_diff
 
@@ -224,29 +192,25 @@ class NavierStokesSolver:
         Solve pressure Poisson equation using Jacobi iteration.
         ∇²p = ρ/dt * ∇·u*
         """
-        # Compute divergence of intermediate velocity
-        div = np.zeros((self.ny, self.nx))
-        for j in range(self.ny):
-            for i in range(self.nx):
-                div[j, i] = (self.u_star[j, i + 1] - self.u_star[j, i]) / self.dx + (
-                    self.v_star[j + 1, i] - self.v_star[j, i]
-                ) / self.dy
+        # Compute divergence of intermediate velocity (Vectorized)
+        div = (self.u_star[:, 1:] - self.u_star[:, :-1]) / self.dx + (
+            self.v_star[1:, :] - self.v_star[:-1, :]
+        ) / self.dy
 
         rhs = self.rho / self.dt * div
 
-        # Jacobi iteration
+        # Jacobi iteration (Vectorized)
         for _ in range(max_iter):
             p_old = self.p.copy()
 
-            for j in range(1, self.ny - 1):
-                for i in range(1, self.nx - 1):
-                    self.p[j, i] = 0.25 * (
-                        p_old[j, i + 1]
-                        + p_old[j, i - 1]
-                        + p_old[j + 1, i]
-                        + p_old[j - 1, i]
-                        - self.dx**2 * rhs[j, i]
-                    )
+            # Use NumPy slicing for O(N) vectorized update
+            self.p[1:-1, 1:-1] = 0.25 * (
+                p_old[1:-1, 2:]  # Right
+                + p_old[1:-1, 0:-2]  # Left
+                + p_old[2:, 1:-1]  # Top
+                + p_old[0:-2, 1:-1]  # Bottom
+                - self.dx**2 * rhs[1:-1, 1:-1]
+            )
 
             # Check convergence
             if np.max(np.abs(self.p - p_old)) < tol:
@@ -259,20 +223,16 @@ class NavierStokesSolver:
         self.p[:, -1] = self.p[:, -2]
 
     def correct_velocity(self):
-        """Correct velocity using pressure gradient."""
-        for j in range(self.ny):
-            for i in range(1, self.nx):
-                self.u[j, i] = (
-                    self.u_star[j, i]
-                    - self.dt / self.rho * (self.p[j, i] - self.p[j, i - 1]) / self.dx
-                )
+        """Correct velocity using pressure gradient (Vectorized)."""
+        # u-correction (Interior points i=1:-1)
+        self.u[:, 1:-1] = (
+            self.u_star[:, 1:-1] - self.dt / self.rho * (self.p[:, 1:] - self.p[:, :-1]) / self.dx
+        )
 
-        for j in range(1, self.ny):
-            for i in range(self.nx):
-                self.v[j, i] = (
-                    self.v_star[j, i]
-                    - self.dt / self.rho * (self.p[j, i] - self.p[j - 1, i]) / self.dy
-                )
+        # v-correction (Interior points j=1:-1)
+        self.v[1:-1, :] = (
+            self.v_star[1:-1, :] - self.dt / self.rho * (self.p[1:, :] - self.p[:-1, :]) / self.dy
+        )
 
     def step(self):
         """Perform one time step using Chorin's projection method."""

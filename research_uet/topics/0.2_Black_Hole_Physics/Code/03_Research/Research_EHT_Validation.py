@@ -68,9 +68,9 @@ def run_test():
 
     # Initialize Standard Logger
     # This automatically creates: /Result/{timestamp}_EHT_Validation/
-    # Initialize Standard Logger
+    # Initialize Standard Logger (V2.1 Showcase)
     result_dir_base = UETPathManager.get_result_dir(
-        topic_id="0.2", experiment_name="Research_EHT_Validation", pillar="03_Research"
+        topic_id="0.2", experiment_name="EHT_Validation", category="showcase"
     )
     logger = UETMetricLogger("EHT_Validation", output_dir=result_dir_base)
 
@@ -96,9 +96,7 @@ def run_test():
         topic_dir_path = Path(__file__).resolve().parent.parent.parent
         engine_path = topic_dir_path / "Code" / "01_Engine" / "Engine_BlackHole.py"
         if engine_path.exists():
-            spec = importlib.util.spec_from_file_location(
-                "Engine_BlackHole", str(engine_path)
-            )
+            spec = importlib.util.spec_from_file_location("Engine_BlackHole", str(engine_path))
             mod = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(mod)
             UETBlackHoleSolver = mod.UETBlackHoleSolver
@@ -178,33 +176,8 @@ def run_test():
     print("=" * 60)
 
     # --- VISUALIZATION ---
-    try:
-        from research_uet.core import uet_viz
-
-        # Use logger.run_dir
-        result_dir = logger.run_dir
-
-        # Plot EHT Shadow Simulation (M87*)
-        x = np.linspace(-10, 10, 100)
-        y = np.linspace(-10, 10, 100)
-        X, Y = np.meshgrid(x, y)
-        R = np.sqrt(X**2 + Y**2)
-        # Ring at ~5 Schwarzschild radii (Shadow)
-        Z = np.exp(-((R - 5) ** 2) / 2) + np.random.normal(0, 0.05, X.shape)
-
-        fig = uet_viz.go.Figure(
-            data=uet_viz.go.Heatmap(z=Z, x=x, y=y, colorscale="Magma")
-        )
-        fig.update_layout(
-            title="Simulated Black Hole Shadow (M87*) - UET",
-            xaxis_title="X (Rs)",
-            yaxis_title="Y (Rs)",
-        )
-        uet_viz.save_plot(fig, "eht_shadow_simulation.png", result_dir)
-        print("  [Viz] Generated 'eht_shadow_simulation.png'")
-
-    except Exception as e:
-        print(f"Viz Error: {e}")
+    # Delegated to Code/05_Visualization/Vis_BlackHole_Signature.py
+    print("  [Note] Run Vis_BlackHole_Signature.py for EHT shadow plots.")
 
     return passed_count == total
 

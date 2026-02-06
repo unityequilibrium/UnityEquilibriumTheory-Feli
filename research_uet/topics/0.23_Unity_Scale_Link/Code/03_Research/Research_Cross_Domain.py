@@ -143,6 +143,9 @@ def test_galaxy_neural_transfer():
     """
     print("\n[TEST 1] GALAXY → NEURAL TRANSFER")
     print("-" * 50)
+    print("  NOTE: We use κ=0.1 (Galactic) here.")
+    print("  (Qubits use κ=1.40 due to higher density/noise floor)")
+    print("-" * 50)
 
     # Use galaxy-calibrated parameters
     kappa_galaxy = 0.1
@@ -240,9 +243,7 @@ def test_economy_neural_correlation():
     omega_high = np.array(omega_high)
     omega_low = np.array(omega_low)
 
-    print(
-        f"\n  Ω(high volatility) = {np.mean(omega_high):.3f} ± {np.std(omega_high):.3f}"
-    )
+    print(f"\n  Ω(high volatility) = {np.mean(omega_high):.3f} ± {np.std(omega_high):.3f}")
     print(f"  Ω(low volatility) = {np.mean(omega_low):.3f} ± {np.std(omega_low):.3f}")
 
     # Compare with neural pattern

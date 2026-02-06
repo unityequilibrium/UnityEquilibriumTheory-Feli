@@ -33,17 +33,22 @@ if research_uet_path:
     if str(root_path) not in sys.path:
         sys.path.insert(0, str(root_path))
 
-# Engine Import
-try:
-    from research_uet.topics.mathnicry.Code.Engine.Engine_Riemann_Field import RiemannFieldEngine
-except ImportError:
-    # Minimal Fallback Engine if path fails
-    class RiemannFieldEngine:
-        def __init__(self, precision=50):
-            mpmath.mp.dps = precision
+# Avoid static import of numeric folder names (SyntaxError)
+import importlib.util
 
-        def calculate_omega(self, s):
-            return float(mpmath.absmax(mpmath.zeta(s)))
+eng_file = (
+    root_path
+    / "research_uet"
+    / "topics"
+    / "0.18_Mathnicry"
+    / "Code"
+    / "01_Engine"
+    / "Engine_Riemann_Field.py"
+)
+spec = importlib.util.spec_from_file_location("Engine_Riemann_Field", eng_file)
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+RiemannFieldEngine = mod.RiemannFieldEngine
 
 
 from research_uet.core.uet_glass_box import UETMetricLogger
