@@ -1,16 +1,11 @@
 import sys
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Setup local imports for Topic 0.10 (Handling numeric folder names)
 topic_path = root_path / "research_uet" / "topics" / "0.10_Fluid_Dynamics_Chaos"
@@ -22,18 +17,20 @@ if str(engine_path) not in sys.path:
 if str(competitor_path) not in sys.path:
     sys.path.insert(0, str(competitor_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-    from Competitor_NS_2D import NavierStokesSolver
-    from Engine_UET_2D import UETFluidSolver
-    from research_uet.core.uet_master_equation import UETParameters
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
+from Competitor_NS_2D import NavierStokesSolver
+from Engine_UET_2D import UETFluidSolver
+from research_uet.core.uet_master_equation import UETParameters
 
 import numpy as np
 import json
 import time
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 
 def compare_lid_driven_cavity():
@@ -234,9 +231,7 @@ def run_all_comparisons():
     )
     logger = None
     try:
-        logger = UETMetricLogger(
-            "Fluid_Comparison_NS_vs_UET", output_dir=result_dir_base
-        )
+        logger = UETMetricLogger("Fluid_Comparison_NS_vs_UET", output_dir=result_dir_base)
         logger.set_metadata(
             {
                 "test_suite": "Lid Driven Cavity + High Re",

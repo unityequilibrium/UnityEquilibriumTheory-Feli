@@ -10,16 +10,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-# --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+
+# --- ROBUST PATH FINDER ---
+
 
 # Output Directory
 OUTPUT_DIR = (
@@ -39,6 +33,12 @@ DATA_DIR = (
 
 plt.style.use("dark_background")
 
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 def generate_cmb_plot():
     print("Generating CMB Power Spectrum Plot...")

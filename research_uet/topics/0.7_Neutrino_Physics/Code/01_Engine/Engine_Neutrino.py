@@ -24,15 +24,6 @@ from dataclasses import dataclass
 from typing import Tuple
 
 # =============================================================================
-# PATH SETUP (Robust)
-# =============================================================================
-SCRIPT_DIR = Path(__file__).resolve().parent
-ROOT = SCRIPT_DIR
-while ROOT.name != "research_uet" and ROOT.parent != ROOT:
-    ROOT = ROOT.parent
-sys.path.insert(0, str(ROOT.parent))
-
-# =============================================================================
 # IMPORT FROM CORE (STANDARD COMPLIANCE)
 # =============================================================================
 try:

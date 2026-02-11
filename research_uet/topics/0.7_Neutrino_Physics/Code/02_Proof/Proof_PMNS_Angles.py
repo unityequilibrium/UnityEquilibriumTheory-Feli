@@ -8,17 +8,17 @@ import sys
 from pathlib import Path
 
 # Path setup
-curr = Path(__file__).resolve()
-while curr.name != "research_uet" and curr.parent != curr:
-    curr = curr.parent
-root_path = curr.parent
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # Engine Import (Dynamic)
 try:
     import importlib.util
 
     engine_file = (
-        curr
+        root_path
+        / "research_uet"
         / "topics"
         / "0.7_Neutrino_Physics"
         / "Code"

@@ -13,32 +13,18 @@ from pathlib import Path
 import sys
 import importlib
 
-# Robust Root Finding (Standard 5x4 Grid Pattern)
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet" / "core").exists():
-        root_path = parent
-        break
+# Robust Root Finding
+from research_uet import ROOT_PATH
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+root_path = ROOT_PATH
 
 # Add Topic Directory to sys.path to allow sibling imports (01_Engine)
-topic_dir = current_path.parent.parent
+topic_dir = root_path / "research_uet" / "topics" / "0.10_Fluid_Dynamics_Chaos" / "Code"
 if str(topic_dir) not in sys.path:
     sys.path.append(str(topic_dir))
 
 UETFluidSolver = importlib.import_module("01_Engine.Engine_UET_2D").UETFluidSolver
-PhysicalProperties = importlib.import_module(
-    "01_Engine.Engine_UET_2D"
-).PhysicalProperties
+PhysicalProperties = importlib.import_module("01_Engine.Engine_UET_2D").PhysicalProperties
 
 
 def analytical_poiseuille(y, H, dP_dx, mu):

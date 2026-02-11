@@ -17,11 +17,7 @@ project_root = script_path.parents[5]
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-except ImportError:
-    print("CRITICAL: UET Core not found.")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager
 
 
 def run_research():

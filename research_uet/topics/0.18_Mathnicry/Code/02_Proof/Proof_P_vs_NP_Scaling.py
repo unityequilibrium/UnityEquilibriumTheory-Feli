@@ -9,22 +9,18 @@ Goal: Prove visually that the search complexity is O(sqrt(N)),
 supporting the UET argument for polynomial-time NP solutions.
 """
 
+from research_uet import ROOT_PATH
+from pathlib import Path
+
+current_path = Path(__file__).resolve()
+root_path = ROOT_PATH
 import sys
 import numpy as np
 import time
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-research_uet_path = None
-for parent in [current_path] + list(current_path.parents):
-    if parent.name == "research_uet":
-        research_uet_path = parent
-        break
-if research_uet_path:
-    root_path = research_uet_path.parent
-    if str(root_path) not in sys.path:
-        sys.path.insert(0, str(root_path))
+
 
 # Engine Import
 try:

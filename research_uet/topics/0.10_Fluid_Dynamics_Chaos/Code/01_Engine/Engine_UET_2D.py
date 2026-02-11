@@ -19,29 +19,9 @@ from dataclasses import dataclass
 from typing import Tuple, Optional, Dict, Any
 from pathlib import Path
 
-# =============================================================================
-# ROBUST PATH FINDING
-# =============================================================================
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-
-if root_path:
-    if str(root_path) not in sys.path:
-        sys.path.insert(0, str(root_path))
-else:
-    print("CRITICAL ERROR: Could not find 'research_uet' root.")
-
 # Core Imports
-try:
-    from research_uet.core.uet_base_solver import UETBaseSolver
-    from research_uet.core.uet_parameters import UETParameters, FLUID_MOBILITY_BRIDGE
-except ImportError as e:
-    print(f"IMPORT ERROR DETAILED: {e}")
-    raise e
+from research_uet.core.uet_base_solver import UETBaseSolver
+from research_uet.core.uet_parameters import UETParameters, FLUID_MOBILITY_BRIDGE
 
 
 @dataclass

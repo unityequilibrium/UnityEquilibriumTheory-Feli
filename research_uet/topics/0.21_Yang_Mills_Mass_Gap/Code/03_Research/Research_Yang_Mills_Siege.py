@@ -28,8 +28,12 @@ import time
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-engine_dir = current_path.parent.parent / "01_Engine"
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
+engine_dir = (
+    root_path / "research_uet" / "topics" / "0.21_Yang_Mills_Mass_Gap" / "Code" / "01_Engine"
+)
 sys.path.append(str(engine_dir))
 
 try:

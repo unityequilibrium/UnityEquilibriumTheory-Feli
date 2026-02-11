@@ -7,25 +7,15 @@ Folder: 01_Engine
 Core UET approach to the Millennium Prize Problem.
 """
 
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 import sys
 import numpy as np
 from pathlib import Path
 from typing import Optional, Dict, Any
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-ROOT = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        ROOT = parent
-        break
-
-if ROOT:
-    if str(ROOT) not in sys.path:
-        sys.path.insert(0, str(ROOT))
-else:
-    print("CRITICAL ERROR: Could not find 'research_uet' root.")
-    sys.exit(1)
 
 from research_uet.core.uet_master_equation import (
     UETParameters,
@@ -112,9 +102,7 @@ def yang_mills_vacuum_energy():
     # Wait, in Master Equation V(C) is around C-C0.
     # If C0=1, and alpha=-0.1, V has min at (C-C0)^2 = |alpha|/gamma
     # C_min = C0 + sqrt(|alpha|/gamma)
-    C_min_physical = params.C0 + np.sqrt(abs(params.alpha) / params.gamma) * np.ones(
-        100
-    )
+    C_min_physical = params.C0 + np.sqrt(abs(params.alpha) / params.gamma) * np.ones(100)
     omega_min = omega_functional_complete(C_min_physical, dx=dx, params=params)
 
     return omega_zero, omega_min

@@ -6,20 +6,18 @@ Folder: 05_Developmental_AI
 Runs the full simulation of an AI growing from Infant to Adult.
 """
 
+from research_uet import ROOT_PATH
+from pathlib import Path
+current_path = Path(__file__).resolve()
+root_path = ROOT_PATH
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 import sys
 import time
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Add current directory to sys.path to allow importing siblings
 if str(current_path.parent) not in sys.path:

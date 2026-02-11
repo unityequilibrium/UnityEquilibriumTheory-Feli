@@ -10,34 +10,20 @@ import sys
 from pathlib import Path
 
 # --- PATH SETUP (Must be FIRST) ---
-current_path = Path(__file__).resolve()
-ROOT = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        ROOT = parent
-        break
+from research_uet import ROOT_PATH
 
-if ROOT:
-    if str(ROOT) not in sys.path:
-        sys.path.insert(0, str(ROOT))
-else:
-    print("CRITICAL: research_uet root not found!")
-    sys.exit(1)
+ROOT = ROOT_PATH
 
 TOPIC_DIR = ROOT / "research_uet" / "topics" / "0.2_Black_Hole_Physics"
 DATA_PATH = TOPIC_DIR / "Data"
 
 # Core Imports
-try:
-    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-    from research_uet.core.uet_parameters import G, C, M_SUN
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
+from research_uet.core.uet_parameters import G, C, M_SUN
 
-    pc_to_m = 3.085677581e16
-    c = C
-    M_sun = M_SUN
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+pc_to_m = 3.085677581e16
+c = C
+M_sun = M_SUN
 
 import json
 import math

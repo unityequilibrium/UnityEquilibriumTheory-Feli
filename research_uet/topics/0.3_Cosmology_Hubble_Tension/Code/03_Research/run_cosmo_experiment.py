@@ -15,34 +15,48 @@ import sys
 from pathlib import Path
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-
-# Setup local imports for Topic 0.3
-topic_path = root_path / "research_uet" / "topics" / "0.3_Cosmology_Hubble_Tension"
-engine_path = topic_path / "Code" / "01_Engine"
-proof_path = topic_path / "Code" / "02_Proof"
-if str(engine_path) not in sys.path:
-    sys.path.insert(0, str(engine_path))
-if str(proof_path) not in sys.path:
-    sys.path.insert(0, str(proof_path))
-
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-    from Engine_Cosmology import UETCosmologyEngine, H0_PLANCK, H0_SHOES
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
+_root = Path(__file__).resolve().parent
+while _root.name != 'research_uet' and _root.parent != _root:
+    _root = _root.parent
+if _root.name == 'research_uet':
+    sys.path.insert(0, str(_root.parent))
+    from research_uet import ROOT_PATH
+    root_path = ROOT_PATH
+else:
+    print("CRITICAL: Root path not found.")
     sys.exit(1)
+    import importlib.util
+
+    # Import Engine
+    engine_path = (
+        root_path
+        / "research_uet"
+        / "topics"
+        / "0.3_Cosmology_Hubble_Tension"
+        / "Code"
+        / "01_Engine"
+        / "Engine_Cosmology.py"
+    )
+    spec = importlib.util.spec_from_file_location("Engine_Cosmology", str(engine_path))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    UETCosmologyEngine = mod.UETCosmologyEngine
+    H0_PLANCK = mod.H0_PLANCK
+    H0_SHOES = mod.H0_SHOES
+except Exception as e:
+    print(f"CRITICAL ERROR: Could not import Cosmology Engine: {e}")
+    sys.exit(1)
+
+from research_uet.core.uet_glass_box import UETPathManager
 
 import csv
 import os
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 
 def run_experiment():
@@ -69,15 +83,9 @@ def run_experiment():
     err_late = abs(h_late - obs_late) / obs_late * 100
     err_gap = abs(gap - obs_gap) / obs_gap * 100
 
-    print(
-        f"   [Early Universe] UET: {h_early:.2f} | Obs: {obs_early:.2f} | Err: {err_early:.2f}%"
-    )
-    print(
-        f"   [Late Universe]  UET: {h_late:.2f} | Obs: {obs_late:.2f} | Err: {err_late:.2f}%"
-    )
-    print(
-        f"   [Tension Gap]    UET: {gap:.2f} | Obs: {obs_gap:.2f} | Err: {err_gap:.2f}%"
-    )
+    print(f"   [Early Universe] UET: {h_early:.2f} | Obs: {obs_early:.2f} | Err: {err_early:.2f}%")
+    print(f"   [Late Universe]  UET: {h_late:.2f} | Obs: {obs_late:.2f} | Err: {err_late:.2f}%")
+    print(f"   [Tension Gap]    UET: {gap:.2f} | Obs: {obs_gap:.2f} | Err: {err_gap:.2f}%")
 
     # Criteria: < 1% error on absolute values, < 5% error on gap
     # Note: Our solver uses calibrated beta_cosmo=0.083 so it should match perfectly by design.
@@ -96,9 +104,7 @@ def run_experiment():
     result_path = result_dir / "results_summary.csv"
 
     with open(result_path, "w", newline="") as f:
-        writer = csv.DictWriter(
-            f, fieldnames=["Metric", "UET", "Observed", "Error_Pct", "Status"]
-        )
+        writer = csv.DictWriter(f, fieldnames=["Metric", "UET", "Observed", "Error_Pct", "Status"])
         writer.writeheader()
         writer.writerow(
             {

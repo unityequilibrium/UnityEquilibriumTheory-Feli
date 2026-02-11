@@ -23,39 +23,35 @@ _root = Path(__file__).parent
 while _root.name != "research_uet" and _root.parent != _root:
     _root = _root.parent
 sys.path.insert(0, str(_root.parent))
+from research_uet.core.uet_master_equation import (
+    UETParameters,
+    SIGMA_CRIT,
+    strategic_boost,
+    potential_V,
+    KAPPA_BEKENSTEIN,
+)
+
+# --- DYNAMIC DATA IMPORT ---
 try:
-    from research_uet.core.uet_master_equation import (
-        UETParameters,
-        SIGMA_CRIT,
-        strategic_boost,
-        potential_V,
-        KAPPA_BEKENSTEIN,
+    import importlib.util
+
+    _data_file = (
+        _root
+        / "topics"
+        / "0.5_Nuclear_Binding_Hadrons"
+        / "Data"
+        / "03_Research"
+        / "Data_QCD_Strong_Force.py"
     )
-except ImportError:
-    pass  # Use local definitions if not available
-
-import os
-
-# Add data path (local) - Updated for 5x4 Grid
-data_dir = _root / "Data" / "03_Research"
-
-# Fix Import Path for Data Module (5x4 Grid)
-TOPIC_DIR = Path(__file__).resolve().parent.parent.parent
-DATA_SUBDIR = TOPIC_DIR / "Data" / "03_Research"
-sys.path.append(str(DATA_SUBDIR))
-
-try:
-    from Data_QCD_Strong_Force import (
-        ALPHA_S_RUNNING,
-        ALPHA_S_MZ,
-        HADRON_MASSES,
-        STRING_TENSION,
-        LAMBDA_QCD,
-        get_alpha_s_at_scale,
-    )
-except ImportError as e:
-    print(f"CRITICAL: Could not import Data_QCD_Strong_Force from {DATA_SUBDIR}")
-    raise e
+    _spec = importlib.util.spec_from_file_location("StrongForceData", str(_data_file))
+    _mod = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_mod)
+    ALPHA_S_RUNNING = _mod.ALPHA_S_RUNNING
+    ALPHA_S_MZ = _mod.ALPHA_S_MZ
+    STRING_TENSION = _mod.STRING_TENSION
+except Exception as e:
+    print(f"CRITICAL: Strong Force data not found: {e}")
+    sys.exit(1)
 
 
 def uet_alpha_s_running(Q_GeV: float, kappa: float = 0.5, beta: float = 1.0) -> float:
@@ -137,9 +133,7 @@ def test_alpha_s_running():
     print("TEST 1: alpha_s Running (Asymptotic Freedom)")
     print("=" * 60)
 
-    print(
-        f"\nPDG 2024 Reference: alpha_s(M_Z) = {ALPHA_S_MZ['value']} +/- {ALPHA_S_MZ['error']}"
-    )
+    print(f"\nPDG 2024 Reference: alpha_s(M_Z) = {ALPHA_S_MZ['value']} +/- {ALPHA_S_MZ['error']}")
 
     # Calibrate kappa to match M_Z data
     # alpha_s(91.2) = 0.1186
@@ -148,9 +142,7 @@ def test_alpha_s_running():
 
     print(f"\nComparing QCD vs UET (kappa = {kappa_calibrated}):")
     print("-" * 60)
-    print(
-        f"{'Q (GeV)':<10} {'alpha_QCD':<12} {'alpha_UET':<12} {'Error %':<10} {'Status':<10}"
-    )
+    print(f"{'Q (GeV)':<10} {'alpha_QCD':<12} {'alpha_UET':<12} {'Error %':<10} {'Status':<10}")
     print("-" * 60)
 
     results = []
@@ -161,17 +153,13 @@ def test_alpha_s_running():
         error_pct = abs(alpha_uet - alpha_exp) / alpha_exp * 100
 
         # Pass if within 15% or within experimental error
-        status = (
-            "PASS" if error_pct < 15 or abs(alpha_uet - alpha_exp) < 2 * err else "FAIL"
-        )
+        status = "PASS" if error_pct < 15 or abs(alpha_uet - alpha_exp) < 2 * err else "FAIL"
         if status == "PASS":
             passed += 1
 
         results.append({"Q": Q, "exp": alpha_exp, "uet": alpha_uet, "error": error_pct})
 
-        print(
-            f"{Q:<10.1f} {alpha_exp:<12.4f} {alpha_uet:<12.4f} {error_pct:<10.1f} {status:<10}"
-        )
+        print(f"{Q:<10.1f} {alpha_exp:<12.4f} {alpha_uet:<12.4f} {error_pct:<10.1f} {status:<10}")
 
     pass_rate = passed / len(ALPHA_S_RUNNING) * 100
     avg_error = np.mean([r["error"] for r in results])
@@ -183,9 +171,7 @@ def test_alpha_s_running():
     return pass_rate, avg_error
 
 
-def uet_hadron_mass(
-    base_mass_MeV: float, n_quarks: int = 2, beta: float = 1.0
-) -> float:
+def uet_hadron_mass(base_mass_MeV: float, n_quarks: int = 2, beta: float = 1.0) -> float:
     """
     UET prediction for hadron mass.
 
@@ -261,9 +247,7 @@ def test_hadron_spectrum():
 
     print("\nComparison (using constituent quark model mapping):")
     print("-" * 70)
-    print(
-        f"{'Hadron':<12} {'M_exp (MeV)':<14} {'M_UET (MeV)':<14} {'Error %':<10} {'Status':<10}"
-    )
+    print(f"{'Hadron':<12} {'M_exp (MeV)':<14} {'M_UET (MeV)':<14} {'Error %':<10} {'Status':<10}")
     print("-" * 70)
 
     passed = 0
@@ -294,9 +278,7 @@ def test_hadron_spectrum():
             passed += 1
 
         errors.append(error_pct)
-        print(
-            f"{name:<12} {m_exp:<14.2f} {m_uet:<14.2f} {error_pct:<10.1f} {status:<10}"
-        )
+        print(f"{name:<12} {m_exp:<14.2f} {m_uet:<14.2f} {error_pct:<10.1f} {status:<10}")
 
     pass_rate = passed / len(test_hadrons) * 100
     avg_error = np.mean(errors)
@@ -342,9 +324,7 @@ def test_confinement():
     return error_pct < 15, error_pct
 
 
-def cornell_potential(
-    r_fm: float, alpha: float = 0.3, sigma_GeV2: float = 0.2
-) -> float:
+def cornell_potential(r_fm: float, alpha: float = 0.3, sigma_GeV2: float = 0.2) -> float:
     """Cornell potential V(r) = -α/r + σr from lattice QCD."""
     r_GeV_inv = r_fm * 5.068
     if r_GeV_inv < 0.1:
@@ -370,9 +350,7 @@ def test_cornell_potential():
 
     r_values = [0.1, 0.2, 0.3, 0.5, 0.8, 1.0, 1.5, 2.0]
     print("-" * 70)
-    print(
-        f"{'r (fm)':<10} {'V_Cornell':<15} {'V_UET':<15} {'Error %':<10} {'Status':<10}"
-    )
+    print(f"{'r (fm)':<10} {'V_Cornell':<15} {'V_UET':<15} {'Error %':<10} {'Status':<10}")
     print("-" * 70)
 
     passed = 0
@@ -385,9 +363,7 @@ def test_cornell_potential():
         if status == "PASS":
             passed += 1
         errors.append(error_pct)
-        print(
-            f"{r:<10.1f} {V_cornell:<15.4f} {V_uet:<15.4f} {error_pct:<10.1f} {status:<10}"
-        )
+        print(f"{r:<10.1f} {V_cornell:<15.4f} {V_uet:<15.4f} {error_pct:<10.1f} {status:<10}")
 
     pass_rate = passed / len(r_values) * 100
     avg_error = np.mean(errors)
@@ -424,18 +400,14 @@ def run_all_tests():
     print("-" * 60)
     print(f"{'alpha_s Running':<30} {pass1:.0f}%{'':<10} {err1:.1f}%")
     print(f"{'Hadron Mass Spectrum':<30} {pass2:.0f}%{'':<10} {err2:.1f}%")
-    print(
-        f"{'Confinement (String Tension)':<30} {'PASS' if pass3 else 'FAIL':<15} {err3:.1f}%"
-    )
+    print(f"{'Confinement (String Tension)':<30} {'PASS' if pass3 else 'FAIL':<15} {err3:.1f}%")
     print(f"{'Cornell Potential':<30} {pass4:.0f}%{'':<10} {err4:.1f}%")
 
     overall_pass = pass3 and (pass4 > 50)
     overall_error = (err1 + err2 + err3 + err4) / 4
 
     print("-" * 60)
-    print(
-        f"Overall: {'PASS (confinement/Cornell)' if overall_pass else 'NEEDS MORE WORK'}"
-    )
+    print(f"Overall: {'PASS (confinement/Cornell)' if overall_pass else 'NEEDS MORE WORK'}")
     print(f"Average Error: {overall_error:.1f}%")
 
     if overall_pass:

@@ -35,14 +35,7 @@ elif not project_root:
     else:
         sys.path.insert(0, str(current_path.parents[4]))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-except ImportError:
-    try:
-        sys.path.append(str(current_path.parents[5]))
-        from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-    except:
-        sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
 
 
 def load_critical_data():

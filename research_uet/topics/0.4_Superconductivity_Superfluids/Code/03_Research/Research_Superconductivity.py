@@ -5,48 +5,28 @@ Tests UET predictions for critical temperature Tc against McMillan 1968 Data.
 ALL-IN-ONE: Contains Logic + Data Loading + Verification.
 """
 
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 import json
 import sys
 import math
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-ROOT = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet" / "core").exists():
-        ROOT = parent
-        break
-
-if ROOT:
-    print(f"DEBUG: ROOT found at {ROOT}")
-    if str(ROOT) not in sys.path:
-        sys.path.insert(0, str(ROOT))
-        print(f"DEBUG: Added ROOT to sys.path")
-else:
-    print("CRITICAL: research_uet root not found!")
-    sys.exit(1)
-
-repo_root = ROOT
-
-# Correctly cast to Path for division operator
-repo_root = Path(repo_root)
 
 try:
-    try:
-        from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-    except ImportError:
-        from core.uet_glass_box import UETPathManager, UETMetricLogger
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
+except ImportError:
+    print("Warning: Light import failed.")
+    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
 
 
 import importlib.util
 
 # Use importlib to bypass syntax error with "0.4" in path
 engine_path = (
-    repo_root
+    root_path
     / "research_uet"
     / "topics"
     / "0.4_Superconductivity_Superfluids"
@@ -87,7 +67,7 @@ class SuperconductivitySolver:
 def load_tc_data():
     """Load superconductor Tc data."""
     data_path = (
-        repo_root
+        root_path
         / "research_uet"
         / "topics"
         / "0.4_Superconductivity_Superfluids"

@@ -4,53 +4,19 @@ UET Superfluids Test - Helium-4
 Tests UET prediction for superfluid properties.
 """
 
-# Import Root for UET Core
 import sys
+import math
 from pathlib import Path
+from research_uet import ROOT_PATH
 
-# --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-research_uet_path = None
+root_path = ROOT_PATH
 
-# Climb up until we find 'research_uet' directory
-for parent in [current_path] + list(current_path.parents):
-    if parent.name == "research_uet":
-        research_uet_path = parent
-        break
-
-if research_uet_path:
-    # Add the PARENT of research_uet to sys.path so we can import research_uet.core
-    root_path = research_uet_path.parent
-    if str(root_path) not in sys.path:
-        sys.path.insert(0, str(root_path))
-    print(f"DEBUG: Found root_path: {root_path}")
-else:
-    print("CRITICAL: research_uet directory not found")
-    sys.exit(1)
-
-try:
-    try:
-        from research_uet.core.uet_glass_box import UETPathManager
-    except ImportError:
-        from core.uet_glass_box import UETPathManager
-except ImportError as e:
-    print(f"CRITICAL: Failed to import UET Core: {e}")
-    sys.exit(1)
-
-# He-4 superfluid data (Donnelly 1998)
-HE4_DATA = {
-    "lambda_point_K": 2.1768,  # Lambda transition
-    "rho_0_kg_m3": 145.0,  # Density at T=0
-    "speed_sound_m_s": 238,  # First sound at 0K
-    "critical_velocity_cm_s": 60,  # Landau critical
-    "quantum_vortex_circulation": 9.97e-4,  # cm^2/s
-}
-
-# Engine Import via Importlib to avoid package digits issue
+# Import Engines and Data
 try:
     import importlib.util
 
-    engine_file = (
+    # Topic 0.4 Engine
+    engine_path = (
         root_path
         / "research_uet"
         / "topics"
@@ -59,24 +25,43 @@ try:
         / "01_Engine"
         / "Engine_Superconductivity.py"
     )
-    spec = importlib.util.spec_from_file_location("Engine_Superconductivity", str(engine_file))
-    engine_mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(engine_mod)
-    AllenDynesEngine = engine_mod.AllenDynesEngine
+    spec_eng = importlib.util.spec_from_file_location("Engine_Supercon", str(engine_path))
+    mod_eng = importlib.util.module_from_spec(spec_eng)
+    spec_eng.loader.exec_module(mod_eng)
+    AllenDynesEngine = mod_eng.AllenDynesEngine
+
+    # Topic 0.4 Data
+    data_path = (
+        root_path
+        / "research_uet"
+        / "topics"
+        / "0.4_Superconductivity_Superfluids"
+        / "Data"
+        / "03_Research"
+        / "superfluid_data.py"
+    )
+    spec_data = importlib.util.spec_from_file_location("SuperfluidData", str(data_path))
+    mod_data = importlib.util.module_from_spec(spec_data)
+    spec_data.loader.exec_module(mod_data)
+    HE4_DATA = mod_data.HELIUM_4_SUPERFLUID
+
+    from research_uet.core.uet_glass_box import UETPathManager
 except Exception as e:
-    print(f"Error loading Engine: {e}")
+    print(f"CRITICAL SETUP ERROR: {e}")
     sys.exit(1)
 
+# Initialize Engine
 engine = AllenDynesEngine()
 
 
 def uet_lambda_point():
     """Delegated to Engine."""
-    return engine.compute_lambda_point(rho=HE4_DATA["rho_0_kg_m3"])
+    return engine.compute_lambda_point(rho=HE4_DATA["density_kg_m3"])
 
 
 def uet_quantum_circulation():
     """Delegated to Engine."""
+    # From Donnelly 1998: kappa = h/m_He4 = 9.97e-4 cm^2/s
     return engine.compute_quantum_vortex()
 
 
@@ -102,7 +87,7 @@ def run_test():
     error = abs(T_uet - T_obs) / T_obs * 100
     print(f"  Error: {error:.1f}%")
 
-    passed = error < 50
+    passed = error < 10
     results.append(passed)
     print(f"  {'PASS' if passed else 'FAIL'}")
 
@@ -110,11 +95,12 @@ def run_test():
     print("\n[2] QUANTUM OF CIRCULATION")
     print("-" * 50)
 
-    kappa_obs = HE4_DATA["quantum_vortex_circulation"]
+    # h / m_He4 ~ 9.97e-4 cm^2/s
+    kappa_obs = 9.97e-4
     kappa_uet = uet_quantum_circulation()
 
-    print(f"  Observed: kappa = {kappa_obs:.2e} cm^2/s")
-    print(f"  UET:      kappa = {kappa_uet:.2e} cm^2/s")
+    print(f"  Observed: kappa = {kappa_obs:.3e} cm^2/s")
+    print(f"  UET:      kappa = {kappa_uet:.3e} cm^2/s")
 
     error_k = abs(kappa_uet - kappa_obs) / kappa_obs * 100
     print(f"  Error: {error_k:.1f}%")
@@ -130,7 +116,7 @@ def run_test():
     print(f"RESULT: {passed_count}/{total} PASSED")
     print("=" * 70)
 
-    # Save Report if UETPathManager is available
+    # Save Report
     try:
         result_dir = UETPathManager.get_result_dir(
             topic_id="0.4_Superconductivity_Superfluids",
@@ -142,7 +128,11 @@ def run_test():
             f.write(f"UET Superfluids Test Results\nPassed: {passed_count}/{total}\n")
         print(f"Report saved to {report_path}")
     except Exception as e:
-        print(f"Could not save report: {e}")
+        # Fallback to local Result dir
+        local_res = Path("Result")
+        local_res.mkdir(exist_ok=True)
+        with open(local_res / "superfluids_report.txt", "w") as f:
+            f.write(f"UET Superfluids Test Results\nPassed: {passed_count}/{total}\n")
 
     return passed_count >= 1
 

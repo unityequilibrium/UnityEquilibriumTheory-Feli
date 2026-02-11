@@ -27,23 +27,11 @@ from dataclasses import dataclass
 from typing import Optional, Dict, Any
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet" / "core").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Core Imports
-try:
-    from research_uet.core.uet_base_solver import UETBaseSolver
-    from research_uet.core.uet_master_equation import UETParameters
-except ImportError as e:
-    print(f"CRITICAL IMPORT ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_base_solver import UETBaseSolver
+from research_uet.core.uet_master_equation import UETParameters
 
 
 class UETClusterSolver(UETBaseSolver):

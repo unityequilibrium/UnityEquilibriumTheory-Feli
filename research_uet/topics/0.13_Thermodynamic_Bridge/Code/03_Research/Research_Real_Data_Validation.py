@@ -16,29 +16,21 @@ Uses UET V3.0 Master Equation:
 
 import sys
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-    from research_uet.core.uet_parameters import K_B, HBAR, C, G, M_SUN
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
+from research_uet.core.uet_parameters import K_B, HBAR, C, G, M_SUN
 
 import os
 import numpy as np
 import importlib.util
 import math
+
 
 # Physic constants mapping
 kB = K_B
@@ -98,6 +90,12 @@ K_J = exp_data.K_J
 # ==============================================================================
 # TEST 1: LANDAUER LIMIT vs REAL DATA
 # ==============================================================================
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 
 def test_landauer_real_data():
@@ -223,9 +221,7 @@ def test_area_theorem_ligo():
         results.append(passed)
         status = "[OK]" if passed else "[FAIL]"
 
-        print(
-            f"   {event['name']:<12} {S_initial:.3e}   {S_final:.3e}   {ratio:.2f}x {status}"
-        )
+        print(f"   {event['name']:<12} {S_initial:.3e}   {S_final:.3e}   {ratio:.2f}x {status}")
 
     print("-" * 65)
 
@@ -249,9 +245,7 @@ def test_bekenstein_entropy():
     print("=" * 70)
 
     print(f"\n[DATA] Black Hole Thermodynamics:")
-    print(
-        f"   {'Object':<20} {'Mass (M_sun)':<15} {'Entropy (Planck)':<20} {'T_Hawking (K)':<15}"
-    )
+    print(f"   {'Object':<20} {'Mass (M_sun)':<15} {'Entropy (Planck)':<20} {'T_Hawking (K)':<15}")
     print("-" * 75)
 
     for name, data in BLACK_HOLE_ENTROPY.items():
@@ -339,9 +333,7 @@ def run_all_real_data_tests():
     )
     logger = None
     try:
-        logger = UETMetricLogger(
-            "Thermodynamic_Real_Data_Validation", output_dir=result_dir_base
-        )
+        logger = UETMetricLogger("Thermodynamic_Real_Data_Validation", output_dir=result_dir_base)
         logger.set_metadata(
             {
                 "test_suite": "Landauer, LIGO, EHT, Josephson",

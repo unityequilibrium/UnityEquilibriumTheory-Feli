@@ -26,13 +26,9 @@ else:
     sys.exit(1)
 
 # Core Imports
-try:
-    from research_uet.core.uet_base_solver import UETBaseSolver
-    from research_uet.core.uet_master_equation import UETParameters
-    from research_uet.core.uet_parameters import INTEGRITY_KILL_SWITCH
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_base_solver import UETBaseSolver
+from research_uet.core.uet_master_equation import UETParameters
+from research_uet.core.uet_parameters import INTEGRITY_KILL_SWITCH
 
 # --- PHYSICAL CONSTANTS (PDG 2024) ---
 M_Z_GEV = 91.1876

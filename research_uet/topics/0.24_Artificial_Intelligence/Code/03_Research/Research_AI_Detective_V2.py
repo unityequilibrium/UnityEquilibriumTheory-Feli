@@ -19,21 +19,15 @@ from pathlib import Path
 from typing import Dict, Any
 
 # --- ROBUST PATH FINDER (Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # --- UET CORE IMPORTS ---
 from research_uet.core.uet_base_solver import UETBaseSolver
 from research_uet.core.uet_data_orchestrator import orchestrator
 from research_uet.core.uet_parameters import get_params
 from research_uet.core.scientific_validation import ScientificValidator
+
+
 
 # --- EXTERNAL PHYSICS ENGINE (Dynamic Import) ---
 try:
@@ -82,6 +76,12 @@ except Exception as e:
     print(f"⚠️ Physics Engine Warning: Import Logic Failed: {e}")
     UETGalaxyEngine = None
 
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 class AIDetectiveSolver(UETBaseSolver):
     """

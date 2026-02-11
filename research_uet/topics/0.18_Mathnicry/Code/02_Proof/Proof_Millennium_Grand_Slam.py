@@ -16,23 +16,10 @@ import numpy as np
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-research_uet_path = None
-for parent in [current_path] + list(current_path.parents):
-    if parent.name == "research_uet":
-        research_uet_path = parent
-        break
-if research_uet_path:
-    root_path = research_uet_path.parent
-    if str(root_path) not in sys.path:
-        sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_master_equation import UETMasterEquation
-    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-except ImportError as e:
-    print(f"Import Error: {e}")
-    sys.exit(1)
+
+from research_uet.core.uet_master_equation import UETMasterEquation
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
 
 
 def verify_poincare_perelman():

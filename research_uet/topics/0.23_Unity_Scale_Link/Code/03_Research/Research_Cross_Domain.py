@@ -22,19 +22,10 @@ from pathlib import Path
 from scipy import stats
 
 # --- PATH SETUP (Must be FIRST) ---
-current_path = Path(__file__).resolve()
-ROOT = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        ROOT = parent
-        break
+# --- PATH SETUP (Must be FIRST) ---
+from research_uet import ROOT_PATH
 
-if ROOT:
-    if str(ROOT) not in sys.path:
-        sys.path.insert(0, str(ROOT))
-else:
-    print("CRITICAL: research_uet root not found!")
-    sys.exit(1)
+ROOT = ROOT_PATH
 
 TOPIC_DIR = ROOT / "research_uet" / "topics" / "0.23_Unity_Scale_Link"
 DATA_DIR = TOPIC_DIR / "Data" / "03_Research"

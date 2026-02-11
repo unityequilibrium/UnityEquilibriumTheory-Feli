@@ -7,25 +7,15 @@ Folder: 01_Engine
 Demonstrates the SAME Ω equation works across scales.
 """
 
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 import sys
 import numpy as np
 from pathlib import Path
 from typing import Optional, Dict, Any
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-ROOT = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        ROOT = parent
-        break
-
-if ROOT:
-    if str(ROOT) not in sys.path:
-        sys.path.insert(0, str(ROOT))
-else:
-    print("CRITICAL ERROR: Could not find 'research_uet' root.")
-    sys.exit(1)
 
 from research_uet.core.uet_master_equation import (
     UETParameters,

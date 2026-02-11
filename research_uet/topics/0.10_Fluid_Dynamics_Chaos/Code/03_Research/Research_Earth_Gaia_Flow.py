@@ -22,11 +22,12 @@ import sys
 import numpy as np
 import time
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
+import importlib.util
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-engine_dir = current_path.parent.parent / "01_Engine"
-sys.path.append(str(engine_dir))
 
 title_art = """
       _______
@@ -39,8 +40,20 @@ title_art = """
 """
 
 try:
-    from Engine_UET_3D import UETFluid3D
-except ImportError as e:
+    engine_path = (
+        root_path
+        / "research_uet"
+        / "topics"
+        / "0.10_Fluid_Dynamics_Chaos"
+        / "Code"
+        / "01_Engine"
+        / "Engine_UET_3D.py"
+    )
+    spec = importlib.util.spec_from_file_location("Engine_UET_3D", engine_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    UETFluid3D = getattr(module, "UETFluid3D")
+except Exception as e:
     print(f"❌ Error: Engine_UET_3D not found. {e}")
     sys.exit(1)
 

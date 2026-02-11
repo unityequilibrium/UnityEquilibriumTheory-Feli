@@ -22,27 +22,23 @@ import sys
 from pathlib import Path
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-    from research_uet.core.uet_parameters import M_PLANCK
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager
+from research_uet.core.uet_parameters import M_PLANCK
 
 import json
 import math
 import numpy as np
 
+
+
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 def load_data():
     """Load lepton data from JSON."""

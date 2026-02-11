@@ -9,39 +9,16 @@ Navier-Stokes fails at discontinuities (Shocks) without heavy regularization (Ar
 UET should handle shocks naturally via the Planck Regulator.
 """
 
+
+from research_uet import ROOT_PATH
+from pathlib import Path
+current_path = Path(__file__).resolve()
+root_path = ROOT_PATH
 import numpy as np
 import sys
 import matplotlib.pyplot as plt
 from pathlib import Path
-
-# Setup Path
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-
-try:
-    from research_uet.core.uet_master_equation import UETParameters
-    from research_uet.core.uet_parameters import FLUID_MOBILITY_BRIDGE
-    import importlib.util
-except ImportError:
-    print("CRITICAL: UET Core not found.")
-    sys.exit(1)
-
-# Dynamic Import of 3D Engine
-try:
-    engine_path = current_path.parent.parent / "01_Engine" / "Engine_UET_3D.py"
-    spec = importlib.util.spec_from_file_location("Engine_UET_3D", engine_path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    UETFluid3D = getattr(module, "UETFluid3D")
-except Exception as e:
-    print(f"CRITICAL: Could not load UETFluid3D Engine. {e}")
-    sys.exit(1)
+import importlib.util
 
 # =============================================================================
 # BENCHMARK DATA: NASA X-43A (Approximated from Flight Data)
@@ -51,6 +28,28 @@ NASA_X43_DATA = {
     "Mach": [3.0, 4.0, 5.0, 6.0, 7.0, 8.0],
     "L_D": [5.2, 4.8, 4.2, 3.9, 3.5, 3.1],  # Typical Waverider trend (Kuchemann Barrier)
 }
+
+from research_uet.core.uet_master_equation import UETParameters
+from research_uet.core.uet_parameters import FLUID_MOBILITY_BRIDGE
+
+# Dynamic Import of 3D Engine
+try:
+    engine_path = (
+        root_path
+        / "research_uet"
+        / "topics"
+        / "0.10_Fluid_Dynamics_Chaos"
+        / "Code"
+        / "01_Engine"
+        / "Engine_UET_3D.py"
+    )
+    spec = importlib.util.spec_from_file_location("Engine_UET_3D", engine_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    UETFluid3D = getattr(module, "UETFluid3D")
+except Exception as e:
+    print(f"CRITICAL: Could not load UETFluid3D Engine. {e}")
+    sys.exit(1)
 
 
 def run_hypersonic_siege():

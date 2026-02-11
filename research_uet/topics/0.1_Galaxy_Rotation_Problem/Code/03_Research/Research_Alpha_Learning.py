@@ -12,27 +12,17 @@ import sys
 from pathlib import Path
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager
 
 import json
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize_scalar
 import importlib
+
+
 
 code_dir = str(Path(__file__).resolve().parent.parent)
 if code_dir not in sys.path:
@@ -42,6 +32,12 @@ if code_dir not in sys.path:
 # For research speed, we mock the engine internals to allow parameter sweeping
 # since Engine_Galaxy_V3 is hardcoded for Zero Curve Fitting.
 
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 def uet_velocity_variable_gamma(gamma, r_kpc, M_disk, R_disk):
     G = 4.302e-6

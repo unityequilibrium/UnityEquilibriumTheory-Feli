@@ -10,32 +10,34 @@ In UET, the magnetic flux function (psi) maps to the Unity Potential (C).
 We test if UET can maintain a stable "D-Shape" plasma (ITER-like) without ELM instability.
 """
 
+
+from research_uet import ROOT_PATH
+from pathlib import Path
+current_path = Path(__file__).resolve()
+root_path = ROOT_PATH
 import numpy as np
 import sys
 import matplotlib.pyplot as plt
 from pathlib import Path
 
 # Setup Path
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_master_equation import UETParameters
-    from research_uet.core.uet_parameters import FLUID_MOBILITY_BRIDGE
-    import importlib.util
-except ImportError:
-    print("CRITICAL: UET Core not found.")
-    sys.exit(1)
+
+from research_uet.core.uet_master_equation import UETParameters
+from research_uet.core.uet_parameters import FLUID_MOBILITY_BRIDGE
+import importlib.util
 
 # Dynamic Import of 3D Engine
 try:
-    engine_path = current_path.parent.parent / "01_Engine" / "Engine_UET_3D.py"
+    engine_path = (
+        root_path
+        / "research_uet"
+        / "topics"
+        / "0.10_Fluid_Dynamics_Chaos"
+        / "Code"
+        / "01_Engine"
+        / "Engine_UET_3D.py"
+    )
     spec = importlib.util.spec_from_file_location("Engine_UET_3D", engine_path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)

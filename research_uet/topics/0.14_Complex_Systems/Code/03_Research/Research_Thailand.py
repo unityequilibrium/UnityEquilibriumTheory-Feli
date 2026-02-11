@@ -1,4 +1,4 @@
-﻿"""
+"""
 UET Test: Thailand Market Equilibrium
 ======================================
 
@@ -12,93 +12,71 @@ Uses real data from Yahoo Finance.
 Updated for UET V3.0
 """
 
+# --- ROBUST PATH FINDER (5x4 Grid Standard) ---
+import sys
+from pathlib import Path
+
+_root = Path(__file__).resolve().parent
+while _root.name != "research_uet" and _root.parent != _root:
+    _root = _root.parent
+if _root.name == "research_uet":
+    sys.path.insert(0, str(_root.parent))
+    from research_uet import ROOT_PATH
+
+    root_path = ROOT_PATH
+else:
+    print("CRITICAL: Root path not found.")
+    sys.exit(1)
 import numpy as np
 import pandas as pd
 import os
 import sys
 from pathlib import Path
 
-# Setup paths
-_root = Path(__file__).parent
-TOPIC_DIR = Path(__file__).resolve().parent.parent.parent
+# Setup paths (Legacy removed, using root_path)
+TOPIC_DIR = root_path / "research_uet" / "topics" / "0.14_Complex_Systems"
 DATA_PATH = TOPIC_DIR / "Data" / "03_Research" / "thailand"
 
-while _root.name != "research_uet" and _root.parent != _root:
-    _root = _root.parent
-sys.path.insert(0, str(_root.parent))
+from research_uet.core.uet_master_equation import UETParameters
 
-try:
-    from research_uet.core.uet_master_equation import UETParameters
+# Import Engine dynamically
+import importlib.util
 
-    # Import Engine dynamically
-    import importlib.util
-
-    engine_path = TOPIC_DIR / "Code" / "01_Engine" / "Engine_Complexity.py"
-    if engine_path.exists():
-        spec = importlib.util.spec_from_file_location(
-            "Engine_Complexity", str(engine_path)
-        )
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        UETComplexityEngine = mod.UETComplexityEngine
-    else:
-        print(f"CRITICAL: Engine not found at {engine_path}")
-        UETComplexityEngine = None
-
-except ImportError as e:
-    print(f"Import Error: {e}")
+engine_path = TOPIC_DIR / "Code" / "01_Engine" / "Engine_Complexity.py"
+if engine_path.exists():
+    spec = importlib.util.spec_from_file_location("Engine_Complexity", str(engine_path))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    UETComplexityEngine = mod.UETComplexityEngine
+else:
+    print(f"CRITICAL: Engine not found at {engine_path}")
     UETComplexityEngine = None
 
 
 def load_market_data(filename):
-    """Load market data from CSV file."""
+    """Load market data from CSV."""
     filepath = DATA_PATH / filename
-
     if filepath.exists():
         try:
-            import pandas as pd
-
             df = pd.read_csv(filepath)
+            # Ensure Close is numeric
+            if "Close" in df.columns:
+                df["Close"] = pd.to_numeric(df["Close"], errors="coerce")
+                df = df.dropna(subset=["Close"])
             return df
         except Exception as e:
-            print(f"   [WARN] Error loading {filename}: {e}")
+            print(f"Error reading {filename}: {e}")
             return None
     return None
 
 
 def analyze_market_equilibrium(df, name):
-    """
-    Analyze market for UET equilibrium properties.
-    Now DELEGATED to UETComplexityEngine (Axiomatic approach).
-    """
-    if df is None or len(df) < 10:
-        return None
+    """Analyze stock market data for UET equilibrium."""
+    prices = df["Close"].values
+    returns = df["Close"].pct_change().dropna().values
 
-    # Find price column
-    price_col = None
-    for col in ["Close", "Adj Close", "close", "Price"]:
-        if col in df.columns:
-            price_col = col
-            break
-
-    if price_col is None:
-        return None
-
-    prices = pd.to_numeric(df[price_col], errors="coerce").dropna().values
-    if len(prices) < 10:
-        return None
-
-    # Calculate returns for complexity metrics
-    returns = np.diff(prices) / prices[:-1]
-    returns = returns[np.isfinite(returns)]
-
-    if len(returns) < 5:
-        return None
-
-    # --- DELEGATE TO ENGINE ---
     if UETComplexityEngine is None:
-        print("CRITICAL: Engine disabled or missing.")
-        sys.exit(1)
+        return None
 
     engine = UETComplexityEngine(name="ThaiMarketAnalyzer")
 
@@ -109,26 +87,8 @@ def analyze_market_equilibrium(df, name):
     # Note: Engine expects generic data, returns dictionary
     comp_metrics = engine.compute_complexity_metrics(returns)
 
-    # Calculate local stats for visual reporting (or extract from engine if available)
-    min_price = np.min(prices)
-    max_price = np.max(prices)
-    mean_return = np.mean(returns)
-    std_return = np.std(returns)
-
-    # Hurst Approx (still useful for local interpretation, but could move to engine later)
-    lag = min(20, len(returns) // 4)
-    if lag > 1:
-        diffs = []
-        for l in range(1, lag + 1):
-            d = np.std(returns[l:] - returns[:-l]) / np.sqrt(l)
-            if np.isfinite(d):
-                diffs.append(d)
-        hurst_approx = 0.5
-        if len(diffs) > 2:
-            hurst_approx = np.log(diffs[-1] / diffs[0]) / np.log(lag) + 0.5
-            hurst_approx = np.clip(hurst_approx, 0, 1)
-    else:
-        hurst_approx = 0.5
+    # Hurst Exponent (Delegated to Engine)
+    hurst_approx = engine.calculate_hurst_exponent(returns)
 
     # Check for Kill Switch (from Engine result)
     if np.isnan(stab_metrics["equilibrium_score"]):

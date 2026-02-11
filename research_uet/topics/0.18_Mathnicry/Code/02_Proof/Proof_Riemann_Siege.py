@@ -20,18 +20,12 @@ import mpmath
 import numpy as np
 import time
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-research_uet_path = None
-for parent in [current_path] + list(current_path.parents):
-    if parent.name == "research_uet":
-        research_uet_path = parent
-        break
-if research_uet_path:
-    root_path = research_uet_path.parent
-    if str(root_path) not in sys.path:
-        sys.path.insert(0, str(root_path))
+
 
 # Avoid static import of numeric folder names (SyntaxError)
 import importlib.util
@@ -52,6 +46,9 @@ RiemannFieldEngine = mod.RiemannFieldEngine
 
 
 from research_uet.core.uet_glass_box import UETMetricLogger
+
+
+# Standardized UET Root Path
 
 
 def run_siege(count=100, tolerance=1e-9):

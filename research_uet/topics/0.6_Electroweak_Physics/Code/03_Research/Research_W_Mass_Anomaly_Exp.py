@@ -15,10 +15,10 @@ import sys
 from pathlib import Path
 
 # Setup paths
-_root = Path(__file__).parent
-while _root.name != "research_uet" and _root.parent != _root:
-    _root = _root.parent
-sys.path.insert(0, str(_root.parent))
+from research_uet import ROOT_PATH
+
+_root = ROOT_PATH
+sys.path.insert(0, str(_root))
 
 # ==============================================================================
 # EMBEDDED DATA (PDG 2024, CDF 2022, ATLAS 2024)
@@ -149,9 +149,7 @@ def test_lhc_consistency():
 
     consistency = LHC_CONSISTENCY
 
-    print(
-        f"\n{'Experiment':<15} {'Mass (GeV)':<12} {'sigma from SM':<12} {'Consistent?':<12}"
-    )
+    print(f"\n{'Experiment':<15} {'Mass (GeV)':<12} {'sigma from SM':<12} {'Consistent?':<12}")
     print("-" * 51)
 
     all_consistent = True
@@ -244,13 +242,9 @@ def run_all_tests():
     print(f"\n{'Test':<35} {'Status':<15} {'Notes':<25}")
     print("-" * 75)
     print(f"{'Measurements':<35} {'DOCUMENTED':<15} {'CDF vs LHC differ!':<25}")
-    print(
-        f"{'CDF Anomaly':<35} {f'{metric2:.1f}sigma':<15} {'If correct: NEW PHYSICS':<25}"
-    )
+    print(f"{'CDF Anomaly':<35} {f'{metric2:.1f}sigma':<15} {'If correct: NEW PHYSICS':<25}")
     print(f"{'LHC Consistency':<35} {'SM CONSISTENT':<15} {'Contradicts CDF':<25}")
-    print(
-        f"{'UET Prediction':<35} {f'{metric4:.4f}%':<15} {'Excellent with running':<25}"
-    )
+    print(f"{'UET Prediction':<35} {f'{metric4:.4f}%':<15} {'Excellent with running':<25}")
 
     passed_count = sum([pass1, pass2, pass3, pass4])
 

@@ -10,26 +10,21 @@ Tests UET predictions against KATRIN, T2K, NOvA data for:
 import json
 import sys
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
+
 
 TOPIC_DIR = root_path / "research_uet" / "topics" / "0.7_Neutrino_Physics"
 DATA_PATH = TOPIC_DIR / "Data" / "03_Research"
+
+
+# Standardized UET Root Path
 
 
 def load_neutrino_data():

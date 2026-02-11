@@ -20,50 +20,19 @@ Hypothesis: alpha ~ kappa * beta ?
 """
 
 import sys
-from pathlib import Path
-
-# --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-except ImportError:
-    print("Warning: UET Core not found, running in standalone mode.")
-
-    class UETPathManager:
-        @staticmethod
-        def execution_path(topic):
-            return Path(".")
-
-
 import json
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
+from research_uet import ROOT_PATH
 
-# --- PATH SETUP ---
-current_path = Path(__file__).resolve().parent
-ROOT = None
-search_path = current_path
-for _ in range(6):
-    if (search_path / "research_uet").exists():
-        ROOT = search_path
-        if str(ROOT) not in sys.path:
-            sys.path.insert(0, str(ROOT))
-        break
-    search_path = search_path.parent
+root_path = ROOT_PATH
+ROOT = ROOT_PATH
 
-if not ROOT:
-    print("CRITICAL: research_uet root not found!")
-    sys.exit(1)
+# --- ROBUST PATH FINDER ---
+
+
+from research_uet.core.uet_glass_box import UETPathManager
 
 
 def load_scaling_data():
@@ -114,9 +83,7 @@ def run_scaling_simulation():
 
     if diff < 0.03:
         print("  MATCH: Scaling Exponent is close to Kappa (0.1).")
-        print(
-            "  Interpretation: The 'Compressibility' of Semantic Space is determined by Kappa."
-        )
+        print("  Interpretation: The 'Compressibility' of Semantic Space is determined by Kappa.")
 
         # Plot
         N = np.logspace(9, 14, 20)  # 1B to 100T parameters

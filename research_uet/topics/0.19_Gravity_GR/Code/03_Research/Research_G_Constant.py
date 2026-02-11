@@ -3,26 +3,21 @@ Test: Gravitational Constant G
 ==============================
 """
 
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 import sys
 from pathlib import Path
 import numpy as np
 
 # --- UNIVERSAL ROOT FINDER ---
-current_path = Path(__file__).resolve()
-root = current_path
-while root.name != "research_uet" and root.parent != root:
-    root = root.parent
-repo_root = root.parent
-
-if str(repo_root) not in sys.path:
-    sys.path.insert(0, str(repo_root))
 
 # Engine Import via Importlib to avoid SyntaxError with '0.19'
 try:
     import importlib.util
 
     engine_file = (
-        repo_root
+        root_path
         / "research_uet"
         / "topics"
         / "0.19_Gravity_GR"

@@ -11,54 +11,53 @@ Event: GW150914
 Data: LIGO Open Science Center
 """
 
+# --- PATH SETUP (Must be FIRST) ---
 import sys
-import math
-import json
 from pathlib import Path
 
-# --- PATH SETUP (Must be FIRST) ---
-current_path = Path(__file__).resolve()
-ROOT = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        ROOT = parent
-        break
+_root = Path(__file__).resolve().parent
+while _root.name != "research_uet" and _root.parent != _root:
+    _root = _root.parent
+if _root.name == "research_uet":
+    sys.path.insert(0, str(_root.parent))
+    from research_uet import ROOT_PATH
 
-if ROOT:
-    if str(ROOT) not in sys.path:
-        sys.path.insert(0, str(ROOT))
+    root_path = ROOT_PATH
+    ROOT = ROOT_PATH
 else:
-    print("CRITICAL: research_uet root not found!")
+    print("CRITICAL: Root path not found.")
     sys.exit(1)
 
 # Core Imports
+import json
+import math
+from research_uet.core.uet_glass_box import UETPathManager
+from research_uet.core.uet_parameters import G, C, M_SUN, K_B, HBAR
+
+c = C
+M_sun = M_SUN
+k_B = K_B
+h_bar = HBAR
+
+# Helper: Dynamic Import of Engine
+import importlib.util
+
 try:
-    from research_uet.core.uet_glass_box import UETPathManager
-    from research_uet.core.uet_parameters import G, C, M_SUN, K_B, HBAR
-
-    c = C
-    M_sun = M_SUN
-    k_B = K_B
-    h_bar = HBAR
-
-    # Helper: Dynamic Import of Engine
-    import importlib.util
-
     eng_path = (
         ROOT
-        / "research_uet/topics/0.2_Black_Hole_Physics/Code/01_Engine/Engine_BlackHole.py"
+        / "research_uet"
+        / "topics"
+        / "0.2_Black_Hole_Physics"
+        / "Code"
+        / "01_Engine"
+        / "Engine_BlackHole.py"
     )
-    if eng_path.exists():
-        spec = importlib.util.spec_from_file_location("Engine_BlackHole", eng_path)
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        UETBlackHoleEngine = mod.UETBlackHoleEngine
-    else:
-        print("CRITICAL: Engine not found.")
-        sys.exit(1)
-
-except ImportError as e:
-    print(f"CRITICAL: Core UET imports failed: {e}")
+    spec = importlib.util.spec_from_file_location("Engine_BlackHole", str(eng_path))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    UETBlackHoleEngine = mod.UETBlackHoleEngine
+except Exception as e:
+    print(f"CRITICAL: Engine not found: {e}")
     sys.exit(1)
 
 
@@ -86,9 +85,7 @@ def run_test():
         print(f"Error loading data: {e}")
         return False
 
-    gw_event = next(
-        item for item in bh_data["gravitational_wave"] if item["event"] == "GW150914"
-    )
+    gw_event = next(item for item in bh_data["gravitational_wave"] if item["event"] == "GW150914")
 
     # Initialize Engine
     engine = UETBlackHoleEngine()

@@ -11,6 +11,9 @@ This is the ULTIMATE test:
 If UET can handle REAL WORLD data at speed → GAME CHANGER!
 """
 
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 import numpy as np
 import json
 import time
@@ -19,28 +22,16 @@ from datetime import datetime
 import sys
 
 # Robust Root Finding (Standard 5x4 Grid Pattern)
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager
 
 # Add Topic Directory to sys.path to allow sibling imports (01_Engine)
 # Current: Code/03_Research/Script.py
 # Parent: Code/03_Research
 # Parent.Parent: Code
 # Parent.Parent.Parent: Topic Root (0.10)
-topic_dir = current_path.parent.parent.parent
+topic_dir = root_path / "research_uet" / "topics" / "0.10_Fluid_Dynamics_Chaos"
 if str(topic_dir) not in sys.path:
     sys.path.append(str(topic_dir))
 
@@ -68,9 +59,7 @@ def load_latest_realtime_data() -> dict:
     return None
 
 
-def convert_aircraft_to_3d_grid(
-    data: dict, nx: int = 32, ny: int = 32, nz: int = 16
-) -> dict:
+def convert_aircraft_to_3d_grid(data: dict, nx: int = 32, ny: int = 32, nz: int = 16) -> dict:
     """Convert aircraft data to 3D grid for UET simulation."""
 
     if not data or "points" not in data:
@@ -193,9 +182,7 @@ def run_uet_with_realtime(grid_data: dict, steps: int = 100) -> dict:
     solver.C = C_init.copy()
 
     # Velocity data can influence I field
-    velocity_magnitude = np.sqrt(
-        grid_data["vx"] ** 2 + grid_data["vy"] ** 2 + grid_data["vz"] ** 2
-    )
+    velocity_magnitude = np.sqrt(grid_data["vx"] ** 2 + grid_data["vy"] ** 2 + grid_data["vz"] ** 2)
     solver.I = velocity_magnitude / (velocity_magnitude.max() + 1e-10) * 0.1
 
     # Track evolution
@@ -255,9 +242,7 @@ def validate_with_realtime():
         print("  ❌ No real-time data found! Run fetch_realtime_data.py first.")
         return None
 
-    print(
-        f"  Found {data['count']} data points from {data.get('fetched_at', 'unknown')}"
-    )
+    print(f"  Found {data['count']} data points from {data.get('fetched_at', 'unknown')}")
 
     # Convert to 3D grid
     print("\n🔄 Converting to 3D Grid...")
@@ -310,9 +295,7 @@ def validate_with_realtime():
     )
     result_dir.mkdir(parents=True, exist_ok=True)
 
-    with open(
-        result_dir / f"validation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json", "w"
-    ) as f:
+    with open(result_dir / f"validation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json", "w") as f:
         json.dump(
             {
                 "timestamp": datetime.now().isoformat(),

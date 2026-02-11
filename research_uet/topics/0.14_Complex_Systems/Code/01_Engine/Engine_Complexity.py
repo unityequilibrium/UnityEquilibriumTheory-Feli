@@ -21,30 +21,10 @@ from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional, Dict, Any
 
-# =============================================================================
-# ROBUST PATH FINDING
-# =============================================================================
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-
-if root_path:
-    if str(root_path) not in sys.path:
-        sys.path.insert(0, str(root_path))
-else:
-    print("CRITICAL ERROR: Could not find 'research_uet' root.")
-
 # Core Imports
-try:
-    from research_uet.core.uet_base_solver import UETBaseSolver
-    from research_uet.core.uet_master_equation import UETParameters
-    from research_uet.core.uet_parameters import INTEGRITY_KILL_SWITCH
-except ImportError as e:
-    print(f"IMPORT ERROR DETAILED: {e}")
-    raise e
+from research_uet.core.uet_base_solver import UETBaseSolver
+from research_uet.core.uet_master_equation import UETParameters
+from research_uet.core.uet_parameters import INTEGRITY_KILL_SWITCH
 
 
 class UETComplexityEngine(UETBaseSolver):
@@ -64,9 +44,7 @@ class UETComplexityEngine(UETBaseSolver):
     ):
         # Axiomatic Parameters
         # Use provided params if in kwargs, otherwise create default
-        params = kwargs.pop(
-            "params", UETParameters(kappa=1.0, beta=1.0, alpha=1.0, C0=0.0)
-        )
+        params = kwargs.pop("params", UETParameters(kappa=1.0, beta=1.0, alpha=1.0, C0=0.0))
 
         super().__init__(
             nx=nx,
@@ -165,9 +143,7 @@ class UETComplexityEngine(UETBaseSolver):
             "power_law_exponent": 0.0,  # Placeholder
         }
 
-    def compute_complexity_metrics(
-        self, data: np.ndarray, fs: float = 256.0
-    ) -> Dict[str, Any]:
+    def compute_complexity_metrics(self, data: np.ndarray, fs: float = 256.0) -> Dict[str, Any]:
         """
         AXIOMATIC COMPLEXITY ANALYSIS
         Used by Brain, Econ, and Social research pillars.
@@ -239,6 +215,35 @@ class UETComplexityEngine(UETBaseSolver):
             "equilibrium_score": equilibrium_score,
             "n_beats": len(rr),
         }
+
+    def calculate_hurst_exponent(self, time_series: np.ndarray) -> float:
+        """
+        Estimate Hurst Exponent (H) for a time series.
+        H = 0.5: Random Walk (Equilibrium)
+        H > 0.5: Trending (Persistence / Memory)
+        H < 0.5: Mean Reverting (Anti-persistence)
+        """
+        if INTEGRITY_KILL_SWITCH:
+            return 0.5
+
+        ts = np.array(time_series)
+        ts = ts[np.isfinite(ts)]
+        if len(ts) < 20:
+            return 0.5
+
+        # R/S Analysis (Simplified)
+        lags = range(2, min(20, len(ts) // 2))
+        tau = [np.sqrt(np.std(np.subtract(ts[lag:], ts[:-lag]))) for lag in lags]
+
+        # This is actually a variogram approach, estimating H from slope
+        # log(std) ~ H * log(lag)
+
+        try:
+            poly = np.polyfit(np.log(lags), np.log(tau), 1)
+            H = poly[0]
+            return float(np.clip(H, 0.0, 1.0))
+        except:
+            return 0.5
 
     def calculate_stability_metrics(self, data: np.ndarray) -> Dict[str, Any]:
         """

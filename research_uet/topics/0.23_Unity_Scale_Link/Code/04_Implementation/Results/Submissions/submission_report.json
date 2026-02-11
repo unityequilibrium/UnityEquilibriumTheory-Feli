@@ -1,0 +1,170 @@
+{
+  "timestamp": "2026-02-07 20:04:03",
+  "submissions": [
+    {
+      "paper_id": "Landauer Coupling as Fundamental Base for Information-Theoretic Physics",
+      "journal": "Nature Physics",
+      "submission_date": "2026-02-07",
+      "status": "Submitted",
+      "expected_review_time": "3-6 months",
+      "impact_factor": 12.5,
+      "acceptance_rate": 0.08,
+      "review_criteria": [
+        "Novelty and significance",
+        "Methodological rigor",
+        "Experimental validation",
+        "Clarity of presentation"
+      ]
+    },
+    {
+      "paper_id": "Thermodynamic Scaling Bridge: Unifying Physics Across 25 Orders of Magnitude",
+      "journal": "Physical Review Letters",
+      "submission_date": "2026-02-07",
+      "status": "Submitted",
+      "expected_review_time": "2-4 months",
+      "impact_factor": 8.8,
+      "acceptance_rate": 0.25,
+      "review_criteria": [
+        "Significant breakthrough",
+        "Technical correctness",
+        "Broad interest",
+        "Concise presentation"
+      ]
+    },
+    {
+      "paper_id": "Cross-Domain Predictive Power: Information Theory as Universal Physics Framework",
+      "journal": "Nature",
+      "submission_date": "2026-02-07",
+      "status": "Submitted",
+      "expected_review_time": "4-8 months",
+      "impact_factor": 49.9,
+      "acceptance_rate": 0.08,
+      "review_criteria": [
+        "Outstanding significance",
+        "Broad scientific interest",
+        "Original research",
+        "Rigorous methodology"
+      ]
+    },
+    {
+      "paper_id": "Mathematical Rigor in Information Physics: Axiomatic Foundation for Unity Equilibrium Theory",
+      "journal": "Physical Review X",
+      "submission_date": "2026-02-07",
+      "status": "Submitted",
+      "expected_review_time": "3-6 months",
+      "impact_factor": 5.5,
+      "acceptance_rate": 0.3,
+      "review_criteria": [
+        "High quality and significance",
+        "Technical excellence",
+        "Interdisciplinary interest",
+        "Comprehensive coverage"
+      ]
+    }
+  ],
+  "review_results": [
+    {
+      "submission": {
+        "paper_id": "Landauer Coupling as Fundamental Base for Information-Theoretic Physics",
+        "journal": "Nature Physics",
+        "submission_date": "2026-02-07",
+        "status": "Submitted",
+        "expected_review_time": "3-6 months",
+        "impact_factor": 12.5,
+        "acceptance_rate": 0.08,
+        "review_criteria": [
+          "Novelty and significance",
+          "Methodological rigor",
+          "Experimental validation",
+          "Clarity of presentation"
+        ]
+      },
+      "review_time_months": 6,
+      "outcome": "Rejected",
+      "reviewer_comments": [
+        "Claims exceed current evidence",
+        "Requires comparison with existing theories"
+      ],
+      "decision_date": "2026-02-07"
+    },
+    {
+      "submission": {
+        "paper_id": "Thermodynamic Scaling Bridge: Unifying Physics Across 25 Orders of Magnitude",
+        "journal": "Physical Review Letters",
+        "submission_date": "2026-02-07",
+        "status": "Submitted",
+        "expected_review_time": "2-4 months",
+        "impact_factor": 8.8,
+        "acceptance_rate": 0.25,
+        "review_criteria": [
+          "Significant breakthrough",
+          "Technical correctness",
+          "Broad interest",
+          "Concise presentation"
+        ]
+      },
+      "review_time_months": 3,
+      "outcome": "Rejected",
+      "reviewer_comments": [
+        "Requires comparison with existing theories",
+        "Methodology needs further clarification"
+      ],
+      "decision_date": "2026-02-07"
+    },
+    {
+      "submission": {
+        "paper_id": "Cross-Domain Predictive Power: Information Theory as Universal Physics Framework",
+        "journal": "Nature",
+        "submission_date": "2026-02-07",
+        "status": "Submitted",
+        "expected_review_time": "4-8 months",
+        "impact_factor": 49.9,
+        "acceptance_rate": 0.08,
+        "review_criteria": [
+          "Outstanding significance",
+          "Broad scientific interest",
+          "Original research",
+          "Rigorous methodology"
+        ]
+      },
+      "review_time_months": 7,
+      "outcome": "Rejected",
+      "reviewer_comments": [
+        "Interesting but requires additional validation",
+        "Claims exceed current evidence"
+      ],
+      "decision_date": "2026-02-07"
+    },
+    {
+      "submission": {
+        "paper_id": "Mathematical Rigor in Information Physics: Axiomatic Foundation for Unity Equilibrium Theory",
+        "journal": "Physical Review X",
+        "submission_date": "2026-02-07",
+        "status": "Submitted",
+        "expected_review_time": "3-6 months",
+        "impact_factor": 5.5,
+        "acceptance_rate": 0.3,
+        "review_criteria": [
+          "High quality and significance",
+          "Technical excellence",
+          "Interdisciplinary interest",
+          "Comprehensive coverage"
+        ]
+      },
+      "review_time_months": 6,
+      "outcome": "Rejected",
+      "reviewer_comments": [
+        "Requires comparison with existing theories",
+        "Claims exceed current evidence"
+      ],
+      "decision_date": "2026-02-07"
+    }
+  ],
+  "statistics": {
+    "total_submissions": 4,
+    "accepted": 0,
+    "rejected": 4,
+    "acceptance_rate": 0.0,
+    "average_impact_factor": 19.175
+  }
+}

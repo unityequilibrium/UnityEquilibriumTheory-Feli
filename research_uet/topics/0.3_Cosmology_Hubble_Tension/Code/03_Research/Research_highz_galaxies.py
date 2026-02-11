@@ -15,30 +15,19 @@ Updated for UET V3.0
 
 import numpy as np
 import matplotlib.pyplot as plt
-from pathlib import Path
-import sys
 import os
+import sys
+from pathlib import Path
+from research_uet import ROOT_PATH
 
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
+root_path = ROOT_PATH
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Setup local imports for Topic 0.3 and Topic 0.1
 topic_path = root_path / "research_uet" / "topics" / "0.3_Cosmology_Hubble_Tension"
 engine_path = topic_path / "Code" / "01_Engine"
 galaxy_engine_path = (
-    root_path
-    / "research_uet"
-    / "topics"
-    / "0.1_Galaxy_Rotation_Problem"
-    / "Code"
-    / "01_Engine"
+    root_path / "research_uet" / "topics" / "0.1_Galaxy_Rotation_Problem" / "Code" / "01_Engine"
 )
 
 if str(engine_path) not in sys.path:
@@ -53,6 +42,12 @@ try:
 except ImportError as e:
     print(f"CRITICAL SETUP ERROR: {e}")
     sys.exit(1)
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 
 def simulate_highz_prediction(z_target=5.0):
@@ -73,25 +68,19 @@ def simulate_highz_prediction(z_target=5.0):
     R = np.linspace(0.1, 15, 100)
 
     # 3. Instantiate Galaxy Engine for z=0
-    params_z0 = GalaxyParams(
-        mass_disk=M_disk, radius_disk=R_disk, mass_bulge=0, redshift=0.0
-    )
+    params_z0 = GalaxyParams(mass_disk=M_disk, radius_disk=R_disk, mass_bulge=0, redshift=0.0)
     engine_z0 = UETGalaxyEngine(params_z0)
     V_z0 = engine_z0.compute_curve(R)
 
     # 4. Instantiate Galaxy Engine for z_target
-    params_zh = GalaxyParams(
-        mass_disk=M_disk, radius_disk=R_disk, mass_bulge=0, redshift=z_target
-    )
+    params_zh = GalaxyParams(mass_disk=M_disk, radius_disk=R_disk, mass_bulge=0, redshift=z_target)
     engine_zh = UETGalaxyEngine(params_zh)
     V_zh = engine_zh.compute_curve(R)
 
     plt.figure(figsize=(10, 6))
     plt.plot(R, V_z0, "b-", label="z = 0 (Current Universe)")
     plt.plot(R, V_zh, "r--", label=f"z = {z_target} (JWST Era)")
-    plt.fill_between(
-        R, V_z0, V_zh, color="red", alpha=0.1, label="UET Evolutionary Boost"
-    )
+    plt.fill_between(R, V_z0, V_zh, color="red", alpha=0.1, label="UET Evolutionary Boost")
 
     plt.title(f"UET Prediction: Evolution of Rotation Curves (a₀ ∝ H(z))")
     plt.xlabel("Radius (kpc)")

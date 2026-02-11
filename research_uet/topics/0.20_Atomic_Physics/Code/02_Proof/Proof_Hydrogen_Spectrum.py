@@ -8,18 +8,14 @@ Validates correct loading of NIST Data and comparison logic.
 
 import sys
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
+
 
 # Path setup
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet" / "core").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Setup local imports for Topic 0.20
 topic_path = root_path / "research_uet" / "topics" / "0.20_Atomic_Physics"
@@ -33,6 +29,9 @@ try:
 except ImportError as e:
     print(f"CRITICAL SETUP ERROR: {e}")
     sys.exit(1)
+
+
+# Standardized UET Root Path
 
 
 def prove_hydrogen():

@@ -33,12 +33,8 @@ root_dir = current_path.parents[5]
 if str(root_dir) not in sys.path:
     sys.path.append(str(root_dir))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-    from Engine_UET_3D import UETFluid3D
-except ImportError as e:
-    print(f"❌ Error: Engine_UET_3D not found. {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
+from Engine_UET_3D import UETFluid3D
 
 
 def compute_energy_spectrum(u, v, w):

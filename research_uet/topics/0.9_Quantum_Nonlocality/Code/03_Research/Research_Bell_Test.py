@@ -13,15 +13,12 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-project_root = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        project_root = parent
-        break
+from research_uet import ROOT_PATH
 
-if project_root and str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
+root_path = ROOT_PATH
+
+if str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
 
 try:
     from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
@@ -32,8 +29,10 @@ except Exception as e:
 
 def load_bell_data():
     """Load Bell test data."""
-    # Hardcoded relative path
-    data_file = current_path.parents[2] / "Data" / "03_Research" / "bell_test_2015.json"
+    # Robust path
+    topic_dir = root_path / "research_uet" / "topics" / "0.9_Quantum_Nonlocality"
+    data_file = topic_dir / "Data" / "03_Research" / "bell_test_2015.json"
+
     if not data_file.exists():
         return None
     with open(data_file, encoding="utf-8") as f:

@@ -16,15 +16,7 @@ from pathlib import Path
 
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 try:
     from research_uet.core.uet_glass_box import UETPathManager
@@ -41,9 +33,17 @@ if str(engine_dir) not in sys.path:
 
 import Engine_Galaxy_V3
 
+
+
 UETGalaxyEngine = Engine_Galaxy_V3.UETGalaxyEngine
 GalaxyParams = Engine_Galaxy_V3.GalaxyParams
 
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 def calculate_surface_density(mass, radius):
     return mass / (math.pi * (radius**2) + 1e-10)

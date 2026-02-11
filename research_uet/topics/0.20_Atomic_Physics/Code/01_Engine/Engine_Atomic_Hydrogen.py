@@ -16,25 +16,15 @@ import csv
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet" / "core").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_base_solver import UETBaseSolver
-    from research_uet.core.uet_master_equation import UETParameters
-except ImportError as e:
-    print(f"CRITICAL IMPORT ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_base_solver import UETBaseSolver
+from research_uet.core.uet_master_equation import UETParameters
 
 # Physical constants (CODATA 2018)
 from research_uet.core.uet_parameters import (
+
+
     H,
     HBAR,
     C,
@@ -47,6 +37,12 @@ from research_uet.core.uet_parameters import (
 # Derived Constants
 R_H = 1.09677e7  # m^-1
 
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 class UETAtomicEngine(UETBaseSolver):
     """

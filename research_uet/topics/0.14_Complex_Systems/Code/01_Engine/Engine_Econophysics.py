@@ -7,20 +7,18 @@ Standardized to ensure Volatility Clustering stylized fact is reproduced.
 Axiom 5 (Natural Will): Temporal persistence of informational flow.
 """
 
+from research_uet import ROOT_PATH
+from pathlib import Path
+current_path = Path(__file__).resolve()
+root_path = ROOT_PATH
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 import numpy as np
 import sys
 from pathlib import Path
 
 # Path finding
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 try:
     from Engine_Complexity import UETComplexityEngine

@@ -1,0 +1,30 @@
+{
+  "// INSTRUCTIONS": "This config connects OpenClaw to Social Media MCP servers",
+  "// REPLACE": "All 'xxx' values with your actual API keys",
+
+  "mcpServers": {
+    "social": {
+      "command": "node",
+      "args": ["C:/openclaw-assistant/social-cli-mcp/dist/mcp-server.js"],
+      "env": {
+        "TWITTER_API_KEY": "xxx",
+        "TWITTER_API_SECRET": "xxx",
+        "TWITTER_ACCESS_TOKEN": "xxx",
+        "TWITTER_ACCESS_SECRET": "xxx",
+        "REDDIT_CLIENT_ID": "xxx",
+        "REDDIT_CLIENT_SECRET": "xxx",
+        "REDDIT_USERNAME": "xxx",
+        "REDDIT_PASSWORD": "xxx",
+        "LINKEDIN_ACCESS_TOKEN": "xxx"
+      }
+    },
+    "bluesky": {
+      "command": "node",
+      "args": ["C:/openclaw-assistant/bsky-mcp-server/dist/index.js"],
+      "env": {
+        "BLUESKY_IDENTIFIER": "your-handle.bsky.social",
+        "BLUESKY_APP_PASSWORD": "xxx"
+      }
+    }
+  }
+}

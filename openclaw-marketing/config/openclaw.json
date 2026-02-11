@@ -1,0 +1,47 @@
+{
+  "// INSTRUCTIONS": "Copy this to ~/.openclaw/openclaw.json after installing OpenClaw",
+  "// REPLACE": "YOUR_DISCORD_BOT_TOKEN, YOUR_GUILD_ID, YOUR_DISCORD_USER_ID, YOUR-GEMINI-API-KEY",
+
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "gemini/gemini-2.5-flash"
+      }
+    }
+  },
+
+  "channels": {
+    "discord": {
+      "enabled": true,
+      "token": "YOUR_DISCORD_BOT_TOKEN",
+      "dm": {
+        "enabled": true,
+        "policy": "allowlist",
+        "allowFrom": ["YOUR_DISCORD_USER_ID"]
+      },
+      "guilds": {
+        "YOUR_GUILD_ID": {
+          "users": ["YOUR_DISCORD_USER_ID"],
+          "requireMention": true,
+          "channels": {
+            "uet-commands": {
+              "allow": true,
+              "requireMention": false
+            },
+            "uet-drafts": {
+              "allow": true,
+              "requireMention": true
+            },
+            "uet-reports": {
+              "allow": true,
+              "requireMention": true
+            }
+          }
+        }
+      },
+      "commands": {
+        "native": "auto"
+      }
+    }
+  }
+}

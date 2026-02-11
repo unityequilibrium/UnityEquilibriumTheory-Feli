@@ -15,25 +15,21 @@ import numpy as np
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet" / "core").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_base_solver import UETBaseSolver
-    from research_uet.core.uet_master_equation import UETParameters
-except ImportError as e:
-    print(f"CRITICAL IMPORT ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_base_solver import UETBaseSolver
+from research_uet.core.uet_master_equation import UETParameters
+
+
 
 
 # --- DATA LOADER ---
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
+
 def load_ame2020_data():
     """Reads the AME2020 txt file."""
     data_path = (

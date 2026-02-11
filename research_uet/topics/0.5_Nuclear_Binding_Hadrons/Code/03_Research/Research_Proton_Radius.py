@@ -3,26 +3,25 @@ UET PROTON RADIUS PUZZLE RESOLUTION
 =====================================
 """
 
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 import sys
 from pathlib import Path
 import numpy as np
 
 # --- UNIVERSAL ROOT FINDER ---
-current_path = Path(__file__).resolve()
-root = current_path
-while root.name != "research_uet" and root.parent != root:
-    root = root.parent
-repo_root = root.parent
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
 
-if str(repo_root) not in sys.path:
-    sys.path.insert(0, str(repo_root))
+root_path = ROOT_PATH
 
 # Engine Import
 try:
     import importlib.util
 
     engine_file = (
-        repo_root
+        root_path
         / "research_uet"
         / "topics"
         / "0.5_Nuclear_Binding_Hadrons"
@@ -33,9 +32,7 @@ try:
     if not engine_file.exists():
         raise FileNotFoundError(f"Missing Engine: {engine_file}")
 
-    spec = importlib.util.spec_from_file_location(
-        "Engine_Nuclear_Binding", str(engine_file)
-    )
+    spec = importlib.util.spec_from_file_location("Engine_Nuclear_Binding", str(engine_file))
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     UETNuclearBindingEngine = mod.UETNuclearBindingEngine

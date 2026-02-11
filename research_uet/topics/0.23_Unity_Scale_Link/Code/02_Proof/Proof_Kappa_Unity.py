@@ -9,15 +9,11 @@ from pathlib import Path
 import numpy as np
 
 # Path setup
-current_path = Path(__file__).resolve()
-repo_root = current_path
-for _ in range(6):
-    if (repo_root / "research_uet").exists():
-        break
-    repo_root = repo_root.parent
+# Path setup
+from research_uet import ROOT_PATH
 
-if str(repo_root) not in sys.path:
-    sys.path.insert(0, str(repo_root))
+root_path = ROOT_PATH
+repo_root = ROOT_PATH
 
 # Engine Import
 try:
@@ -32,9 +28,7 @@ try:
         / "01_Engine"
         / "Engine_Unity_Scale.py"
     )
-    spec = importlib.util.spec_from_file_location(
-        "Engine_Unity_Scale", str(engine_file)
-    )
+    spec = importlib.util.spec_from_file_location("Engine_Unity_Scale", str(engine_file))
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     UETUnityScaleEngine = mod.UETUnityScaleEngine

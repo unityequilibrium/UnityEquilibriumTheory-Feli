@@ -13,16 +13,10 @@ from mpl_toolkits.mplot3d import Axes3D
 from pathlib import Path
 import mpmath
 
-# --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+
+# --- ROBUST PATH FINDER ---
+
 
 # Setup Paths
 TOPIC_DIR = root_path / "research_uet" / "topics" / "0.18_Mathnicry"
@@ -35,6 +29,12 @@ UET_CYAN = "#00e5ff"
 UET_MAGENTA = "#ff00ff"
 UET_GOLD = "#ffd700"
 UET_BLACK = "#000000"
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 def generate_cine_riemann():
     print("🚀 Generating UET Cinematic Riemann Zeta Viz...")

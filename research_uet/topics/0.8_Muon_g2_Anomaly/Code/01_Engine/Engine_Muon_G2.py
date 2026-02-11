@@ -15,14 +15,11 @@ from dataclasses import dataclass
 
 # Path setup
 Scripts_DIR = Path(__file__).resolve().parent
-root_path = None
-for parent in [Scripts_DIR] + list(Scripts_DIR.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
+
 
 try:
     from research_uet.core.uet_parameters import (

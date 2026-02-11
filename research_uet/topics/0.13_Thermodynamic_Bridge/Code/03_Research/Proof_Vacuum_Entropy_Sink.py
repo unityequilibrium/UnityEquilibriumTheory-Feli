@@ -26,21 +26,9 @@ import sys
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-except ImportError as e:
-    print(f"CRITICAL: UET Core Import Failed: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager
 
 
 class VacuumEntropySink:

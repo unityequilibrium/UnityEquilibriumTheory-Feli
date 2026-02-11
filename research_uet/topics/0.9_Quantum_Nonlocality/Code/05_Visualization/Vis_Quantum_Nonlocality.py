@@ -13,17 +13,13 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
+
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Setup Paths
 TOPIC_DIR = root_path / "research_uet" / "topics" / "0.9_Quantum_Nonlocality"

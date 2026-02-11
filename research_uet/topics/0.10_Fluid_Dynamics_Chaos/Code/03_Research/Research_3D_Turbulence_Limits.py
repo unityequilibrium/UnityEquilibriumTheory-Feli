@@ -17,36 +17,22 @@ import os
 import time
 import numpy as np
 import matplotlib.pyplot as plt
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # Robust Root Finding (Standard 5x4 Grid Pattern)
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-    from research_uet.core.uet_master_equation import UETParameters
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager
+from research_uet.core.uet_master_equation import UETParameters
 
 # We use the core UET Master Equation principles but implemented for 3D
 from research_uet.core.uet_master_equation import UETParameters
 
 # Engine Import
 topic_dir = (
-    root_path
-    / "research_uet"
-    / "topics"
-    / "0.10_Fluid_Dynamics_Chaos"
-    / "Code"
-    / "01_Engine"
+    root_path / "research_uet" / "topics" / "0.10_Fluid_Dynamics_Chaos" / "Code" / "01_Engine"
 )
 if str(topic_dir) not in sys.path:
     sys.path.append(str(topic_dir))
@@ -55,8 +41,15 @@ if str(topic_dir) not in sys.path:
 # Using Centralized Engine (Axiomatic)
 from Engine_UET_3D import UETFluid3D
 
+
 # Note: The UET3DSolver class has been removed in favor of the centralized Engine_UET_3D.
 # This ensures that all calculations use the verified Omega Functional logic.
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 
 def run_scaling_tests():
@@ -73,9 +66,7 @@ def run_scaling_tests():
         grid_size = n**3
         print(f"\n   Testing Scale: {n}^3 ({grid_size:,} cells)")
 
-        solver = UETFluid3D(
-            nx=n, ny=n, nz=n, dt=0.001, kappa=params.kappa, beta=params.beta
-        )
+        solver = UETFluid3D(nx=n, ny=n, nz=n, dt=0.001, kappa=params.kappa, beta=params.beta)
         # Inject a massive stressor (Delta function spike)
         solver.C[n // 2, n // 2, n // 2] = 100.0
 

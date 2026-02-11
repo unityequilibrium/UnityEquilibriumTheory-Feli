@@ -8,37 +8,55 @@ import sys
 from pathlib import Path
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
+_root = Path(__file__).resolve().parent
+while _root.name != "research_uet" and _root.parent != _root:
+    _root = _root.parent
+if _root.name == "research_uet":
+    sys.path.insert(0, str(_root.parent))
+    from research_uet import ROOT_PATH
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+    root_path = ROOT_PATH
+else:
+    print("CRITICAL: Root path not found.")
+    sys.exit(1)
 
 TOPIC_DIR = root_path / "research_uet" / "topics" / "0.9_Quantum_Nonlocality"
 DATA_PATH = TOPIC_DIR / "Data"
 
-# Engine Import (Dynamic)
+# --- DYNAMIC ENGINE IMPORT ---
 try:
     import importlib.util
 
-    engine_file = TOPIC_DIR / "Code" / "01_Engine" / "Engine_Quantum.py"
-    spec = importlib.util.spec_from_file_location("Engine_Quantum", engine_file)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    UETQuantumEngine = getattr(module, "UETQuantumEngine")
+    # Locate Engine relative to standardized root
+    engine_path = (
+        root_path
+        / "research_uet"
+        / "topics"
+        / "0.9_Quantum_Nonlocality"
+        / "Code"
+        / "01_Engine"
+        / "Engine_Quantum.py"
+    )
+    spec = importlib.util.spec_from_file_location("Engine_Quantum", str(engine_path))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    UETQuantumEngine = mod.UETQuantumEngine
 except Exception as e:
-    print(f"Error loading Engine: {e}")
+    print(f"CRITICAL: Engine not found: {e}")
     sys.exit(1)
 
 import numpy as np
 import json
 
+
 # Load Data
 data_file = DATA_PATH / "03_Research" / "bell_inequality_data.json"
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 
 def run_bell_test():

@@ -37,17 +37,7 @@ elif not project_root:
         # Try 4 levels just in case
         sys.path.insert(0, str(current_path.parents[4]))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-except ImportError:
-    # Manual Fallback
-    try:
-        sys.path.append(str(current_path.parents[5]))
-        from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-    except ImportError as e:
-        print(f"CRITICAL SETUP ERROR: {e}")
-        print(f"Sys Path: {sys.path}")
-        sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
 
 
 def load_hydride_data():

@@ -7,17 +7,13 @@ Topic: 0.11 - Phase Transitions
 import sys
 from pathlib import Path
 import numpy as np
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
+
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Engine Import (Dynamic)
 try:
@@ -39,6 +35,9 @@ try:
 except Exception as e:
     print(f"Error loading Engine: {e}")
     sys.exit(1)
+
+
+# Standardized UET Root Path
 
 
 def prove_symmetry_breaking():

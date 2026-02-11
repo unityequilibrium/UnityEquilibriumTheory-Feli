@@ -11,23 +11,19 @@ Updated for UET V3.0
 
 import sys
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 import numpy as np
 import os
 import glob
 import math
 from research_uet.core.uet_glass_box import UETPathManager
+
 
 # Import from UET V3.0 Master Equation
 try:
@@ -51,6 +47,12 @@ DATA_PATH = TOPIC_DIR / "Data"
 DATA_DIR = str(DATA_PATH)
 
 
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
+
+
 def load_hrv_data():
     """Load HRV data from PhysioNet."""
     bio_dir = os.path.join(DATA_DIR, "03_Research", "biology_hrv")
@@ -67,11 +69,7 @@ def load_hrv_data():
                     df = pd.read_csv(filepath)
                     if len(df.columns) > 0:
                         # Convert to numeric, coerce errors (handles header in data)
-                        rr = (
-                            pd.to_numeric(df.iloc[:, 0], errors="coerce")
-                            .dropna()
-                            .values
-                        )
+                        rr = pd.to_numeric(df.iloc[:, 0], errors="coerce").dropna().values
                         if len(rr) > 10:
                             name = filename.replace(".csv", "")
                             datasets.append((name, rr))
@@ -91,8 +89,7 @@ def calculate_hrv_metrics(rr_intervals):
     import importlib.util
 
     eng_path = (
-        root_path
-        / "research_uet/topics/0.14_Complex_Systems/Code/01_Engine/Engine_Complexity.py"
+        root_path / "research_uet/topics/0.14_Complex_Systems/Code/01_Engine/Engine_Complexity.py"
     )
     if eng_path.exists():
         spec = importlib.util.spec_from_file_location("Engine_Complexity", eng_path)

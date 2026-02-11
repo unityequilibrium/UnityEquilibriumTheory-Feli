@@ -1,6 +1,6 @@
-import unittest
-import numpy as np
-import json
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 import unittest
 import numpy as np
 import json
@@ -9,37 +9,23 @@ from pathlib import Path
 import os
 
 # Robust Root Finding (Standard 5x4 Grid Pattern)
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Engine Import
 topic_dir = (
-    root_path
-    / "research_uet"
-    / "topics"
-    / "0.10_Fluid_Dynamics_Chaos"
-    / "Code"
-    / "01_Engine"
+    root_path / "research_uet" / "topics" / "0.10_Fluid_Dynamics_Chaos" / "Code" / "01_Engine"
 )
 if str(topic_dir) not in sys.path:
     sys.path.append(str(topic_dir))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
+from research_uet.core.uet_glass_box import UETPathManager
 
-    # Use Centralized 3D Engine
-    from Engine_UET_3D import UETFluid3D
-    from research_uet.core.uet_glass_box import UETMetricLogger
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+# Use Centralized 3D Engine
+from Engine_UET_3D import UETFluid3D
+from research_uet.core.uet_glass_box import UETMetricLogger
+
+
+# Standardized UET Root Path
 
 
 class TestMatrixTurbulence(unittest.TestCase):
@@ -54,9 +40,7 @@ class TestMatrixTurbulence(unittest.TestCase):
         # UPSCALED: 50x50x50 grid (125,000 cells) for Academic Grade simulation
         self.size = 50
         # Use Centralized Engine
-        self.engine = UETFluid3D(
-            nx=self.size, ny=self.size, nz=self.size, dt=0.002, kappa=0.01
-        )
+        self.engine = UETFluid3D(nx=self.size, ny=self.size, nz=self.size, dt=0.002, kappa=0.01)
 
     def test_high_reynolds_chaos(self):
         """
@@ -70,7 +54,6 @@ class TestMatrixTurbulence(unittest.TestCase):
         steps = 1000  # UPSCALED: Long-duration stability test
 
         # Initial Random Perturbation (Turbulence Seed)
-        # Initial Random Perturbation (Turbulence Seed)
         # In UET 3D, we perturb the Information Field (I) which acts as the driver/velocity proxy
         # self.engine.I is (nz, ny, nx)
         self.engine.I += np.random.randn(self.size, self.size, self.size) * 0.1
@@ -80,7 +63,7 @@ class TestMatrixTurbulence(unittest.TestCase):
             from research_uet.core.uet_glass_box import UETMetricLogger
         except ImportError:
             # Try to force find it via core dir
-            sys.path.append(str(current_path / "research_uet" / "core"))
+            sys.path.append(str(root_path / "research_uet" / "core"))
             from uet_glass_box import UETMetricLogger
 
         # Updated Path Management
@@ -122,9 +105,7 @@ class TestMatrixTurbulence(unittest.TestCase):
             try:
                 # 1. Force Injection (on I field)
                 center = self.size // 2
-                self.engine.I[
-                    center - 2 : center + 2, center - 2 : center + 2, center
-                ] += (5.0 * dt)
+                self.engine.I[center - 2 : center + 2, center - 2 : center + 2, center] += 5.0 * dt
 
                 # Dissipation (handled by engine naturally, but we can damp I)
                 self.engine.I *= 0.99
@@ -144,9 +125,7 @@ class TestMatrixTurbulence(unittest.TestCase):
                     print(f"{i:<6} | {kinetic_proxy:<18.2e} | {max_grad:<10.2f} | OK")
 
                 if not self.engine.is_smooth():
-                    raise ValueError(
-                        f"CRITICAL FAILURE: Numerical Explosion at step {i}"
-                    )
+                    raise ValueError(f"CRITICAL FAILURE: Numerical Explosion at step {i}")
 
             except Exception as e:
                 print(f"❌ TEST FAILED: {e}")

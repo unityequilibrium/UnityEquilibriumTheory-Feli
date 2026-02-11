@@ -13,27 +13,23 @@ Target:
 import sys
 import numpy as np
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Local Engine Import
-engine_dir = (
-    root_path / "research_uet/topics/0.24_Artificial_Intelligence/Code/01_Engine"
-)
+engine_dir = root_path / "research_uet/topics/0.24_Artificial_Intelligence/Code/01_Engine"
 if str(engine_dir) not in sys.path:
     sys.path.insert(0, str(engine_dir))
 
 from UET_AI_Core import UetcortexNeuralNet
 from research_uet.core.uet_parameters import UETParameters
+
+
+# Standardized UET Root Path
 
 
 def run_verification():

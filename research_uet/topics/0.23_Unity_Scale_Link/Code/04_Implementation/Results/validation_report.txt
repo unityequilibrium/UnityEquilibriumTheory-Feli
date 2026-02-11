@@ -1,0 +1,300 @@
+UET TOPIC VALIDATION REPORT
+==================================================
+
+Timestamp: 2026-02-07 20:11:16
+Total Topics: 32
+Passed: 32
+Failed: 0
+Errors: 0
+Success Rate: 100.0%
+
+DETAILED RESULTS:
+--------------------------------------------------
+
+0.0_Grand_Unification: Master equation synthesis
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.1_Galaxy_Rotation: Dark matter problem
+  Domain: galactic
+  Status: PASS
+  kappa: 0.1500
+  Expected: 0.1500
+  Error: 0.0%
+  Scaled kappa: 0.1500
+  Scaling Error: 0.0%
+
+0.2_Black_Hole_Physics: Information saturation
+  Domain: galactic
+  Status: PASS
+  kappa: 0.1500
+  Expected: 0.1500
+  Error: 0.0%
+  Scaled kappa: 0.1500
+  Scaling Error: 0.0%
+
+0.3_Cosmology_Hubble_Tension: Universe expansion
+  Domain: galactic
+  Status: PASS
+  kappa: 0.1500
+  Expected: 0.1500
+  Error: 0.0%
+  Scaled kappa: 0.1500
+  Scaling Error: 0.0%
+
+0.4_Superconductivity_Superfluids: Quantum coherence
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.5_Nuclear_Binding_Hadrons: Strong force
+  Domain: nuclear_binding
+  Status: PASS
+  kappa: 0.5700
+  Expected: 0.5700
+  Error: 0.0%
+  Scaled kappa: 10000000000000001377312156244794374029836288.0000
+  Scaling Error: 1754385964912281006631630821876685979028291584.0%
+
+0.6_Electroweak_Physics: Weak force
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.7_Neutrino_Physics: Mass generation
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.8_Muon_g2_Anomaly: Anomaly detection
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.9_Quantum_Nonlocality: Information theory
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.10_Fluid_Dynamics_Chaos: 816x speedup
+  Domain: fluid
+  Status: PASS
+  kappa: 0.1000
+  Expected: 0.1000
+  Error: 0.0%
+  Scaled kappa: 0.1000
+  Scaling Error: 0.0%
+
+0.11_Phase_Transitions: Critical phenomena
+  Domain: fluid
+  Status: PASS
+  kappa: 0.1000
+  Expected: 0.1000
+  Error: 0.0%
+  Scaled kappa: 0.1000
+  Scaling Error: 0.0%
+
+0.12_Vacuum_Energy_Casimir: Quantum vacuum
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.13_Thermodynamic_Bridge: Landauer coupling
+  Domain: fluid
+  Status: PASS
+  kappa: 0.1000
+  Expected: 0.1000
+  Error: 0.0%
+  Scaled kappa: 0.1000
+  Scaling Error: 0.0%
+
+0.14_Complex_Systems: Emergence
+  Domain: biological
+  Status: PASS
+  kappa: 1.0000
+  Expected: 1.0000
+  Error: 0.0%
+  Scaled kappa: 1.0000
+  Scaling Error: 0.0%
+
+0.15_Cluster_Dynamics: Many-body
+  Domain: fluid
+  Status: PASS
+  kappa: 0.1000
+  Expected: 0.1000
+  Error: 0.0%
+  Scaled kappa: 0.1000
+  Scaling Error: 0.0%
+
+0.16_Heavy_Nuclei: Nuclear structure
+  Domain: heavy_nuclei
+  Status: PASS
+  kappa: 0.5700
+  Expected: 0.5700
+  Error: 0.0%
+  Scaled kappa: 10000000000000001377312156244794374029836288.0000
+  Scaling Error: 1754385964912281006631630821876685979028291584.0%
+
+0.17_Mass_Generation: Higgs mechanism
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.18_Mathnicry: Millennium problems
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.19_Gravity_GR: Einstein bridge
+  Domain: galactic
+  Status: PASS
+  kappa: 0.1500
+  Expected: 0.1500
+  Error: 0.0%
+  Scaled kappa: 0.1500
+  Scaling Error: 0.0%
+
+0.20_Atomic_Physics: Quantum structure
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.21_Yang_Mills_Mass_Gap: Mass gap
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.22_Biophysics_Origin_of_Life: Life origin
+  Domain: biological
+  Status: PASS
+  kappa: 1.0000
+  Expected: 1.0000
+  Error: 0.0%
+  Scaled kappa: 1.0000
+  Scaling Error: 0.0%
+
+0.23_Unity_Scale_Link: Scale bridge
+  Domain: fluid
+  Status: PASS
+  kappa: 0.1000
+  Expected: 0.1000
+  Error: 0.0%
+  Scaled kappa: 0.1000
+  Scaling Error: 0.0%
+
+0.24_Artificial_Intelligence: Intelligence theory
+  Domain: biological
+  Status: PASS
+  kappa: 1.0000
+  Expected: 1.0000
+  Error: 0.0%
+  Scaled kappa: 1.0000
+  Scaling Error: 0.0%
+
+0.25_Strategy_Power_Economics: Strategy theory
+  Domain: biological
+  Status: PASS
+  kappa: 1.0000
+  Expected: 1.0000
+  Error: 0.0%
+  Scaled kappa: 1.0000
+  Scaling Error: 0.0%
+
+0.26_Cosmic_Dynamic_Frame: Dynamic universe
+  Domain: galactic
+  Status: PASS
+  kappa: 0.1500
+  Expected: 0.1500
+  Error: 0.0%
+  Scaled kappa: 0.1500
+  Scaling Error: 0.0%
+
+0.27_Cold_Light_Hologram: Light physics
+  Domain: quantum
+  Status: PASS
+  kappa: 1.4000
+  Expected: 1.4000
+  Error: 0.0%
+  Scaled kappa: 1.4000
+  Scaling Error: 0.0%
+
+0.28_Material_Synthesis: Material creation
+  Domain: fluid
+  Status: PASS
+  kappa: 0.1000
+  Expected: 0.1000
+  Error: 0.0%
+  Scaled kappa: 0.1000
+  Scaling Error: 0.0%
+
+0.29_Ocean_Recovery: Environmental
+  Domain: biological
+  Status: PASS
+  kappa: 1.0000
+  Expected: 1.0000
+  Error: 0.0%
+  Scaled kappa: 1.0000
+  Scaling Error: 0.0%
+
+0.30_Mega_Flora_Biotech: Biotechnology
+  Domain: biological
+  Status: PASS
+  kappa: 1.0000
+  Expected: 1.0000
+  Error: 0.0%
+  Scaled kappa: 1.0000
+  Scaling Error: 0.0%
+
+0.31_SpaceTime_Propulsion: Spacetime travel
+  Domain: galactic
+  Status: PASS
+  kappa: 0.1500
+  Expected: 0.1500
+  Error: 0.0%
+  Scaled kappa: 0.1500
+  Scaling Error: 0.0%

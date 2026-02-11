@@ -5,21 +5,18 @@ Topic: 0.8 Muon g-2 Anomaly
 Goal: Verify UET explanation for the muon magnetic moment anomaly against Fermilab 2023 data.
 """
 
+from research_uet import ROOT_PATH
+from pathlib import Path
+
+root_path = ROOT_PATH
+
 import json
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-# We need to find the directory that CONTAINS 'research_uet' (the package).
-# File: .../topics/0.8.../Code/03_Research/script.py
-# Levels: 1=03, 2=Code, 3=0.8, 4=topics, 5=research_uet (package), 6=root
-root_path = current_path.parents[5]
 
-if str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 try:
     from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
@@ -30,8 +27,10 @@ except Exception as e:
 
 def load_g2_data():
     """Load Fermilab g-2 data."""
-    # Hardcoded relative path to ensure stability
-    data_file = current_path.parents[2] / "Data" / "03_Research" / "fermilab_g2_2023.json"
+    # Robust data loading
+    topic_dir = root_path / "research_uet" / "topics" / "0.8_Muon_g2_Anomaly"
+    data_file = topic_dir / "Data" / "03_Research" / "fermilab_g2_2023.json"
+
     if not data_file.exists():
         print(f"Data file not found at {data_file}")
         return None

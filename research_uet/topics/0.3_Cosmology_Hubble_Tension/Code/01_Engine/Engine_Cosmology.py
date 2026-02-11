@@ -17,40 +17,28 @@ from dataclasses import dataclass
 from typing import Dict, Any, List
 from pathlib import Path
 
-# =============================================================================
-# ROBUST PATH FINDING
-# =============================================================================
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-
-if root_path:
-    if str(root_path) not in sys.path:
-        sys.path.insert(0, str(root_path))
-else:
-    print("CRITICAL ERROR: Could not find 'research_uet' root.")
-
 # Core Imports
-try:
-    from research_uet.core.uet_base_solver import UETBaseSolver
-    from research_uet.core.uet_master_equation import UETParameters
-    from research_uet.core.uet_glass_box import UETPathManager
-    from research_uet.core.uet_parameters import (
-        C,
-        ALPHA_EM,
-        INTEGRITY_KILL_SWITCH,
-    )  # Import Speed of Light, Fine Structure Constant, and Kill Switch
-except ImportError as e:
-    print(f"IMPORT ERROR DETAILED: {e}")
-    raise e
+from research_uet.core.uet_base_solver import UETBaseSolver
+from research_uet.core.uet_master_equation import UETParameters
+from research_uet.core.uet_glass_box import UETPathManager
+from research_uet.core.uet_parameters import (
+
+
+C,
+ALPHA_EM,
+INTEGRITY_KILL_SWITCH,
+)  # Import Speed of Light, Fine Structure Constant, and Kill Switch
 
 # Standard Cosmological Observed Values
 H0_PLANCK = 67.4  # km/s/Mpc (Planck 2018)
 H0_SHOES = 73.04  # km/s/Mpc (SH0ES 2022)
 
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 class UETCosmologyEngine(UETBaseSolver):
     """

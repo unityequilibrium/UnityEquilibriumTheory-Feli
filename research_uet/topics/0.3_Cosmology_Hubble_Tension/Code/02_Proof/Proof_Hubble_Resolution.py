@@ -8,16 +8,10 @@ Topic: 0.3 - Cosmology / Hubble Tension
 from pathlib import Path
 import sys
 import os
+from research_uet import ROOT_PATH
 
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
+root_path = ROOT_PATH
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Setup local imports for Topic 0.3
 topic_path = root_path / "research_uet" / "topics" / "0.3_Cosmology_Hubble_Tension"
@@ -30,6 +24,9 @@ try:
 except ImportError as e:
     print(f"CRITICAL SETUP ERROR: {e}")
     sys.exit(1)
+
+
+# Standardized UET Root Path
 
 
 def prove_hubble_resolution():

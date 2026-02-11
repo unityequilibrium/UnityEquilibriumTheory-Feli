@@ -19,20 +19,6 @@ import sys
 from pathlib import Path
 from dataclasses import dataclass
 
-# =============================================================================
-# ROBUST PATH FINDING
-# =============================================================================
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-
-if root_path:
-    if str(root_path) not in sys.path:
-        sys.path.insert(0, str(root_path))
-
 # Core Imports
 try:
     from research_uet.core.uet_base_solver import UETBaseSolver

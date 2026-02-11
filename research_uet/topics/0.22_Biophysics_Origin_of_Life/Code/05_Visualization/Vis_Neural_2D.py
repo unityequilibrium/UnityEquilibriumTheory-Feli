@@ -12,16 +12,10 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 from pathlib import Path
 
-# --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+
+# --- ROBUST PATH FINDER ---
+
 
 # Setup Paths
 TOPIC_DIR = root_path / "research_uet" / "topics" / "0.22_Biophysics_Origin_of_Life"
@@ -30,6 +24,12 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Thermodynamics / Aesthetics
 plt.style.use('dark_background')
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 def run_neural_2d_sim(N=64, T=5.0, dt=0.01):
     """Simulates 2D Neural Field Dynamics."""

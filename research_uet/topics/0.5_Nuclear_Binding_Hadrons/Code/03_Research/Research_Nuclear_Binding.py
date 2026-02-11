@@ -15,15 +15,9 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-ROOT_DIR = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        ROOT_DIR = parent
-        break
+from research_uet import ROOT_PATH
 
-if ROOT_DIR and str(ROOT_DIR) not in sys.path:
-    sys.path.insert(0, str(ROOT_DIR))
+ROOT_DIR = ROOT_PATH
 
 try:
     from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger

@@ -13,26 +13,18 @@ Uses UET V3.0 Master Equation:
 
 import sys
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager
 
 import numpy as np
 import os
+
 
 try:
     from research_uet.core import uet_viz
@@ -41,12 +33,7 @@ except ImportError:
 
 # Add Data Path
 data_dir = (
-    root_path
-    / "research_uet"
-    / "topics"
-    / "0.12_Vacuum_Energy_Casimir"
-    / "Data"
-    / "03_Research"
+    root_path / "research_uet" / "topics" / "0.12_Vacuum_Energy_Casimir" / "Data" / "03_Research"
 )
 if str(data_dir) not in sys.path:
     sys.path.insert(0, str(data_dir))
@@ -58,9 +45,7 @@ try:
         save_data,
     )
 except ImportError:
-    print(
-        "WARNING: Could not import casimir_experimental_data. Running in mock mode or failing."
-    )
+    print("WARNING: Could not import casimir_experimental_data. Running in mock mode or failing.")
     raise
 
 # Import from UET V3.0 Master Equation
@@ -78,6 +63,12 @@ except ImportError:
     K_B = 1.380649e-23
 
 PI = np.pi
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 
 def casimir_force_sphere_plate_qed(d_m: float, R_m: float) -> float:
@@ -140,9 +131,7 @@ def run_test_with_real_data():
     print(f"   Material: {mohideen['material']}")
     print()
 
-    print(
-        f"{'d (nm)':<10} {'F_exp (pN)':<15} {'F_UET (pN)':<15} {'Error %':<10} Status"
-    )
+    print(f"{'d (nm)':<10} {'F_exp (pN)':<15} {'F_UET (pN)':<15} {'Error %':<10} Status")
     print("-" * 70)
 
     results = []
@@ -183,9 +172,7 @@ def run_test_with_real_data():
         else:
             status = "❌ Poor"
 
-        print(
-            f"{d_nm:<10} {F_exp_pN:<15.2f} {F_uet_pN:<15.2f} {error_pct:<10.1f} {status}"
-        )
+        print(f"{d_nm:<10} {F_exp_pN:<15.2f} {F_uet_pN:<15.2f} {error_pct:<10.1f} {status}")
 
         results.append(
             {

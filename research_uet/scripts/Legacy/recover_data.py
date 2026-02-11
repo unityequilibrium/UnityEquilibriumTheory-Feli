@@ -4,11 +4,7 @@ import sys
 
 sys.path.insert(0, os.getcwd())
 
-try:
-    from research_uet.lab.galaxies.test_175_galaxies_v4 import SPARC_GALAXIES
-except ImportError:
-    print("Could not import SPARC_GALAXIES")
-    sys.exit(1)
+from research_uet.lab.galaxies.test_175_galaxies_v4 import SPARC_GALAXIES
 
 
 def recover():

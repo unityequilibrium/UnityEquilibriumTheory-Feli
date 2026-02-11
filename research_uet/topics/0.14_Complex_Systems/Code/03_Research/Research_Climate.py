@@ -15,16 +15,35 @@ import sys
 import os
 from pathlib import Path
 
-# --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+# --- ROBUST PATH FINDER (5x4 Grid Standard) ---
+_root = Path(__file__).resolve().parent
+while _root.name != "research_uet" and _root.parent != _root:
+    _root = _root.parent
+if _root.name == "research_uet":
+    sys.path.insert(0, str(_root.parent))
+    from research_uet import ROOT_PATH
+
+    root_path = ROOT_PATH
+else:
+    print("CRITICAL: Root path not found.")
+    sys.exit(1)
+
+TOPIC_DIR = root_path / "research_uet" / "topics" / "0.14_Complex_Systems"
+DATA_PATH = TOPIC_DIR / "Data"
+DATA_DIR = str(DATA_PATH)
+
+# Engine Import
+try:
+    import importlib.util
+
+    engine_file = TOPIC_DIR / "Code" / "01_Engine" / "Engine_Complexity.py"
+    spec = importlib.util.spec_from_file_location("Engine_Complexity", str(engine_file))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    UETComplexityEngine = mod.UETComplexityEngine
+except Exception:
+    UETComplexityEngine = None
 
 try:
     from research_uet.core.uet_glass_box import UETPathManager
@@ -37,14 +56,6 @@ try:
     )
 except ImportError:
     pass
-
-TOPIC_DIR = (
-    root_path / "research_uet" / "topics" / "0.14_Complex_Systems"
-    if root_path
-    else Path(__file__).resolve().parent.parent.parent
-)
-DATA_PATH = TOPIC_DIR / "Data"
-DATA_DIR = str(DATA_PATH)
 
 
 def load_climate_data():
@@ -72,12 +83,7 @@ def load_climate_data():
 
 def analyze_equilibrium_distance(time_series, name):
     """
-    Analyze how far system is from equilibrium.
-
-    UET Interpretation:
-    - dC/dt = 0: Equilibrium
-    - dC/dt > 0 (accelerating): Forcing overpowers stabilization
-    - Climate is being FORCED (CO2 injection) -> dOmega/dt > 0
+    Analyze how far system is from equilibrium using UET Complexity Engine.
     """
     if len(time_series) < 10:
         return None
@@ -88,37 +94,26 @@ def analyze_equilibrium_distance(time_series, name):
     if len(values) < 10:
         return None
 
-    # Rate of change
-    rate = np.diff(values)
-    avg_rate = np.mean(rate[-12:])  # Recent rate
+    # Use Engine if available
+    if UETComplexityEngine:
+        engine = UETComplexityEngine(name="Climate_Analyzer")
+        metrics = engine.calculate_stability_metrics(values)
+        hurst = engine.calculate_hurst_exponent(values)
 
-    # Acceleration (derivative of rate)
-    accel = np.diff(rate)
-    avg_accel = np.mean(accel[-12:]) if len(accel) > 0 else 0
+        return {
+            "name": name,
+            "current_value": values[-1],
+            "avg_rate": metrics["cv"],  # Proxy for rate of change/volatility
+            "avg_accel": 0.0,
+            "eq_distance": 1.0 - metrics["equilibrium_score"],
+            "equilibrium_score": metrics["equilibrium_score"],
+            "hurst": hurst,
+            "status": "UNSTABLE" if metrics["equilibrium_score"] < 0.5 else "STABLE",
+            "data_points": len(values),
+        }
 
-    # Equilibrium distance
-    # 0 = equilibrium, higher = farther
-    eq_distance = abs(avg_rate) / (np.std(values) + 0.001)
-
-    # Classify
-    if avg_rate > 0 and avg_accel > 0:
-        status = "ACCELERATING AWAY (far from equilibrium)"
-    elif avg_rate > 0:
-        status = "INCREASING (not at equilibrium)"
-    elif abs(avg_rate) < 0.01 * np.std(values):
-        status = "STABLE (near equilibrium)"
-    else:
-        status = "DECREASING (returning to equilibrium)"
-
-    return {
-        "name": name,
-        "current_value": values[-1],
-        "avg_rate": avg_rate,
-        "avg_accel": avg_accel,
-        "eq_distance": eq_distance,
-        "status": status,
-        "data_points": len(values),
-    }
+    # Fallback if engine fails
+    return None
 
 
 def run_test():
@@ -145,11 +140,7 @@ def run_test():
         # Find CO2 column
         co2_col = None
         for col in df.columns:
-            if (
-                "average" in col.lower()
-                or "co2" in col.lower()
-                or "trend" in col.lower()
-            ):
+            if "average" in col.lower() or "co2" in col.lower() or "trend" in col.lower():
                 co2_col = col
                 break
 

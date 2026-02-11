@@ -2,16 +2,9 @@
 from pathlib import Path
 import sys
 import os
+from research_uet import ROOT_PATH
 
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+root_path = ROOT_PATH
 
 # Setup local imports for Topic 0.3
 topic_path = root_path / "research_uet" / "topics" / "0.3_Cosmology_Hubble_Tension"
@@ -40,6 +33,9 @@ from dark_energy_data import (
     uet_dark_energy_interpretation,
     uet_hubble_tension_hypothesis,
 )
+
+
+# Standardized UET Root Path
 
 
 def test_hubble_tension():

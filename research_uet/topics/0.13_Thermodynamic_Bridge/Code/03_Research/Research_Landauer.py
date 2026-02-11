@@ -23,47 +23,31 @@ import sys
 
 import os
 from pathlib import Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
+
+import importlib.util
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager
-except ImportError as e:
-    print(f"GlassBox Import Error: {e}")
-
-# Setup Topic Imports
-engine_dir = (
-    root_path
-    / "research_uet"
-    / "topics"
-    / "0.13_Thermodynamic_Bridge"
-    / "Code"
-    / "01_Engine"
-)
-if str(engine_dir) not in sys.path:
-    sys.path.insert(0, str(engine_dir))
-
-try:
-    from research_uet.core.uet_master_equation import UETParameters
-    import importlib
-
-    Engine_Thermodynamics = importlib.import_module("Engine_Thermodynamics")
-    UETThermoEngine = Engine_Thermodynamics.UETThermoEngine
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager
 
 # Initialize Engine for calculations
-engine = UETThermoEngine()
+try:
+    engine_path = (
+        root_path
+        / "research_uet/topics/0.13_Thermodynamic_Bridge/Code/01_Engine/Engine_Thermodynamics.py"
+    )
+    spec = importlib.util.spec_from_file_location("Engine_Thermodynamics", engine_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    UETThermoEngine = getattr(module, "UETThermoEngine")
+    engine = UETThermoEngine()
+except Exception as e:
+    print(f"Error loading Engine: {e}")
+    sys.exit(1)
 
 
 # ==============================================================================

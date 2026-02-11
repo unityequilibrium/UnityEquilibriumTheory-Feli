@@ -13,14 +13,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 # --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-# We need to find the directory that CONTAINS 'research_uet' (the package).
-# File: .../topics/0.6.../Code/03_Research/script.py
-# Levels: 1=03, 2=Code, 3=0.6, 4=topics, 5=research_uet (package), 6=root
-root_path = current_path.parents[5]
 
-if str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 try:
     from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger

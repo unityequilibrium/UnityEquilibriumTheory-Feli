@@ -16,38 +16,35 @@ import os
 import sys
 from pathlib import Path
 
+
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
+_root = Path(__file__).resolve().parent
+while _root.name != "research_uet" and _root.parent != _root:
+    _root = _root.parent
+if _root.name == "research_uet":
+    sys.path.insert(0, str(_root.parent))
+    from research_uet import ROOT_PATH
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+    root_path = ROOT_PATH
+else:
+    print("CRITICAL: Root path not found.")
+    sys.exit(1)
 
-TOPIC_DIR = (
-    root_path / "research_uet" / "topics" / "0.14_Complex_Systems"
-    if root_path
-    else Path(".").resolve()
-)
+TOPIC_DIR = root_path / "research_uet" / "topics" / "0.14_Complex_Systems"
 DATA_PATH = TOPIC_DIR / "Data" / "03_Research" / "social"
 
-
-# Engine Import (Dynamic to bypass 0.14 folder literal restriction)
+# --- DYNAMIC ENGINE IMPORT ---
 try:
     import importlib.util
-    from research_uet.core.uet_master_equation import UETParameters
 
-    engine_file = TOPIC_DIR / "Code" / "01_Engine" / "Engine_Complexity.py"
-    spec = importlib.util.spec_from_file_location("Engine_Complexity", engine_file)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    UETComplexityEngine = getattr(module, "UETComplexityEngine")
+    engine_path = TOPIC_DIR / "Code" / "01_Engine" / "Engine_Complexity.py"
+    spec = importlib.util.spec_from_file_location("Engine_Complexity", str(engine_path))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    UETComplexityEngine = mod.UETComplexityEngine
 except Exception as e:
-    print(f"Error loading Engine 0.14 Social: {e}")
-    sys.exit(1)
+    print(f"CRITICAL: Engine not found: {e}")
+    UETComplexityEngine = None
 
 
 def load_ego_network(filename):

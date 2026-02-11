@@ -9,21 +9,16 @@ Tests:
 Standard: Glass Box (metrics logged).
 """
 
+import os
 import sys
 import csv
 from pathlib import Path
-import os
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
 # Import UET Muon Solver from Engine folder
 TOPIC_DIR = root_path / "research_uet" / "topics" / "0.8_Muon_g2_Anomaly"
@@ -34,6 +29,14 @@ from Engine_Muon_G2 import UETMuonG2Solver
 
 
 # Simple wrapper class to match old muon_solver interface
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
+
+
 class UETMuonSolver:
     def __init__(self):
         self.solver = UETMuonG2Solver()
@@ -88,9 +91,7 @@ def run_experiment():
     result_path = result_dir / "muon_results.csv"
 
     with open(result_path, "w", newline="") as f:
-        writer = csv.DictWriter(
-            f, fieldnames=["Metric", "UET", "Observed", "Error_Pct", "Status"]
-        )
+        writer = csv.DictWriter(f, fieldnames=["Metric", "UET", "Observed", "Error_Pct", "Status"])
         writer.writeheader()
         writer.writerow(
             {

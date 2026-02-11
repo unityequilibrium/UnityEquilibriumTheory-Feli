@@ -13,16 +13,10 @@ import matplotlib.pyplot as plt
 import importlib
 from pathlib import Path
 
-# --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+
+# --- ROBUST PATH FINDER ---
+
 
 # Setup local imports
 topic_path = root_path / "research_uet" / "topics" / "0.1_Galaxy_Rotation_Problem"
@@ -42,6 +36,12 @@ except ImportError as e:
 OUTPUT_DIR = topic_path / "Result" / "01_Showcase"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 def load_data():
     """Load SPARC data from JSON."""

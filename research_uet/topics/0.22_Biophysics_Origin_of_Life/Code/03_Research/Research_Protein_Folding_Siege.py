@@ -16,6 +16,12 @@ We use "Grover-like" Search to find the lowest energy configuration instantly.
 Sequence: H H P P H H P H H P P H H (Classic Benchmark)
 """
 
+from research_uet import ROOT_PATH
+from pathlib import Path
+current_path = Path(__file__).resolve()
+root_path = ROOT_PATH
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 import numpy as np
 import random
 import time
@@ -24,15 +30,6 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 # Setup Path & Engine
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-
 
 def run_protein_siege():
     print("=" * 60)

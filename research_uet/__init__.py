@@ -13,6 +13,13 @@ Exposes "Hero Features" for easy access:
 import sys
 import os
 import importlib.util
+from pathlib import Path
+
+# Version
+__version__ = "0.8.7"
+
+# exposes the package root for all sub-modules
+ROOT_PATH = Path(__file__).parent.parent.resolve()
 
 
 def _import_from_path(name, relative_path):

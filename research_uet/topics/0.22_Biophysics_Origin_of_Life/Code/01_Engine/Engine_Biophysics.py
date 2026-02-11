@@ -163,14 +163,10 @@ class UETBiophysicsEngine(UETBaseSolver):
         return {
             "Primordial_Omega": float(omega_start * check),
             "Biological_Omega": float(omega_life * check),
-            "Entropy_Reduction": float(
-                (omega_start - omega_life) / (omega_start + 1e-9) * check
-            ),
+            "Entropy_Reduction": float((omega_start - omega_life) / (omega_start + 1e-9) * check),
         }
 
-    def simulate_cellular_decay(
-        self, initial_coherence: float, steps: int = 100
-    ) -> Dict[str, Any]:
+    def simulate_cellular_decay(self, initial_coherence: float, steps: int = 100) -> Dict[str, Any]:
         """
         AXIOM 2: Information Decay.
         Models the collapse of cellular coherence (C) due to entropy accumulation (I).
@@ -181,9 +177,7 @@ class UETBiophysicsEngine(UETBaseSolver):
         """
         # Initialize Field C (Coherence)
         C = np.ones(self.nx) * initial_coherence
-        I = np.linspace(
-            0.01, 0.2, self.nx
-        )  # Varying entropy pressure across the tissue
+        I = np.linspace(0.01, 0.2, self.nx)  # Varying entropy pressure across the tissue
 
         coherence_history = []
         omega_history = []
@@ -201,9 +195,7 @@ class UETBiophysicsEngine(UETBaseSolver):
             "integrity_loss": float(initial_coherence - np.mean(C)),
         }
 
-    def predict_cancer_transition(
-        self, coherence_threshold: float = 0.4, steps: int = 100
-    ) -> str:
+    def predict_cancer_transition(self, coherence_threshold: float = 0.4, steps: int = 100) -> str:
         """
         Predict if a cell cluster will transition to a chaotic state (Cancer).
         Based on UET Phase Transition: if C < C_crit, Ω collapses.

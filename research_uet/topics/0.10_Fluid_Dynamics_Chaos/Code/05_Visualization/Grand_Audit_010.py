@@ -12,20 +12,20 @@ import json
 import time
 from pathlib import Path
 
-# --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+
+# --- ROBUST PATH FINDER ---
+
 
 TOPIC_DIR = root_path / "research_uet" / "topics" / "0.10_Fluid_Dynamics_Chaos"
 CODE_DIR = TOPIC_DIR / "Code"
 
+
+
+
+# Standardized UET Root Path
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 
 def audit_directory(dir_name):
     target_dir = CODE_DIR / dir_name

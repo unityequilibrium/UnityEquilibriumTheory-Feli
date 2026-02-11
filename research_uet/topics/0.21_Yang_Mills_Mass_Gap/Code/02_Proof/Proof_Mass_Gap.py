@@ -8,15 +8,11 @@ import sys
 from pathlib import Path
 
 # Path setup
-current_path = Path(__file__).resolve()
-repo_root = current_path
-for _ in range(6):
-    if (repo_root / "research_uet").exists():
-        break
-    repo_root = repo_root.parent
+# Path setup
+from research_uet import ROOT_PATH
 
-if str(repo_root) not in sys.path:
-    sys.path.insert(0, str(repo_root))
+root_path = ROOT_PATH
+repo_root = ROOT_PATH
 
 # Engine Import
 try:

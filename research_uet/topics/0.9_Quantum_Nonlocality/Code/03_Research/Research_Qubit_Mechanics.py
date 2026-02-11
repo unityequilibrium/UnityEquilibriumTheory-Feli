@@ -17,6 +17,8 @@ Methodology:
 5. Compare Simulated T1 vs Real T1.
 """
 
+from research_uet import ROOT_PATH
+root_path = ROOT_PATH
 import sys
 import json
 import numpy as np
@@ -28,20 +30,14 @@ matplotlib.use("Agg")  # Force headless mode to prevent CRASH
 import matplotlib.pyplot as plt
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 else:
     print("CRITICAL: research_uet root not found!")
     sys.exit(1)
 
 from research_uet.core.uet_parameters import UETParameters
+
+
 
 # Engine Import (Crystallized Specialized Engine)
 # Engine Import (Explicit Path Loading)
@@ -68,6 +64,10 @@ except Exception as e:
     print(f"CRITICAL: Failed to load Qubit Engine: {e}")
     sys.exit(1)
 
+
+
+
+# Standardized UET Root Path
 
 def load_qubit_data():
     data_path = (

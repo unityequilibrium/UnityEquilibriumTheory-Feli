@@ -11,24 +11,14 @@ Uses real EEG data.
 Updated for UET V3.0
 """
 
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 import numpy as np
 import os
 import sys
 from pathlib import Path
 
-# --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
-
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-else:
-    # Fallback
-    pass
 
 TOPIC_DIR = (
     root_path / "research_uet" / "topics" / "0.14_Complex_Systems"
@@ -51,6 +41,9 @@ try:
 except Exception as e:
     print(f"Error loading Engine 0.14 Brain: {e}")
     sys.exit(1)
+
+
+# Standardized UET Root Path
 
 
 def load_eeg_data():

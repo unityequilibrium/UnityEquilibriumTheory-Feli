@@ -11,19 +11,16 @@ Methodology:
 4. Extract the "Rules" found by AI (e.g. "If Density < X, Error is High").
 """
 
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
+
 import sys
 from pathlib import Path
 
-# --- ROBUST PATH FINDER ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+# --- ROBUST PATH FINDER ---
+
 
 try:
     from research_uet.core.uet_data_orchestrator import orchestrator
@@ -33,14 +30,13 @@ except ImportError:
     ScientificValidator = None
 
 # Setup Paths Standardized
-code_dir = (
-    root_path / "research_uet" / "topics" / "0.1_Galaxy_Rotation_Problem" / "Code"
-)
+code_dir = root_path / "research_uet" / "topics" / "0.1_Galaxy_Rotation_Problem" / "Code"
 if str(code_dir) not in sys.path:
     sys.path.append(str(code_dir))
 
 # Import Physics Engine (External Topic)
 import importlib
+
 
 try:
     Engine_Galaxy_V3 = importlib.import_module("01_Engine.Engine_Galaxy_V3")
@@ -58,6 +54,9 @@ try:
 except ImportError:
     HAS_SKLEARN = False
     print("Warning: sklearn not found. Switching to Statistical Correlation mode.")
+
+
+# Standardized UET Root Path
 
 
 def calculate_surface_density(mass, radius):

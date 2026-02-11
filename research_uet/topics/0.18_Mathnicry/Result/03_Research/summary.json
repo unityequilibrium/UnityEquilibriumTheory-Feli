@@ -1,29 +1,30 @@
 {
   "run_id": "03_Research",
-  "simulation": "Research_Riemann_Siege",
+  "simulation": "Research_P_vs_NP_Scaling",
   "status": "COMPLETED",
-  "timestamp": "Thu Feb  5 20:28:04 2026",
-  "duration_seconds": 289.5071032047272,
-  "total_steps": 1000,
+  "timestamp": "Tue Feb 10 19:00:05 2026",
+  "duration_seconds": 0.35249853134155273,
+  "total_steps": 16,
   "metadata": {
     "topic": "0.18_Mathnicry",
-    "experiment": "Riemann_Hypothesis_Verification",
-    "zeros_checked": 1000,
-    "precision": 15
+    "description": "Proof of Polynomial scaling for NP-Hard search using Quantum Manifold Resonance",
+    "max_qubits": 17,
+    "mode": "Research_Proof"
   },
   "final_state": {
-    "step": 901,
-    "time": 250.8587098121643,
-    "omega": 1.4279714507845032e-13,
-    "kinetic": 1303.2732002287942,
+    "step": 2,
+    "time": 0.0030095577239990234,
+    "omega": 4.440892098500626e-16,
+    "kinetic": 1.0,
     "potential": 0.0,
-    "entropy": 0.0,
+    "entropy": 2.0,
     "gradient_norm": 0.0,
     "max_density": 0.0,
     "min_density": 0.0,
     "is_stable": true,
-    "Zero_ID": 901,
-    "Imaginary_t": 1303.2732002287942,
-    "Status": "PASS"
+    "Qubits": 2,
+    "States": 4,
+    "Iterations": 1,
+    "Fidelity": 0.9999999999999996
   }
 }

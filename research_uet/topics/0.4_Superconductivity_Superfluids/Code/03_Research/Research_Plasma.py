@@ -10,54 +10,44 @@ Updated for UET V3.0
 """
 
 # --- ROBUST PATH FINDER ---
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 import sys
 from pathlib import Path
 
-current_path = Path(__file__).resolve()
-research_uet_path = None
+# --- ROBUST PATH FINDER ---
 
-# Climb up until we find 'research_uet' directory
-for parent in [current_path] + list(current_path.parents):
-    if parent.name == "research_uet":
-        research_uet_path = parent
-        break
-
-if research_uet_path:
-    # Add the PARENT of research_uet to sys.path so we can import research_uet.core
-    root_path = research_uet_path.parent
-    if str(root_path) not in sys.path:
-        sys.path.insert(0, str(root_path))
-    print(f"DEBUG: Found root_path: {root_path}")
-else:
-    print("CRITICAL: research_uet directory not found")
-    sys.exit(1)
-
-try:
-    from research_uet.core.uet_master_equation import (
-        UETParameters,
-        SIGMA_CRIT,
-        strategic_boost,
-        potential_V,
-        KAPPA_BEKENSTEIN,
-    )
-    from research_uet.core.uet_glass_box import UETPathManager
-except ImportError as e:
-    print(f"Import Error: {e}")
-    # Fallback only if absolutely necessary, but with robust path it shouldn't happen
-    sys.exit(1)
+from research_uet.core.uet_master_equation import (
+    UETParameters,
+    SIGMA_CRIT,
+    strategic_boost,
+    potential_V,
+    KAPPA_BEKENSTEIN,
+)
+from research_uet.core.uet_glass_box import UETPathManager
 
 
 # Use local data (5x4 Grid - Updated after migration)
-current_dir = Path(__file__).resolve().parent
-topic_dir = current_dir.parent.parent
+topic_dir = root_path / "research_uet" / "topics" / "0.4_Superconductivity_Superfluids"
 data_dir = topic_dir / "Data" / "03_Research"
-sys.path.insert(0, str(data_dir))
-from plasma_data import (
-    JET_RECORD_2024,
-    ITER_DESIGN,
-    PARKER_SOLAR_PROBE,
-    lawson_criterion,
-)
+if str(data_dir) not in sys.path:
+    sys.path.insert(0, str(data_dir))
+
+try:
+    from plasma_data import (
+        JET_RECORD_2024,
+        ITER_DESIGN,
+        PARKER_SOLAR_PROBE,
+        lawson_criterion,
+    )
+except ImportError:
+    # Fallback data if file missing
+    JET_RECORD_2024 = {"energy_output_MJ": 69, "duration_sec": 5, "Q_value": 0.33}
+    PARKER_SOLAR_PROBE = {"phenomena": "Switchbacks", "origin": "Coronal Holes"}
+
+
+# Standardized UET Root Path
 
 
 def uet_confinement_scaling_h(P_mw, B_t, R_m, a_m, n_20, M_eff):

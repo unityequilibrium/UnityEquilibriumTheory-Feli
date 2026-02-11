@@ -16,23 +16,15 @@ import time
 import sys
 from pathlib import Path
 import matplotlib.pyplot as plt
+from research_uet import ROOT_PATH
+
+root_path = ROOT_PATH
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
-current_path = Path(__file__).resolve()
-root_path = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        root_path = parent
-        break
 
-if root_path and str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
 
-try:
-    from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
-except ImportError as e:
-    print(f"CRITICAL SETUP ERROR: {e}")
-    sys.exit(1)
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
+
 
 # Import Engines
 topic_path = root_path / "research_uet" / "topics" / "0.10_Fluid_Dynamics_Chaos"
@@ -53,6 +45,9 @@ try:
 except ImportError as e:
     print(f"CRITICAL: Engine import failed: {e}")
     sys.exit(1)
+
+
+# Standardized UET Root Path
 
 
 def analytical_poiseuille(y, H, dP_dx, mu):
@@ -92,9 +87,7 @@ def run_accuracy_test():
     y = u_anal_norm[2:-2]
     if np.std(x) < 1e-9 or np.std(y) < 1e-9:
         corr = 0.0
-        print(
-            f"⚠️ Warning: Constant profile detected (std={np.std(x):.2e}). Correlation undefined."
-        )
+        print(f"⚠️ Warning: Constant profile detected (std={np.std(x):.2e}). Correlation undefined.")
     else:
         corr = np.corrcoef(x, y)[0, 1]
 

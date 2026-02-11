@@ -14,19 +14,9 @@ import sys
 from pathlib import Path
 
 # --- PATH SETUP (Must be FIRST) ---
-current_path = Path(__file__).resolve()
-ROOT = None
-for parent in [current_path] + list(current_path.parents):
-    if (parent / "research_uet").exists():
-        ROOT = parent
-        break
+from research_uet import ROOT_PATH
 
-if ROOT:
-    if str(ROOT) not in sys.path:
-        sys.path.insert(0, str(ROOT))
-else:
-    print("CRITICAL: research_uet root not found!")
-    sys.exit(1)
+ROOT = ROOT_PATH
 
 TOPIC_DIR = ROOT / "research_uet" / "topics" / "0.2_Black_Hole_Physics"
 
@@ -69,13 +59,9 @@ def run_experiment():
         radii, potentials, safe, r_stable = solver.solve_internal_structure(M)
 
         status = "✅ RESOLVED" if safe else "❌ SINGULARITY"
-        print(
-            f"   M = {M:.0e} M_sun | Status: {status} | Stable Radius: {r_stable:.2e} m"
-        )
+        print(f"   M = {M:.0e} M_sun | Status: {status} | Stable Radius: {r_stable:.2e} m")
 
-        resolution_results.append(
-            {"Mass": M, "Resolved": safe, "Stable_Radius": r_stable}
-        )
+        resolution_results.append({"Mass": M, "Resolved": safe, "Stable_Radius": r_stable})
 
     # === TEST 2: Cosmological Coupling ===
     print("\n[2] Testing Cosmological Coupling (k)...")
