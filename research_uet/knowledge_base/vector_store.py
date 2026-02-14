@@ -24,6 +24,9 @@ import json
 import math
 import sqlite3
 import time
+import subprocess
+import threading
+import sys
 from dataclasses import dataclass, asdict, field
 from pathlib import Path
 from typing import Optional
@@ -63,6 +66,8 @@ class VectorDocument:
     doc_id: str  # Unique identifier (file path or hash)
     semantic_vec: list[float]  # Semantic embedding (1024d from API)
     uet_vec: list[float]  # UET physics vector (20d)
+    text: str = ""  # Raw text content (chunk or full file)
+    metadata: dict = field(default_factory=dict)  # Additional JSON metadata
 
     # --- Metadata ---
     topic_id: str = ""  # "0.1_Quantum_Mechanics"
@@ -77,6 +82,7 @@ class VectorDocument:
     beta: float = 0.0  # β
     entropy: float = 0.0  # Shannon H
     axiom_count: int = 0  # How many axioms referenced
+    axiom_signature: str = ""  # JSON-encoded list[bool], len=12
     scale: str = ""  # Physical scale
     indexed_at: float = 0.0  # Unix timestamp
 
@@ -116,7 +122,10 @@ class VectorStore:
         self.db_path.mkdir(parents=True, exist_ok=True)
 
         # Select backend
-        if backend == "lancedb" or (backend is None and HAS_LANCEDB):
+        if backend == "mcp":
+            self._backend = _MCPBackend(self.db_path)
+            self.backend_name = "mcp"
+        elif backend == "lancedb" or (backend is None and HAS_LANCEDB):
             self._backend = _LanceDBBackend(self.db_path)
             self.backend_name = "lancedb"
         else:
@@ -243,8 +252,8 @@ class VectorStore:
         return self._backend.count()
 
     def list_topics(self) -> list[str]:
-        """List all unique topic_ids."""
-        return self._backend.list_topics()
+        """List all unique topics."""
+        return getattr(self._backend, "list_topics", lambda: [])()
 
     def stats(self) -> dict:
         """Get store statistics."""
@@ -368,6 +377,7 @@ class _SQLiteBackend:
                 doc_id TEXT PRIMARY KEY,
                 semantic_vec TEXT,
                 uet_vec TEXT,
+                text TEXT,
                 topic_id TEXT,
                 topic_number TEXT,
                 file_path TEXT,
@@ -380,6 +390,7 @@ class _SQLiteBackend:
                 beta REAL,
                 entropy REAL,
                 axiom_count INTEGER,
+                axiom_signature TEXT,
                 scale TEXT,
                 indexed_at REAL
             )
@@ -437,6 +448,9 @@ class _SQLiteBackend:
             # Reconstruct document
             row_dict["semantic_vec"] = json.loads(row_dict["semantic_vec"])
             row_dict["uet_vec"] = json.loads(row_dict["uet_vec"])
+            # Ensure text field is present (handle legacy rows if needed, though we drop DB usually)
+            if "text" not in row_dict:
+                row_dict["text"] = ""
             doc = VectorDocument.from_dict(row_dict)
 
             scored.append(SearchResult(doc=doc, score=distance))
@@ -468,6 +482,181 @@ class _SQLiteBackend:
     def list_topics(self) -> list[str]:
         cursor = self._conn.execute("SELECT DISTINCT topic_id FROM documents ORDER BY topic_id")
         return [row[0] for row in cursor if row[0]]
+
+
+# =============================================================================
+# MCP BACKEND (Rust Connection)
+# =============================================================================
+
+
+class _MCPBackend:
+    """
+    MCP Backend — Connects to the Rust Knowledge Base via MCP tools.
+    Delegates all physics and storage to the containerized Rust core.
+    """
+
+    def __init__(self, db_path: Path):
+        self.db_path = db_path
+        self._process = None
+        self._lock = threading.Lock()
+        self._request_id = 0
+        self._start_server()
+
+    def _start_server(self):
+        """Lazy start the MCP server via .bat wrapper."""
+        cmd = [str(Path(__file__).parents[2] / "start_mcp_server.bat")]
+        try:
+            self._process = subprocess.Popen(
+                cmd,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=sys.stderr,
+                text=True,
+                bufsize=1,
+                encoding="utf-8",
+            )
+            # Perform MCP Handshake
+            self._call_rpc(
+                "initialize",
+                {
+                    "protocolVersion": "2024-11-05",
+                    "capabilities": {},
+                    "clientInfo": {"name": "vector-store-python", "version": "1.0"},
+                },
+            )
+            self._call_rpc("notifications/initialized", {})
+        except Exception as e:
+            print(f"⚠️ Failed to start MCP Backend: {e}")
+            self._process = None
+
+    def _call_rpc(self, method: str, params: dict) -> dict:
+        """Helper to call JSON-RPC method."""
+        if not self._process:
+            return {"error": "Server not running"}
+
+        with self._lock:
+            self._request_id += 1
+            req = {"jsonrpc": "2.0", "method": method, "params": params, "id": self._request_id}
+            try:
+                self._process.stdin.write(json.dumps(req) + "\n")
+                self._process.stdin.flush()
+
+                # Read response (one line)
+                line = self._process.stdout.readline()
+                if not line:
+                    return {"error": "Empty response"}
+
+                resp = json.loads(line)
+                if "error" in resp:
+                    print(f"❌ MCP Error: {resp['error']}")
+                return resp
+            except Exception as e:
+                return {"error": str(e)}
+
+    def upsert(self, doc: VectorDocument):
+        """Add document via 'ingest_document' tool."""
+        # Ensure metadata is serializable
+        meta = getattr(doc, "metadata", {})
+        if not isinstance(meta, dict):
+            meta = {}
+
+        args = {
+            "name": "ingest_document",
+            "arguments": {
+                "doc_id": doc.doc_id,
+                "file_path": str(doc.file_path) if doc.file_path else doc.doc_id,
+                "content": doc.text,
+                "semantic_vec": doc.semantic_vec,
+                "physics_vec": doc.uet_vec,
+                "metadata": meta,
+            },
+        }
+        resp = self._call_rpc("tools/call", args)
+        if "error" in resp:
+            raise RuntimeError(f"MCP Ingest Error: {resp['error']}")
+
+    def upsert_batch(self, docs: list[VectorDocument]) -> int:
+        for doc in docs:
+            self.upsert(doc)
+        return len(docs)
+
+    def search_by_vector(
+        self, query_vec: list[float], vec_field: str, top_k: int
+    ) -> list[SearchResult]:
+        """Search via 'search_knowledge_base' or 'search_physics' tools."""
+        if vec_field == "semantic_vec":
+            tool_name = "search_knowledge_base"
+            args = {
+                "name": tool_name,
+                "arguments": {"query": "vector_search", "query_vector": query_vec},
+            }
+        else:
+            tool_name = "search_physics"
+            args = {"name": tool_name, "arguments": {"physics_vector": query_vec}}
+
+        resp = self._call_rpc("tools/call", args)
+        if "error" in resp or "result" not in resp:
+            return []
+
+        results = resp["result"].get("results", [])
+        search_results = []
+        for r in results:
+            # Reconstruct VectorDocument from search metadata
+            # Rust returns: chunk_id, doc_id, text, path, score
+            doc = VectorDocument(
+                doc_id=r["doc_id"],
+                text=r["text"],
+                file_path=r["path"],
+                semantic_vec=[],  # Not returned by search usually
+                uet_vec=[],
+            )
+            search_results.append(SearchResult(doc=doc, score=r["score"]))
+
+        return search_results
+
+    def get(self, doc_id: str) -> Optional[VectorDocument]:
+        args = {"name": "get_document", "arguments": {"doc_id": doc_id}}
+        resp = self._call_rpc("tools/call", args)
+
+        if "error" in resp or "result" not in resp:
+            return None
+
+        doc_data = resp["result"].get("document")
+        if not doc_data:
+            return None
+
+        # Reconstruct VectorDocument
+        # Note: We don't get vectors back from 'get_document' in current Rust impl to save BW
+        # If we need them, we must update Rust 'get_document' to join chunks.
+        return VectorDocument(
+            doc_id=doc_data["id"],
+            text=doc_data["extracted_text"],
+            file_path=doc_data["path"],
+            metadata=doc_data.get("metadata", {}),
+            semantic_vec=[],
+            uet_vec=[],
+        )
+
+    def delete(self, doc_id: str) -> bool:
+        args = {"name": "delete_document", "arguments": {"doc_id": doc_id}}
+        resp = self._call_rpc("tools/call", args)
+        if "error" in resp or "result" not in resp:
+            return False
+        return resp["result"].get("success", False)
+
+    def count(self) -> int:
+        args = {"name": "count_documents", "arguments": {}}
+        resp = self._call_rpc("tools/call", args)
+        if "error" in resp or "result" not in resp:
+            return 0
+        return resp["result"].get("count", 0)
+
+    def list_topics(self) -> list[str]:
+        args = {"name": "list_topics", "arguments": {}}
+        resp = self._call_rpc("tools/call", args)
+        if "error" in resp or "result" not in resp:
+            return []
+        return resp["result"].get("topics", [])
 
 
 # =============================================================================

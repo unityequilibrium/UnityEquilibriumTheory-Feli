@@ -1,0 +1,2 @@
+step,time,omega,kinetic,potential,entropy,gradient_norm,max_density,min_density,is_stable,gradient_energy,entropy_interaction,nature_health,gini_estimate,capital_concentration
+1,0.001,15.026622435191497,0.0,15.026622435191497,0.0,0.0,100.0,0.001,True,0.0,0.0,0.0,4.115161919634188,0.07520181952904237

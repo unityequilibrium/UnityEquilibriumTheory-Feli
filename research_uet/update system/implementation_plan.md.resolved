@@ -1,0 +1,419 @@
+# UET Multi-Agent System: Rust & Docker Implementation Plan
+
+**Goal:** Transform the Python prototype into a high-performance **Rust + Docker** production system.
+**Status:** 🚀 **Active (Phase 5 Start)**
+
+## 📜 Roadmap Overview
+
+| Phase | Component | Tech Stack | Goal |
+|:------|:----------|:-----------|:-----|
+| **1-4**| Python Prototype | Python, SQLite | ✅ **Completed** (Proof of Concept) |
+| **5** | **Rust Core Engine** | Rust (`uet_core`) | ⚡ Port Physics Equations (Type-Safe) |
+| **6** | **Knowledge Base** | Rust (`uet_kb`) | 🗄️ Vector DB + MCP Server |
+| **7** | **Orchestration** | Docker Compose | 🐳 Containerize & Connect Agents |
+
+---
+
+## 🛠️ Detailed Implementation Plan (Active)
+
+### Phase 5: Rust Core Engine (`uet_core`) — The Physics 🧠
+*Goal: Create a pure Rust library that calculates $\Omega$, $\kappa$, $\beta$ with 100% precision.*
+
+#### 5.1 Project Initialization
+- [ ] `cargo new uet_core --lib`
+- [ ] Configure [Cargo.toml](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/Cargo.toml) (serde, uom, ndarray)
+- [ ] Set up `tests/` directory for TDD
+
+#### 5.2 Port Mathematical Domains (TDD Required)
+- [ ] **Field Theory:** Port `Field` struct (Tensor operations)
+- [ ] **Parameters:** Port $\kappa$ (Kappa), $\beta$ (Beta) calculation logic
+- [ ] **Master Equation:** Port `compute_omega(c, i)` integral
+- [ ] **Verification:**
+    - Create `tests/test_physics.rs`
+    - Compare output with Python `uet_master_equation.py` results to 1e-9 precision.
+
+---
+
+### Phase 6: Knowledge Base Server (`uet_kb`) — The Memory 🗄️
+*Goal: A high-performance, standalone Database Server that speaks MCP.*
+
+#### 6.1 Database Layer (Postgres)
+- [ ] Uses **Postgres + pgvector** (Production Grade)
+- [ ] Driver: `sqlx` (Async Rust)
+- [ ] Schema:
+    ```rust
+    struct DocumentChunk {
+        id: Uuid,
+        content: String,
+        uet_vector: UetVector, // From Phase 5
+        embedding: Vec<f32>,   // Semantic (optional)
+    }
+    ```
+
+#### 6.2 MCP Server Interface
+- [ ] Implement Model Context Protocol (MCP) in Rust.
+- [ ] Expose Tools:
+    - `search_knowledge_base(query: String)`
+    - [get_document(id: String)](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/uet_kb/src/db.rs#214-229)
+    - `add_document(content: String)`
+
+---
+
+### Phase 7: Docker Infrastructure — The System 🐳
+*Goal: "It works on my machine" -> "It works everywhere".*
+
+#### 7.1 Dockerfiles
+- [ ] **`Dockerfile.core`**: Multi-stage build for `uet_kb` (Binary size < 50MB).
+    - Base: `rust:alpine` -> Scratch/Distroless.
+- [ ] **`Dockerfile.orch`**: Python environment for Orchestrator (Dependencies minimized).
+
+#### 7.2 Docker Compose ([docker-compose.yml](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/docker-compose.yml))
+- [ ] Define Services:
+    - `uet-kb`: The Rust Database (Connects to Postgres)
+    - `postgres`: The Vector Database (pgvector/pgvector:pg16, Port 5433)
+    - `orchestrator`: The Python Logic (Connects to `uet-kb`)
+    - `math-agent`: DeepSeek R1 Container (Optional/API)
+- [ ] Network: `uet-net` (Internal isolation)
+- [ ] Volume: `uet-data` (Persistent vector storage)
+
+---
+
+## ✅ Legacy / Completed Work (Phase 1-4)
+*(Archived for Reference)*
+
+### Phase 1: Foundation — Project Structure & Config (Completed ✅)[NEW] [config.toml](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/config.toml)
+
+Central config — all API keys, model assignments, cost budgets in one place:
+
+```toml
+[openrouter]
+base_url = "https://openrouter.ai/api/v1"
+
+# === API Keys — แยกตาม function ===
+[openrouter.keys]
+# ถ้าใช้ key เดียว ใส่ที่ default แล้ว agent อ้าง key นี้
+default = "sk-or-v1-xxxx"     # <-- ใส่ key ตรงนี้
+
+# ถ้าอยากแยก key ต่อ agent (optional — เพื่อ track cost แยก)
+# embedding = "sk-or-v1-embed-xxxx"
+# orchestrator = "sk-or-v1-orch-xxxx"
+
+# === Model Assignment ต่อ Agent ===
+[agents.orchestrator]
+model = "qwen/qwen3-coder-next"
+key_name = "default"                  # ใช้ key ไหน
+max_tokens_per_call = 4096
+daily_budget_usd = 0.50               # budget limit
+
+[agents.local_data]
+model = "zhipu/glm-4.7-flash"
+key_name = "default"
+max_tokens_per_call = 2048
+daily_budget_usd = 0.20
+
+[agents.web_research]
+model = "deepseek/deepseek-v3.2"
+key_name = "default"
+max_tokens_per_call = 4096
+daily_budget_usd = 0.30
+
+[agents.equation_expert]
+model = "qwen/qwen3-30b-a3b:free"    # Free tier first
+key_name = "default"
+max_tokens_per_call = 4096
+daily_budget_usd = 0.00
+
+[agents.embedding]
+model = "qwen/qwen3-embedding-8b"
+key_name = "default"
+daily_budget_usd = 0.50               # สำหรับ batch embed
+
+# === Vector DB ===
+[vector_db]
+engine = "lancedb"                    # lancedb | sqlite_vss | qdrant
+path = "./knowledge_base/vectors"
+embedding_dim = 1024
+
+# === Cost Tracking ===
+[cost_tracking]
+log_file = "./knowledge_base/cost_log.jsonl"
+alert_threshold_usd = 1.00            # แจ้งเตือนเมื่อใช้เกิน
+```
+
+#### [NEW] [__init__.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/__init__.py)
+
+Package init — ว่าง
+
+#### [NEW] [api_client.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/api_client.py)
+
+OpenRouter API client พร้อม **cost tracking per agent**:
+
+```python
+class CostTracker:
+    """Track API costs per agent, per model, per day"""
+    # Logs every call to cost_log.jsonl:
+    # {"timestamp", "agent_id", "model", "input_tokens", "output_tokens",
+    #  "cost_usd", "cumulative_daily_usd"}
+    
+class OpenRouterClient:
+    """Unified OpenRouter client with agent-aware routing"""
+    def embed(self, texts: list[str]) -> list[list[float]]
+    def chat(self, agent_id: str, messages: list[dict]) -> str
+    # Each call auto-logs to CostTracker
+    # Respects daily_budget_usd per agent — raises BudgetExceeded if over
+```
+
+---
+
+### Phase 2: UET Tensorizer — Physics-derived Embeddings
+
+#### [NEW] [tensorizer.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/tensorizer.py)
+
+Per [01.md](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/v/01.md) design, using real UET engine:
+
+```python
+@dataclass
+class UetVector:
+    """Rust-compatible, serde-compatible"""
+    omega: float          # จาก uet_master_equation.compute_omega()
+    kappa: float          # จาก uet_parameters
+    beta: float           # coupling strength
+    entropy: float        # Shannon H ของเนื้อหา
+    axiom_signature: list[bool]  # len=12
+    topic_id: str
+    content_hash: bytes   # sha256, 32 bytes
+
+class UetTensorizer:
+    """Convert research files → UetVector using real UET engine"""
+    def __init__(self):
+        self.engine = UETMasterEquation(...)  # import from core
+    
+    def tensorize_file(self, filepath: Path) -> UetVector:
+        # 1. Read file content
+        # 2. Compute Ω, κ, β via uet_master_equation.py
+        # 3. Compute Shannon entropy H
+        # 4. Detect axiom references → 12-bit signature
+        # 5. Return UetVector
+```
+
+---
+
+### Phase 3: Hybrid Vector Store (Semantic + UET Physics)
+
+#### [NEW] [vector_store.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/vector_store.py)
+
+LanceDB embedded store:
+
+```python
+class HybridVectorStore:
+    """Semantic + UET physics vectors in LanceDB"""
+    
+    # Schema per record:
+    # | semantic_vec (1024d) | uet_vec (~20d) | metadata JSON |
+    
+    def insert(self, file_path, semantic_embed, uet_vector, metadata)
+    def search_semantic(self, query_embed, top_k=10)
+    def search_omega(self, target_omega_range, top_k=10)  # Ω-Search
+    def search_hybrid(self, query_embed, uet_params, alpha=0.7, top_k=10)
+```
+
+#### [NEW] [omega_search.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/omega_search.py)
+
+UET Ω-minimization search engine:
+
+```python
+class OmegaSearchEngine:
+    """Physics-informed similarity search"""
+    def compute_relevance(self, query_field, result_field) -> float:
+        omega_gap = self.engine.compute_omega(query_field, result_field)
+        return 1.0 / (1.0 + omega_gap)
+    
+    def search(self, query, filters=None) -> list[SearchResult]
+```
+
+---
+
+### Phase 4: Ingestion Pipeline
+
+#### [NEW] [ingest.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/ingest.py)
+
+Scan → tensorize → embed → store:
+
+```python
+class IngestionPipeline:
+    """Process research_uet/topics/ → LanceDB"""
+    def ingest_topic(self, topic_path: Path) -> int  # returns count
+    def ingest_all(self, dry_run=False) -> dict       # returns stats
+    # Supports: .py, .md, data_logs/*
+    # Chunks large files → multiple vectors
+```
+
+---
+
+### Phase 5: Cost Dashboard & Monitoring
+
+#### [NEW] [cost_dashboard.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/cost_dashboard.py)
+
+CLI tool to view costs:
+
+```
+$ python -m research_uet.knowledge_base.cost_dashboard
+
+╔══════════════════════════════════════════════════════════╗
+║              API Cost Report — 2026-02-11               ║
+╠══════════════════════════════════════════════════════════╣
+║ Agent          │ Model              │ Calls │ Cost USD  ║
+║────────────────┼────────────────────┼───────┼───────────║
+║ embedding      │ qwen3-embedding-8b │  450  │ $0.09     ║
+║ orchestrator   │ qwen3-coder-next   │   12  │ $0.03     ║
+║ local_data     │ glm-4.7-flash      │   28  │ $0.02     ║
+║ web_research   │ deepseek-v3.2      │    3  │ $0.04     ║
+║ equation_expert│ qwen3-30b (free)   │    8  │ $0.00     ║
+║────────────────┼────────────────────┼───────┼───────────║
+║ TOTAL          │                    │  501  │ $0.18     ║
+╚══════════════════════════════════════════════════════════╝
+```
+
+---
+
+## File Structure Summary
+
+```
+research_uet/knowledge_base/           # ← NEW directory
+├── __init__.py                         # Package init
+├── config.toml                         # API keys, models, budgets
+├── api_client.py                       # OpenRouter client + CostTracker
+├── tensorizer.py                       # UET physics → vectors
+├── vector_store.py                     # LanceDB hybrid store
+├── omega_search.py                     # Ω-minimization search
+├── ingest.py                           # Bulk ingestion pipeline
+├── cost_dashboard.py                   # Cost tracking CLI
+├── vectors/                            # LanceDB data (auto-created)
+└── cost_log.jsonl                      # Per-call cost log (auto-created)
+```
+
+---
+
+## Build Order (ทำทีละ module → test → discuss → ต่อ)
+
+| # | Module | Dependencies | Test Method |
+|:--|:-------|:-------------|:------------|
+| 1 | [config.toml](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/config.toml) + [__init__.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/agents/__init__.py) | None | Load & validate config |
+| 2 | [api_client.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/api_client.py) + [CostTracker](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/api_client.py#89-198) | config.toml | Unit test: mock API, verify cost log |
+| 3 | [tensorizer.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/tensorizer.py) | `core/uet_master_equation.py` | **Test with 1 file first → discuss** |
+| 4 | [vector_store.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/vector_store.py) | lancedb (pip install) | CRUD test with 10 vectors |
+| 5 | [omega_search.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/omega_search.py) | tensorizer + vector_store | Search test: "find κ > 0.5" |
+| 6 | [ingest.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/ingest.py) | all above | **Dry-run → report stats → discuss** |
+| 7 | [cost_dashboard.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/cost_dashboard.py) | cost_log.jsonl | Visual verification |
+
+> [!IMPORTANT]
+> **Rule from 00.md:** ทำทีละขั้น — สร้าง 1 module → ทดสอบ → คุย → แล้วค่อยต่อ
+
+---
+
+## Verification Plan
+
+### Automated Tests
+
+Each module gets a test file in `research_uet/knowledge_base/tests/`:
+
+1. **`test_api_client.py`** — Mock OpenRouter API, verify:
+   - Cost tracking writes correct JSONL
+   - Budget limits raise [BudgetExceeded](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/api_client.py#200-204)
+   - Agent routing uses correct model
+   ```
+   python -m pytest research_uet/knowledge_base/tests/test_api_client.py -v
+   ```
+
+2. **`test_tensorizer.py`** — Verify against real UET engine:
+   - Tensorize 1 file from `0.0_Grand_Unification/`
+   - Check Ω, κ, β are non-zero floats (not NaN)
+   - Check axiom_signature is 12-bit
+   - Check output is JSON-serializable (Rust-compatible)
+   ```
+   python -m pytest research_uet/knowledge_base/tests/test_tensorizer.py -v
+   ```
+
+3. **`test_vector_store.py`** — LanceDB CRUD:
+   - Insert 10 test vectors → search → verify ranking
+   - Hybrid search: semantic + Ω combined
+   ```
+   python -m pytest research_uet/knowledge_base/tests/test_vector_store.py -v
+   ```
+
+### Manual Verification (After Phase 6 ingestion)
+
+1. **Run cost dashboard** — User visually confirms per-agent cost breakdown
+2. **Test search** — User queries "find all topics related to Grand Unification" and verifies results make physics sense
+3. **Check cost_log.jsonl** — User opens file to verify each API call is logged with agent_id and cost
+
+### Pre-existing Tests
+
+Existing tests in [research_uet/core/test/](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/core/test/) confirm the UET engine works correctly:
+```
+python -m pytest research_uet/core/test/ -v
+```
+These must pass before tensorizer can delegate to the engine.
+
+---
+
+## Dependencies to Install
+
+```powershell
+pip install lancedb tomli httpx
+# lancedb: ~150 MB (Rust-native, embedded vector DB)
+# tomli: ~20 KB (TOML parser for Python < 3.11)
+# httpx: ~500 KB (async HTTP client for OpenRouter API)
+```
+
+**Total install size:** ~150 MB (well within 12.9 GB) ✅
+
+---
+
+### 🕰️ Chronological Archival Plan (UET History Refinement)
+
+As the theory evolves, older research and equation iterations will be archived in monthly subfolders to track progress over time.
+
+#### 📁 Target Directories
+- **`uet_history/equations/[YYYY-MM]/`**: Technical specifications, parameter iterations, and mathematical configurations.
+- **`uet_history/research/[YYYY-MM]/`**: Experimental logs, validation reports, and data audits.
+- **`uet_history/theory/[category]/`**: Only pure theoretical concepts and axiomatic definitions.
+
+#### 🛠️ Sorting Logic (PowerShell Automation)
+1. **Identify Date**: Extract date from filenames (e.g., [(2025.11.27)](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/vector_store.py#332-337)) or use file system creation dates.
+2. **Categorize**:
+   - **Research**: `*Report*`, `*Audit*`, `*Validation*`, `*Analysis*`, `*Experiment*`, `*R0-E*`.
+   - **Equations**: `*Equation*`, `*Formula*`, `*Symbol*`, `*Config*`, `*Template*`, `*∇*`.
+   - **Concepts**: Keep items like `Laws of Thermodynamics`, `Energy`, `Field`, `Axiom` in the `theory/` subdirectories.
+3. **Move**: Move files to their respective `[research|equations]/[YYYY-MM]/` paths.
+
+#### 📂 Archive Consolidation Plan
+To reduce root clutter, historical archives will be merged into a single tiered structure.
+
+- **`uet_history/archives/`**:
+  - `backups/`: Contains the `.zip` files from the original `archives` folder.
+  - `data_collections/`: Contains the dated subdirectories from `data_archive`.
+  - `logs/`: For any residual files from `development_history`.
+
+1. **Move Zips**: Relocate existing zips in `archives` to `archives/backups`.
+2. **Move Data**: Move all subfolders in `data_archive` to `archives/data_collections`.
+3. **Clean Up**: Remove empty `data_archive` and `development_history` folders.
+
+---
+
+### 🌌 Phase 8-10: The Universal Physics Platform
+*Goal: Evolve uet_core from a library into a global calculation service and dashboard.*
+
+#### 8.1 Universal Calculator (MCP)
+- **Concept:** Any AI or system can connect to `uet_kb/uet_core` via MCP to solve complex physics problems.
+- **Spec:** Define JSON-RPC 2.0 schemas for physical field inputs and $\Omega$-gap results.
+
+#### 8.2 Strategic Dashboard
+- **Scope:** 
+  - **API Metrics:** Costs (Phase 2 legacy) + Performance.
+  - **Physics Metrics:** Real-time state of the "Field" ($\Omega$, $\beta$, Coherence).
+  - **Agent State:** Current tasks, coordination logs, and reasoning steps.
+- **Tech:** React/Next.js (Frontend) + Rocket/Axum (Rust Backend) + WebSockets for real-time physics telemetry.
+
+#### 8.3 Simulation & Lab Lab
+- **Concept:** Integration with game engines or custom simulations for visual laboratory experiments.

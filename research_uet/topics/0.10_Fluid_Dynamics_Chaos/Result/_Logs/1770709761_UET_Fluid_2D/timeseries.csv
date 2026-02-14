@@ -1,0 +1,2 @@
+step,time,omega,kinetic,potential,entropy,gradient_norm,max_density,min_density,is_stable,gradient_energy,entropy_interaction,kinetic_energy,max_velocity
+0,0.001,0.002136455078125004,0.0,0.00014648437500000024,0.0,0.0,1.1,1.0,True,0.0020000000000000035,-1.0029296875000001e-05,10.240000000000018,0.8000000000000007

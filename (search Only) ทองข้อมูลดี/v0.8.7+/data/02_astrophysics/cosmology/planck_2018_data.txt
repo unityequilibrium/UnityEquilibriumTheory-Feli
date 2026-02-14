@@ -1,6 +1,0 @@
-Parameter,Value,Uncertainty,Unit,Source
-H0,67.4,0.5,km/s/Mpc,Planck2018
-Omega_Lambda,0.6847,0.0073,dimensionless,Planck2018
-Omega_Matter,0.3153,0.0073,dimensionless,Planck2018
-Lambda_Observed,1.1056e-52,0.0001e-52,m^-2,Calculated_from_Omega_L
-Vacuum_Density_rho_vac,5.97e-27,0.01e-27,kg/m^3,Planck2018

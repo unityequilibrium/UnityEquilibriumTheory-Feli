@@ -1,0 +1,4 @@
+step,time,omega,kinetic,potential,entropy,gradient_norm,max_density,min_density,is_stable,gradient_energy,entropy_interaction
+0,1.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,True,0.0,0.0
+1,2.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,True,0.0,0.0
+2,3.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,True,0.0,0.0

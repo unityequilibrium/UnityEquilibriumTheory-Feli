@@ -1,0 +1,3 @@
+step,time,omega,kinetic,potential,entropy,gradient_norm,max_density,min_density,is_stable
+1,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,True
+2,2.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,True

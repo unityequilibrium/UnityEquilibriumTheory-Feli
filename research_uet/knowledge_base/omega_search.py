@@ -203,6 +203,7 @@ class OmegaSearch:
 
             results.append(
                 {
+                    "doc": candidate.doc,  # Add full document object
                     "doc_id": candidate.doc.doc_id,
                     "topic_id": candidate.doc.topic_id,
                     "file_path": candidate.doc.file_path,
@@ -263,6 +264,14 @@ class OmegaSearch:
 
     def _reconstruct_uet_vector(self, doc: VectorDocument) -> UetVector:
         """Reconstruct a UetVector from VectorDocument metadata."""
+        # Parse axiom_signature from JSON string stored in VectorDocument
+        import json as _json
+
+        try:
+            axiom_sig = _json.loads(doc.axiom_signature) if doc.axiom_signature else [False] * 12
+        except (ValueError, TypeError):
+            axiom_sig = [False] * 12
+
         return UetVector(
             omega=doc.omega,
             kappa=doc.kappa,
@@ -270,7 +279,7 @@ class OmegaSearch:
             alpha=1.0,  # Default if not stored
             gamma=0.025,  # Default if not stored
             entropy=doc.entropy,
-            axiom_signature=[False] * 12,  # Not stored in VectorDocument
+            axiom_signature=axiom_sig,
             topic_id=doc.topic_id,
             topic_number=doc.topic_number,
             file_path=doc.file_path,
@@ -345,7 +354,7 @@ if __name__ == "__main__":
             print(engine.explain_match(r))
             print()
         assert (
-            results[0]["topic_number"] == "0.1" or results[0]["doc_id"] == "doc_0"
+            results[0]["doc_id"] == "doc_0"
         ), "Astrophysical doc should rank highest for galaxy query"
 
         # Test: Search for electroweak

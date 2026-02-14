@@ -1,0 +1,5 @@
+step,time,omega,kinetic,potential,entropy,gradient_norm,max_density,min_density,is_stable,gradient_energy,entropy_interaction,thought_entropy,evidence_count
+0,1.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,True,0.0,0.0,1.0,100
+1,2.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,True,0.0,0.0,3.118905072394924,100
+2,3.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,True,0.0,0.0,3.118905072394924,100
+3,4.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,True,0.0,0.0,3.118905072394924,100

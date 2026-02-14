@@ -2,8 +2,8 @@
   "run_id": "03_Research",
   "simulation": "Research_P_vs_NP_Scaling",
   "status": "COMPLETED",
-  "timestamp": "Tue Feb 10 19:00:05 2026",
-  "duration_seconds": 0.35249853134155273,
+  "timestamp": "Thu Feb 12 11:30:25 2026",
+  "duration_seconds": 0.5442993640899658,
   "total_steps": 16,
   "metadata": {
     "topic": "0.18_Mathnicry",
@@ -13,7 +13,7 @@
   },
   "final_state": {
     "step": 2,
-    "time": 0.0030095577239990234,
+    "time": 0.001361846923828125,
     "omega": 4.440892098500626e-16,
     "kinetic": 1.0,
     "potential": 0.0,

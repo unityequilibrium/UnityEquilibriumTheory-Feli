@@ -1,0 +1,4 @@
+ Container uet_postgres  Running
+MCP Server Running... (Listening on Stdin)
+Received: {"jsonrpc": "2.0", "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "debug-script", "version": "1.0"}}, "id": 1}
+Received: {"jsonrpc": "2.0", "method": "tools/list", "id": 2}

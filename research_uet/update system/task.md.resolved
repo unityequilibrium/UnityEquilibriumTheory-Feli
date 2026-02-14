@@ -1,0 +1,110 @@
+# UET Multi-Agent RAG — Task Checklist
+
+## Phase 1: Research & Analysis ✅
+- [x] Study architecture, embeddings, failure lessons, tensorizer design
+- [x] Write [implementation_plan.md](file:///c:/Users/santa/.gemini/antigravity/brain/f900b088-337e-4f4a-87e4-d544ef501d6b/implementation_plan.md)
+
+## Phase 2: Implementation ✅ (7/7 modules)
+- [x] [config.toml](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/config.toml) + [__init__.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/agents/__init__.py) (lazy imports)
+- [x] [api_client.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/api_client.py) + CostTracker — 3/3 tests ✅
+- [x] [tensorizer.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/tensorizer.py) — 3/3 tests ✅
+- [x] [vector_store.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/vector_store.py) (SQLite + LanceDB) — 9/9 tests ✅
+- [x] [omega_search.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/omega_search.py) — 4/4 tests ✅
+- [x] [ingest.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/ingest.py) — dry-run + full ingestion + chunking ✅
+- [x] [cost_dashboard.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/cost_dashboard.py) ✅
+
+## Phase 3: Verification ✅
+- [x] Dry-run: 32 topics, 9,139 files, 0 errors
+- [x] Full ingestion: **19,430 documents**, 0 errors
+- [x] **Ω-Search live test**: 100% Axiom overlap, correct topic ranking
+- [x] API Integration: Keys configured, client ready
+
+## Phase 4: Multi-Agent System ✅
+- [x] **Agent Foundation**
+    - [x] `research_uet/agents/` structure & [__init__.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/agents/__init__.py)
+    - [x] [base_agent.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/agents/base_agent.py) (Interface + connection to `api_client`)
+- [x] **Research Agent** (RAG)
+    - [x] [research_agent.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/agents/research_agent.py) (Uses `OmegaSearch` + LLM synthesis)
+    - [x] Tool: `search_knowledge_base`
+- [x] **Orchestrator Agent** (Router)
+    - [x] [orchestrator.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/agents/orchestrator.py) (Routes to Research/Math/Chat)
+- [x] **CLI Interface**
+    - [x] [main.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/agents/main.py) (Interactive chat loop)
+
+## Phase 5: Rust Core Engine (`uet_core`) (Active)
+- [x] **Project Setup**
+    - [x] `cargo new uet_core`
+    - [x] Config [Cargo.toml](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/Cargo.toml) (uom, ndarray)
+- [x] **Physics Port**
+    - [x] `Field` struct
+    - [x] `compute_omega(c, i)` logic
+    - [x] Test verification against Python
+
+## Phase 6: Knowledge Base (`uet_kb`)
+- [x] **Database Layer**
+    - [x] Create `uet_kb` + Config Workspace
+    - [x] Integrate `uet_core` as dependency
+    - [x] Initial SQLite Prototype (Deprecated in favor of Postgres)
+    - [x] **Refactor to Postgres**
+        - [x] Switch `rusqlite` -> `sqlx`
+        - [x] Implement `pgvector` schema ([db.rs](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/uet_kb/src/db.rs))
+- [x] **MCP Server**
+    - [x] Add `serde_json` & I/O logic
+    - [x] Implement [mcp.rs](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/uet_kb/src/mcp.rs) (JSON-RPC 2.0 Loop)
+    - [x] Define Tools:
+        - [x] `search_knowledge_base` (Vector Search)
+        - [x] `ingest_document` (Add to DB)
+    - [x] Integrate [serve](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/vector_store.py#505-531) command in `main.rs`
+
+## Phase 7: Docker Infrastructure
+- [x] **Docker Infrastructure**
+    - [x] Write [Dockerfile](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/Dockerfile) (Multi-stage build)
+    - [x] Write [docker-compose.yml](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/docker-compose.yml) (Postgres + KB)
+    - [x] Test Build & Run (Verified on User Machine))
+- [x] **Orchestration**
+    - [x] Build & Test (Requires Docker Desktop) -> **Verified**
+    - [x] MCP Connection -> **Verified**
+
+### Phase 8: Tower 4 & 5 Implementation (Knowledge & Data Layer)
+> **Ref:** [00__UET_Platform_Master_Blueprint.md](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/uet_history/documents/00__UET_Platform_Master_Blueprint.md) - Implementing the KS/RAG Engine Backbone
+- [ ] Update postgres schema (if needed) and rebuild docker
+- [x] Implement [get](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/vector_store.py#332-337), [delete](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/vector_store.py#246-249), [count](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/vector_store.py#250-253), [list_topics](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/vector_store.py#352-357) in Rust MCP
+- [x] Update [vector_store.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/vector_store.py) to use full MCP CRUD features
+- [x] Rebuild and restart Docker container
+- [x] Re-run [migrate_to_postgres.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/migrate_to_postgres.py) to restore data (Volume was pruned)
+- [ ] Volume: `uet-data` (Persistent vector storage)
+
+## Phase 9: Marketing Agent Integration (New)
+- [x] Create `MarketingAgent.py` based on `openclaw-marketing/skills`
+- [x] Implement `social-cli-mcp` or [moltbook_poster.py](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/openclaw-marketing/scripts/moltbook_poster.py) as tools (Implemented as internal methods)
+- [x] Configure [config.toml](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/research_uet/knowledge_base/config.toml) for Marketing Agent (Model, Budget)
+- [x] Integrate Marketing Agent into Orchestrator
+- [x] **Refactor**: Move agents to top-level `uet_agents/` directory & Standardize README ✅
+
+## Phase 10: Validation & Stress Testing
+- [ ] Implement `test_agents.py` suite
+- [ ] Verify cost tracking accuracy
+
+## Phase 11: Theory Re-organization & Refinement (Active)
+- [x] Create `research` and `theory` directory structure
+- [x] Mirror `plan` structure in `uet_history/theory`
+- [x] Move research-oriented files (`0.x_only.md`) to `research`
+- [x] Categorize basic axiom files into `00_foundation`
+- [x] Refine the theory structure:
+    - [x] Map `UET_Merged_2025-11-27_Theory.md` contents (Reference only)
+    - [x] Organize individual theory files from `development_history` into category subdirectories
+    - [x] **Refine chronological archival**:
+        - [x] Move pure concepts back to `theory/0x_...`
+        - [x] Move developmental history to `research/[YYYY-MM]`
+        - [x] Move mathematical iterations to `equations/[YYYY-MM]`
+    - [x] **Consolidate history folders**:
+        - [x] Merge `archives`, `data_archive`, and `development_history` into `archives/`
+        - [x] Organize as `archives/backups/` and `archives/data_collections/`
+    - [x] Move obsolete files to `uet_history/obsolete/`
+    - [x] Document the new organization in `uet_history/README.md`
+## Phase 12: Universal Platform Vision & Design Update (Active)
+- [x] Synthesize legacy designs from `uet_history/software_design`
+- [x] Draft "Universal Physics Calculator" platform spec
+- [ ] Design MCP interface for external AI connectivity to `uet_core`
+- [ ] Plan Multi-level Dashboard (API, Physics, System State)
+- [/] Update software design documentation to v5.0

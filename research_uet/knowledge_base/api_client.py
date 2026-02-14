@@ -65,6 +65,8 @@ _MODEL_PRICING = {
     "deepseek/deepseek-v3.2": {"input": 0.25, "output": 0.38},
     "qwen/qwen3-30b-a3b:free": {"input": 0.0, "output": 0.0},
     "mistral/devstral-2": {"input": 0.05, "output": 0.22},
+    # Marketing Agent
+    "google/gemini-2.0-flash-001": {"input": 0.10, "output": 0.40},
 }
 
 

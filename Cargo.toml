@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "uet_core",
+    "uet_kb",
+]
+resolver = "2"

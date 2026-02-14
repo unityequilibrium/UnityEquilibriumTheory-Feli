@@ -1,0 +1,32 @@
+
+
+services:
+  # === The Brain (API Server) ===
+  uet_kb:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: uet_kb:latest
+    container_name: uet_kb_server
+    depends_on:
+      - postgres
+    environment:
+      - RUST_LOG=info
+    # Override default localhost with docker service name 'postgres'
+    command: ["uet_kb", "--db-url", "postgres://postgres:postgres@postgres:5432/uet_kb", "init-db"]
+    
+  # === The Memory (Database) ===
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: uet_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: uet_kb
+    ports:
+      - "5433:5432" # Expose to host for local dev/testing
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

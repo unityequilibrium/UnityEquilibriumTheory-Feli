@@ -1,5 +1,0 @@
-Telescope,Method,H0,Uncertainty,Omega_Lambda,Source
-Planck_2018,CMB_Power_Spectrum,67.4,0.5,0.6847,Planck_Collab_VI
-Hubble_HST,SH0ES_Cepheids,73.04,1.04,0.70,Riess_et_al_2022
-JWST_2024,TRGB_JAGB_calibration,69.8,1.7,0.69,Freedman_et_al_2024
-UET_Prediction,Holographic_Theory,?,0.0,0.6847,UET_Core_Eq

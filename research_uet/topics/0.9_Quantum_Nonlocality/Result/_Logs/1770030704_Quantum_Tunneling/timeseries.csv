@@ -1,0 +1,2 @@
+step,time,omega,kinetic,potential,entropy,gradient_norm,max_density,min_density,is_stable,gradient_energy,entropy_interaction,mode,metric_val,violation
+0,0.001,1.1664801206080824,0.0,1.1664801206080824,0.0,0.0,9.99880071896471,0.0,True,0.0,0.0,tunneling,9.99880071896471,False
