@@ -40,6 +40,20 @@ graph LR
 ---
 
 ## 3. 🔬 Implementation & Code (การทำงานของโค้ด)
+
+### 3.1 Algorithm Flow
+1. **Step 1:** Initialize micro-singularity mass $M_{singularity}$ and position
+2. **Step 2:** Calculate Hawking decay time: $t_{decay} = 5120\pi G^2 M^2 / \hbar c^4$
+3. **Step 3:** Compute gravitational gradient: $\nabla \Phi = -GM/r^2$
+4. **Step 4:** Integrate momentum gain: $\Delta V = \int \nabla \Phi dt$ during safe window
+
+### 3.2 Key Variables
+*   `$M_{singularity}$`: Micro-black hole mass (100-ton class)
+*   `$t_{decay}$`: Hawking radiation evaporation time
+*   `$\nabla \Phi$`: Gravitational gradient field
+*   `$\Delta V$`: Velocity change from slingshot
+*   `$d_{safe}$`: Minimum safe distance (1.5x Hawking radius)
+
 *   **Engine_Slingshot_v2.py:** Models the relativistic Doppler-shift and the "Landing" phase (deceleration).
 *   **Proof_01_LightSpeed_Approach.py:** Verifies structural stability under high tidal forces.
 
@@ -53,10 +67,29 @@ graph LR
 | **Safety Margin** | **1.5x Hawking Distance** | > 1.2x | ✅ |
 | **Fuel Mass** | **0 kg** | 0.0 kg | ✅ |
 
+> **Graph/Visual:**
+> [Slingshot Trajectory Plot]
+>
+> **⚠️ Output Standard (การบันทึกไฟล์):**
+> *   **Social Media/Highlight:** `Result/01_Showcase/` (ใช้ `category="showcase"`)
+> *   **Technical Plots:** `Result/02_Figures/` (ใช้ `category="figures"`)
+> *   **Raw Logs:** `Result/_Logs/` (ใช้ `category="log"`)
+
 ---
 
 ## 5. 🧠 Discussion & Analysis (วิเคราะห์ผลเชิงลึก)
-The key insight is the **Synchronization (Logic 0.31.2)**. By synchronizing the ship's local time-gradient with the singularity's decay, we avoid the time-dilation traps and tidal spaghettification.
+
+### 5.1 Why it works? (ทำไมถึงสำเร็จ?)
+The key insight is the **Synchronization (Logic 0.31.2)**. By synchronizing the ship's local time-gradient with the singularity's decay, we avoid the time-dilation traps and tidal spaghettification. The ship doesn't "push" itself; it "slides" down the extreme gravitational gradient produced by a micro-singularity, which evaporates via Hawking radiation before it can swallow the ship.
+
+### 5.2 Limitation (ข้อจำกัด)
+*   **Timing Precision:** Requires nanosecond-level synchronization with Hawking decay
+*   **Singularity Creation:** Generating 100-ton class micro-black holes is technically challenging
+*   **Radiation Safety:** Must ensure complete evaporation before ship passage
+
+### 5.3 Connection to "Value" (เชื่อมโยงกับเรื่องคุณค่า)
+*   **Does this reduce $\Omega$?** Yes - Achieves relativistic velocities without fuel mass, minimizing entropy cost
+*   **Implication:** SGS is the only path to the stars that respects the Laws of Thermodynamics
 
 ---
 

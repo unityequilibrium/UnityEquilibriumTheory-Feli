@@ -39,6 +39,20 @@ graph LR
 ---
 
 ## 3. 🔬 Implementation & Code (การทำงานของโค้ด)
+
+### 3.1 Algorithm Flow
+1. **Step 1:** Load baryonic mass distribution $\rho(r)$ from SPARC data
+2. **Step 2:** Compute information field potential: $V_{info} = \alpha \cdot V_{baryonic}$
+3. **Step 3:** Calculate velocity: $v(r) = \sqrt{r \cdot (V_{baryonic} + V_{info})}$
+4. **Step 4:** Compare with observed velocities and compute error metrics
+
+### 3.2 Key Variables
+*   `$\rho(r)$`: Baryonic mass density profile
+*   `$V_{baryonic}$`: Newtonian potential from visible matter
+*   `$\alpha$`: Information coupling coefficient (derived from Axiom 3)
+*   `$V_{info}$`: Additional potential from information field
+*   `$v(r)$`: Predicted rotational velocity
+
 *   **Engine_Galaxy_V3.py:** Axiomatic solver implementing the damped Alpha-Law (v3.3).
 *   **Research_Galaxy_Rotation.py:** Parallelized benchmark on 154 SPARC cases.
 
@@ -52,10 +66,29 @@ graph LR
 | **Dwarf Galaxy Fit** | **PASS** | $V_{error} < 5 km/s$ | ✅ |
 | **Zero Tuning Check** | **Verified** | No free parameters | ✅ |
 
+> **Graph/Visual:**
+> [Rotation Curve Comparison Plot]
+>
+> **⚠️ Output Standard (การบันทึกไฟล์):**
+> *   **Social Media/Highlight:** `Result/01_Showcase/` (ใช้ `category="showcase"`)
+> *   **Technical Plots:** `Result/02_Figures/` (ใช้ `category="figures"`)
+> *   **Raw Logs:** `Result/_Logs/` (ใช้ `category="log"`)
+
 ---
 
 ## 5. 🧠 Discussion & Analysis (วิเคราะห์ผลเชิงลึก)
-The success of UET on Topic 0.1 proves that the "Missing Mass" is an illusion caused by using a scale-invariant gravitational constant ($G$) in a scale-dependent universe.
+
+### 5.1 Why it works? (ทำไมถึงสำเร็จ?)
+The success of UET on Topic 0.1 proves that the "Missing Mass" is an illusion caused by using a scale-invariant gravitational constant ($G$) in a scale-dependent universe. At low densities, information coupling increases, creating additional acceleration without new particles.
+
+### 5.2 Limitation (ข้อจำกัด)
+*   **High Density:** At very high densities (galactic cores), the model may need relativistic corrections
+*   **Dwarf Galaxies:** Some dwarf galaxies show deviations that need further study
+*   **Alternative Models:** MOND and other models also fit data but require different assumptions
+
+### 5.3 Connection to "Value" (เชื่อมโยงกับเรื่องคุณค่า)
+*   **Does this reduce $\Omega$?** Yes - Eliminates need for dark matter particles, reduces model complexity
+*   **Implication:** Gravity is scale-dependent, not constant across all densities
 
 ---
 

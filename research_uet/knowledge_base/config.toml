@@ -1,0 +1,108 @@
+# =============================================================================
+# UET Knowledge Base — Central Configuration (TEMPLATE)
+# =============================================================================
+# This is a TEMPLATE file. DO NOT commit real API keys to version control.
+# Copy this file to config.toml and fill in your keys.
+#
+# SECURITY: 
+# - config.toml is in .gitignore and will NOT be committed
+# - Use environment variables for extra security: OPENROUTER_KEY_*
+# =============================================================================
+
+[openrouter]
+base_url = "https://openrouter.ai/api/v1"
+
+# === API Keys ===
+# Use one key for everything, or separate keys per agent to track costs
+# independently on the OpenRouter dashboard.
+#
+# Options:
+# 1) Set keys in this file (config.toml - local only, not committed)
+# 2) Set environment variables: OPENROUTER_KEY_DEFAULT, OPENROUTER_KEY_ORCHESTRATOR, etc.
+# 3) Mix both (env vars override file)
+#
+[openrouter.keys]
+# Default key (used if no agent-specific key is set)
+# default = "sk-or-v1-CHANGEME"
+
+# Agent-specific keys (optional - for cost tracking)
+embedding = "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"
+orchestrator = "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"
+local_data = "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"
+web_research = "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"
+equation_expert = "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"
+openclaw-marketing = "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"
+
+# =============================================================================
+# AGENT CONFIGURATIONS
+# =============================================================================
+# Each agent has: model, key_name (which key to use), budget limits
+
+[agents.orchestrator]
+model = "google/gemini-2.0-flash-001"
+key_name = "orchestrator"
+max_tokens_per_call = 4096
+daily_budget_usd = 0.50
+description = "Routes user queries to specialized agents"
+
+[agents.local_data]
+model = "google/gemini-2.0-flash-001"
+key_name = "local_data"
+max_tokens_per_call = 2048
+daily_budget_usd = 0.20
+description = "Searches local research data via MCP"
+
+[agents.web_research]
+model = "google/gemini-2.0-flash-001"
+key_name = "web_research"
+max_tokens_per_call = 4096
+daily_budget_usd = 0.30
+description = "Deep web research and reasoning"
+
+[agents.marketing]
+model = "google/gemini-2.0-flash-001"
+key_name = "openclaw-marketing"
+max_tokens_per_call = 4096
+daily_budget_usd = 0.50
+description = "Social media marketing and outreach"
+
+[agents.equation_expert]
+model = "deepseek/deepseek-r1"
+key_name = "equation_expert"
+max_tokens_per_call = 4096
+daily_budget_usd = 0.00
+description = "Math and equation analysis (free tier)"
+
+[agents.embedding]
+model = "qwen/qwen3-embedding-8b"
+key_name = "embedding"
+daily_budget_usd = 0.50
+description = "Text → vector embeddings for search"
+
+# =============================================================================
+# VECTOR DATABASE
+# =============================================================================
+
+[vector_db]
+engine = "lancedb"                          # lancedb | sqlite_vss | qdrant
+path = "research_uet/knowledge_base/vectors"           # Relative to research_uet/
+embedding_dim = 1024                        # Semantic embedding dimensions
+uet_vector_dim = 20                         # UET physics vector dimensions
+
+# =============================================================================
+# COST TRACKING
+# =============================================================================
+
+[cost_tracking]
+log_file = "research_uet/knowledge_base/cost_log.jsonl"  # Per-call cost log
+alert_threshold_usd = 1.00                    # Alert when daily total exceeds this
+retention_days = 90                            # Keep logs for N days
+
+# =============================================================================
+# UET TENSORIZER
+# =============================================================================
+
+[tensorizer]
+grid_size = 64                              # Grid resolution for C/I fields
+default_scale = "general"                   # Fallback scale for unknown topics
+axiom_count = 12                            # Number of UET axioms

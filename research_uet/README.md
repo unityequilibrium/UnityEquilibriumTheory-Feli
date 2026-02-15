@@ -11,7 +11,7 @@
 
 ## 🛡️ The "Triple-Green" Standard (v0.9.0)
 
-To ensure this framework remains robust, we enforce a strict standard across all 20+ topics:
+To ensure this framework remains robust, we enforce a strict standard across all 31 topics:
 
 1.  **[Pass Rate: 100%]**: Every script runs and validates against real data.
 2.  **[Architecture: 5x4]**: Every folder follows the Logic/Evidence/Narrative/Citation/Proof grid.
@@ -55,7 +55,7 @@ Navigation guide for the `research_uet/` ecosystem:
 
 ### 2. The Evidence (`/topics`)
 *   **Path**: [`research_uet/topics/`](./topics/)
-*   **Purpose**: The **25 Research Domains** (Galaxy Rotation, AI, Economics, etc.).
+*   **Purpose**: The **31 Research Domains** (Galaxy Rotation, AI, Economics, etc.).
 *   **Architecture**: Follows the [Platinum Standard](./topics/Work/how%20to%20README.md).
 
 ### 3. The Documentation (`/docs`)

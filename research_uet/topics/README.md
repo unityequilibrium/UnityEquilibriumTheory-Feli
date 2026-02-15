@@ -1,6 +1,6 @@
-# 🔬 UET Research Topics: The 27 Pillars of Truth
+# 🔬 UET Research Topics: The 31 Pillars of Truth
 
-![Status](https://img.shields.io/badge/Topics-27_Master-blue)
+![Status](https://img.shields.io/badge/Topics-31_Master-blue)
 ![Tests](https://img.shields.io/badge/Verification-150+_Scripts-green)
 ![Coverage](https://img.shields.io/badge/Physics-Unified-purple)
 
@@ -15,7 +15,7 @@
 
 ---
 
-## 🌟 The Master Index (27 Domains)
+## 🌟 The Master Index (31 Domains)
 
 We categorize our research into **3 Impact Zones**:
 
@@ -24,6 +24,7 @@ We categorize our research into **3 Impact Zones**:
 
 | ID | Topic Name | The Problem | UET Solution | Status |
 |:---|:-----------|:------------|:-------------|:-------|
+| [0.0](0.0_Grand_Unification/) | **Grand Unification** | Theory of Everything | Master Equation Framework | ✅ |
 | [0.10](0.10_Fluid_Dynamics_Chaos/) | **Fluid Dynamics** | Navier-Stokes smoothness | Smoothness on 4D Manifold | ✅ |
 | [0.21](0.21_Yang_Mills_Mass_Gap/) | **Yang-Mills** | Mass Gap existence | Information Saturation Limit | ✅ |
 | [0.18](0.18_Mathnicry/) | **Mathnicry** | P vs NP / Riemann | Manifold Connectivity Opt. | ✅ |
@@ -64,6 +65,9 @@ We categorize our research into **3 Impact Zones**:
 | [0.15](0.15_Cluster_Dynamics/) | **Cluster Dynamics** | Missing Baryons | Virial Mod | ✅ |
 | [0.27](0.27_Cold_Light_Hologram/) | **Cold Light (Hologram)** | Stopping Light (Entropy) | Geometric Resonance Lock | ✅ |
 | [0.28](0.28_Material_Synthesis/) | **Material Synthesis** | Graphene Defects | Acoustic Guidance Field | ✅ |
+| [0.29](0.29_Ocean_Recovery/) | **Ocean Recovery** | Ocean Acidification | Graphene Ocean Shield | ✅ |
+| [0.30](0.30_Mega_Flora_Biotech/) | **Mega Flora Biotech** | Agricultural Yield | Acoustic Nutrient Delivery | ✅ |
+| [0.31](0.31_SpaceTime_Propulsion/) | **SpaceTime Propulsion** | Interstellar Travel | Relativistic Slingshot | ✅ |
 
 ---
 

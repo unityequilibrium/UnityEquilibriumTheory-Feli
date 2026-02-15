@@ -1,0 +1,108 @@
+# =============================================================================
+# UET Knowledge Base — Central Configuration (TEMPLATE)
+# =============================================================================
+# This is a TEMPLATE file. DO NOT commit real API keys to version control.
+# Copy this file to config.toml and fill in your keys.
+#
+# SECURITY: 
+# - config.toml is in .gitignore and will NOT be committed
+# - Use environment variables for extra security: OPENROUTER_KEY_*
+# =============================================================================
+
+[openrouter]
+base_url = "https://openrouter.ai/api/v1"
+
+# === API Keys ===
+# Use one key for everything, or separate keys per agent to track costs
+# independently on the OpenRouter dashboard.
+#
+# Options:
+# 1) Set keys in this file (config.toml - local only, not committed)
+# 2) Set environment variables: OPENROUTER_KEY_DEFAULT, OPENROUTER_KEY_ORCHESTRATOR, etc.
+# 3) Mix both (env vars override file)
+#
+[openrouter.keys]
+# Default key (used if no agent-specific key is set)
+default = "sk-or-v1-CHANGEME"
+
+# Agent-specific keys (optional - for cost tracking)
+# embedding = "sk-or-v1-CHANGEME"
+# orchestrator = "sk-or-v1-CHANGEME"
+# local_data = "sk-or-v1-CHANGEME"
+# web_research = "sk-or-v1-CHANGEME"
+# equation_expert = "sk-or-v1-CHANGEME"
+# openclaw-marketing = "sk-or-v1-CHANGEME"
+
+# =============================================================================
+# AGENT CONFIGURATIONS
+# =============================================================================
+# Each agent has: model, key_name (which key to use), budget limits
+
+[agents.orchestrator]
+model = "google/gemini-2.0-flash-001"
+key_name = "orchestrator"
+max_tokens_per_call = 4096
+daily_budget_usd = 0.50
+description = "Routes user queries to specialized agents"
+
+[agents.local_data]
+model = "google/gemini-2.0-flash-001"
+key_name = "local_data"
+max_tokens_per_call = 2048
+daily_budget_usd = 0.20
+description = "Searches local research data via MCP"
+
+[agents.web_research]
+model = "google/gemini-2.0-flash-001"
+key_name = "web_research"
+max_tokens_per_call = 4096
+daily_budget_usd = 0.30
+description = "Deep web research and reasoning"
+
+[agents.marketing]
+model = "google/gemini-2.0-flash-001"
+key_name = "openclaw-marketing"
+max_tokens_per_call = 4096
+daily_budget_usd = 0.50
+description = "Social media marketing and outreach"
+
+[agents.equation_expert]
+model = "deepseek/deepseek-r1"
+key_name = "equation_expert"
+max_tokens_per_call = 4096
+daily_budget_usd = 0.00
+description = "Math and equation analysis (free tier)"
+
+[agents.embedding]
+model = "qwen/qwen3-embedding-8b"
+key_name = "embedding"
+daily_budget_usd = 0.50
+description = "Text → vector embeddings for search"
+
+# =============================================================================
+# VECTOR DATABASE
+# =============================================================================
+
+[vector_db]
+engine = "lancedb"                          # lancedb | sqlite_vss | qdrant
+path = "research_uet/knowledge_base/vectors"           # Relative to research_uet/
+embedding_dim = 1024                        # Semantic embedding dimensions
+uet_vector_dim = 20                         # UET physics vector dimensions
+
+# =============================================================================
+# COST TRACKING
+# =============================================================================
+
+[cost_tracking]
+log_file = "research_uet/knowledge_base/cost_log.jsonl"  # Per-call cost log
+alert_threshold_usd = 1.00                    # Alert when daily total exceeds this
+retention_days = 90                            # Keep logs for N days
+
+# =============================================================================
+# UET TENSORIZER
+# =============================================================================
+
+[tensorizer]
+grid_size = 64                              # Grid resolution for C/I fields
+default_scale = "general"                   # Fallback scale for unknown topics
+axiom_count = 12                            # Number of UET axioms
