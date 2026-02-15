@@ -232,7 +232,7 @@ Where:
 │  816x faster fluid simulation, no dark matter needed      │
 │                                                            │
 │  🔗 THE LINK                                               │
-│  github.com/unityequilibrium/Equation-UET-v0.9.0          │
+│  github.com/unityequilibrium/UnityEquilibriumTheory          │
 │                                                            │
 └────────────────────────────────────────────────────────────┘
 ```

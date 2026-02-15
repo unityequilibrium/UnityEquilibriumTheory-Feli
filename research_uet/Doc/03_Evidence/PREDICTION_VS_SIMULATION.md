@@ -150,7 +150,7 @@ UET ถูกออกแบบมาเพื่อถามว่า:
 2. **การจำลองดีกว่าการทำนายจริงไหม?**
 3. **วิทยาศาสตร์ควรมุ่งเน้นที่อะไร — รู้อนาคต หรือ เตรียมพร้อมสำหรับอนาคต?**
 
-> แสดงความคิดเห็นได้ที่: [GitHub Issues](https://github.com/unityequilibrium/Equation-UET-v0.9.0/issues)
+> แสดงความคิดเห็นได้ที่: [GitHub Issues](https://github.com/unityequilibrium/UnityEquilibriumTheory/issues)
 
 ---
 

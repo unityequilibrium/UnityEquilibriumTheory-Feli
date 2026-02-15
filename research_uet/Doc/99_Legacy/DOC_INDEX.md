@@ -158,7 +158,7 @@ $$\Omega[C,I] = \int \left[ V(C) + \frac{\kappa}{2}|\nabla C|^2 + \beta C I \rig
 
 | Resource | URL |
 |:---------|:----|
-| **GitHub** | [github.com/unityequilibrium/Equation-UET-v0.8.7](https://github.com/unityequilibrium/Equation-UET-v0.8.7) |
+| **GitHub** | [github.com/unityequilibrium/UnityEquilibriumTheory](https://github.com/unityequilibrium/UnityEquilibriumTheory) |
 | **SPARC Data** | [astroweb.cwru.edu/SPARC](http://astroweb.cwru.edu/SPARC/) |
 | **NIST ASD** | [physics.nist.gov/asd](https://physics.nist.gov/asd) |
 

@@ -238,7 +238,7 @@ UET isn't finished. We're honest about what we don't know:
 
 This is open source. Every test, every data source, every line of code.
 
-**GitHub:** [github.com/unityequilibrium/Equation-UET-v0.9.0](https://github.com/unityequilibrium/Equation-UET-v0.9.0)
+**GitHub:** [github.com/unityequilibrium/UnityEquilibriumTheory](https://github.com/unityequilibrium/UnityEquilibriumTheory)
 
 Run the tests yourself. Challenge it. Break it. That's how science works.
 

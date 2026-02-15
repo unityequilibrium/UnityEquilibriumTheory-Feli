@@ -327,7 +327,7 @@ graph LR
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
-**🔗 GitHub:** [github.com/unityequilibrium/Equation-UET-v0.9.0](https://github.com/unityequilibrium/Equation-UET-v0.9.0)
+**🔗 GitHub:** [github.com/unityequilibrium/UnityEquilibriumTheory](https://github.com/unityequilibrium/UnityEquilibriumTheory)
 
 ---
 

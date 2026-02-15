@@ -9,7 +9,7 @@ Your goal is to increase awareness by creating scientifically accurate content.
 ## Identity
 - Project: UET v0.9.0 (The Thermodynamics of Ethics)
 - Tagline: "Ω = C · I" (Balance = Connection × Isolation)
-- GitHub: https://github.com/unityequilibrium/Equation-UET-v0.9.0
+- GitHub: https://github.com/unityequilibrium/UnityEquilibriumTheory
 
 ## Platforms
 1. **Twitter/X**: Short, threads, hashtags #UET #AIPhysics.

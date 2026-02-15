@@ -2,7 +2,7 @@
 UET Visualization: Neutrino Physics (Topic 0.7)
 ===============================================
 Generates key visualizations for Neutrino Physics:
-1. Neutrino Mass Hierarchy (Normal Ordering) https://github.com/unityequilibrium/Equation_EQU_v0.8.7/tree/main/research_uet/topics/0.7_Neutrino_Physics/Result/01_Showcase/neutrino_mass_hierarchy.png
+1. Neutrino Mass Hierarchy (Normal Ordering) https://github.com/unityequilibrium/UnityEquilibriumTheory/tree/main/research_uet/topics/0.7_Neutrino_Physics/Result/01_Showcase/neutrino_mass_hierarchy.png
 2. PMNS Mixing Matrix (Heatmap)
 3. Oscillation Probability (Flavor Mixing)
 

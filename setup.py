@@ -11,7 +11,7 @@ setup(
     description="A Unified Physics Simulation Framework (UET)",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/unityequilibrium/Equation-UET-v0.9.0",
+    url="https://github.com/unityequilibrium/UnityEquilibriumTheory",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",

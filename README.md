@@ -197,8 +197,8 @@ UET is now available as a standard Python 3.9+ library.
 ### 1. Installation
 
 ```bash
-git clone https://github.com/unityequilibrium/Equation-UET-v0.9.0.git
-cd Equation-UET-v0.9.0
+git clone https://github.com/unityequilibrium/UnityEquilibriumTheory.git
+cd UnityEquilibriumTheory
 pip install .
 ```
 
@@ -331,7 +331,7 @@ Physics students and researchers often search for these questions. UET provides 
 
 *Version 0.9.0 Grand Unified | MIT License | Last Updated: 2026-01-26*
 
-*[GitHub](https://github.com/unityequilibrium/Equation_EQU_v0.9.0) | [📊 View All Experiments](./research_uet/topics/)*
+*[GitHub](https://github.com/unityequilibrium/UnityEquilibriumTheory) | [📊 View All Experiments](./research_uet/topics/)*
 
 ---
 
