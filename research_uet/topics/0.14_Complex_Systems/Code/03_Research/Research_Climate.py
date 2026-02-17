@@ -219,7 +219,10 @@ def run_test():
         from research_uet.core import uet_viz
 
         result_dir = UETPathManager.get_result_dir(
-            topic_id="0.14", experiment_name="Research_Climate", pillar="03_Research"
+            topic_id="0.14_Complex_Systems",
+            experiment_name="Research_Climate",
+            pillar="03_Research",
+            category="log",
         )
         result_dir.mkdir(parents=True, exist_ok=True)
 

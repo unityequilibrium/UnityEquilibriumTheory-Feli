@@ -150,14 +150,13 @@ def run_learning():
         print(">> WEAK EVIDENCE. Tuning might be individual.")
     # ----------------------
 
-    out_dir = (
-        UETPathManager.get_result_dir(
-            topic_id="0.1",
-            experiment_name="Research_Alpha_Learning",
-            pillar="03_Research",
-        )
-        / "figures"
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.1_Galaxy_Rotation_Problem",
+        experiment_name="Research_Alpha_Learning",
+        pillar="03_Research",
+        category="log",
     )
+    out_dir = result_dir / "figures"
     out_dir.mkdir(parents=True, exist_ok=True)
     plt.savefig(out_dir / "alpha_learning.png")
     print(f"Plot saved to {out_dir / 'alpha_learning.png'}")

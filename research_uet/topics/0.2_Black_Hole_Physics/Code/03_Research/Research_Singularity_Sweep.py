@@ -83,9 +83,10 @@ def run_experiment():
     # Save Results
     # Save Results
     result_dir = UETPathManager.get_result_dir(
-        topic_id="0.2",
+        topic_id="0.2_Black_Hole_Physics",
         experiment_name="Research_Singularity_Sweep",
         pillar="03_Research",
+        category="log",
     )
     result_dir.mkdir(parents=True, exist_ok=True)
     result_path = result_dir / "results_summary.csv"

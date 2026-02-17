@@ -32,9 +32,10 @@ if __name__ == "__main__":
     # Standard 5x4 Grid Result Path
     result_dir = (
         UETPathManager.get_result_dir(
-            topic_id="0.10",
-            experiment_name="Research_Legacy_Results",
+            topic_id="0.10_Fluid_Dynamics_Chaos",
+            experiment_name="Research_Legacy_Runner",
             pillar="03_Research",
+            category="log",
         )
         / "experiments"
     )

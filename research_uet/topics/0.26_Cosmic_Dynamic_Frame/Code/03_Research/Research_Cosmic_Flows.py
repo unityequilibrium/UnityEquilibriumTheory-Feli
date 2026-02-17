@@ -58,7 +58,7 @@ def run_viz():
     output_dir = UETPathManager.get_result_dir(
         topic_id="0.26", experiment_name="Laniakea_Flow", category="showcase"
     )
-    logger = UETMetricLogger("Laniakea_Flow", output_dir=output_dir)
+    logger = UETMetricLogger("Laniakea_Flow", topic_id="0.26", category="showcase")
 
     # 2. Load Data
     data = load_flows()

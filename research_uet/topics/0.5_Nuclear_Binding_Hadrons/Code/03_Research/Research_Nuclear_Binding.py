@@ -112,7 +112,7 @@ def run_test():
         pillar="03_Research",
         category="showcase",
     )
-    logger = UETMetricLogger("Nuclear_Binding", output_dir=result_dir)
+    logger = UETMetricLogger("Nuclear_Binding", topic_id="0.5", category="showcase")
 
     print(f"\nTotal nuclei: {len(NUCLEI_DATA)}")
 

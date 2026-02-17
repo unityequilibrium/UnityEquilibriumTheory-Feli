@@ -115,14 +115,13 @@ def run_inertial_comparison():
     print(f"   Wave Effect: {status}")
 
     # --- Visualization ---
-    fig_dir = (
-        UETPathManager.get_result_dir(
-            topic_id="0.10",
-            experiment_name="Research_Inertial_Fluid",
-            pillar="03_Research",
-        )
-        / "figures"
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.10_Fluid_Dynamics_Chaos",
+        experiment_name="Research_Inertial_Fluid",
+        pillar="03_Research",
+        category="showcase",
     )
+    fig_dir = result_dir / "figures"
     fig_dir.mkdir(parents=True, exist_ok=True)
 
     plt.figure(figsize=(12, 5))

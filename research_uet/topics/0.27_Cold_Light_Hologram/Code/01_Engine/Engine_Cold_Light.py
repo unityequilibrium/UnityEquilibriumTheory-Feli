@@ -108,8 +108,13 @@ if __name__ == "__main__":
     # Save JSON results using UETPathManager
     import json
 
-    res_dir = UETPathManager.get_result_dir("0.27", "Cold_Light_Sweep")
-    out_file = res_dir / "Cold_Light_Resonance.json"
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.27_Cold_Light_Hologram",
+        experiment_name="Engine_Cold_Light",
+        pillar="01_Engine",
+        category="log",
+    )
+    out_file = result_dir / "Cold_Light_Resonance.json"
     with open(out_file, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\n✅ RESULTS SAVED: {out_file}")

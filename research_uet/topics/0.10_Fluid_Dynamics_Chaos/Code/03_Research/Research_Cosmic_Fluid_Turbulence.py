@@ -221,7 +221,10 @@ def run_cosmic_simulation():
 
     # Save Plot
     result_dir = UETPathManager.get_result_dir(
-        "0.10", "Cosmic_Turbulence", "03_Research"
+        topic_id="0.10_Fluid_Dynamics_Chaos",
+        experiment_name="Research_Cosmic_Fluid_Turbulence",
+        pillar="03_Research",
+        category="showcase",
     )
     result_dir.mkdir(parents=True, exist_ok=True)
 

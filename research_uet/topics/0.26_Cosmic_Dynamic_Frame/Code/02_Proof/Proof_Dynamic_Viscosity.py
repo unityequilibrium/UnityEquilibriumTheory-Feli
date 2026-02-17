@@ -75,7 +75,12 @@ def prove_viscosity():
     plt.grid(True, which="both", alpha=0.3)
     plt.legend()
 
-    result_dir = UETPathManager.get_result_dir("0.26", "Proof_Viscosity", "02_Proof")
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.26_Cosmic_Dynamic_Frame",
+        experiment_name="Proof_Dynamic_Viscosity",
+        pillar="02_Proof",
+        category="log",
+    )
     save_path = result_dir / "Fig_Proof_Viscosity.png"
     plt.savefig(save_path)
     plt.close()

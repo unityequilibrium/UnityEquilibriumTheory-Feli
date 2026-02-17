@@ -24,7 +24,10 @@ def visualize_hierarchy():
 
     # Output Dir
     result_dir = UETPathManager.get_result_dir(
-        topic_id="0.7", experiment_name="Research_Neutrino_Vis", pillar="03_Research"
+        topic_id="0.7",
+        experiment_name="Research_Neutrino_Vis",
+        pillar="03_Research",
+        category="showcase",
     )
     if not result_dir.exists():
         result_dir.mkdir(parents=True, exist_ok=True)

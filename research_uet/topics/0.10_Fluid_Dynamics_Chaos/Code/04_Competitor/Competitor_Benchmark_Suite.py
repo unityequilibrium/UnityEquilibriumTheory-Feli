@@ -147,12 +147,20 @@ def run_benchmarks():
             experiment_name="Research_Benchmark_Comparison",
             pillar="04_Competitor",
             stable=True,
+            category="log",
         )
         logger = UETMetricLogger(
-            "Research_Benchmark_Comparison", output_dir=str(output_dir), flat_mode=True
+            "Competitor_Benchmark", 
+            topic_id="0.10_Fluid_Dynamics_Chaos", 
+            category="log", 
+            output_dir=str(output_dir)
         )
     except ImportError:
-        logger = UETMetricLogger("Research_Benchmark_Comparison")
+        logger = UETMetricLogger(
+            "Competitor_Benchmark", 
+            topic_id="0.10_Fluid_Dynamics_Chaos", 
+            category="log"
+        )
 
     results = []
     results.append(run_accuracy_test())

@@ -84,7 +84,7 @@ def run_coupling_analysis():
 
     # Visualization:
     result_dir = UETPathManager.get_result_dir("0.17", "Higgs_Coupling", category="showcase")
-    logger = UETMetricLogger("Higgs_Coupling", output_dir=result_dir)
+    logger = UETMetricLogger("Higgs_Coupling", topic_id="0.17", category="showcase")
 
     plt.figure(figsize=(10, 7))
 

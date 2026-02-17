@@ -117,7 +117,10 @@ def run_engine():
 
         # Plot
         result_dir = UETPathManager.get_result_dir(
-            "0.2", "Supersonic_Sink", "01_Engine"
+            topic_id="0.2_Black_Hole_Physics",
+            experiment_name="Engine_Supersonic_Sink",
+            pillar="01_Engine",
+            category="log",
         )
         plt.figure(figsize=(10, 6))
         plt.plot(R / Rs, V / engine.C, "r-", linewidth=3, label="Inflow Velocity")

@@ -143,6 +143,7 @@ def run_test():
             experiment_name="Alpha_Decay",
             pillar="03_Research",
             stable=True,
+            category="showcase",
         )
     except ImportError:
         # Fallback for standalone run

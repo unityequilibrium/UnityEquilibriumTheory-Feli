@@ -91,7 +91,7 @@ def run_analysis():
     output_dir = UETPathManager.get_result_dir(
         topic_id="0.25", experiment_name="Market_Power_Law", category="showcase"
     )
-    logger = UETMetricLogger("Market_Power_Law", output_dir=output_dir)
+    logger = UETMetricLogger("Market_Power_Law", topic_id="0.25", category="showcase")
 
     # 2. Load Data
     try:

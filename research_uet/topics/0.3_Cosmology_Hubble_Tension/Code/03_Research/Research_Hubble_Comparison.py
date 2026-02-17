@@ -113,6 +113,7 @@ def run_test():
             topic_id="0.3_Cosmology_Hubble_Tension",
             experiment_name="Research_Hubble_Comparison",
             pillar="03_Research",
+            category="log",
         )
 
         # Create Comparison Plot

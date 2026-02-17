@@ -101,7 +101,12 @@ def run_torus_verification():
     print(f"   Topological Gain at 20kpc: {V_f[R>20][0]/V_n[R>20][0]:.2f}x Newton")
 
     # SAVE RESULTS
-    res_dir = UETPathManager.get_result_dir("0.26", "Torus_Topology_V2")
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.26_Cosmic_Dynamic_Frame",
+        experiment_name="Engine_Dynamic_Universe_v2_Torus",
+        pillar="01_Engine",
+        category="log",
+    )
     plt.style.use("dark_background")
     plt.figure(figsize=(10, 6))
     plt.plot(R, V_n, "c--", label="Newtonian (Sphere Topology)")

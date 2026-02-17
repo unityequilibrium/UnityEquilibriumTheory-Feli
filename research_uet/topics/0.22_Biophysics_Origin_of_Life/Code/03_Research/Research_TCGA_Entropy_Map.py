@@ -44,7 +44,12 @@ def analyze_tcga_entropy():
     print(f"  - Tumor Coherence:  {c_tumor:.4f}")
 
     # --- VISUALIZATION ---
-    result_dir = UETPathManager.get_result_dir("0.22", "TCGA_Genomic_Map", "03_Research")
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.22_Biophysics_Origin_of_Life",
+        experiment_name="Research_TCGA_Entropy_Map",
+        pillar="03_Research",
+        category="log",
+    )
 
     plt.figure(figsize=(8, 6))
     plt.bar(["Normal Tissue", "Tumor Tissue"], [c_normal, c_tumor], color=["green", "red"])

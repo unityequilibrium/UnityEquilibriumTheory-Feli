@@ -155,6 +155,7 @@ def run_all_tests():
             topic_id="0.4_Superconductivity_Superfluids",
             experiment_name="Research_Plasma",
             pillar="03_Research",
+            category="log",
         )
 
         if "AllenDynesEngine" not in globals():

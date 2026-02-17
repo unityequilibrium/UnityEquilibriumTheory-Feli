@@ -330,10 +330,11 @@ def run_all_real_data_tests():
         topic_id="0.13",
         experiment_name="Research_Real_Data_Validation",
         pillar="03_Research",
+        category="log",
     )
     logger = None
     try:
-        logger = UETMetricLogger("Thermodynamic_Real_Data_Validation", output_dir=result_dir_base)
+        logger = UETMetricLogger("Thermodynamic_Real_Data_Validation", topic_id="0.13", category="log")
         logger.set_metadata(
             {
                 "test_suite": "Landauer, LIGO, EHT, Josephson",

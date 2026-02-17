@@ -25,9 +25,10 @@ def run_test():
 
         result_dir = (
             UETPathManager.get_result_dir(
-                topic="0.6_Electroweak_Physics",
-                name="Research_Higgs_Mechanism",
+                topic_id="0.6",
+                experiment_name="Higgs_Mechanism",
                 pillar="03_Research",
+                category="showcase",
             )
             / "higgs_mass"
         )

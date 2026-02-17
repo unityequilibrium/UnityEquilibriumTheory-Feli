@@ -25,6 +25,8 @@ if _root.name == 'research_uet':
 else:
     print("CRITICAL: Root path not found.")
     sys.exit(1)
+
+try:
     import importlib.util
 
     # Import Engine
@@ -98,7 +100,10 @@ def run_experiment():
 
     # Save Results
     result_dir = UETPathManager.get_result_dir(
-        topic_id="0.3", experiment_name="run_cosmo_experiment", pillar="03_Research"
+        topic_id="0.3",
+        experiment_name="Cosmo_Experiment",
+        pillar="03_Research",
+        category="log",
     )
     result_dir.mkdir(parents=True, exist_ok=True)
     result_path = result_dir / "results_summary.csv"

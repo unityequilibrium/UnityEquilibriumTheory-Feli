@@ -206,9 +206,10 @@ def run_accuracy_validation():
 
     # Save
     result_dir = UETPathManager.get_result_dir(
-        topic_id="0.10",
+        topic_id="0.10_Fluid_Dynamics_Chaos",
         experiment_name="Research_Legacy_Accuracy",
         pillar="03_Research",
+        category="log",
     )
     result_dir.mkdir(parents=True, exist_ok=True)
 

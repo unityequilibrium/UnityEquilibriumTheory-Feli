@@ -41,9 +41,10 @@ class FluidVisualization:
 
     def __init__(self):
         self.result_dir = UETPathManager.get_result_dir(
-            topic_id="0.10",
-            experiment_name="Research_Dashboard_Tool",
-            pillar="03_Research",
+            topic_id="0.10_Fluid_Dynamics_Chaos",
+            experiment_name="Vis_Dashboard_Tool",
+            pillar="05_Visualization",
+            category="showcase",
         )
         # Standardized path: 03_Research/dashboard
         self.output_dir = self.result_dir / "03_Research" / "dashboard"

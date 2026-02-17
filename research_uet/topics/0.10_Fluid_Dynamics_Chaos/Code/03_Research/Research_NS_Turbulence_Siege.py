@@ -139,7 +139,7 @@ def run_turbulence_siege(steps=500, reynolds=1e6):
 
     # 4. Visualization
     result_dir = UETPathManager.get_result_dir("0.10", "Turbulence_Spectrum", category="showcase")
-    logger = UETMetricLogger("Turbulence", output_dir=result_dir)
+    logger = UETMetricLogger("Turbulence", topic_id="0.10", category="showcase")
 
     plt.figure(figsize=(10, 6))
     plt.loglog(k[1:], E_k[1:], "b-", label="UET Energy Spectrum", linewidth=2)

@@ -44,7 +44,7 @@ class UETQubitEngine:
         self.matrix_engine = MatrixEvolution(params=self.params)
         self.state_tensor = UniverseState(self.nx)
 
-        self.logger = UETMetricLogger(simulation_name="UET_Qubit_Engine", topic_id="0.9")
+        self.logger = UETMetricLogger(simulation_name="UET_Qubit_Engine", topic_id="0.9", category="log")
 
     @property
     def phi(self):

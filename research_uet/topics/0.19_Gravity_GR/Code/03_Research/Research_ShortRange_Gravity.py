@@ -64,7 +64,7 @@ def run_test():
     output_dir = UETPathManager.get_result_dir(
         topic_id="0.19", experiment_name="ShortRange_Gravity", category="showcase"
     )
-    logger = UETMetricLogger("ShortRange_Gravity", output_dir=output_dir)
+    logger = UETMetricLogger("ShortRange_Gravity", topic_id="0.19", category="showcase")
 
     # 2. Load Data
     data = load_eotwash_data()

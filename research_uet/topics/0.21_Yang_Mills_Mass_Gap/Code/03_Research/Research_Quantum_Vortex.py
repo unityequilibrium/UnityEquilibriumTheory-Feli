@@ -72,8 +72,12 @@ def run_research():
             break  # Stop after finding first stable point
 
     # --- VISUALIZATION ---
-    result_dir = UETPathManager.get_result_dir("0.21", "Quantum_Vortex", "03_Research")
-
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.21_Yang_Mills_Mass_Gap",
+        experiment_name="Research_Quantum_Vortex",
+        pillar="03_Research",
+        category="log",
+    )
     plt.figure(figsize=(10, 6))
     if stable_tracker:
         plt.plot(stable_tracker, label="Vortex Energy (Stable)", color="green")

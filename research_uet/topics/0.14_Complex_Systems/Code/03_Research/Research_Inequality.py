@@ -265,15 +265,13 @@ def run_test():
     try:
         from research_uet.core import uet_viz
 
-        result_dir = (
-            UETPathManager.get_result_dir(
-                topic_id="0.14",
-                experiment_name="Research_Inequality",
-                pillar="03_Research",
-            )
-            / "03_Research",
-            "inequality",
+        result_dir = UETPathManager.get_result_dir(
+            topic_id="0.14_Complex_Systems",
+            experiment_name="Research_Inequality",
+            pillar="03_Research",
+            category="log",
         )
+        result_dir = result_dir / "03_Research" / "inequality"
         result_dir.mkdir(parents=True, exist_ok=True)
 
         if results:

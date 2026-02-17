@@ -78,7 +78,7 @@ def run_hydride_analysis():
     result_dir = UETPathManager.get_result_dir(
         "0.4_Superconductivity_Superfluids", "Hydride_Validation", category="showcase"
     )
-    logger = UETMetricLogger("HydrideSC", output_dir=result_dir)
+    logger = UETMetricLogger("HydrideSC", topic_id="0.4", category="showcase")
 
     plt.figure(figsize=(10, 6))
 

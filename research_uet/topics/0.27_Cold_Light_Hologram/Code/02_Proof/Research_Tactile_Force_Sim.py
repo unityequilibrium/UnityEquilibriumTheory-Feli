@@ -83,7 +83,8 @@ if __name__ == "__main__":
     # Save results
     import json
 
-    res_dir = UETPathManager.get_result_dir("0.27", "Tactile_Push_Sim", pillar="02_Proof")
+    res_dir = UETPathManager.get_result_dir("0.27", "Tactile_Push_Sim", pillar="02_Proof", category="log")
+    res_logger = UETMetricLogger("Tactile_Force", topic_id="0.27", category="log")
     with open(res_dir / "push_data.json", "w") as f:
         json.dump(results, f, indent=4)
 

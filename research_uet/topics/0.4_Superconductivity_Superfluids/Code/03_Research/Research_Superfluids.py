@@ -118,12 +118,13 @@ def run_test():
 
     # Save Report
     try:
-        result_dir = UETPathManager.get_result_dir(
-            topic_id="0.4_Superconductivity_Superfluids",
+        result_dir_base = UETPathManager.get_result_dir(
+            topic_id="0.4",
             experiment_name="Research_Superfluids",
             pillar="03_Research",
+            category="log",
         )
-        report_path = result_dir / "superfluids_report.txt"
+        report_path = result_dir_base / "superfluids_report.txt"
         with open(report_path, "w") as f:
             f.write(f"UET Superfluids Test Results\nPassed: {passed_count}/{total}\n")
         print(f"Report saved to {report_path}")

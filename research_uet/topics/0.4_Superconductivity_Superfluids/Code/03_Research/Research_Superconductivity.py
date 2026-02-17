@@ -124,10 +124,11 @@ def run_experiment():
         topic_id="0.4",
         experiment_name="Research_Superconductivity",
         pillar="03_Research",
+        category="log",
     )
     logger = None
     try:
-        logger = UETMetricLogger("Superconductivity_Integrity", output_dir=result_dir_base)
+        logger = UETMetricLogger("Superconductivity_Integrity", topic_id="0.4", category="log")
         print(f"📂 Results: {logger.run_dir}")
     except Exception:
         pass

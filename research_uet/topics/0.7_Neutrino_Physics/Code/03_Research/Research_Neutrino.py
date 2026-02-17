@@ -61,11 +61,14 @@ def run_test():
 
     # Initialize Standard Logger
     result_dir_base = UETPathManager.get_result_dir(
-        topic_id="0.7", experiment_name="Research_Neutrino", pillar="03_Research"
+        topic_id="0.7",
+        experiment_name="Research_Neutrino",
+        pillar="03_Research",
+        category="log",
     )
     logger = None
     try:
-        logger = UETMetricLogger("Neutrino_PMNS", output_dir=result_dir_base)
+        logger = UETMetricLogger("Neutrino_PMNS", topic_id="0.7", category="log")
         logger.set_metadata(
             {
                 "data_source": "T2K, NOvA, KATRIN",

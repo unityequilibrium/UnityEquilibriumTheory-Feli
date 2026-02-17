@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 from research_uet.core.uet_parameters import get_params, C
-from research_uet.core.uet_glass_box import UETPathManager
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
 
 
 class PerovskiteLightTrap:
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     # Save to Results
     import json
 
-    res_dir = UETPathManager.get_result_dir("0.27", "Perovskite_Comparison", pillar="03_Research")
+    res_dir = UETPathManager.get_result_dir("0.27", "Perovskite_Comparison", pillar="03_Research", category="log")
     with open(res_dir / "experiment_log.json", "w") as f:
         json.dump(results, f, indent=4)
     print(f"\n✅ EXPERIMENT COMPLETE: {res_dir}")

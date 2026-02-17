@@ -22,7 +22,7 @@ def run_double_slit():
 
     # Output Dir
     result_dir = UETPathManager.get_result_dir(
-        topic_id="0.9", experiment_name="Research_Double_Slit", pillar="03_Research"
+        topic_id="0.9", experiment_name="Research_Double_Slit", pillar="03_Research", category="showcase"
     )
     if not result_dir.exists():
         result_dir.mkdir(parents=True, exist_ok=True)

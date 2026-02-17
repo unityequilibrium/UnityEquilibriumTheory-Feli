@@ -124,7 +124,12 @@ def run_simulation():
         plt.legend()
         plt.grid()
 
-        output_dir = UETPathManager.get_result_dir("0.13", "Proof_Vacuum_Sink")
+        output_dir = UETPathManager.get_result_dir(
+            topic_id="0.13_Thermodynamic_Bridge",
+            experiment_name="Proof_Vacuum_Entropy_Sink",
+            pillar="03_Research",
+            category="log",
+        )
         plt.savefig(output_dir / "entropy_sink_plot.png")
         print(f"   [Viz] Saved: {output_dir / 'entropy_sink_plot.png'}")
 

@@ -30,7 +30,16 @@ matplotlib.use("Agg")  # Force headless mode to prevent CRASH
 import matplotlib.pyplot as plt
 
 # --- ROBUST PATH FINDER (5x4 Grid Standard) ---
+current_path = Path(__file__).resolve()
+ROOT = None
+for parent in [current_path] + list(current_path.parents):
+    if (parent / "research_uet").exists():
+        ROOT = parent
+        break
 
+if ROOT:
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
 else:
     print("CRITICAL: research_uet root not found!")
     sys.exit(1)

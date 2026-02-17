@@ -126,6 +126,7 @@ def run_verification_suite():
         topic_id="0.10_Fluid_Dynamics_Chaos",
         experiment_name="Research_Calibration_Sweep",
         pillar="03_Research",
+        category="log",
     )
     result_dir.mkdir(parents=True, exist_ok=True)
 

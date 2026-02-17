@@ -60,7 +60,8 @@ def run_siege(count=100, tolerance=1e-9):
     # Initialize Glass Box
     logger = UETMetricLogger(
         simulation_name="Research_Riemann_Siege",
-        output_dir="topics/0.18_Mathnicry/Result/03_Research",
+        topic_id="0.18",
+        category="log",
     )
     logger.set_metadata(
         {

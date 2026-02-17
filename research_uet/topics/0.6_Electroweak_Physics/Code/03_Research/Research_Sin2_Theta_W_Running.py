@@ -73,7 +73,7 @@ def run_test():
 
     # --- VISUALIZATION ---
     result_dir = UETPathManager.get_result_dir("0.6", "Weak_Mixing_Validation", category="showcase")
-    logger = UETMetricLogger("WeakMixing", output_dir=result_dir)
+    logger = UETMetricLogger("WeakMixing", topic_id="0.6", category="showcase")
 
     Q_vals = np.logspace(-3, 4, 100)
     s2_vals = [uet_running_sin2_theta(q) for q in Q_vals]

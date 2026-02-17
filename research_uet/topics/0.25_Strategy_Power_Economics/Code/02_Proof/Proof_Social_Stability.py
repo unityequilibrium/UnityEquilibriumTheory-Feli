@@ -24,11 +24,7 @@ def run_stability_comparison():
 
     # World 1: Inequality (Predators vs Prey)
     print("\n🌍 World 1: The Predator World (Type D + Type A)")
-    logger_d = UETMetricLogger(
-        simulation_name="World_Predator",
-        output_dir="topics/0.25_Strategy_Power_Economics/Result/02_Proof",
-        flat_mode=True,
-    )
+    logger_d = UETMetricLogger("Social_Stability", topic_id="0.25", category="log")
     engine_d = PowerDynamicsEngine(nx=100, logger=logger_d)
     engine_d.seed_real_world()  # Properly populates self.agents[100]
     # Reset to flat baseline for controlled proof
@@ -51,7 +47,8 @@ def run_stability_comparison():
     print("\n🌍 World 2: The Stabilizer World (Type C + Type A)")
     logger_c = UETMetricLogger(
         simulation_name="World_Stabilizer",
-        output_dir="topics/0.25_Strategy_Power_Economics/Result/02_Proof",
+        topic_id="0.25",
+        category="log",
         flat_mode=True,
     )
     engine_c = PowerDynamicsEngine(nx=100, logger=logger_c)

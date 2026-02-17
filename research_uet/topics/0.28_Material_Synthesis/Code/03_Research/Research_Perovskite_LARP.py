@@ -100,7 +100,8 @@ if __name__ == "__main__":
     # Save to Results
     import json
 
-    res_dir = UETPathManager.get_result_dir("0.28", "Perovskite_LARP", pillar="03_Research")
+    logger = UETMetricLogger("Perovskite_LARP", topic_id="0.28", category="log")
+    res_dir = logger.get_result_dir(pillar="03_Research")
     with open(res_dir / "synthesis_log.json", "w") as f:
         json.dump(results, f, indent=4)
     print(f"\n💾 RESULTS SAVED: {res_dir}/synthesis_log.json")

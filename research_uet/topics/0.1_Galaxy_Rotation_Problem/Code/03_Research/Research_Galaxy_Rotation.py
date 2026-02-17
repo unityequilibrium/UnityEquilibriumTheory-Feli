@@ -85,10 +85,13 @@ def run_experiment():
 
     # Initialize Standard Logger
     global logger
-    result_dir_base = UETPathManager.get_result_dir(
-        topic_id="0.1", experiment_name="Research_Galaxy_Rotation", pillar="03_Research"
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.1_Galaxy_Rotation_Problem",
+        experiment_name="Research_Galaxy_Rotation",
+        pillar="03_Research",
+        category="log",
     )
-    logger = UETMetricLogger("Galaxy_Validation", output_dir=result_dir_base)
+    logger = UETMetricLogger("Galaxy_Validation", topic_id="0.1", category="log")
 
     # Save Metadata
     logger.set_metadata(

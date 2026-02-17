@@ -235,14 +235,12 @@ def run_test_with_real_data():
         from research_uet.core import uet_viz
 
         if "UETPathManager" in globals():
-            result_dir = (
-                UETPathManager.get_result_dir(
-                    topic_id="0.12",
-                    experiment_name="casimir_test",
-                    pillar="03_Research",
-                )
-                / "casimir_effect"
-            )
+            result_dir = UETPathManager.get_result_dir(
+                topic_id="0.12_Vacuum_Energy_Casimir",
+                experiment_name="casimir_test",
+                pillar="03_Research",
+                category="log",
+            ) / "casimir_effect"
         else:
             result_dir = (
                 root_path

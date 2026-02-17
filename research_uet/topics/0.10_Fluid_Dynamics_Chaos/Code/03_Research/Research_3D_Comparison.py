@@ -224,14 +224,15 @@ def run_all_comparisons():
     }
 
     # Initialize Standard Logger
-    result_dir_base = UETPathManager.get_result_dir(
-        topic_id="0.10",
-        experiment_name="Research_3D_Comparison",
-        pillar="03_Research",
-    )
+    result_dir = UETPathManager.get_result_dir(
+                topic_id="0.10",
+                experiment_name="Research_3D_Comparison",
+                pillar="03_Research",
+                category="log",
+            )
     logger = None
     try:
-        logger = UETMetricLogger("Fluid_Comparison_NS_vs_UET", output_dir=result_dir_base)
+        logger = UETMetricLogger("Fluid_Comparison_NS_vs_UET", topic_id="0.10", category="log")
         logger.set_metadata(
             {
                 "test_suite": "Lid Driven Cavity + High Re",
@@ -256,6 +257,7 @@ def run_all_comparisons():
                 topic="0.10_Fluid_Dynamics_Chaos",
                 name="Research_3D_Comparison",
                 pillar="03_Research",
+                category="log",
             )
             / "03_Research"
         )

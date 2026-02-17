@@ -100,7 +100,7 @@ def run_validation():
 
     # 4. Generate Showcase Plot
     result_dir = UETPathManager.get_result_dir("0.21", "Mass_Gap_Validation", category="showcase")
-    logger = UETMetricLogger("MassGap_Val", output_dir=result_dir)
+    logger = UETMetricLogger("MassGap_Val", topic_id="0.21", category="showcase")
 
     plt.figure(figsize=(10, 6))
 

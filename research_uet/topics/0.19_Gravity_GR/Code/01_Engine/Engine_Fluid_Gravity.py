@@ -142,7 +142,12 @@ def run_engine():
         print("   This confirms the 'Falling Space' hypothesis of Topic 0.26.")
 
         # Save Plot
-        result_dir = UETPathManager.get_result_dir("0.19", "Fluid_Gravity", "01_Engine")
+        result_dir = UETPathManager.get_result_dir(
+            topic_id="0.19_Gravity_GR",
+            experiment_name="Engine_Fluid_Gravity",
+            pillar="01_Engine",
+            category="log",
+        )
         plt.figure(figsize=(10, 6))
         plt.loglog(R, A_newton, "c-", linewidth=4, alpha=0.5, label="Newtonian")
         plt.loglog(R, A_fluid, "r--", label="Fluid Pressure")

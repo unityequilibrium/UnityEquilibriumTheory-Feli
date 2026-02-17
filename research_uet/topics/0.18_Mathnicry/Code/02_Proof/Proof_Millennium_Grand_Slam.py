@@ -139,8 +139,7 @@ def run_grand_slam():
 
         # Log Result via Glass Box
         logger = UETMetricLogger(
-            simulation_name="Research_Millennium_Grand_Slam",
-            output_dir="topics/0.18_Mathnicry/Result/03_Research",
+            simulation_name="Millennium_Grand_Slam", topic_id="0.18", category="log"
         )
 
         # Log Final "Step" as the verification event

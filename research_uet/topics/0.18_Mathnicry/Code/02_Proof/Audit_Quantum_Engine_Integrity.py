@@ -39,6 +39,9 @@ def run_glass_box_audit():
     # 1. Setup Logger & Hunter
     # Important: Point output to the standard Topic Result folder
     logger = UETMetricLogger(
+        "Quantum_Engine_Audit", 
+        topic_id="0.18", 
+        category="log",
         simulation_name="Quantum_Integrity_Audit",
         output_dir=str(
             Path(__file__).resolve().parent.parent.parent / "Result" / "02_Proof"

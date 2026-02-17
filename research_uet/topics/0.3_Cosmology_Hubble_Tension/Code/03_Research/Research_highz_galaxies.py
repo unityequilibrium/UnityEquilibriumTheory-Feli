@@ -92,7 +92,12 @@ def simulate_highz_prediction(z_target=5.0):
     try:
         from research_uet.core.uet_glass_box import UETPathManager
 
-        output_dir = UETPathManager.get_result_dir("0.3", "HighZ_Prediction")
+        output_dir = UETPathManager.get_result_dir(
+            topic_id="0.3_Cosmology_Hubble_Tension",
+            experiment_name="Research_highz_galaxies",
+            pillar="03_Research",
+            category="log",
+        )
     except ImportError:
         # Fallback if running standalone without core
         output_dir = Path("Result")

@@ -40,7 +40,8 @@ def run_scaling_test(max_qubits=8):
     # Initialize Glass Box Logger
     logger = UETMetricLogger(
         simulation_name="Research_P_vs_NP_Scaling",
-        output_dir="topics/0.18_Mathnicry/Result/03_Research",
+        topic_id="0.18",
+        category="log"
     )
 
     # Metadata

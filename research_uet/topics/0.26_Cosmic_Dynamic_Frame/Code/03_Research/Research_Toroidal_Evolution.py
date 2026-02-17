@@ -98,7 +98,12 @@ def run_evolution():
     print(f"   Peak Energy:    {peak_energy:.2f}")
     print(f"   Spike Factor:   {increase_factor:.1f}x")
 
-    output_dir = UETPathManager.get_result_dir("0.26", "Topology_Singularity")
+    output_dir = UETPathManager.get_result_dir(
+        topic_id="0.26_Cosmic_Dynamic_Frame",
+        experiment_name="Research_Toroidal_Evolution",
+        pillar="03_Research",
+        category="log",
+    )
 
     plt.figure(figsize=(10, 6))
     plt.plot(r_values, energy_levels, "r-", linewidth=3)

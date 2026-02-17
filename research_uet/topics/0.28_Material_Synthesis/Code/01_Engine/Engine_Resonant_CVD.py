@@ -134,7 +134,12 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
     # Use UETPathManager for consistent result storage
-    result_dir = UETPathManager.get_result_dir("0.28", "Resonant_CVD")
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.28_Material_Synthesis",
+        experiment_name="Engine_Resonant_CVD",
+        pillar="01_Engine",
+        category="log",
+    )
 
     labels = ["Standard CVD", "UET Resonant CVD"]
     efficiencies = [e1, e2]

@@ -70,7 +70,7 @@ def run_test():
     result_dir = UETPathManager.get_result_dir(
         "0.9_Quantum_Nonlocality", "Bell_Test_Validation", category="showcase"
     )
-    logger = UETMetricLogger("BellTest", output_dir=result_dir)
+    logger = UETMetricLogger("BellTest", topic_id="0.9", category="showcase")
 
     # Plot CHSH Correlation S(theta)
     # S(theta) = 3*cos(theta) - cos(3*theta) ? No, typically plotted relative to angle.

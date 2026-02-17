@@ -57,7 +57,12 @@ def run_high_fidelity_simulation():
                 tissue[tx, ty] = 1.0
 
     # --- VISUALIZATION ---
-    result_dir = UETPathManager.get_result_dir("0.22", "Tissue_Analysis", "03_Research")
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.22_Biophysics_Origin_of_Life",
+        experiment_name="Research_HighFidelity_Tissue_Grid",
+        pillar="03_Research",
+        category="log",
+    )
 
     plt.figure(figsize=(8, 6))
     plt.imshow(tissue, cmap="RdYlGn", origin="lower", vmin=0, vmax=1)

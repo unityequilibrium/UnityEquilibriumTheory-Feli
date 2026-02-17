@@ -89,7 +89,7 @@ def run_simulation():
 
     # Output
     result_dir = UETPathManager.get_result_dir("0.13", "Heat_Flux_Hysteresis", category="showcase")
-    logger = UETMetricLogger("HeatFlux", output_dir=result_dir)
+    logger = UETMetricLogger("HeatFlux", topic_id="0.13", category="showcase")
 
     plt.figure(figsize=(12, 5))
 

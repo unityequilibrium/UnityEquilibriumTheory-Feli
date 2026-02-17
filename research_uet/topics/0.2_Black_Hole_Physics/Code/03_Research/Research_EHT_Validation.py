@@ -58,7 +58,7 @@ def run_test():
     result_dir_base = UETPathManager.get_result_dir(
         topic_id="0.2", experiment_name="EHT_Validation", category="showcase"
     )
-    logger = UETMetricLogger("EHT_Validation", output_dir=result_dir_base)
+    logger = UETMetricLogger("EHT_Validation", topic_id="0.2", category="showcase")
 
     # Save Metadata
     logger.set_metadata(

@@ -664,9 +664,10 @@ def run_ultimate_analysis():
 
     # Standardized Output Path
     result_dir = UETPathManager.get_result_dir(
-        topic_id="0.2",
+        topic_id="0.2_Black_Hole_Physics",
         experiment_name="Research_CCBH_Analysis",
         pillar="03_Research",
+        category="log",
     )
     result_dir.mkdir(parents=True, exist_ok=True)
     output_path = result_dir / "ultimate_ccbh_analysis.png"
@@ -864,6 +865,7 @@ def analyze_entropy_recycling(k_fit, log_M0_avg=8.5, volume_radius_mpc=1000):
             topic="0.2_Black_Hole_Physics",
             name="Research_CCBH_Analysis",
             pillar="03_Research",
+            category="log",
         )
 
         # Black Hole Entropy Plot

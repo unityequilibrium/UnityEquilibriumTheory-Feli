@@ -78,7 +78,7 @@ def run_critical_analysis():
     result_dir = UETPathManager.get_result_dir(
         "0.11_Phase_Transitions", "Critical_Exponents_Validation", category="showcase"
     )
-    logger = UETMetricLogger("PhaseTrans", output_dir=result_dir)
+    logger = UETMetricLogger("PhaseTrans", topic_id="0.11", category="showcase")
 
     plt.figure(figsize=(10, 6))
 

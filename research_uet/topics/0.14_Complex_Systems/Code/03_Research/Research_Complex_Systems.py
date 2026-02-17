@@ -148,6 +148,7 @@ def run_test():
         topic_id="0.14",
         experiment_name="Research_Complex_Systems",
         pillar="03_Research",
+        category="log",
     )
     logger = None
 
@@ -171,7 +172,7 @@ def run_test():
         pass  # Allow fallback for now
 
     try:
-        logger = UETMetricLogger("Complex_Systems_Qualitative", output_dir=result_dir_base)
+        logger = UETMetricLogger("Complex_Systems_Qualitative", topic_id="0.14", category="log")
         logger.set_metadata(
             {
                 "test_suite": "Economics, Climate, Biology",

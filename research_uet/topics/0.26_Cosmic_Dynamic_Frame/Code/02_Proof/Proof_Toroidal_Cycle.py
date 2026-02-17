@@ -189,7 +189,12 @@ def run_simulation():
         print("   The Universe aligns with the Torus model (Laniakea Validation).")
 
         # Plot
-        output_dir = UETPathManager.get_result_dir("0.26", "Proof_Toroidal_Cycle")
+        output_dir = UETPathManager.get_result_dir(
+            topic_id="0.26_Cosmic_Dynamic_Frame",
+            experiment_name="Proof_Toroidal_Cycle",
+            pillar="02_Proof",
+            category="log",
+        )
 
         plt.figure(figsize=(12, 5))
         plt.subplot(1, 2, 1)

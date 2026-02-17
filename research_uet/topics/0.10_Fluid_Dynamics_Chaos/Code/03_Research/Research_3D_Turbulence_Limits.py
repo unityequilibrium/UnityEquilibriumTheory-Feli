@@ -106,6 +106,7 @@ def run_scaling_tests():
         topic_id="0.10_Fluid_Dynamics_Chaos",
         experiment_name="Research_3D_Turbulence_Limits",
         pillar="03_Research",
+        category="showcase",
     )
     fig_dir = kw_output_dir / "figures"
     fig_dir.mkdir(parents=True, exist_ok=True)

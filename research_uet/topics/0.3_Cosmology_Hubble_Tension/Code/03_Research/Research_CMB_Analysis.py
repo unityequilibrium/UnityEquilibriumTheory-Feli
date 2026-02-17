@@ -189,9 +189,10 @@ def test_cmb_peaks():
             pass
 
         result_dir = UETPathManager.get_result_dir(
-            topic_id="0.3",
+            topic_id="0.3_Cosmology_Hubble_Tension",
             experiment_name="Research_CMB_Analysis",
             pillar="03_Research",
+            category="log",
         )
         data_dir = (
             ROOT
@@ -347,8 +348,9 @@ def run_all_tests():
             topic_id="0.3",
             experiment_name="Research_CMB_Analysis",
             pillar="03_Research",
+            category="log",
         )
-        logger = UETMetricLogger("CMB_Validation", output_dir=result_dir_base)
+        logger = UETMetricLogger("CMB_Validation", topic_id="0.3", category="log")
 
         # Save Metadata
         logger.set_metadata(

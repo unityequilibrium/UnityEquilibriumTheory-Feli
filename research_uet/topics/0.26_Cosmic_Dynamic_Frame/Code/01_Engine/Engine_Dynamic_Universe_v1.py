@@ -201,9 +201,10 @@ def run_engine():
     print("---------------------------------------")
 
     output_dir = UETPathManager.get_result_dir(
-        topic_id="0.26",
-        experiment_name="Engine_V1_Calibration",
+        topic_id="0.26_Cosmic_Dynamic_Frame",
+        experiment_name="Engine_Dynamic_Universe_v1",
         pillar="01_Engine",
+        category="log",
         stable=True,
     )
 

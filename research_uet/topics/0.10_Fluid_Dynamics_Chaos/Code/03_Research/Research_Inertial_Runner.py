@@ -22,9 +22,10 @@ if __name__ == "__main__":
     # Save
     result_dir = (
         UETPathManager.get_result_dir(
-            topic_id="0.10",
+            topic_id="0.10_Fluid_Dynamics_Chaos",
             experiment_name="Research_Inertial_Runner",
             pillar="03_Research",
+            category="log",
         )
         / "experiments"
     )

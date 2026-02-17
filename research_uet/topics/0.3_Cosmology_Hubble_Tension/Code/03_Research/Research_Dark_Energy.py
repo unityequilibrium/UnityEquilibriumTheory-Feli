@@ -130,6 +130,7 @@ def test_dark_energy_eqn():
             topic_id="0.3_Cosmology_Hubble_Tension",
             experiment_name="Research_Dark_Energy",
             pillar="03_Research",
+            category="log",
         )
 
         # Plot w(z) evolution

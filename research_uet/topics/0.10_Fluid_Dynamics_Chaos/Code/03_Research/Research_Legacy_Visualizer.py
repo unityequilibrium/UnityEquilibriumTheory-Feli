@@ -84,6 +84,7 @@ def generate_comparison_plot():
         topic_id="0.10",
         experiment_name="Research_Legacy_Visualizer",
         pillar="03_Research",
+        category="showcase",
     )
     result_dir.mkdir(parents=True, exist_ok=True)
 
@@ -185,6 +186,7 @@ def generate_speed_comparison():
         topic_id="0.10",
         experiment_name="Research_Legacy_Visualizer",
         pillar="03_Research",
+        category="showcase",
     )
 
     try:
@@ -279,6 +281,7 @@ def generate_summary_table():
         topic_id="0.10",
         experiment_name="Research_Legacy_Visualizer",
         pillar="03_Research",
+        category="showcase",
     )
     result_dir.mkdir(parents=True, exist_ok=True)
     with open(result_dir / "RESEARCH_SUMMARY.txt", "w", encoding="utf-8") as f:
@@ -294,6 +297,7 @@ if __name__ == "__main__":
             topic_id="0.10",
             experiment_name="Research_Legacy_Visualizer",
             pillar="03_Research",
+            category="showcase",
         )
         result_dir.mkdir(parents=True, exist_ok=True)
 

@@ -5,7 +5,7 @@ from pathlib import Path
 # --- ROBUST PATH FINDER ---
 
 
-from research_uet.core.uet_glass_box import UETPathManager
+from research_uet.core.uet_glass_box import UETPathManager, UETMetricLogger
 
 
 class SafetyAerosolSim:
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     # Save results
     import json
 
-    res_dir = UETPathManager.get_result_dir("0.27", "Safety_Aerosol_Audit", pillar="02_Proof")
+    res_dir = UETPathManager.get_result_dir("0.27", "Safety_Aerosol_Audit", pillar="02_Proof", category="log")
     with open(res_dir / "safety_audit.json", "w") as f:
         json.dump(results, f, indent=4)
 

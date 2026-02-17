@@ -96,13 +96,18 @@ def run_pioneer_simulation():
     print(f"   Max Deviation: {max_error:.2e} m/s^2")
 
     if max_error < 1.0e-10:
-        print("✅ SUCCESS: Constant Superfluid Density explains Pioneer Anomaly.")
+        print(" SUCCESS: Constant Superfluid Density explains Pioneer Anomaly.")
         print("   The 'Vacuum Drag' hypothesis is consistent with data.")
     else:
-        print("⚠️ WARNING: Data shows variation not explained by constant density.")
+        print(" WARNING: Data shows variation not explained by constant density.")
 
     # 6. Plot
-    result_dir = UETPathManager.get_result_dir("0.26", "Pioneer_Experiment")
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.26_Cosmic_Dynamic_Frame",
+        experiment_name="Research_Pioneer_Drag",
+        pillar="03_Research",
+        category="log",
+    )
 
     plt.figure(figsize=(10, 6))
     plt.errorbar(

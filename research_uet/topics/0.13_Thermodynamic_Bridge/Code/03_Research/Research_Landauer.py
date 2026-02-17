@@ -304,7 +304,10 @@ def run_all_tests():
         from research_uet.core import uet_viz
 
         result_dir = UETPathManager.get_result_dir(
-            topic_id="0.13", experiment_name="Research_Landauer", pillar="03_Research"
+            topic_id="0.13_Thermodynamic_Bridge",
+            experiment_name="Research_Landauer",
+            pillar="03_Research",
+            category="log",
         )
         result_dir.mkdir(parents=True, exist_ok=True)
 

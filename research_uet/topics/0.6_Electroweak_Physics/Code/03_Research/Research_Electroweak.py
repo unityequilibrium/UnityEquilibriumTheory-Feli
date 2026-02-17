@@ -135,12 +135,15 @@ def run_test():
     print("=" * 60)
 
     # Initialize Standard Logger
-    result_dir_base = UETPathManager.get_result_dir(
-        topic_id="0.6", experiment_name="Research_Electroweak", pillar="03_Research"
+    result_dir = UETPathManager.get_result_dir(
+        topic_id="0.6_Electroweak_Physics",
+        experiment_name="Research_Electroweak",
+        pillar="03_Research",
+        category="log",
     )
     logger = None
     try:
-        logger = UETMetricLogger("Electroweak_Analysis", output_dir=result_dir_base)
+        logger = UETMetricLogger("Electroweak_Analysis", topic_id="0.6", category="log")
         logger.set_metadata(
             {
                 "data_source": "PDG 2024",
@@ -224,6 +227,7 @@ def run_test():
                 topic_id="0.6",
                 experiment_name="Research_Electroweak",
                 pillar="03_Research",
+                category="log",
             )
             if not result_dir.exists():
                 result_dir.mkdir(parents=True, exist_ok=True)

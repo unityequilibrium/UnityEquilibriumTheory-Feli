@@ -204,9 +204,10 @@ def run_unified_theory():
 
     # VISUALIZATION (Standardized)
     result_dir = UETPathManager.get_result_dir(
-        topic_id="0.26",  # <--- CORRECT ARGUMENT
-        experiment_name="Unified_Theory_Validation",
+        topic_id="0.26_Cosmic_Dynamic_Frame",
+        experiment_name="Research_Unified_Cosmic_Theory",
         pillar="03_Research",
+        category="log",
         stable=True,
     )
     result_dir.mkdir(parents=True, exist_ok=True)

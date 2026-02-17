@@ -118,7 +118,12 @@ def run_gvbh_unified_sim():
 
     # Save Results to Topic 0.26 Result Dir
     try:
-        output_dir = UETPathManager.get_result_dir("0.26_Cosmic_Dynamic_Frame", "GvB_Evolution")
+        output_dir = UETPathManager.get_result_dir(
+            topic_id="0.26_Cosmic_Dynamic_Frame",
+            experiment_name="Research_GvB_Evolution",
+            pillar="03_Research",
+            category="log",
+        )
     except:
         output_dir = (
             ROOT_PATH

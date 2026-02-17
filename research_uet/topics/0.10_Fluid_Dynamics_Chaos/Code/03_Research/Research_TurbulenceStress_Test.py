@@ -75,12 +75,13 @@ class TestMatrixTurbulence(unittest.TestCase):
                 experiment_name="Turbulence_Stress_Test",
                 pillar="03_Research",
                 stable=True,
+                category="log",
             )
             logger = UETMetricLogger(
-                "Turbulence_Stress_Test", output_dir=str(output_dir), flat_mode=True
+                "Turbulence_Stress_Test", topic_id="0.10", category="log", flat_mode=True
             )
         except ImportError:
-            logger = UETMetricLogger("Turbulence_Stress_Test")
+            logger = UETMetricLogger("Turbulence_Stress_Test", topic_id="0.10", category="log")
         logger.set_metadata(
             {
                 "fluid": "Air",
@@ -162,6 +163,7 @@ class TestMatrixTurbulence(unittest.TestCase):
                 topic_id="0.10_Fluid_Dynamics_Chaos",
                 experiment_name="Research_TurbulenceStress_Test",
                 pillar="03_Research",
+                category="log",
             )
             result_dir.mkdir(parents=True, exist_ok=True)
 

@@ -33,6 +33,7 @@ def run_test():
             topic_id="0.5_Nuclear_Binding_Hadrons",
             experiment_name="Research_Quark_Masses",
             pillar="03_Research",
+            category="showcase",
         )
         import numpy as np
 

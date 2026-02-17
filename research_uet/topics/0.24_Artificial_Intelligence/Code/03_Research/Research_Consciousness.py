@@ -107,7 +107,10 @@ def run_experiment():
 
         # Plot
         result_dir = UETPathManager.get_result_dir(
-            "0.24", "Consciousness_Entropy", "03_Research"
+            topic_id="0.24_Artificial_Intelligence",
+            experiment_name="Research_Consciousness",
+            pillar="03_Research",
+            category="log",
         )
         plt.figure(figsize=(10, 6))
         for strength, history in results.items():
