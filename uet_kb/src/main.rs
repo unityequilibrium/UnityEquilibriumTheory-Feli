@@ -1,10 +1,6 @@
 mod db;
 mod mcp;
 
-use uet_core::parameters::get_params;
-use uet_core::fields::Field;
-use uet_core::dynamics::compute_omega;
-use ndarray::ArrayD;
 use clap::{Parser, Subcommand};
 use std::path::Path;
 
@@ -12,7 +8,7 @@ use std::path::Path;
 #[command(name = "uet_kb")]
 #[command(about = "UET Knowledge Base Server (Rust + Postgres)", long_about = None)]
 struct Cli {
-    #[arg(short, long, default_value = "postgres://postgres:postgres@localhost:5432/uet_kb")]
+    #[arg(short, long, default_value = "postgres://postgres:postgres@localhost:5433/uet_kb")]
     db_url: String,
 
     #[command(subcommand)]
@@ -21,8 +17,6 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Test the physics engine core
-    TestPhysics,
     /// Initialize the database (Install extensions & Tables)
     InitDb,
     /// Ingest a text file (Fake embedding for now)
@@ -44,20 +38,6 @@ async fn main() {
     let cli = Cli::parse();
 
     match &cli.command {
-        Some(Commands::TestPhysics) => {
-            println!("Testing UET Physics Core integration...");
-            // ... (Physics code remains mostly synchronous logic, but running in async runtime is fine)
-            let params = get_params("electroweak").unwrap();
-            println!("Loaded Parameters: Scale={}, Kappa={}", params.scale, params.kappa);
-            
-            let shape = vec![10];
-            let data = ArrayD::from_elem(shape, params.c0 + 0.1);
-            let field = Field::new(data);
-            
-            let omega = compute_omega(&field, None, 0.1, &params);
-            println!("Computed Omega: {}", omega);
-            println!("✅ Integration successful!");
-        }
         Some(Commands::InitDb) => {
             println!("Initializing database at: {}", cli.db_url);
             match db::init_db(&cli.db_url).await {

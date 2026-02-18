@@ -190,6 +190,8 @@ class UETStepData:
 
 
 class UETMetricLogger:
+    VALID_CATEGORIES = ["log", "showcase", "figures"]
+
     def __init__(
         self,
         simulation_name: str,
@@ -198,6 +200,27 @@ class UETMetricLogger:
         category: str = "log",  # [NEW]
         topic_id: str = "General",  # [NEW] Optional topic binding
     ):
+        # Validate category parameter
+        if category not in self.VALID_CATEGORIES:
+            raise ValueError(
+                f"Invalid category '{category}'. "
+                f"Valid categories: {', '.join(self.VALID_CATEGORIES)}"
+            )
+
+        # Warn about legacy patterns
+        if output_dir and not topic_id or topic_id == "General":
+            print(
+                f"⚠️ [UETMetricLogger] Using 'output_dir' directly is deprecated. "
+                f"Use 'topic_id' and 'category' parameters instead."
+            )
+            print(f"   Example: UETMetricLogger('Simulation', topic_id='0.1', category='showcase')")
+
+        if not output_dir and topic_id == "General":
+            print(
+                f"⚠️ [UETMetricLogger] No 'topic_id' provided. "
+                f"Using legacy fallback. Please specify 'topic_id' for proper output organization."
+            )
+
         self.simulation_name, self.flat_mode = simulation_name, flat_mode
         self.category = category
         root = UETPathManager.get_root()

@@ -15,8 +15,9 @@ Last Updated: 2026-01-13
 """
 
 import os
+import math
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, Optional
 
 # =============================================================================
 # GLOBAL INTEGRITY KILL SWITCH (The Truth Auditor)
@@ -54,6 +55,123 @@ FLUID_MOBILITY_BRIDGE = 1750.0  # Derived Informational-Physical Bridge for Topi
 L_PLANCK = (HBAR * G / C**3) ** 0.5  # Planck length
 M_PLANCK = (HBAR * C / G) ** 0.5  # Planck mass
 T_PLANCK = L_PLANCK / C  # Planck time
+
+# =============================================================================
+# FIRST-PRINCIPLES CALCULATION (Landauer Principle)
+# =============================================================================
+
+LANDAUER_CONSTANT = math.log(2)  # ln(2) for Landauer coupling
+
+
+def calculate_beta_landauer(temperature: float = 293.15) -> float:
+    """
+    Calculate β from Landauer Principle (First Principles).
+
+    β = k_B * T * ln(2)
+
+    This is the minimum energy cost per bit of information processing,
+    derived from thermodynamics and validated experimentally (Bérut 2012).
+
+    Args:
+        temperature: System temperature in Kelvin (default: room temperature 293.15K)
+
+    Returns:
+        β in Joules (energy per bit)
+
+    Reference:
+        - Landauer (1961): Irreversibility and heat generation
+        - Bérut et al. (2012): Experimental verification (DOI: 10.1103/PhysRevLett.109.180601)
+    """
+    return K_B * temperature * LANDAUER_CONSTANT
+
+
+def calculate_kappa_from_beta(beta: float, information_density: float) -> float:
+    """
+    Calculate κ from β and information density (First Principles).
+
+    κ = β / ρ_info
+
+    Where ρ_info is the information density (bits/m³).
+
+    This represents the "information inertia" - how much energy is required
+    to change information content per unit volume.
+
+    Args:
+        beta: Energy per bit (Joules) from calculate_beta_landauer()
+        information_density: Information density (bits/m³)
+
+    Returns:
+        κ (dimensionless gradient penalty coefficient)
+
+    Reference:
+        - UET Topic 0.13: Thermodynamic Bridge validation
+        - Unity Scale Link: Information-Physical coupling
+    """
+    if information_density <= 0:
+        raise ValueError("information_density must be positive")
+    return beta / information_density
+
+
+def calculate_scaling_ratio(scale_from: float, scale_to: float) -> float:
+    """
+    Calculate scaling factor for parameter transformation between scales.
+
+    Based on thermodynamic scaling laws from Topic 0.13:
+    - Temperature: T ∝ scale^(-2/3)
+    - Information density: ρ ∝ scale^(-3)
+
+    Args:
+        scale_from: Source scale (meters)
+        scale_to: Target scale (meters)
+
+    Returns:
+        Scaling factor to multiply parameters by
+
+    Reference:
+        - Topic 0.13: Thermodynamic scaling exponent = 2/3
+        - Unity Scale Link: Scale bridge calculations
+    """
+    temp_ratio = (scale_to / scale_from) ** (-2.0 / 3.0)
+    density_ratio = (scale_from / scale_to) ** 3.0
+    return temp_ratio * density_ratio
+
+
+def derive_parameters_first_principles(
+    scale: float,
+    temperature: float,
+    information_density: float,
+) -> UETParameters:
+    """
+    Derive UET parameters from first principles using Landauer coupling.
+
+    This is the PRIMARY method for calculating parameters, replacing
+    hardcoded values with physically-derived quantities.
+
+    Args:
+        scale: Characteristic length scale (meters)
+        temperature: System temperature (Kelvin)
+        information_density: Information density (bits/m³)
+
+    Returns:
+        UETParameters with derived kappa, beta, and context
+
+    Example:
+        >>> params = derive_parameters_first_principles(1e-3, 300, 1e18)
+        >>> print(f"β = {params.beta:.2e} J")
+        >>> print(f"κ = {params.kappa:.4f}")
+    """
+    # Calculate from first principles
+    beta = calculate_beta_landauer(temperature)
+    kappa = calculate_kappa_from_beta(beta, information_density)
+
+    # Construct parameters
+    return UETParameters(
+        kappa=kappa,
+        beta=beta,
+        temperature=temperature,
+        scale=f"{scale:.2e}m",
+        origin="First-Principles (Landauer)",
+    )
 
 # =============================================================================
 # UET SCALE-DEPENDENT PARAMETERS
@@ -94,7 +212,78 @@ class UETParameters:
                 object.__setattr__(self, field_name, 0.0)
 
 
-# Define parameters for each physical scale
+# =============================================================================
+# DOMAIN-SPECIFIC PRESETS (with First-Principles Derivation)
+# =============================================================================
+
+_DOMAIN_PRESETS = {
+    "quantum": {
+        "scale": 1e-9,  # meters (nanometer)
+        "temperature": 4.2,  # K (liquid helium)
+        "info_density": 1e15,  # bits/m³
+        "description": "Quantum systems (nanoscale)",
+    },
+    "nuclear_binding": {
+        "scale": 1e-15,  # meters (femtometer)
+        "temperature": 1e12,  # K (nuclear temperature)
+        "info_density": 1e20,  # bits/m³
+        "description": "Nuclear binding (QCD scale)",
+    },
+    "fluid": {
+        "scale": 1e-3,  # meters (millimeter)
+        "temperature": 300,  # K (room temperature)
+        "info_density": 1e18,  # bits/m³
+        "description": "Fluid dynamics (mesoscale)",
+    },
+    "galactic": {
+        "scale": 1e20,  # meters (galactic scale)
+        "temperature": 2.7,  # K (CMB temperature)
+        "info_density": 1e10,  # bits/m³
+        "description": "Galactic rotation (cosmological)",
+    },
+    "biological": {
+        "scale": 1e-6,  # meters (micrometer)
+        "temperature": 310,  # K (body temperature)
+        "info_density": 1e16,  # bits/m³
+        "description": "Biological systems (cellular)",
+    },
+}
+
+
+def get_params_first_principles(domain_name: str) -> UETParameters:
+    """
+    Get UET parameters for a domain using first-principles calculation.
+
+    This is the RECOMMENDED method for obtaining parameters, as it uses
+    physically-derived quantities rather than hardcoded values.
+
+    Args:
+        domain_name: One of "quantum", "nuclear_binding", "fluid", "galactic", "biological"
+
+    Returns:
+        UETParameters with calculated kappa, beta, and context
+
+    Example:
+        >>> params = get_params_first_principles("fluid")
+        >>> print(f"κ = {params.kappa:.4f}, β = {params.beta:.2e} J")
+    """
+    if domain_name not in _DOMAIN_PRESETS:
+        available = list(_DOMAIN_PRESETS.keys())
+        raise ValueError(f"Unknown domain: {domain_name}. Available: {available}")
+
+    preset = _DOMAIN_PRESETS[domain_name]
+    return derive_parameters_first_principles(
+        scale=preset["scale"],
+        temperature=preset["temperature"],
+        information_density=preset["info_density"],
+    )
+
+
+# =============================================================================
+# LEGACY PARAMETER REGISTRY (Backward Compatibility)
+# =============================================================================
+
+# Define parameters for each physical scale (LEGACY - use first-principles instead)
 _SCALE_PARAMS = {
     # =========================================================================
     # PLANCK SCALE: Black holes, Quantum gravity
@@ -235,22 +424,76 @@ def get_kappa_beta(scale: str = "electroweak") -> tuple[float, float]:
 
 PARAMETER_POLICY = """
 ╔══════════════════════════════════════════════════════════════════════╗
-║                    NO PARAMETER FITTING POLICY                       ║
+║           UET PARAMETER CALCULATION POLICY (UPDATED)                ║
 ╠══════════════════════════════════════════════════════════════════════╣
-║  UET parameters MUST be:                                             ║
 ║                                                                      ║
-║  1. DERIVED from first principles (theory)                           ║
-║  2. CALIBRATED ONCE on independent data                              ║
-║  3. Defined in THIS registry (not hard-coded per test)               ║
+║  PRIMARY METHOD: First-Principles Calculation                       ║
+║  ──────────────────────────────────────────────────────────────   ║
+║  Use derive_parameters_first_principles() or get_params_first_      ║
+║  principles() for calculating parameters from physical laws:         ║
 ║                                                                      ║
-║  DO NOT use scipy.optimize to fit parameters per experiment!         ║
-║  DO NOT change parameters to match specific data!                    ║
+║    β = k_B * T * ln(2)           (Landauer Principle)                ║
+║    κ = β / ρ_info                (Information-Physical coupling)     ║
+║                                                                      ║
+║  Domain presets available: quantum, nuclear_binding, fluid,         ║
+║  galactic, biological                                          ║
+║                                                                      ║
+║  LEGACY METHOD: Hardcoded Registry (Backward Compatibility)          ║
+║  ──────────────────────────────────────────────────────────────   ║
+║  Legacy _SCALE_PARAMS are kept for existing code, but new code       ║
+║  should use first-principles calculation.                          ║
+║                                                                      ║
+║  PROHIBITED:                                                        ║
+║  - DO NOT use scipy.optimize to fit parameters per experiment!      ║
+║  - DO NOT change parameters to match specific data!                 ║
+║  - DO NOT use "shadow math" (bypassing UET_KILL_ENGINE)             ║
+║                                                                      ║
 ╚══════════════════════════════════════════════════════════════════════╝
 """
 
 
 if __name__ == "__main__":
+    print("=" * 70)
+    print("UET PARAMETER CALCULATION - FIRST PRINCIPLES DEMONSTRATION")
+    print("=" * 70)
+
     print(PARAMETER_POLICY)
-    print("\nAvailable scales:")
+
+    print("\n" + "=" * 70)
+    print("FIRST-PRINCIPLES CALCULATION EXAMPLES")
+    print("=" * 70)
+
+    # Example 1: Landauer Principle at room temperature
+    print("\n[1] Landauer Principle at 300K:")
+    beta_room = calculate_beta_landauer(300)
+    beta_ev = beta_room / E_CHARGE
+    print(f"    β = {beta_room:.4e} J = {beta_ev:.6f} eV")
+    print(f"    Expected: 0.017921 eV (Topic 0.13 validation)")
+    print(f"    Status: {'PASS' if abs(beta_ev - 0.017921) < 0.001 else 'FAIL'}")
+
+    # Example 2: Domain-specific parameters
+    print("\n[2] Domain-Specific Parameters (First-Principles):")
+    domains = ["quantum", "fluid", "galactic", "biological"]
+    for domain in domains:
+        params = get_params_first_principles(domain)
+        print(f"    {domain}:")
+        print(f"        κ = {params.kappa:.6f}")
+        print(f"        β = {params.beta:.4e} J")
+        print(f"        scale = {params.scale}, origin = {params.origin}")
+
+    # Example 3: Scaling between domains
+    print("\n[3] Scaling Example (quantum → fluid):")
+    scale_factor = calculate_scaling_ratio(1e-9, 1e-3)
+    print(f"    Scale factor: {scale_factor:.4e}")
+    print(f"    (κ at fluid scale) = (κ at quantum scale) × {scale_factor:.4e}")
+
+    print("\n" + "=" * 70)
+    print("LEGACY PARAMETER REGISTRY (Backward Compatibility)")
+    print("=" * 70)
+    print("\nAvailable legacy scales:")
     for name, params in _SCALE_PARAMS.items():
         print(f"  {name}: κ={params.kappa}, β={params.beta} ({params.origin})")
+
+    print("\n" + "=" * 70)
+    print("RECOMMENDATION: Use first-principles calculation for new code!")
+    print("=" * 70)

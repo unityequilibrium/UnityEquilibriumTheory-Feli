@@ -10,6 +10,22 @@ Unlike traditional blockchains that use random hashing, UET mining is **function
 - **The Work**: Each calculation solves a fragment of the UET Master Equation or a scientific simulation.
 - **The Reward**: Successive valid calculations generate fragments of UET Coin. Using the platform *is* mining.
 
+### 2.1 Canonical Work Unit (PoUW/PoE)
+A reward-eligible work unit MUST include:
+- `task_id`, `task_family`, `input_seed`, `difficulty`, `created_at`
+- `result_hash`, `verification_artifact`, `runtime_ms`, `nonce`
+- signer identity metadata (`schema_version`, `sig_alg`, `hash_alg`, `key_id`)
+
+### 2.2 Verification Rule
+- Every minted unit MUST be machine-verifiable with deterministic rules.
+- Verification must be materially cheaper than generation.
+- Non-verifiable or subjective outputs are ineligible for minting.
+
+### 2.3 Minting Rule
+- Minting is based on accepted work proofs only.
+- Issuance weight is determined by policy parameters (difficulty, task-family weight, and epoch budget).
+- Rewards may be reduced or reverted if fraud proof succeeds during the challenge window.
+
 ## 3. Anti-Inflation & Asset Backing
 To prevent the "Easy Production" problem, UET Coins are backed by a multi-layered **Global Asset Reserve**:
 1.  **Energy (50%)**: Stored electrical/thermal potential verified by state utilities.
@@ -40,3 +56,13 @@ UET ends land speculation by shifting to a **State-Lease Model**.
 3.  **Coin**: Work units minted as UET Coin.
 4.  **Re-invest**: 50% of State coin used to maintain energy/resource infrastructure.
 5.  **Repeat**: Loop closes, preventing energy loss from the system.
+
+## 8. Portfolio Rotation and Anti-Inflation Guard
+- UET runs a portfolio of task families (not a single family forever).
+- If a family becomes too easy due to algorithmic shortcuts, issuance weight is reduced or family is retired.
+- Epoch issuance caps and task-family concentration limits are used to prevent inflation from one dominant family.
+
+## 9. Spec Boundaries
+- Economic policy and allocation live in this document.
+- Canonical ledger/proof objects are defined in `14__UNITY_LEDGER_POUW_POE_v5.0_SPEC.md`.
+- Cryptographic policy is defined in `17__QUANTUM_RESISTANT_SECURITY_STANDARD_v5.0.md`.

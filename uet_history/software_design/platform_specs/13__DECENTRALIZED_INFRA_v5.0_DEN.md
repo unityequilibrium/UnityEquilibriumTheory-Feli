@@ -20,6 +20,11 @@ Each DEN consists of a standardized software stack designed for high availabilit
 - **Bridge Layer**: Multi-MCP interface for cross-node discovery and secure payload delivery.
 - **Security Layer**: Sentinel AI Monitor for node integrity and anomaly detection.
 
+### 2.3 Node Identity and Trust
+- Every DEN node operates with a versioned node identity (`node_id`, `key_id`, `sig_alg`, `hash_alg`).
+- Work proofs and block proposals must be signed by active node identity keys.
+- Key rotation/revocation follows `17__QUANTUM_RESISTANT_SECURITY_STANDARD_v5.0.md`.
+
 ### 2.2 Sync Logic (Cross-University Data Exchange)
 When Node A needs data from Node B to "inform a decision":
 1. **Intent Extraction**: Node A's Agent Engine defines the required data range.
@@ -36,11 +41,18 @@ The DEN network is the physical manifestation of the Mathnicry Blockchain.
 - Universities perform scientific work units assigned by the **Global Orchestrator**.
 - 50% of the minted UET Coin goes into the **Educational Reform Fund**.
 - 50% stays with the local node for infrastructure maintenance and student dividends.
+- Work units are valid for minting only when proof certificates pass deterministic verification rules.
+- Nodes exchange proof objects (task metadata + verification artifact + signature) before global commit.
 
 ### 3.2 Resilience & Self-Protection (The Antigravity Mesh)
 - Nodes perform "Heartbeat Verifications" on neighbors.
 - If a node is compromised, adjacent nodes automatically isolate it and redistribute its workload.
 - **Consensus**: 66% of local clusters must agree on a scientific result for it to be committed to the Global Knowledge Graph.
+- Local consensus results are promoted to global ledger commits with signed header metadata.
+
+### 3.3 Secure Transport Boundary
+- MCP over stdio is considered local-trust only.
+- Cross-node sessions require authenticated secure transport and replay-resistant message IDs.
 
 ---
 

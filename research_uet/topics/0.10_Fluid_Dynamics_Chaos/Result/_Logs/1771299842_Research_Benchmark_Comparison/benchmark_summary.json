@@ -1,0 +1,12 @@
+[
+  {
+    "test": "accuracy",
+    "correlation": 0.9997476769753063,
+    "passed": true
+  },
+  {
+    "test": "speed",
+    "uet_time": 0.03749537467956543,
+    "speedup": 1.5364380321364304
+  }
+]

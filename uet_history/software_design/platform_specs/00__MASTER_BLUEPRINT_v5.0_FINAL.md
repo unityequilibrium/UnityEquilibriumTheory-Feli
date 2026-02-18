@@ -29,6 +29,8 @@ To establish the **Unity Mega-Platform** as the world's most performant and reli
 
 ### **Tower 6: Economy & Interaction (Ledger & Social)**
 - **Unity Ledger:** Energy-to-Token mapping using Mathnicry (Quantum-Resistant).
+- **PoUW/PoE Commit Layer:** Useful work and equilibrium outputs are committed as machine-verifiable proof certificates, not unverifiable claims.
+- **Crypto Baseline:** All ledger-critical objects carry versioned cryptographic metadata (`schema_version`, `sig_alg`, `hash_alg`, `key_id`) for future-safe algorithm rotation.
 - **Social Hub:** Collaborative scientific discourse and project management.
 
 ---
@@ -58,3 +60,8 @@ To establish the **Unity Mega-Platform** as the world's most performant and reli
 > [!IMPORTANT]
 > **V5.0 Focus:** Accessibility (MCP), Speed (Rust), and Transparency (Ledger).
 > This document remains the "Top-Level Charter" for all platform development.
+
+### Related Specifications
+- `14__UNITY_LEDGER_POUW_POE_v5.0_SPEC.md`
+- `17__QUANTUM_RESISTANT_SECURITY_STANDARD_v5.0.md`
+- `18__TASK_PORTFOLIO_AND_ROTATION_v5.0.md`

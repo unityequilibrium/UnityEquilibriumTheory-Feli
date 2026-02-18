@@ -1,2 +1,0 @@
-step,time,omega,kinetic,potential,entropy,gradient_norm,max_density,min_density,is_stable,status,details
-1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,True,GRAND_SLAM_VERIFIED,All 7 Millennium Problems Unified under UET

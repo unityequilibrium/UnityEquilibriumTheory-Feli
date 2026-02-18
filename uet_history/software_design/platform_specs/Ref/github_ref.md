@@ -1,0 +1,1 @@
+https://github.com/rust-in-blockchain/awesome-blockchain-rust?tab=readme-ov-file

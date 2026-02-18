@@ -2,5 +2,12 @@
 members = [
     "uet_core",
     "uet_kb",
+    "uet_security",
+    "uet_chain",
+    "uet_governance",
+    "uet_oracle",
+    "uet_economic",
+    "uet_market",
+    "uet_miner",
 ]
 resolver = "2"

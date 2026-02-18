@@ -109,18 +109,6 @@ async fn handle_request(req: JsonRpcRequest, pool: &sqlx::Pool<sqlx::Postgres>) 
         "tools/list" => Ok(json!({
             "tools": [
                 {
-                    "name": "ingest_document",
-                    "description": "Ingest a document into the Knowledge Base",
-                    "inputSchema": {
-                        "type": "object",
-                        "properties": {
-                            "file_path": { "type": "string" },
-                            "content": { "type": "string" }
-                        },
-                        "required": ["file_path"]
-                    }
-                },
-                {
                     "name": "search_knowledge_base",
                     "description": "Search for relevant concepts using semantic vector search",
                     "inputSchema": {
@@ -146,17 +134,6 @@ async fn handle_request(req: JsonRpcRequest, pool: &sqlx::Pool<sqlx::Postgres>) 
                 {
                     "name": "get_document",
                     "description": "Retrieve a document by ID (no vectors returned)",
-                    "inputSchema": {
-                        "type": "object",
-                        "properties": {
-                            "doc_id": { "type": "string" }
-                        },
-                        "required": ["doc_id"]
-                    }
-                },
-                {
-                    "name": "delete_document",
-                    "description": "Delete a document by ID",
                     "inputSchema": {
                         "type": "object",
                         "properties": {
@@ -227,57 +204,6 @@ async fn handle_tool_call(params: Option<Value>, pool: &sqlx::Pool<sqlx::Postgre
     let args = params.get("arguments").cloned().unwrap_or(json!({}));
 
     match name {
-        "ingest_document" => {
-            let file_path = args.get("file_path").and_then(|v| v.as_str()).unwrap_or("unknown");
-            let content = args.get("content").and_then(|v| v.as_str()).map(|s| s.to_string());
-            let metadata = args.get("metadata").cloned();
-            
-            // If content is not provided, try to read file (simple local case)
-            let content = args.get("content").and_then(|v| v.as_str()).unwrap_or("");
-            
-            // Optional: pre-computed vectors (for migration or advanced clients)
-            let semantic_vec_arg = args.get("semantic_vec").and_then(|v| v.as_array());
-            let physics_vec_arg = args.get("physics_vec").and_then(|v| v.as_array());
-
-            let doc_id_str = args.get("doc_id").and_then(|v| v.as_str());
-            let doc_uuid = doc_id_str.and_then(|s| uuid::Uuid::parse_str(s).ok());
-
-            let doc_id = db::insert_document(pool, doc_uuid, file_path, content, metadata).await.map_err(|e| JsonRpcError {
-                code: -32000,
-                message: e.to_string(),
-                data: None
-            })?;
-
-            // If pre-computed vectors are provided, we treat this as a single-chunk ingestion (or migration)
-            if let (Some(s_vec), Some(p_vec)) = (semantic_vec_arg, physics_vec_arg) {
-                 let s_vals: Vec<f64> = s_vec.iter().map(|v| v.as_f64().unwrap_or(0.0)).collect();
-                 let p_vals: Vec<f64> = p_vec.iter().map(|v| v.as_f64().unwrap_or(0.0)).collect();
-                 
-                 db::insert_chunk(pool, &doc_id, content, &s_vals, &p_vals).await.map_err(|e| JsonRpcError {
-                    code: -32000,
-                    message: e.to_string(),
-                    data: None
-                })?;
-            } else {
-                // Legacy/Simple path: Split by lines (very crude, should use real chunking)
-                // and use mock vectors if not provided
-                let chunks = content.split('\n').filter(|s| !s.trim().is_empty());
-                for chunk_text in chunks {
-                    let s_vec = vec![0.0; 1024]; // Zero vector for now
-                    let p_vec = vec![0.0; 20];
-                    let _ = db::insert_chunk(pool, &doc_id, chunk_text, &s_vec, &p_vec).await;
-                }
-            }
-
-            Ok(json!({
-                "content": [
-                    {
-                        "type": "text",
-                        "text": format!("Successfully ingested document: {}", file_path)
-                    }
-                ]
-            }))
-        },
         "search_knowledge_base" => {
             let semantic_vec_arg = args.get("query_vector").and_then(|v| v.as_array());
             
@@ -329,16 +255,6 @@ async fn handle_tool_call(params: Option<Value>, pool: &sqlx::Pool<sqlx::Postgre
             })?;
             
             Ok(json!({ "document": doc }))
-        },
-        "delete_document" => {
-            let doc_id = args.get("doc_id").and_then(|v| v.as_str()).unwrap_or("");
-            let success = db::delete_document(pool, doc_id).await.map_err(|e| JsonRpcError {
-                code: -32000,
-                message: e.to_string(),
-                data: None
-            })?;
-            
-            Ok(json!({ "success": success }))
         },
         "count_documents" => {
             let count = db::count_documents(pool).await.map_err(|e| JsonRpcError {

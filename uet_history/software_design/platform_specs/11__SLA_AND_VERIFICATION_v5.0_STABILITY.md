@@ -28,6 +28,23 @@ An autonomous agent that runs in the backend with read-only access to all system
     - L1 Agent Reasoning: < 5s.
 - **Accuracy**: RAG must achieve a minimum `Evidence_Score > 0.8` to be presented as "Reliable."
 
+### 4.1 PoUW/PoE Verification SLOs
+- **Proof Verification Time**:
+    - Single proof verification target: < 250ms (median under nominal load).
+    - Block verification target (N proofs): < 3s for baseline validator profile.
+- **Proof Size Envelope**:
+    - Max canonical proof payload per work unit: 256 KB (policy adjustable by epoch).
+- **Determinism Requirement**:
+    - Re-verifying the same proof on two compliant nodes must return identical verdict.
+
+### 4.2 Fraud-Proof and Recheck Window
+- **Challenge Window**: accepted proofs remain challengeable for 7 epochs (default policy).
+- **Fraud Response SLA**:
+    - Critical fraud alert acknowledgment: < 5 minutes.
+    - Temporary reward hold decision: < 1 epoch.
+- **Recheck Trigger**:
+    - Automatic recheck if anomaly score exceeds threshold or if verifier disagreement > 5%.
+
 ## 5. Failure Mode Recovery
 - **Safe Mode**: If Flow Control detects a critical `SYSTEM_ERROR`, it places the platform in "Read-Only" mode.
 - **Rollback**: Every Global KB update creates a checkpoint. Admins can trigger a `KNOWLEDGE_ROLLBACK` to the last known stable state.
@@ -39,3 +56,5 @@ An autonomous agent that runs in the backend with read-only access to all system
 
 ## 7. Security Enforcement
 - **Sentinel Guard**: If the Admin AI Monitor detects a brute-force pattern on the API, it automatically throttles the offending IP and creates a `SECURITY_VIOLATION` log.
+- **Ledger Guard**: Repeated signature failures, replay attempts, or malformed proof objects trigger immediate `SECURITY_VIOLATION` and verifier quarantine policy.
+- **Crypto Policy Hook**: Signature/hash policy and rotation controls are governed by `17__QUANTUM_RESISTANT_SECURITY_STANDARD_v5.0.md`.

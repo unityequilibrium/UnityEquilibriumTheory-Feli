@@ -314,6 +314,89 @@ python research_uet/topics/run_all_tests.py
 
 ---
 
+## 💰 Uet-Cash Mining System
+
+**Status:** ✅ Core + Security Complete | 🚧 Governance/Oracle/Economic/Market: WIP
+
+Uet-Cash is a proof-of-useful-work (PoUW) cryptocurrency where mining = solving UET equations.
+
+### Architecture
+
+```
+uet_core (Rust) → UET Master Equation Solver
+        ↓
+uet_miner (Rust) → Mining Algorithm with Nonce Search
+        ↓
+uet_security (Rust) → Quantum-Resistant Signatures & Hashing
+        ↓
+Uet-Cash Blocks → Proof Verification → Uet-Cash Rewards
+```
+
+### Components
+
+| Component | Status | Description |
+|:----------|:-------|:------------|
+| **uet_core** | ✅ Complete | UET Master Equation in Rust (7-term functional) |
+| **uet_miner** | ✅ Complete | Mining algorithm with nonce search and proof verification |
+| **uet_security** | ✅ Complete | Quantum-resistant signatures (Dilithium), SHA3/BLAKE3 hashing |
+| **uet_governance** | 🚧 WIP | Governance system (voting, proposals) - deferred |
+| **uet_oracle** | 🚧 WIP | Oracle infrastructure (verification) - deferred |
+| **uet_economic** | 🚧 WIP | Economic policies (issuance, difficulty) - deferred |
+| **uet_market** | 🚧 WIP | Market infrastructure (AMM, price discovery) - deferred |
+
+### Security Features
+
+**Quantum-Resistant Cryptography**
+- ✅ Dilithium PQ signatures for block/tx/proof signing
+- ✅ SHA3/BLAKE3 hashing (quantum-resistant)
+- ✅ Signature metadata (schema_version, sig_alg, hash_alg, key_id)
+
+**Block Security**
+- ✅ Header signature verification
+- ✅ Merkle roots (tx_merkle_root, proof_root)
+- ✅ State root verification
+- ✅ Full block validation rules
+
+**Anti-Cheat Controls**
+- ✅ Replay protection (task_id + node_id + nonce uniqueness)
+- ✅ Fraud proofs (challenge invalid proofs)
+- ✅ Epoch-based nonce reset
+- ✅ Result stealing resistance (signature bound to node_id)
+
+### How Mining Works
+
+1. **Receive Task**: Get UET equation to solve (task_id, input_seed, difficulty)
+2. **Solve Equation**: Use `uet_core` to compute UET functional with nonce search
+3. **Create Proof**: Generate proof with signature and metadata
+4. **Verify Difficulty**: Check if result hash has required leading zeros
+5. **Submit Proof**: Send proof (result_hash, nonce, verification_artifact, signature) to network
+6. **Get Reward**: Receive Uet-Cash for valid proof
+
+### Example
+
+```rust
+use uet_miner::{MiningTask, TaskFamily, UetCashMiner};
+use uet_security::{CryptoSuite, MockSigner, SignatureAlgorithm};
+
+let task = MiningTask {
+    task_id: "example".to_string(),
+    family: TaskFamily::EquilibriumCertificate,
+    input_seed: vec![1.0, 2.0, 3.0],
+    difficulty: 2, // Require 2 leading zeros
+    created_at: 0,
+};
+
+let suite = CryptoSuite::default();
+let signer = MockSigner::new("node-a", SignatureAlgorithm::Dilithium3);
+
+let miner = UetCashMiner::new(task, "node-a".to_string(), suite);
+if let Some(proof) = miner.mine(1000000, &signer) {
+    println!("Found proof: {}", proof.result_hash_hex);
+}
+```
+
+---
+
 ## ❓ Questions Answered by UET (SEO & Key Research)
 
 Physics students and researchers often search for these questions. UET provides Python-verified answers:

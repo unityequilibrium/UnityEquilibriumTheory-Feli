@@ -1,2 +1,0 @@
-step,time,omega,kinetic,potential,entropy,gradient_norm,max_density,min_density,is_stable,gradient_energy,entropy_interaction,M_baryon,M_halo,M_total,Halo_Ratio,V_virial
-0,0.001,0.6106409881052406,0.0,0.0,0.0,0.0,2.2461999019540047,0.006692651183174905,True,0.6106409881052406,0.0,499.97140693189226,0.0,499.97140693189226,0.0,0.0

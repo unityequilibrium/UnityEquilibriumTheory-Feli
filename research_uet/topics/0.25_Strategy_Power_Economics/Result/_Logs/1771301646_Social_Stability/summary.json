@@ -1,0 +1,26 @@
+{
+  "run_id": "1771301646_Social_Stability",
+  "simulation": "Social_Stability",
+  "status": "COMPLETED",
+  "timestamp": "Tue Feb 17 11:14:06 2026",
+  "duration_seconds": 0.03949594497680664,
+  "total_steps": 50,
+  "metadata": {},
+  "final_state": {
+    "step": 1,
+    "time": 0.001,
+    "omega": 0.00020220513015005285,
+    "kinetic": 0.0,
+    "potential": 0.00020220513015005285,
+    "entropy": 0.0,
+    "gradient_norm": 0.0,
+    "max_density": 1.0450099515250157,
+    "min_density": 0.9999649897838352,
+    "is_stable": true,
+    "gradient_energy": 0.0,
+    "entropy_interaction": 0.0,
+    "nature_health": 0.9999970750017315,
+    "gini_estimate": 0.01782269568995821,
+    "capital_concentration": 0.010356877409473185
+  }
+}

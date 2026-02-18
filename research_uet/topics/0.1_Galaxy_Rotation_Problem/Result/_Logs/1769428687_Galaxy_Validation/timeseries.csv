@@ -1,2 +1,0 @@
-step,time,omega,kinetic,potential,entropy,gradient_norm,max_density,min_density,is_stable,pass_rate,avg_error,total_galaxies
-1,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,True,58.44155844155844,16.829313973697715,154

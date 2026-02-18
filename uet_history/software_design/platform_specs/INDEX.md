@@ -23,8 +23,24 @@ Welcome to the Unity Mega-Platform v5.0 Specification Directory. These documents
 
 ## 🌐 Global Infrastructure
 - [13__DECENTRALIZED_INFRA_v5.0_DEN.md](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/uet_history/software_design/platform_specs/13__DECENTRALIZED_INFRA_v5.0_DEN.md)
-- [14__EDUCATIONAL_BLOCKCHAIN_v5.0_SPEC.md](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/uet_history/software_design/platform_specs/14__EDUCATIONAL_BLOCKCHAIN_v5.0_SPEC.md)
+- [14__UNITY_LEDGER_POUW_POE_v5.0_SPEC.md](file:///c:/Users/santa/Desktop/uet_harness/uet_history/software_design/platform_specs/14__UNITY_LEDGER_POUW_POE_v5.0_SPEC.md)
 - [15__ACADEMIC_SOCIAL_PLATFORM_v5.0_SPEC.md](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/uet_history/software_design/platform_specs/15__ACADEMIC_SOCIAL_PLATFORM_v5.0_SPEC.md)
+
+## 🔐 Security and Rotation
+- [17__QUANTUM_RESISTANT_SECURITY_STANDARD_v5.0.md](file:///c:/Users/santa/Desktop/uet_harness/uet_history/software_design/platform_specs/17__QUANTUM_RESISTANT_SECURITY_STANDARD_v5.0.md)
+- [18__TASK_PORTFOLIO_AND_ROTATION_v5.0.md](file:///c:/Users/santa/Desktop/uet_harness/uet_history/software_design/platform_specs/18__TASK_PORTFOLIO_AND_ROTATION_v5.0.md)
+
+## 🏛️ Governance
+- [19__DECENTRALIZED_GOVERNANCE_v5.0.md](file:///c:/Users/santa/Desktop/uet_harness/uet_history/software_design/platform_specs/19__DECENTRALIZED_GOVERNANCE_v5.0.md)
+
+## 🔮 Oracle Infrastructure
+- [20__ORACLE_INFRASTRUCTURE_v5.0.md](file:///c:/Users/santa/Desktop/uet_harness/uet_history/software_design/platform_specs/20__ORACLE_INFRASTRUCTURE_v5.0.md)
+
+## 💰 Economic Policy
+- [21__ECONOMIC_POLICY_v5.0.md](file:///c:/Users/santa/Desktop/uet_harness/uet_history/software_design/platform_specs/21__ECONOMIC_POLICY_v5.0.md)
+
+## 📊 Market Infrastructure
+- [22__MARKET_INFRASTRUCTURE_v5.0.md](file:///c:/Users/santa/Desktop/uet_harness/uet_history/software_design/platform_specs/22__MARKET_INFRASTRUCTURE_v5.0.md)
 
 ---
 **Status Map**: [DOCUMENTATION_SYNTHESIS_MAP.md](file:///c:/Users/santa/Desktop/lad/Lab_uet_harness_v0.8.7/uet_history/software_design/platform_specs/DOCUMENTATION_SYNTHESIS_MAP.md)
