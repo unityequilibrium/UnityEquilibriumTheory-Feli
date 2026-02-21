@@ -30,7 +30,7 @@
     - [1. Installation](#1-installation)
     - [2. Usage Examples](#2-usage-examples)
     - [3. Run Verify Test](#3-run-verify-test)
-  - [📚 9. Complete Topic Index (27 Domains)](#-9-complete-topic-index-27-domains)
+  - [📚 9. Complete Topic Index (31 Domains)](#-9-complete-topic-index-31-domains)
   - [🔍 10. Methodology](#-10-methodology)
     - [Human + AI Collaboration](#human--ai-collaboration)
     - [Transparency](#transparency)
